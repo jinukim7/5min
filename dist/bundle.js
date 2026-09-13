@@ -371,12 +371,13 @@
   // src/js/firebase-config.js
   var firebase2 = window.firebase;
   var firebaseConfig = {
-    projectId: "better-school-life-260913",
-    appId: "1:333970857991:web:8b3165032a7fd38c158aa2",
-    storageBucket: "better-school-life-260913.firebasestorage.app",
-    apiKey: "AIzaSyDxCDJ-agfDGiFN6sBTdlk6TB-TodfeUDw",
-    authDomain: "better-school-life-260913.firebaseapp.com",
-    messagingSenderId: "333970857991"
+    apiKey: "AIzaSyDeSMupn_VL2zYk-wB6h0Z8WF9ggBUC5i4",
+    authDomain: "min-test-b8823.firebaseapp.com",
+    projectId: "min-test-b8823",
+    storageBucket: "min-test-b8823.firebasestorage.app",
+    messagingSenderId: "944016610108",
+    appId: "1:944016610108:web:de03d89b2922fb8dea4439",
+    measurementId: "G-V1Q14GW202"
   };
   if (!firebase2.apps.length) {
     firebase2.initializeApp(firebaseConfig);
