@@ -1022,9 +1022,9 @@
         },
         todayQuizDone: true,
         myComment: "\uC544\uCE68 \uC778\uC0AC\uB97C \uBA3C\uC800 \uBC1D\uAC8C \uAC74\uB124\uB2C8 \uD558\uB8E8\uAC00 \uC0C1\uCF8C\uD569\uB2C8\uB2E4!",
-        students: INITIAL_STUDENTS_28,
-        gradeStudents: GRADE_STUDENTS_ALL,
-        schoolStudents: SCHOOL_STUDENTS_ALL,
+        students: [],
+        gradeStudents: [],
+        schoolStudents: [],
         teacherProposals: INITIAL_TEACHER_PROPOSALS,
         recommendedBooks: [...MIDDLE_SCHOOL_BOOKS],
         classGoalPoints: 35e3,
@@ -1406,7 +1406,7 @@
               realStudents.push({ ...data, uid: doc.id });
             }
           });
-          this.state.students = realStudents.length ? realStudents : this.state.students;
+          this.state.students = realStudents;
           this.state.schoolStudents = this.state.students;
           this.state.gradeStudents = this.state.students.filter((s) => s.grade === this.state.userProfile.grade);
           this.notify();

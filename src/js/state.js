@@ -657,9 +657,9 @@ export class AppState {
       },
       todayQuizDone: true,
       myComment: '아침 인사를 먼저 밝게 건네니 하루가 상쾌합니다!',
-      students: INITIAL_STUDENTS_28,
-      gradeStudents: GRADE_STUDENTS_ALL,
-      schoolStudents: SCHOOL_STUDENTS_ALL,
+      students: [],
+      gradeStudents: [],
+      schoolStudents: [],
       teacherProposals: INITIAL_TEACHER_PROPOSALS,
       recommendedBooks: [...MIDDLE_SCHOOL_BOOKS],
       classGoalPoints: 35000,
@@ -1080,7 +1080,7 @@ export class AppState {
             realStudents.push({ ...data, uid: doc.id });
           }
         });
-        this.state.students = realStudents.length ? realStudents : this.state.students;
+        this.state.students = realStudents;
         this.state.schoolStudents = this.state.students;
         this.state.gradeStudents = this.state.students.filter(s => s.grade === this.state.userProfile.grade);
         this.notify();
