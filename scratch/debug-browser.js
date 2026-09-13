@@ -104,7 +104,7 @@ async function testUrl(targetUrl) {
 }
 
 async function run() {
-  await testUrl('http://localhost:5180/');
+  await testUrl('https://jinukim7.github.io/5min/');
 }
 
 run();
