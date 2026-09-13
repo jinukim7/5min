@@ -2,7 +2,7 @@
 import { appState } from './state.js';
 import { sounds } from './sound.js';
 import { auth, googleProvider, db } from './firebase-config.js';
-import { resolveAccountRole, verifyTeacherCode, parseStudentEmail } from './roles.js';
+import { resolveAccountRole, normalizeTeacherCode, verifyTestTeacherCode, parseStudentEmail } from './roles.js';
 
 const ROLE_LABELS = {
   student: '👨‍🎓 학생',
@@ -173,11 +173,17 @@ export function openTeacherUpgradeModal(onSuccess = () => {}) {
 
   modal.querySelector('#btn-cancel-teacher-code').onclick = () => modal.classList.remove('active');
 
-  const submit = () => {
-    if (!verifyTeacherCode(input.value)) {
-      sounds.playError();
-      errorEl.textContent = '인증 코드가 올바르지 않습니다.';
-      input.select();
+  const fail = (message) => {
+    sounds.playError();
+    errorEl.textContent = message;
+    submitBtn.disabled = false;
+    input.select();
+  };
+
+  const submit = async () => {
+    const code = normalizeTeacherCode(input.value);
+    if (!code) {
+      fail('교사 인증 코드를 입력해 주세요.');
       return;
     }
 
@@ -189,20 +195,27 @@ export function openTeacherUpgradeModal(onSuccess = () => {}) {
       onSuccess();
     };
 
+    submitBtn.disabled = true;
+
     if (appState.isTestAccount()) {
-      promote();
+      if (await verifyTestTeacherCode(code)) promote();
+      else fail('인증 코드가 올바르지 않습니다.');
       return;
     }
 
-    submitBtn.disabled = true;
+    // 코드 확인은 Firestore 보안 규칙이 수행: teacherCodes/{code} 문서가 있어야 저장 허용
     db.collection('users').doc(uid).set({
       role: 'teacher',
       roleSource: 'code',
+      teacherCode: code,
       roleUpdatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true }).then(promote).catch(err => {
-      // DB를 쓸 수 없는 환경에서도 이 기기 세션에서는 승격 유지
-      console.warn('교사 권한 DB 저장 실패 (이 기기에만 반영)', err);
-      promote();
+      console.warn('교사 권한 저장 거부', err);
+      if (err.code === 'permission-denied') {
+        fail('인증 코드가 올바르지 않습니다.');
+      } else {
+        fail(`권한 확인 서버에 연결할 수 없습니다. (${err.code || 'unknown'})`);
+      }
     });
   };
 

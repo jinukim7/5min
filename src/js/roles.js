@@ -10,8 +10,15 @@ export const STUDENT_ID_PATTERN = /^(\d{2})(\d)(\d)(\d{2})$/;
 // 학교 도메인이지만 학생 형식이 아닌 계정 + 아래 도메인은 교사로 구분
 export const EXTRA_TEACHER_DOMAINS = ['sen.go.kr'];
 
-// 자동 구분이 안 된 사용자가 교사 권한을 신청할 때 입력하는 코드
-export const TEACHER_SECRET_CODE = 'TEACHER2026';
+// 교사 인증 코드는 사이트 코드에 두지 않습니다.
+// 실제 계정: Firestore `teacherCodes/{코드}` 문서 존재 여부를 보안 규칙(firestore.rules)이 확인합니다.
+// 테스트 계정(개발용): DB가 없으므로 코드의 해시값으로만 확인합니다.
+const TEST_TEACHER_CODE_HASH = '2bd394809ca042d614cf6059adc332fdd2cc93cb5fe116b4c9356255d6fdb6b8';
+const TEACHER_CODE_SALT = 'barum5-teacher:';
+
+export function normalizeTeacherCode(code = '') {
+  return String(code).trim().toUpperCase();
+}
 
 // 개발 단계용 [학생으로 테스트] / [교사로 테스트] 버튼 표시 여부 (운영 시 false)
 export const DEV_TEST_LOGIN_ENABLED = true;
@@ -60,6 +67,10 @@ export function resolveAccountRole(email, stored = {}) {
   return { role: 'student', roleSource: 'default' };
 }
 
-export function verifyTeacherCode(code = '') {
-  return String(code).trim().toUpperCase() === TEACHER_SECRET_CODE;
+// 테스트 계정 전용 코드 확인 (SHA-256 해시 비교)
+export async function verifyTestTeacherCode(code = '') {
+  const bytes = new TextEncoder().encode(TEACHER_CODE_SALT + normalizeTeacherCode(code));
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  const hex = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+  return hex === TEST_TEACHER_CODE_HASH;
 }

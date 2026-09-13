@@ -2120,7 +2120,11 @@
   var SCHOOL_DOMAIN = "kyunghee.sen.ms.kr";
   var STUDENT_ID_PATTERN = /^(\d{2})(\d)(\d)(\d{2})$/;
   var EXTRA_TEACHER_DOMAINS = ["sen.go.kr"];
-  var TEACHER_SECRET_CODE = "TEACHER2026";
+  var TEST_TEACHER_CODE_HASH = "2bd394809ca042d614cf6059adc332fdd2cc93cb5fe116b4c9356255d6fdb6b8";
+  var TEACHER_CODE_SALT = "barum5-teacher:";
+  function normalizeTeacherCode(code = "") {
+    return String(code).trim().toUpperCase();
+  }
   var DEV_TEST_LOGIN_ENABLED = true;
   function splitEmail(email = "") {
     const [localPart = "", domain = ""] = String(email).trim().toLowerCase().split("@");
@@ -2149,8 +2153,11 @@
     if (detected) return { role: detected, roleSource: "auto" };
     return { role: "student", roleSource: "default" };
   }
-  function verifyTeacherCode(code = "") {
-    return String(code).trim().toUpperCase() === TEACHER_SECRET_CODE;
+  async function verifyTestTeacherCode(code = "") {
+    const bytes = new TextEncoder().encode(TEACHER_CODE_SALT + normalizeTeacherCode(code));
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    const hex = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    return hex === TEST_TEACHER_CODE_HASH;
   }
 
   // src/js/auth.js
@@ -2304,11 +2311,16 @@ ${reason}
     const submitBtn = modal.querySelector("#btn-submit-teacher-code");
     input.focus();
     modal.querySelector("#btn-cancel-teacher-code").onclick = () => modal.classList.remove("active");
-    const submit = () => {
-      if (!verifyTeacherCode(input.value)) {
-        sounds.playError();
-        errorEl.textContent = "\uC778\uC99D \uCF54\uB4DC\uAC00 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.";
-        input.select();
+    const fail = (message) => {
+      sounds.playError();
+      errorEl.textContent = message;
+      submitBtn.disabled = false;
+      input.select();
+    };
+    const submit = async () => {
+      const code = normalizeTeacherCode(input.value);
+      if (!code) {
+        fail("\uAD50\uC0AC \uC778\uC99D \uCF54\uB4DC\uB97C \uC785\uB825\uD574 \uC8FC\uC138\uC694.");
         return;
       }
       const { uid, email } = appState.state.auth;
@@ -2318,18 +2330,24 @@ ${reason}
         modal.classList.remove("active");
         onSuccess();
       };
+      submitBtn.disabled = true;
       if (appState.isTestAccount()) {
-        promote();
+        if (await verifyTestTeacherCode(code)) promote();
+        else fail("\uC778\uC99D \uCF54\uB4DC\uAC00 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
         return;
       }
-      submitBtn.disabled = true;
       db.collection("users").doc(uid).set({
         role: "teacher",
         roleSource: "code",
+        teacherCode: code,
         roleUpdatedAt: firebase.firestore.FieldValue.serverTimestamp()
       }, { merge: true }).then(promote).catch((err) => {
-        console.warn("\uAD50\uC0AC \uAD8C\uD55C DB \uC800\uC7A5 \uC2E4\uD328 (\uC774 \uAE30\uAE30\uC5D0\uB9CC \uBC18\uC601)", err);
-        promote();
+        console.warn("\uAD50\uC0AC \uAD8C\uD55C \uC800\uC7A5 \uAC70\uBD80", err);
+        if (err.code === "permission-denied") {
+          fail("\uC778\uC99D \uCF54\uB4DC\uAC00 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
+        } else {
+          fail(`\uAD8C\uD55C \uD655\uC778 \uC11C\uBC84\uC5D0 \uC5F0\uACB0\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4. (${err.code || "unknown"})`);
+        }
       });
     };
     submitBtn.onclick = submit;
@@ -2481,7 +2499,7 @@ ${reason}
   }
 
   // src/js/chatbot.js
-  var API_KEY = "AQ.Ab8RN6Jm_G1zISqvyyWyiXeAswCh_7zfdO-X9IDVPMBTB8jaag";
+  var PROXY_URL = "";
   var SLANG_DICTIONARY = {
     "\uC874\uBC84": { meaning: "\uB05D\uAE4C\uC9C0 \uBC84\uD2F4\uB2E4\uB294 \uB73B\uC758 \uC18D\uC5B4", correct: "\uB05D\uAE4C\uC9C0 \uC778\uB0B4\uD558\uAE30, \uCC38\uACE0 \uACAC\uB514\uAE30" },
     "\uD0B9\uBC1B\uB124": { meaning: "\uB9E4\uC6B0 \uD654\uAC00 \uB098\uAC70\uB098 \uC5B4\uC774\uC5C6\uB2E4\uB294 \uB73B", correct: "\uC815\uB9D0 \uD654\uB09C\uB2E4, \uC5B4\uC774\uC5C6\uB2E4" },
@@ -2489,7 +2507,6 @@ ${reason}
     "\uAC1C\uC774\uB4DD": { meaning: "\uC544\uC8FC \uD070 \uC774\uB4DD\uC744 \uBCF4\uC558\uB2E4\uB294 \uB73B", correct: "\uD070 \uC774\uC775, \uC544\uC8FC \uC88B\uC740 \uC77C" },
     "\uB178\uC7BC": { meaning: "\uC7AC\uBBF8\uAC00 \uC5C6\uB2E4\uB294 \uB73B", correct: "\uC9C0\uB8E8\uD568, \uC7AC\uBBF8\uC5C6\uC74C" }
   };
-  var GEMINI_MODELS = ["gemini-3.6-flash", "gemini-flash-latest", "gemini-3.5-flash"];
   var chatbotEnabled = false;
   function setChatbotEnabled(enabled) {
     chatbotEnabled = enabled;
@@ -2499,32 +2516,16 @@ ${reason}
   var escapeHtml = (text) => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   var formatReply = (text) => escapeHtml(text).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
   async function askGemini(word) {
-    const body = JSON.stringify({
-      systemInstruction: {
-        parts: [{ text: "\uB2F9\uC2E0\uC740 \uC911\uD559\uC0DD\uC5D0\uAC8C \uBC14\uB978 \uC6B0\uB9AC\uB9D0\uC744 \uC54C\uB824\uC8FC\uB294 \uCE5C\uC808\uD558\uACE0 \uB530\uB73B\uD55C \uC120\uC0DD\uB2D8\uC785\uB2C8\uB2E4. \uB2F5\uBCC0\uC740 3\uBB38\uC7A5 \uC774\uB0B4\uB85C \uC9E7\uAC8C \uD569\uB2C8\uB2E4." }]
-      },
-      contents: [{ parts: [{ text: `\uD559\uC0DD\uC774 \uB2E4\uC74C \uB2E8\uC5B4\uC758 \uB73B\uACFC \uC62C\uBC14\uB978 \uC21C\uD654\uC5B4\uB97C \uBB3C\uC5B4\uBD24\uC2B5\uB2C8\uB2E4: "${word}". \uC774 \uB2E8\uC5B4\uAC00 \uBE44\uC18D\uC5B4\uB098 \uC740\uC5B4, \uC2E0\uC870\uC5B4\uB77C\uBA74 \uADF8 \uB73B\uC744 \uAC04\uB2E8\uD788 \uC124\uBA85\uD558\uACE0, \uD559\uC0DD\uC774 \uC77C\uC0C1\uC5D0\uC11C \uC4F8 \uC218 \uC788\uB294 \uAE0D\uC815\uC801\uC774\uACE0 \uBC14\uB978\uB9D0(\uC21C\uD654\uC5B4)\uB85C \uBC14\uAFB8\uC5B4 \uC548\uB0B4\uD574\uC8FC\uC138\uC694.` }] }]
+    if (!PROXY_URL) throw new Error("\uC911\uACC4 \uC11C\uBC84\uAC00 \uC544\uC9C1 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
+    const res = await fetch(PROXY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ word })
     });
-    let lastError = null;
-    for (const model of GEMINI_MODELS) {
-      try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body
-        });
-        if (!res.ok) throw new Error(`${model} \uC751\uB2F5 \uC624\uB958 (${res.status})`);
-        const data = await res.json();
-        const parts = data?.candidates?.[0]?.content?.parts || [];
-        const reply = parts.filter((p) => p.text && !p.thought).map((p) => p.text).join("").trim();
-        if (!reply) throw new Error(`${model} \uBE48 \uC751\uB2F5`);
-        return reply;
-      } catch (err) {
-        console.warn("\uCC57\uBD07 API \uC2E4\uD328, \uB2E4\uC74C \uBAA8\uB378 \uC2DC\uB3C4", err);
-        lastError = err;
-      }
-    }
-    throw lastError;
+    if (!res.ok) throw new Error(`\uC911\uACC4 \uC11C\uBC84 \uC624\uB958 (${res.status})`);
+    const data = await res.json();
+    if (!data.reply) throw new Error("\uBE48 \uC751\uB2F5");
+    return data.reply;
   }
   function initChatbot() {
     const container = document.createElement("div");

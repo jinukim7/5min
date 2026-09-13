@@ -1,6 +1,11 @@
 // src/js/chatbot.js
-
-const API_KEY = "AQ.Ab8RN6Jm_G1zISqvyyWyiXeAswCh_7zfdO-X9IDVPMBTB8jaag";
+//
+// Gemini API 키는 이 파일(공개 GitHub 저장소)에 절대 넣지 않습니다.
+// 대신 Cloudflare Worker 중계 서버를 통해 호출합니다. 키는 Worker의 비밀 변수로만 존재합니다.
+// 배포 방법: cloudflare-worker/gemini-proxy.js 상단 주석 참고.
+//
+// PROXY_URL 이 비어 있으면(아직 배포 전) 아래 SLANG_DICTIONARY 로만 동작합니다.
+const PROXY_URL = ""; // 예: "https://barum5-gemini-proxy.내계정.workers.dev"
 
 // Fallback dictionary for slang
 const SLANG_DICTIONARY = {
@@ -10,9 +15,6 @@ const SLANG_DICTIONARY = {
   "개이득": { meaning: "아주 큰 이득을 보았다는 뜻", correct: "큰 이익, 아주 좋은 일" },
   "노잼": { meaning: "재미가 없다는 뜻", correct: "지루함, 재미없음" }
 };
-
-// gemini-pro 는 종료된 모델이라 404가 발생 → 현재 사용 가능한 모델을 순서대로 시도
-const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-flash-latest', 'gemini-3.5-flash'];
 
 let chatbotEnabled = false;
 
@@ -35,33 +37,17 @@ const formatReply = (text) => escapeHtml(text)
   .replace(/\n/g, '<br>');
 
 async function askGemini(word) {
-  const body = JSON.stringify({
-    systemInstruction: {
-      parts: [{ text: '당신은 중학생에게 바른 우리말을 알려주는 친절하고 따뜻한 선생님입니다. 답변은 3문장 이내로 짧게 합니다.' }]
-    },
-    contents: [{ parts: [{ text: `학생이 다음 단어의 뜻과 올바른 순화어를 물어봤습니다: "${word}". 이 단어가 비속어나 은어, 신조어라면 그 뜻을 간단히 설명하고, 학생이 일상에서 쓸 수 있는 긍정적이고 바른말(순화어)로 바꾸어 안내해주세요.` }] }]
-  });
+  if (!PROXY_URL) throw new Error('중계 서버가 아직 설정되지 않았습니다.');
 
-  let lastError = null;
-  for (const model of GEMINI_MODELS) {
-    try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body
-      });
-      if (!res.ok) throw new Error(`${model} 응답 오류 (${res.status})`);
-      const data = await res.json();
-      const parts = data?.candidates?.[0]?.content?.parts || [];
-      const reply = parts.filter(p => p.text && !p.thought).map(p => p.text).join('').trim();
-      if (!reply) throw new Error(`${model} 빈 응답`);
-      return reply;
-    } catch (err) {
-      console.warn('챗봇 API 실패, 다음 모델 시도', err);
-      lastError = err;
-    }
-  }
-  throw lastError;
+  const res = await fetch(PROXY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ word })
+  });
+  if (!res.ok) throw new Error(`중계 서버 오류 (${res.status})`);
+  const data = await res.json();
+  if (!data.reply) throw new Error('빈 응답');
+  return data.reply;
 }
 
 export function initChatbot() {

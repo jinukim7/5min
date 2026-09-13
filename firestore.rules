@@ -1,0 +1,59 @@
+rules_version = '2';
+
+// 바름5분 Firestore 보안 규칙
+// - 교사 인증 코드는 teacherCodes/{코드} 문서로만 존재하며 누구도 읽을 수 없습니다.
+// - users/{uid} 의 role 을 'teacher' 로 저장하려면
+//   (1) 학교 교사 이메일이거나 (2) 존재하는 교사 인증 코드를 함께 보내야 합니다.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userEmail() {
+      return request.auth.token.email.lower();
+    }
+
+    // 학생 계정: 입학년도2 + 학년1 + 반1 + 번호2 @kyunghee.sen.ms.kr
+    function isStudentEmail() {
+      return userEmail().matches('^[0-9]{6}@kyunghee[.]sen[.]ms[.]kr$');
+    }
+
+    // 학교 도메인이지만 학생 형식이 아닌 계정, 또는 sen.go.kr 계정
+    function isAutoTeacherEmail() {
+      return request.auth.token.email_verified == true
+        && !isStudentEmail()
+        && (userEmail().matches('^.+@kyunghee[.]sen[.]ms[.]kr$')
+            || userEmail().matches('^.+@sen[.]go[.]kr$'));
+    }
+
+    function hasValidTeacherCode(data) {
+      return data.get('teacherCode', '') is string
+        && data.teacherCode.size() > 0
+        && data.teacherCode.size() <= 64
+        && data.teacherCode.matches('^[A-Z0-9_-]+$')
+        && exists(/databases/$(database)/documents/teacherCodes/$(data.teacherCode));
+    }
+
+    function hasAllowedRole(data) {
+      return !('role' in data)
+        || data.role == 'student'
+        || (data.role == 'teacher' && (isAutoTeacherEmail() || hasValidTeacherCode(data)));
+    }
+
+    // 교사 인증 코드: 클라이언트에서 조회·수정 불가 (Firebase 콘솔에서만 관리)
+    match /teacherCodes/{code} {
+      allow read, write: if false;
+    }
+
+    // 사용자 프로필: 본인만 읽고 쓸 수 있으며 role 값은 위 조건을 통과해야 함
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn()
+        && request.auth.uid == uid
+        && hasAllowedRole(request.resource.data);
+      allow delete: if false;
+    }
+  }
+}
