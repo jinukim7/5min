@@ -1528,110 +1528,114 @@ class App {
     }
 
     // 3. 퀴즈 만들기 (PDF p.3~4)
-    return `
-      <div class="worksheet-title-area">
-        <h2 class="worksheet-main-title">퀴즈 만들기</h2>
-        <div class="worksheet-sub-title">&lt;나의 책 나의 기록&gt;</div>
-      </div>
+    if (this.readingTemplate === 'make_quiz') {
+      return `
+        <div class="worksheet-title-area">
+          <h2 class="worksheet-main-title">퀴즈 만들기</h2>
+          <div class="worksheet-sub-title">&lt;나의 책 나의 기록&gt;</div>
+        </div>
 
-      <div class="torn-paper-box" style="margin-bottom: 1.5rem;">
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
-          <div>
-            <div style="font-weight: 800; font-size: 1.1rem; color: #1E293B; margin-bottom: 0.4rem;">
-              Q1. ( <input type="text" id="ws-quiz-p1" style="width: 40px; border:none; border-bottom:1px solid #64748B; background:transparent; font-weight:700; text-align:center;"> p)
+        <div class="torn-paper-box" style="margin-bottom: 1.5rem;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+            <div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: #1E293B; margin-bottom: 0.4rem;">
+                Q1. ( <input type="text" id="ws-quiz-p1" style="width: 40px; border:none; border-bottom:1px solid #64748B; background:transparent; font-weight:700; text-align:center;"> p)
+              </div>
+              <textarea class="worksheet-textarea" id="ws-quiz-q1" placeholder="친구들이 책을 읽고 맞출 수 있는 첫 번째 퀴즈 질문을 만들어보세요."></textarea>
             </div>
-            <textarea class="worksheet-textarea" id="ws-quiz-q1" placeholder="친구들이 책을 읽고 맞출 수 있는 첫 번째 퀴즈 질문을 만들어보세요."></textarea>
-          </div>
-          <div style="border-left: 2px dashed #CBD5E1; padding-left: 1.5rem;">
-            <div style="font-weight: 800; font-size: 1.1rem; color: #059669; margin-bottom: 0.4rem;">A. 정답</div>
-            <textarea class="worksheet-textarea" id="ws-quiz-a1" placeholder="Q1의 정답을 적어주세요."></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="torn-paper-box">
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
-          <div>
-            <div style="font-weight: 800; font-size: 1.1rem; color: #1E293B; margin-bottom: 0.4rem;">
-              Q2. ( <input type="text" id="ws-quiz-p2" style="width: 40px; border:none; border-bottom:1px solid #64748B; background:transparent; font-weight:700; text-align:center;"> p)
+            <div style="border-left: 2px dashed #CBD5E1; padding-left: 1.5rem;">
+              <div style="font-weight: 800; font-size: 1.1rem; color: #059669; margin-bottom: 0.4rem;">A. 정답</div>
+              <textarea class="worksheet-textarea" id="ws-quiz-a1" placeholder="Q1의 정답을 적어주세요."></textarea>
             </div>
-            <textarea class="worksheet-textarea" id="ws-quiz-q2" placeholder="두 번째 퀴즈 질문을 만들어보세요."></textarea>
-          </div>
-          <div style="border-left: 2px dashed #CBD5E1; padding-left: 1.5rem;">
-            <div style="font-weight: 800; font-size: 1.1rem; color: #059669; margin-bottom: 0.4rem;">A. 정답</div>
-            <textarea class="worksheet-textarea" id="ws-quiz-a2" placeholder="Q2의 정답을 적어주세요."></textarea>
           </div>
         </div>
-      </div>
 
-      <div class="worksheet-meta-bar">
-        <div><strong>책제목:</strong> <input type="text" class="worksheet-input-inline" value="${titleVal}" readonly></div>
-        <div><strong>저자:</strong> <input type="text" class="worksheet-input-inline" value="${authorVal}" readonly></div>
-        <div><strong>학번:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.grade}0${userProfile.classNum}${String(userProfile.number).padStart(2,'0')}" readonly></div>
-        <div><strong>이름:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.role === 'teacher' ? userProfile.realName : userProfile.nickname}" readonly></div>
-      </div>
-
-      <div style="margin-top: 2rem; text-align: center;">
-        <button class="btn btn-primary" id="btn-submit-worksheet" style="padding: 0.85rem 2.5rem; font-size: 1rem;">
-          ❓ 내가 만든 퀴즈 등록 (+30P)
-        </button>
-      </div>
-    `;
-  }
-
-  // 4. 마인드맵 (PDF p.5~6)
-  if (this.readingTemplate === 'mindmap') {
-    return `
-      <div class="worksheet-title-area">
-        <h2 class="worksheet-main-title">마인드맵</h2>
-        <div class="worksheet-sub-title">&lt;나의 책 나의 기록&gt;</div>
-      </div>
-
-      <div style="background: radial-gradient(#CBD5E1 1.2px, transparent 1.2px); background-size: 18px 18px; border: 1px solid #CBD5E1; border-radius: var(--radius-lg); padding: 2.5rem 1.5rem; margin-bottom: 2rem; text-align: center; background-color: #FFFFFF;">
-        <div style="font-size: 0.875rem; color: #64748B; margin-bottom: 1.5rem; font-weight: 600;">
-          중심 키워드를 적고, 책을 읽으며 떠오른 생각과 핵심 단어를 6개의 가지에 자유롭게 적어보세요.
+        <div class="torn-paper-box">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+            <div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: #1E293B; margin-bottom: 0.4rem;">
+                Q2. ( <input type="text" id="ws-quiz-p2" style="width: 40px; border:none; border-bottom:1px solid #64748B; background:transparent; font-weight:700; text-align:center;"> p)
+              </div>
+              <textarea class="worksheet-textarea" id="ws-quiz-q2" placeholder="두 번째 퀴즈 질문을 만들어보세요."></textarea>
+            </div>
+            <div style="border-left: 2px dashed #CBD5E1; padding-left: 1.5rem;">
+              <div style="font-weight: 800; font-size: 1.1rem; color: #059669; margin-bottom: 0.4rem;">A. 정답</div>
+              <textarea class="worksheet-textarea" id="ws-quiz-a2" placeholder="Q2의 정답을 적어주세요."></textarea>
+            </div>
+          </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; max-width: 580px; margin: 0 auto;">
-          <!-- Top 2 branches -->
-          <div style="display: flex; justify-content: space-between; width: 100%;">
-            <input type="text" id="ws-mm-1" placeholder="↖ 생각가지 1" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
-            <input type="text" id="ws-mm-2" placeholder="↗ 생각가지 2" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
+        <div class="worksheet-meta-bar">
+          <div><strong>책제목:</strong> <input type="text" class="worksheet-input-inline" value="${titleVal}" readonly></div>
+          <div><strong>저자:</strong> <input type="text" class="worksheet-input-inline" value="${authorVal}" readonly></div>
+          <div><strong>학번:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.grade}0${userProfile.classNum}${String(userProfile.number).padStart(2,'0')}" readonly></div>
+          <div><strong>이름:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.role === 'teacher' ? userProfile.realName : userProfile.nickname}" readonly></div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center;">
+          <button class="btn btn-primary" id="btn-submit-worksheet" style="padding: 0.85rem 2.5rem; font-size: 1rem;">
+            ❓ 내가 만든 퀴즈 등록 (+30P)
+          </button>
+        </div>
+      `;
+    }
+
+    // 4. 마인드맵 (PDF p.5~6)
+    if (this.readingTemplate === 'mindmap') {
+      return `
+        <div class="worksheet-title-area">
+          <h2 class="worksheet-main-title">마인드맵</h2>
+          <div class="worksheet-sub-title">&lt;나의 책 나의 기록&gt;</div>
+        </div>
+
+        <div style="background: radial-gradient(#CBD5E1 1.2px, transparent 1.2px); background-size: 18px 18px; border: 1px solid #CBD5E1; border-radius: var(--radius-lg); padding: 2.5rem 1.5rem; margin-bottom: 2rem; text-align: center; background-color: #FFFFFF;">
+          <div style="font-size: 0.875rem; color: #64748B; margin-bottom: 1.5rem; font-weight: 600;">
+            중심 키워드를 적고, 책을 읽으며 떠오른 생각과 핵심 단어를 6개의 가지에 자유롭게 적어보세요.
           </div>
 
-          <!-- Middle Row with Center Circle -->
-          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-            <input type="text" id="ws-mm-3" placeholder="← 생각가지 3" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
-            
-            <div style="width: 140px; height: 90px; border: 3px solid #1E293B; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 0.5rem;">
-              <span style="font-size: 0.7rem; color: #64748B; font-weight: 800;">중심 키워드</span>
-              <input type="text" id="ws-mm-center" placeholder="키워드 적기" style="border: none; border-bottom: 2px solid #3B82F6; text-align: center; font-weight: 800; font-size: 1rem; width: 90%; outline: none;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; max-width: 580px; margin: 0 auto;">
+            <!-- Top 2 branches -->
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+              <input type="text" id="ws-mm-1" placeholder="↖ 생각가지 1" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
+              <input type="text" id="ws-mm-2" placeholder="↗ 생각가지 2" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
             </div>
 
-            <input type="text" id="ws-mm-4" placeholder="생각가지 4 →" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
-          </div>
+            <!-- Middle Row with Center Circle -->
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+              <input type="text" id="ws-mm-3" placeholder="← 생각가지 3" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
+              
+              <div style="width: 140px; height: 90px; border: 3px solid #1E293B; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 0.5rem;">
+                <span style="font-size: 0.7rem; color: #64748B; font-weight: 800;">중심 키워드</span>
+                <input type="text" id="ws-mm-center" placeholder="키워드 적기" style="border: none; border-bottom: 2px solid #3B82F6; text-align: center; font-weight: 800; font-size: 1rem; width: 90%; outline: none;">
+              </div>
 
-          <!-- Bottom 2 branches -->
-          <div style="display: flex; justify-content: space-between; width: 100%;">
-            <input type="text" id="ws-mm-5" placeholder="↙ 생각가지 5" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
-            <input type="text" id="ws-mm-6" placeholder="↘ 생각가지 6" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
+              <input type="text" id="ws-mm-4" placeholder="생각가지 4 →" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
+            </div>
+
+            <!-- Bottom 2 branches -->
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+              <input type="text" id="ws-mm-5" placeholder="↙ 생각가지 5" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
+              <input type="text" id="ws-mm-6" placeholder="↘ 생각가지 6" style="padding: 0.5rem 0.75rem; border: 2px dashed #6366F1; border-radius: 20px; text-align: center; font-weight: 700; width: 140px; background: #EEF2FF;">
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="worksheet-meta-bar">
-        <div><strong>책제목:</strong> <input type="text" class="worksheet-input-inline" value="${titleVal}" readonly></div>
-        <div><strong>저자:</strong> <input type="text" class="worksheet-input-inline" value="${authorVal}" readonly></div>
-        <div><strong>학번:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.grade}0${userProfile.classNum}${String(userProfile.number).padStart(2,'0')}" readonly></div>
-        <div><strong>이름:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.role === 'teacher' ? userProfile.realName : userProfile.nickname}" readonly></div>
-      </div>
+        <div class="worksheet-meta-bar">
+          <div><strong>책제목:</strong> <input type="text" class="worksheet-input-inline" value="${titleVal}" readonly></div>
+          <div><strong>저자:</strong> <input type="text" class="worksheet-input-inline" value="${authorVal}" readonly></div>
+          <div><strong>학번:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.grade}0${userProfile.classNum}${String(userProfile.number).padStart(2,'0')}" readonly></div>
+          <div><strong>이름:</strong> <input type="text" class="worksheet-input-inline" value="${userProfile.role === 'teacher' ? userProfile.realName : userProfile.nickname}" readonly></div>
+        </div>
 
-      <div style="margin-top: 2rem; text-align: center;">
-        <button class="btn btn-primary" id="btn-submit-worksheet" style="padding: 0.85rem 2.5rem; font-size: 1rem; background: #4F46E5;">
-          🌐 마인드맵 등록 (+30P)
-        </button>
-      </div>
-    `;
+        <div style="margin-top: 2rem; text-align: center;">
+          <button class="btn btn-primary" id="btn-submit-worksheet" style="padding: 0.85rem 2.5rem; font-size: 1rem; background: #4F46E5;">
+            🌐 마인드맵 등록 (+30P)
+          </button>
+        </div>
+      `;
+    }
+
+    return '';
   }
 
   // ================= BADGES & HALL OF FAME VIEW =================
@@ -2412,6 +2416,14 @@ class App {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  window.__app = new App();
-});
+function initApp() {
+  if (!window.__app) {
+    window.__app = new App();
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
