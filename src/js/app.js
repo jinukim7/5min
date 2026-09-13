@@ -10,6 +10,16 @@ import { openGoogleLoginModal, openProfileOnboardingModal, openTeacherUpgradeMod
 import { initChatbot, setChatbotEnabled } from './chatbot.js';
 import { DEV_TEST_LOGIN_ENABLED } from './roles.js';
 
+// 타자 연습 통과 기준 정확도 (%)
+const TYPING_PASS_ACCURACY = 95;
+
+// HTML 속성/본문에 넣을 사용자·데이터 문자열 이스케이프
+const escapeAttr = (text) => String(text ?? '')
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;');
+
 export function showToast(message, icon = '✨') {
   const container = document.getElementById('toast-container');
   if (!container) return;
@@ -48,7 +58,8 @@ class App {
 
     // Reading state (PDF 3 templates)
     this.readingTemplate = 'quote_cards'; // 'quote_cards' | 'summary_reflection' | 'make_quiz'
-    this.bookSourceType = 'recommended'; // 'recommended' | 'custom'
+    this.bookSourceType = 'custom'; // 'custom'(내가 읽은 도서, 기본) | 'recommended'
+    this.customBook = { title: '', author: '' };
     this.selectedBookId = 'b1';
     this.readingLogs = [...INITIAL_READING_LOGS];
 
@@ -295,7 +306,7 @@ class App {
     container.innerHTML = `
       <section class="hero-section">
         <div class="hero-pill-tag">
-          <span>✨</span> 경희중학교 · 매일 5분 올바른 루틴
+          <span>✨</span> 경희중학교 · 매일 5분 올바른 루틴 프로젝트
         </div>
         <h1 class="hero-title">
           매너, 스마트 타이핑, 독서기록으로<br>
@@ -354,6 +365,9 @@ class App {
           <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.5rem;">
             현재 범위: <strong>${scopeLabel}</strong> | ${appState.state.userProfile.role === 'teacher' ? '교사 화면 (실명+닉네임 병기)' : '학생 화면 (닉네임만 표시)'}
           </p>
+          ${appState.isShowingSampleStudents() ? `
+            <p style="margin-top: 0.4rem;"><span class="badge badge-orange">🧪 예시 데이터 — 실제 학생 기록이 등록되면 자동으로 바뀝니다</span></p>
+          ` : ''}
 
           <!-- Scope Selector (학급 / 학년 / 전교생) -->
           <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.25rem;">
@@ -825,6 +839,32 @@ class App {
     }
   }
 
+  // 이전 타수 / 평균 타수 HUD 칸 (통과한 기록 기준)
+  renderTypingRecordHudHtml(prefix) {
+    const { prevCPM, avgCPM, count } = appState.getTypingRecordSummary();
+    return `
+      <div class="hud-stat-box">
+        <div class="hud-label">이전 타수</div>
+        <div class="hud-value" id="${prefix}-hud-prev">${prevCPM}<span class="hud-unit">CPM</span></div>
+      </div>
+      <div class="hud-stat-box">
+        <div class="hud-label">평균 타수 (오늘 ${count}회)</div>
+        <div class="hud-value" id="${prefix}-hud-avg">${avgCPM}<span class="hud-unit">CPM</span></div>
+      </div>
+    `;
+  }
+
+  // 정확도 95% 이상일 때만 통과: 통과 시 기록 저장 후 true 반환
+  passTypingAttempt(status, mode) {
+    if (status.accuracy < TYPING_PASS_ACCURACY) {
+      sounds.playError();
+      showToast(`정확도 ${status.accuracy}% — ${TYPING_PASS_ACCURACY}% 이상이어야 통과할 수 있어요. 다시 도전!`, '🔁');
+      return false;
+    }
+    appState.recordTypingResult(status.cpm, status.accuracy, mode);
+    return true;
+  }
+
   // --- 1. 자리 연습 ---
   renderKeyPracticeMode(container) {
     const STAGES = this.typingLang === 'ko' ? KR_KEY_STAGES : EN_KEY_STAGES;
@@ -849,6 +889,7 @@ class App {
             <div class="hud-label">정확도</div>
             <div class="hud-value" id="key-hud-acc">100<span class="hud-unit">%</span></div>
           </div>
+          ${this.renderTypingRecordHudHtml('key')}
           <div class="hud-stat-box">
             <div class="hud-label">진행도</div>
             <div class="hud-value" id="key-hud-prog">0<span class="hud-unit">%</span></div>
@@ -911,11 +952,19 @@ class App {
         this.highlightKeyboardKey(status.currentKey);
       },
       (finalStatus) => {
+        const rerender = () => setTimeout(() => {
+          if (this.typingMode === 'key' && container.isConnected) this.renderKeyPracticeMode(container);
+        }, 1500);
+        if (!this.passTypingAttempt(finalStatus, 'key')) {
+          rerender();
+          return;
+        }
         sounds.playCelebration();
         triggerConfetti();
         const earned = Math.round(finalStatus.cpm / 10 + 20);
         appState.addTypingScore(earned, finalStatus.cpm, finalStatus.accuracy);
-        showToast(`자리 연습 완료! +${earned}P 적립 (타수: ${finalStatus.cpm} CPM)`, '🎯');
+        showToast(`자리 연습 완료! +${earned}P 적립 (타수: ${finalStatus.cpm} CPM, 정확도 ${finalStatus.accuracy}%)`, '🎯');
+        rerender();
       }
     );
 
@@ -1048,6 +1097,8 @@ class App {
     const wordBubble = container.querySelector('#word-target-bubble');
     const countEl = container.querySelector('#word-hud-count');
     const ptsEl = container.querySelector('#word-hud-points');
+    // 동적으로 그린 입력창은 autofocus 가 동작하지 않으므로 직접 커서를 옮김
+    wordInput.focus();
 
     wordInput.addEventListener('keydown', (e) => {
       sounds.playKeyTick();
@@ -1101,6 +1152,7 @@ class App {
             <div class="hud-label">정확도</div>
             <div class="hud-value" id="st-hud-acc">100<span class="hud-unit">%</span></div>
           </div>
+          ${this.renderTypingRecordHudHtml('st')}
           <div class="hud-stat-box">
             <div class="hud-label">경과 시간</div>
             <div class="hud-value" id="st-hud-time">00:00</div>
@@ -1135,7 +1187,7 @@ class App {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
           <button class="btn btn-secondary" id="btn-restart-short">🔄 다시 치기</button>
           <div style="font-size: 0.85rem; color: var(--text-muted);">
-            ⌨️ 직접 보이는 입력창에 타이핑하세요. [Enter] 키로 문장을 제출할 수 있습니다.
+            ⌨️ [Enter] 키로 문장을 제출합니다. 정확도 ${TYPING_PASS_ACCURACY}% 이상이면 통과!
           </div>
         </div>
       </div>
@@ -1163,6 +1215,13 @@ class App {
         hudTime.textContent = `${min}:${sec}`;
       },
       (status) => {
+        if (!this.passTypingAttempt(status, 'short')) {
+          // 통과 실패: 같은 문장을 처음부터 다시
+          setTimeout(() => {
+            if (this.typingMode === 'short' && container.isConnected) this.renderShortPracticeMode(container);
+          }, 1200);
+          return;
+        }
         sounds.playCelebration();
         triggerConfetti();
         const earned = Math.round(status.cpm / 10 + 25) * this.typingLevel;
@@ -1170,11 +1229,13 @@ class App {
         showToast(`짧은 글 타자 완성! +${earned}P 적립 (${status.cpm} CPM, 정확도 ${status.accuracy}%)`, '🎉');
 
         setTimeout(() => {
+          if (this.typingMode !== 'short' || !container.isConnected) return;
           this.sentenceIndex = (this.sentenceIndex + 1) % list.length;
           this.renderShortPracticeMode(container);
         }, 1500);
       }
     );
+    visibleInput.focus();
 
     visibleInput.addEventListener('input', (e) => {
       sounds.playKeyTick();
@@ -1246,6 +1307,7 @@ class App {
             <div class="hud-label">정확도</div>
             <div class="hud-value" id="lg-hud-acc">100<span class="hud-unit">%</span></div>
           </div>
+          ${this.renderTypingRecordHudHtml('lg')}
           <div class="hud-stat-box">
             <div class="hud-label">진행도</div>
             <div class="hud-value" id="lg-hud-prog">0<span class="hud-unit">%</span></div>
@@ -1275,7 +1337,7 @@ class App {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
           <button class="btn btn-secondary" id="btn-restart-long">🔄 다시 치기</button>
           <div style="font-size: 0.85rem; color: var(--text-muted);">
-            긴 글 완독 타이핑 시 레벨에 비례하여 대량의 성장 포인트가 적립됩니다.
+            정확도 ${TYPING_PASS_ACCURACY}% 이상으로 완성하면 레벨에 비례한 포인트가 적립됩니다.
           </div>
         </div>
       </div>
@@ -1298,13 +1360,22 @@ class App {
         hudProg.innerHTML = `${status.progress}<span class="hud-unit">%</span>`;
       },
       (status) => {
+        const rerender = (delay) => setTimeout(() => {
+          if (this.typingMode === 'long' && container.isConnected) this.renderLongPracticeMode(container);
+        }, delay);
+        if (!this.passTypingAttempt(status, 'long')) {
+          rerender(1200);
+          return;
+        }
         sounds.playCelebration();
         triggerConfetti();
         const earned = Math.round(status.cpm / 10 + 60) * this.typingLevel;
         appState.addTypingScore(earned, status.cpm, status.accuracy);
-        showToast(`긴 글 완독 타이핑 완료! +${earned}P 적립!`, '🏆');
+        showToast(`긴 글 완독 타이핑 완료! +${earned}P 적립! (${status.cpm} CPM, 정확도 ${status.accuracy}%)`, '🏆');
+        rerender(1500);
       }
     );
+    visibleInput.focus();
 
     visibleInput.addEventListener('input', (e) => {
       sounds.playKeyTick();
@@ -1406,34 +1477,38 @@ class App {
         </div>
 
         <!-- Book Selection (추천도서 선택 vs 직접 입력) -->
-        <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-xs);">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-            <div style="font-weight: 800; font-size: 0.95rem;">
-              📖 읽은 책 선택 방식
-            </div>
-            <div class="book-source-toggle" style="margin: 0;">
-              <button class="book-source-btn ${!isCustom ? 'active' : ''}" id="btn-src-rec">
-                추천도서 ${books.length}권에서 선택
-              </button>
-              <button class="book-source-btn ${isCustom ? 'active' : ''}" id="btn-src-custom">
-                ✍️ 내가 읽은 도서 직접 입력
-              </button>
-            </div>
+        <div class="book-source-picker">
+          <div class="book-source-cards">
+            <button class="book-source-card book-source-card-primary ${isCustom ? 'active' : ''}" id="btn-src-custom">
+              <span class="book-source-card-icon">✍️</span>
+              <span class="book-source-card-text">
+                <span class="book-source-card-title">내가 읽은 도서 기록하기</span>
+                <span class="book-source-card-sub">지금 읽고 있는 책, 직접 고른 책을 먼저 기록해요</span>
+              </span>
+              <span class="book-source-card-badge">추천</span>
+            </button>
+            <button class="book-source-card ${!isCustom ? 'active' : ''}" id="btn-src-rec">
+              <span class="book-source-card-icon">📚</span>
+              <span class="book-source-card-text">
+                <span class="book-source-card-title">추천도서에서 고르기</span>
+                <span class="book-source-card-sub">중학생 추천도서 ${books.length}권</span>
+              </span>
+            </button>
           </div>
 
-          <div style="margin-top: 1rem;">
+          <div class="book-source-detail ${isCustom ? 'is-custom' : ''}">
             ${!isCustom ? `
               <select id="ws-rec-book" style="width: 100%; padding: 0.65rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
                 ${books.map(b => `
-                  <option value="${b.id}" ${b.id === this.selectedBookId ? 'selected' : ''}>
+                  <option value="${b.id}" ${b.id === selectedBook.id ? 'selected' : ''}>
                     ${b.isTeacherAdded ? '🌟 [선생님 추천] ' : ''}${b.title} (${b.author} 저 · ${b.publisher || '추천도서'})
                   </option>
                 `).join('')}
               </select>
             ` : `
-              <div style="display: grid; grid-template-columns: 2fr 1.5fr; gap: 1rem;">
-                <input type="text" id="ws-custom-title" placeholder="책 제목을 입력하세요" style="padding: 0.65rem; border: 1px solid #4F46E5; border-radius: var(--radius-md); font-weight: 700;">
-                <input type="text" id="ws-custom-author" placeholder="저자를 입력하세요" style="padding: 0.65rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              <div class="custom-book-fields">
+                <input type="text" id="ws-custom-title" placeholder="📖 내가 읽은 책 제목" value="${escapeAttr(this.customBook.title)}">
+                <input type="text" id="ws-custom-author" placeholder="저자" value="${escapeAttr(this.customBook.author)}">
               </div>
             `}
           </div>
@@ -1508,7 +1583,16 @@ class App {
         sounds.playClick();
         this.bookSourceType = 'custom';
         this.renderReading(container);
+        container.querySelector('#ws-custom-title')?.focus();
       });
+    }
+
+    // 직접 입력한 책 정보는 양식 탭을 바꿔도 유지
+    const customTitleInput = container.querySelector('#ws-custom-title');
+    const customAuthorInput = container.querySelector('#ws-custom-author');
+    if (customTitleInput && customAuthorInput) {
+      customTitleInput.addEventListener('input', (e) => { this.customBook.title = e.target.value; });
+      customAuthorInput.addEventListener('input', (e) => { this.customBook.author = e.target.value; });
     }
 
     const recSelect = container.querySelector('#ws-rec-book');
@@ -1584,14 +1668,14 @@ class App {
 
         <!-- 2 Torn Grid Note Paper Blocks -->
         <div class="torn-paper-box">
-          <textarea class="worksheet-textarea" id="ws-q1-text" placeholder="기억하고 싶은 첫 번째 구절을 기록해 보세요.">${!isCustom && book.quotes[0] ? book.quotes[0] : ''}</textarea>
+          <textarea class="worksheet-textarea" id="ws-q1-text" placeholder="${escapeAttr(!isCustom && book.quotes[0] ? `예시) ${book.quotes[0]}` : '기억하고 싶은 첫 번째 구절을 기록해 보세요.')}"></textarea>
           <div class="torn-page-tag">
             ( <input type="text" class="page-num-input" id="ws-q1-page" placeholder="  "> 페이지 )
           </div>
         </div>
 
         <div class="torn-paper-box">
-          <textarea class="worksheet-textarea" id="ws-q2-text" placeholder="기억하고 싶은 두 번째 구절을 기록해 보세요.">${!isCustom && book.quotes[1] ? book.quotes[1] : ''}</textarea>
+          <textarea class="worksheet-textarea" id="ws-q2-text" placeholder="${escapeAttr(!isCustom && book.quotes[1] ? `예시) ${book.quotes[1]}` : '기억하고 싶은 두 번째 구절을 기록해 보세요.')}"></textarea>
           <div class="torn-page-tag">
             ( <input type="text" class="page-num-input" id="ws-q2-page" placeholder="  "> 페이지 )
           </div>
@@ -1900,11 +1984,11 @@ class App {
     container.innerHTML = `
       <section class="hero-section">
         <div class="hero-pill-tag">
-          <span>✨</span> 경희중학교 · 매일 5분 올바른 루틴
+          <span>✨</span> 경희중학교 · 매일 5분 올바른 루틴 프로젝트
         </div>
         <h1 class="hero-title">
           로그인하고<br>
-          <span class="highlight-gradient">바름5분을 시작해 보세요</span>
+          <span class="highlight-gradient">바름 5분을 시작해 보세요</span>
         </h1>
         <p class="hero-desc">
           아침 시간뿐만 아니라 쉬는 시간·점심시간 등 짬날 때마다 들어와서 매너 실천, 스마트 타이핑, 독서기록을 이어가요!
@@ -2014,6 +2098,10 @@ class App {
 
     const proposals = appState.state.teacherProposals || [];
     const recommendedBooks = appState.getRecommendedBooks();
+    appState.listenToUnknownWords(() => {
+      if (this.currentView === 'teacher' && container.isConnected) this.renderTeacher(container);
+    });
+    const unknownWords = appState.getUnknownWords();
 
     container.innerHTML = `
       <div class="teacher-dashboard">
@@ -2184,6 +2272,44 @@ class App {
           </div>
         </div>
 
+        <!-- Chatbot Unknown Words Management Panel -->
+        <div class="teacher-proposal-panel" style="margin-top: 2rem;">
+          <div class="proposal-panel-header">
+            <div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
+                <span>🌱</span> 바른말 챗봇 미등록 단어 관리 (${unknownWords.length}개)
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                학생이 물어봤지만 챗봇이 답하지 못한 단어입니다. 뜻과 바른 표현을 추가하면 다음부터 챗봇이 바로 안내합니다.
+              </p>
+            </div>
+            <button class="btn btn-primary btn-add-dict-word" data-word="" style="font-size: 0.85rem; background: #059669;">
+              ➕ 단어 직접 추가하기
+            </button>
+          </div>
+
+          ${unknownWords.length === 0 ? `
+            <div style="text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+              아직 기록된 미등록 단어가 없습니다. 🎉
+            </div>
+          ` : `
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; margin-top: 1.25rem;">
+              ${unknownWords.map(w => `
+                <div class="card" style="padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+                    <strong style="font-size: 1.05rem; color: #1E293B; word-break: break-all;">${escapeAttr(w.word)}</strong>
+                    <span class="badge badge-orange">${w.count}회 질문</span>
+                  </div>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-primary btn-add-dict-word" data-word="${escapeAttr(w.word)}" style="flex: 1; font-size: 0.8rem; padding: 0.4rem;">📝 뜻 등록</button>
+                    <button class="btn btn-secondary btn-delete-unknown-word" data-word-id="${escapeAttr(w.id)}" style="font-size: 0.8rem; padding: 0.4rem 0.75rem;">삭제</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        </div>
+
         <!-- Student Management Table (RealName + Nickname) -->
         <div class="table-container-card">
           <div class="table-toolbar">
@@ -2247,7 +2373,7 @@ class App {
         <div class="exhibition-top-bar">
           <div class="exhibition-brand">
             <div class="logo-badge" style="background: #3B82F6;">Q</div>
-            <div style="font-size: 1.3rem; font-weight: 800;">바름5분 전시 모드 — 2학년 3반</div>
+            <div style="font-size: 1.3rem; font-weight: 800;">바름 5분 전시 모드 — 2학년 3반</div>
             <span class="exhibition-badge">LIVE MORNING SHOWCASE</span>
           </div>
           <button class="exhibition-btn-close" id="btn-close-exhibition">✕ 닫기 (ESC)</button>
@@ -2309,6 +2435,25 @@ class App {
       });
     }
 
+    // Chatbot dictionary: register meaning / delete unknown word
+    container.querySelectorAll('.btn-add-dict-word').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        sounds.playClick();
+        this.openDictionaryWordModal(container, e.currentTarget.dataset.word);
+      });
+    });
+
+    container.querySelectorAll('.btn-delete-unknown-word').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const wordId = e.currentTarget.dataset.wordId;
+        if (!confirm('이 단어를 미등록 목록에서 삭제할까요?')) return;
+        sounds.playClick();
+        await appState.deleteUnknownWord(wordId);
+        showToast('미등록 단어를 삭제했습니다.', '🗑️');
+        this.renderTeacher(container);
+      });
+    });
+
     // Filter
     container.querySelectorAll('.table-filter-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -2350,14 +2495,14 @@ class App {
       btnExport.addEventListener('click', () => {
         sounds.playSuccess();
         const header = '번호,실명,닉네임,매너점수,타자점수,독서점수,총합포인트,최고타수,다짐\n';
-        const rows = appState.state.students.map(s => 
+        const rows = this.getSelectedClassStudents().map(s =>
           `${s.number},${s.realName},${s.nickname},${s.mannersScore},${s.typingScore},${s.readingScore},${s.totalPoints},${s.typingBestCPM},"${s.comment || ''}"`
         ).join('\n');
         const blob = new Blob(["\uFEFF" + header + rows], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `바름5분_2학년3반_기록_${appState.getTodayString()}.csv`;
+        a.download = `바름 5분_2학년3반_기록_${appState.getTodayString()}.csv`;
         a.click();
         URL.revokeObjectURL(url);
         showToast('학급 활동 기록 CSV 파일 다운로드 완료', '📥');
@@ -2436,6 +2581,84 @@ class App {
       sounds.playSuccess();
       modal.classList.remove('active');
       showToast('새 매너 지침이 제안되었습니다. (동료 교사 투표 시작)', '🗳️');
+      this.renderTeacher(parentContainer);
+    };
+  }
+
+  // Chatbot Dictionary Word Modal (관리자 단어 등록)
+  openDictionaryWordModal(parentContainer, word = '') {
+    let modal = document.getElementById('dict-word-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.className = 'modal-overlay';
+      modal.id = 'dict-word-modal';
+      const fieldStyle = 'width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-family: inherit; font-size: 0.9rem;';
+      const labelStyle = 'font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;';
+      modal.innerHTML = `
+        <div class="modal-content" style="max-width: 500px; text-align: left;">
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">🌱 챗봇 사전에 단어 등록</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            등록하면 학생이 이 단어를 물어볼 때 챗봇이 아래 내용으로 안내합니다.
+          </p>
+          <div style="margin-bottom: 1rem;">
+            <label style="${labelStyle}">단어</label>
+            <input type="text" id="dict-word-input" maxlength="50" placeholder="예: 킹받네" style="${fieldStyle} font-weight: 700;">
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="${labelStyle}">어원 (본래 뜻) — "'단어'는 본래 ..." 뒤에 이어집니다</label>
+            <textarea id="dict-etymology-input" rows="2" placeholder="예: '열받네'의 '열'을 영어 'King'으로 바꿔 강조한 신조어입니다." style="${fieldStyle}"></textarea>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="${labelStyle}">현재 쓰임 — "현재는 ..." 뒤에 이어집니다</label>
+            <textarea id="dict-meaning-input" rows="2" placeholder="예: 몹시 화가 나거나 짜증 날 때 쓰입니다." style="${fieldStyle}"></textarea>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="${labelStyle}">바른 표현</label>
+            <input type="text" id="dict-correct-input" placeholder="예: 정말 속상하다" style="${fieldStyle}">
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn btn-secondary" id="btn-close-dict" style="flex: 1;">취소</button>
+            <button class="btn btn-primary" id="btn-save-dict" style="flex: 1; background: #059669;">사전에 등록하기</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    const wordInput = modal.querySelector('#dict-word-input');
+    const etymologyInput = modal.querySelector('#dict-etymology-input');
+    const meaningInput = modal.querySelector('#dict-meaning-input');
+    const correctInput = modal.querySelector('#dict-correct-input');
+    wordInput.value = word;
+    etymologyInput.value = '';
+    meaningInput.value = '';
+    correctInput.value = '';
+
+    modal.classList.add('active');
+    (word ? etymologyInput : wordInput).focus();
+
+    modal.querySelector('#btn-close-dict').onclick = () => modal.classList.remove('active');
+    modal.querySelector('#btn-save-dict').onclick = async () => {
+      const entry = {
+        word: wordInput.value.trim(),
+        etymology: etymologyInput.value.trim(),
+        meaning: meaningInput.value.trim(),
+        correct: correctInput.value.trim()
+      };
+      if (!entry.word || !entry.etymology || !entry.meaning || !entry.correct) {
+        showToast('단어, 어원, 현재 쓰임, 바른 표현을 모두 입력해주세요.', '⚠️');
+        return;
+      }
+
+      const ok = await appState.addDictionaryWord(entry);
+      modal.classList.remove('active');
+      if (ok) {
+        sounds.playSuccess();
+        showToast(`'${entry.word}' 단어가 챗봇 사전에 등록되었습니다.`, '🌱');
+      } else {
+        sounds.playError();
+        showToast('서버 저장에 실패했습니다. 교사 권한과 네트워크를 확인해주세요.', '⚠️');
+      }
       this.renderTeacher(parentContainer);
     };
   }
@@ -2578,6 +2801,11 @@ class App {
     window.addEventListener('keydown', escHandler);
   }
 
+  getSelectedClassStudents() {
+    const [g, c] = (appState.state.selectedClassKey || '2-3').split('-').map(Number);
+    return appState.getStudentsByClass(g, c);
+  }
+
   closeExhibition() {
     const overlay = document.getElementById('exhibition-view');
     if (overlay) overlay.classList.remove('active');
@@ -2585,21 +2813,21 @@ class App {
   }
 
   nextExhibitionSlide() {
-    const students = appState.state.students.filter(s => s.comment);
+    const students = this.getSelectedClassStudents().filter(s => s.comment);
     if (!students.length) return;
     this.exhibitionIndex = (this.exhibitionIndex + 1) % students.length;
     this.updateExhibitionSlide();
   }
 
   prevExhibitionSlide() {
-    const students = appState.state.students.filter(s => s.comment);
+    const students = this.getSelectedClassStudents().filter(s => s.comment);
     if (!students.length) return;
     this.exhibitionIndex = (this.exhibitionIndex - 1 + students.length) % students.length;
     this.updateExhibitionSlide();
   }
 
   updateExhibitionSlide() {
-    const students = appState.state.students.filter(s => s.comment);
+    const students = this.getSelectedClassStudents().filter(s => s.comment);
     if (!students.length) return;
 
     const student = students[this.exhibitionIndex];

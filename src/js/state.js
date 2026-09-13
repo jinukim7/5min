@@ -5,569 +5,67 @@ import { db } from './firebase-config.js';
 
 const STORAGE_KEY = 'pyeonhakwi_ms_state_v4';
 
-// 28 realistic Middle School students (2학년 3반 - 최대 28명 정원)
-export const INITIAL_STUDENTS_28 = [
-  {
-    number: 1,
-    grade: 2,
-    classNum: 3,
-    realName: '김민준',
-    nickname: '별빛달빛',
-    mannersScore: 480,
-    typingScore: 540,
-    readingScore: 320,
-    totalPoints: 1340,
-    typingBestCPM: 365,
-    typingAcc: 98,
-    streak: 8,
-    checked: true,
-    quizDone: true,
-    comment: '아침 인사를 먼저 밝게 건네니 하루가 상쾌합니다!',
-    hasSticker: true
-  },
-  {
-    number: 2,
-    grade: 2,
-    classNum: 3,
-    realName: '이서연',
-    nickname: '책읽는사자',
-    mannersScore: 520,
-    typingScore: 610,
-    readingScore: 490,
-    totalPoints: 1620,
-    typingBestCPM: 425,
-    typingAcc: 99,
-    streak: 11,
-    checked: true,
-    quizDone: true,
-    comment: '《시간을 파는 상점》을 읽고 매일 5분의 소중함을 실감했어요.',
-    hasSticker: true
-  },
-  {
-    number: 3,
-    grade: 2,
-    classNum: 3,
-    realName: '박도윤',
-    nickname: '새벽구름',
-    mannersScore: 390,
-    typingScore: 410,
-    readingScore: 280,
-    totalPoints: 1080,
-    typingBestCPM: 295,
-    typingAcc: 94,
-    streak: 5,
-    checked: true,
-    quizDone: false,
-    comment: '책상 위 교과서 정돈과 복도 우측통행을 지키고 있어요.',
-    hasSticker: false
-  },
-  {
-    number: 4,
-    grade: 2,
-    classNum: 3,
-    realName: '정예은',
-    nickname: '꿈꾸는고래',
-    mannersScore: 510,
-    typingScore: 480,
-    readingScore: 460,
-    totalPoints: 1450,
-    typingBestCPM: 380,
-    typingAcc: 97,
-    streak: 9,
-    checked: true,
-    quizDone: true,
-    comment: '친구들에게 고운 말 쓰기를 온·오프라인에서 모두 실천 중입니다.',
-    hasSticker: true
-  },
-  {
-    number: 5,
-    grade: 2,
-    classNum: 3,
-    realName: '최시우',
-    nickname: '푸른하늘',
-    mannersScore: 310,
-    typingScore: 330,
-    readingScore: 210,
-    totalPoints: 850,
-    typingBestCPM: 240,
-    typingAcc: 91,
-    streak: 3,
-    checked: false,
-    quizDone: false,
-    comment: '한컴 자리연습으로 기본기부터 탄탄히 채우고 있습니다.',
-    hasSticker: false
-  },
-  {
-    number: 6,
-    grade: 2,
-    classNum: 3,
-    realName: '강지아',
-    nickname: '바람소리',
-    mannersScore: 560,
-    typingScore: 640,
-    readingScore: 520,
-    totalPoints: 1720,
-    typingBestCPM: 460,
-    typingAcc: 100,
-    streak: 14,
-    checked: true,
-    quizDone: true,
-    comment: '《원더》의 친절 명언처럼 친구의 실수를 따뜻하게 안아줄게요.',
-    hasSticker: true
-  },
-  {
-    number: 7,
-    grade: 2,
-    classNum: 3,
-    realName: '윤하준',
-    nickname: '달콤초코',
-    mannersScore: 420,
-    typingScore: 390,
-    readingScore: 310,
-    totalPoints: 1120,
-    typingBestCPM: 315,
-    typingAcc: 95,
-    streak: 6,
-    checked: true,
-    quizDone: false,
-    comment: '급식실에서 새치기 안 하고 실무사님께 감사 인사하기 성공!',
-    hasSticker: false
-  },
-  {
-    number: 8,
-    grade: 2,
-    classNum: 3,
-    realName: '한소율',
-    nickname: '은하수별',
-    mannersScore: 460,
-    typingScore: 490,
-    readingScore: 390,
-    totalPoints: 1340,
-    typingBestCPM: 350,
-    typingAcc: 96,
-    streak: 7,
-    checked: true,
-    quizDone: true,
-    comment: '아침 독서 후 짧은 글 타자 연습을 하니 집중력이 훨씬 높아져요.',
-    hasSticker: false
-  },
-  {
-    number: 9,
-    grade: 2,
-    classNum: 3,
-    realName: '송지호',
-    nickname: '날아라우주',
-    mannersScore: 280,
-    typingScore: 290,
-    readingScore: 180,
-    totalPoints: 750,
-    typingBestCPM: 210,
-    typingAcc: 89,
-    streak: 2,
-    checked: false,
-    quizDone: false,
-    comment: '독수리 타법 벗어나기 1단계 기본자리 마스터 도전!',
-    hasSticker: false
-  },
-  {
-    number: 10,
-    grade: 2,
-    classNum: 3,
-    realName: '배채원',
-    nickname: '초록풀잎',
-    mannersScore: 490,
-    typingScore: 520,
-    readingScore: 410,
-    totalPoints: 1420,
-    typingBestCPM: 390,
-    typingAcc: 98,
-    streak: 8,
-    checked: true,
-    quizDone: true,
-    comment: '선생님 설명하실 때 디벗 화면 덮기 규칙을 확실하게 지킵니다.',
-    hasSticker: true
-  },
-  {
-    number: 11,
-    grade: 2,
-    classNum: 3,
-    realName: '오은우',
-    nickname: '미소천사',
-    mannersScore: 440,
-    typingScore: 460,
-    readingScore: 350,
-    totalPoints: 1250,
-    typingBestCPM: 330,
-    typingAcc: 95,
-    streak: 6,
-    checked: true,
-    quizDone: true,
-    comment: '등굣길 스마트폰 대신 주변 친구들에게 밝은 아침 인사를 건넸어요.',
-    hasSticker: false
-  },
-  {
-    number: 12,
-    grade: 2,
-    classNum: 3,
-    realName: '임수아',
-    nickname: '용감한호랑이',
-    mannersScore: 380,
-    typingScore: 370,
-    readingScore: 290,
-    totalPoints: 1040,
-    typingBestCPM: 285,
-    typingAcc: 93,
-    streak: 4,
-    checked: true,
-    quizDone: false,
-    comment: '《아몬드》를 읽고 진정한 공감의 의미를 배우고 있습니다.',
-    hasSticker: false
-  },
-  {
-    number: 13,
-    grade: 2,
-    classNum: 3,
-    realName: '권현우',
-    nickname: '햇살가득',
-    mannersScore: 320,
-    typingScore: 310,
-    readingScore: 220,
-    totalPoints: 850,
-    typingBestCPM: 250,
-    typingAcc: 90,
-    streak: 3,
-    checked: false,
-    quizDone: false,
-    comment: '내일부터는 10분 일찍 등교하여 아침 독서에 빠져보겠습니다.',
-    hasSticker: false
-  },
-  {
-    number: 14,
-    grade: 2,
-    classNum: 3,
-    realName: '신유나',
-    nickname: '지혜올빼미',
-    mannersScore: 530,
-    typingScore: 560,
-    readingScore: 480,
-    totalPoints: 1570,
-    typingBestCPM: 410,
-    typingAcc: 98,
-    streak: 10,
-    checked: true,
-    quizDone: true,
-    comment: '친구 칭찬 한마디와 디벗 안전 충전으로 하루를 보람차게 마무리합니다.',
-    hasSticker: true
-  },
-  {
-    number: 15,
-    grade: 2,
-    classNum: 3,
-    realName: '유재원',
-    nickname: '무지개빛',
-    mannersScore: 510,
-    typingScore: 590,
-    readingScore: 440,
-    totalPoints: 1540,
-    typingBestCPM: 435,
-    typingAcc: 99,
-    streak: 11,
-    checked: true,
-    quizDone: true,
-    comment: '영문 타자와 한글 타자 모두 400타 돌파 목표!',
-    hasSticker: true
-  },
-  {
-    number: 16,
-    grade: 2,
-    classNum: 3,
-    realName: '조하은',
-    nickname: '맑은샘물',
-    mannersScore: 470,
-    typingScore: 450,
-    readingScore: 370,
-    totalPoints: 1290,
-    typingBestCPM: 340,
-    typingAcc: 96,
-    streak: 7,
-    checked: true,
-    quizDone: true,
-    comment: '이동 수업 시 다른 반 교실 복도에서 정숙하게 걷기 실천 중!',
-    hasSticker: false
-  },
-  {
-    number: 17,
-    grade: 2,
-    classNum: 3,
-    realName: '서진우',
-    nickname: '봄날의햇살',
-    mannersScore: 360,
-    typingScore: 350,
-    readingScore: 270,
-    totalPoints: 980,
-    typingBestCPM: 275,
-    typingAcc: 92,
-    streak: 4,
-    checked: true,
-    quizDone: false,
-    comment: '식판 반납할 때 수저 분리와 잔반 처리를 깨끗이 했습니다.',
-    hasSticker: false
-  },
-  {
-    number: 18,
-    grade: 2,
-    classNum: 3,
-    realName: '문채은',
-    nickname: '푸른바다',
-    mannersScore: 450,
-    typingScore: 480,
-    readingScore: 400,
-    totalPoints: 1330,
-    typingBestCPM: 360,
-    typingAcc: 97,
-    streak: 8,
-    checked: true,
-    quizDone: true,
-    comment: '《체리새우》를 읽고 내 소신을 다정하게 말하는 법을 배웠어요.',
-    hasSticker: false
-  },
-  {
-    number: 19,
-    grade: 2,
-    classNum: 3,
-    realName: '황도현',
-    nickname: '은빛날개',
-    mannersScore: 290,
-    typingScore: 320,
-    readingScore: 190,
-    totalPoints: 800,
-    typingBestCPM: 230,
-    typingAcc: 89,
-    streak: 2,
-    checked: false,
-    quizDone: false,
-    comment: '타자 속도를 조금씩 올리는 성취감이 쏠쏠합니다.',
-    hasSticker: false
-  },
-  {
-    number: 20,
-    grade: 2,
-    classNum: 3,
-    realName: '안서진',
-    nickname: '숲속요정',
-    mannersScore: 490,
-    typingScore: 510,
-    readingScore: 430,
-    totalPoints: 1430,
-    typingBestCPM: 375,
-    typingAcc: 97,
-    streak: 9,
-    checked: true,
-    quizDone: true,
-    comment: '배움터 지킴이 선생님께 드린 아침 인사에 하루가 환해졌습니다.',
-    hasSticker: true
-  },
-  {
-    number: 21,
-    grade: 2,
-    classNum: 3,
-    realName: '장민서',
-    nickname: '은빛바람',
-    mannersScore: 430,
-    typingScore: 470,
-    readingScore: 360,
-    totalPoints: 1260,
-    typingBestCPM: 345,
-    typingAcc: 96,
-    streak: 6,
-    checked: true,
-    quizDone: true,
-    comment: '친구들과 서로 존중하며 하루를 시작합니다.',
-    hasSticker: false
-  },
-  {
-    number: 22,
-    grade: 2,
-    classNum: 3,
-    realName: '송태양',
-    nickname: '해오름',
-    mannersScore: 370,
-    typingScore: 420,
-    readingScore: 290,
-    totalPoints: 1080,
-    typingBestCPM: 290,
-    typingAcc: 93,
-    streak: 5,
-    checked: true,
-    quizDone: false,
-    comment: '아침 독서로 마음을 가다듬고 수업에 집중해요.',
-    hasSticker: false
-  },
-  {
-    number: 23,
-    grade: 2,
-    classNum: 3,
-    realName: '전지우',
-    nickname: '푸른숲',
-    mannersScore: 500,
-    typingScore: 530,
-    readingScore: 450,
-    totalPoints: 1480,
-    typingBestCPM: 400,
-    typingAcc: 98,
-    streak: 9,
-    checked: true,
-    quizDone: true,
-    comment: '디벗 안전 수칙을 잘 지켜 모범이 되겠습니다.',
-    hasSticker: true
-  },
-  {
-    number: 24,
-    grade: 2,
-    classNum: 3,
-    realName: '황보민',
-    nickname: '새솔',
-    mannersScore: 340,
-    typingScore: 360,
-    readingScore: 240,
-    totalPoints: 940,
-    typingBestCPM: 260,
-    typingAcc: 91,
-    streak: 3,
-    checked: true,
-    quizDone: false,
-    comment: '자리연습부터 차근차근 타수를 늘려가고 있어요.',
-    hasSticker: false
-  },
-  {
-    number: 25,
-    grade: 2,
-    classNum: 3,
-    realName: '고도현',
-    nickname: '샛별',
-    mannersScore: 460,
-    typingScore: 490,
-    readingScore: 380,
-    totalPoints: 1330,
-    typingBestCPM: 355,
-    typingAcc: 96,
-    streak: 7,
-    checked: true,
-    quizDone: true,
-    comment: '급식실 질서와 잔반 줄이기를 앞장서서 실천합니다.',
-    hasSticker: false
-  },
-  {
-    number: 26,
-    grade: 2,
-    classNum: 3,
-    realName: '남궁은',
-    nickname: '달빛소나타',
-    mannersScore: 520,
-    typingScore: 580,
-    readingScore: 470,
-    totalPoints: 1570,
-    typingBestCPM: 415,
-    typingAcc: 99,
-    streak: 11,
-    checked: true,
-    quizDone: true,
-    comment: '《페인트》를 읽고 진정한 가족과 성장의 의미를 깨달았어요.',
-    hasSticker: true
-  },
-  {
-    number: 27,
-    grade: 2,
-    classNum: 3,
-    realName: '조시윤',
-    nickname: '물보라',
-    mannersScore: 390,
-    typingScore: 380,
-    readingScore: 300,
-    totalPoints: 1070,
-    typingBestCPM: 280,
-    typingAcc: 92,
-    streak: 4,
-    checked: true,
-    quizDone: false,
-    comment: '복도에서 뛰지 않고 우측보행을 철저히 지킵니다.',
-    hasSticker: false
-  },
-  {
-    number: 28,
-    grade: 2,
-    classNum: 3,
-    realName: '유서진',
-    nickname: '초록별',
-    mannersScore: 480,
-    typingScore: 510,
-    readingScore: 410,
-    totalPoints: 1400,
-    typingBestCPM: 370,
-    typingAcc: 97,
-    streak: 8,
-    checked: true,
-    quizDone: true,
-    comment: '아침 인사를 밝게 나누니 하루의 시작이 활기차요!',
-    hasSticker: true
-  }
+// 데이터베이스 입력 전 화면 확인용 예시 학생 (21개 학급 × 학급당 10명)
+// Firestore 에 실제 학생 데이터가 한 명이라도 생기면 자동으로 실제 데이터만 표시됩니다.
+const SAMPLE_FAMILY_NAMES = ['김', '이', '박', '최', '정', '강', '조', '윤', '장', '임', '한', '오', '서', '신', '권', '황', '안', '송', '류', '홍'];
+const SAMPLE_GIVEN_NAMES = ['민준', '서연', '도윤', '하은', '시우', '지아', '하준', '서윤', '주원', '지유', '예준', '채원', '지호', '수아', '건우', '다은', '우진', '예린', '선우', '소율', '연우', '윤서', '유찬', '지민', '은우', '하린', '태윤', '아인', '민재', '서아'];
+const SAMPLE_NICKNAMES = ['별빛달빛', '책읽는사자', '새벽구름', '꿈꾸는고래', '푸른하늘', '바람소리', '달콤초코', '은하수별', '날아라우주', '초록풀잎', '미소천사', '용감한호랑이', '햇살가득', '지혜올빼미', '무지개빛', '맑은샘물', '봄날의햇살', '푸른바다', '은빛날개', '숲속요정', '해오름', '샛별', '달빛소나타', '물보라', '초록별', '구름빵', '반짝반딧불', '노을빛', '종이비행기', '행복한펭귄'];
+const SAMPLE_COMMENTS = [
+  '아침 인사를 먼저 밝게 건네니 하루가 상쾌합니다!',
+  '《시간을 파는 상점》을 읽고 매일 5분의 소중함을 실감했어요.',
+  '책상 위 교과서 정돈과 복도 우측통행을 지키고 있어요.',
+  '친구들에게 고운 말 쓰기를 온·오프라인에서 모두 실천 중입니다.',
+  '자리연습부터 차근차근 타수를 늘려가고 있어요.',
+  '《원더》의 친절 명언처럼 친구의 실수를 따뜻하게 안아줄게요.',
+  '급식실에서 새치기 안 하고 감사 인사하기 성공!',
+  '아침 독서 후 짧은 글 타자 연습을 하니 집중력이 높아져요.',
+  '선생님 설명하실 때 디벗 화면 덮기 규칙을 지킵니다.',
+  '복도에서 뛰지 않고 우측보행을 철저히 지킵니다.'
 ];
 
-// Ensure each initial student has an id property
-INITIAL_STUDENTS_28.forEach((s, idx) => {
-  if (!s.id) s.id = `s_2_3_${s.number || idx + 1}`;
-});
-
-// Alias for backwards compatibility
-export const INITIAL_STUDENTS_20 = INITIAL_STUDENTS_28;
-
-// Generate 21 Classes (3 Grades × 7 Classes) with up to 28 students each (Total 588 students)
-function generateExpandedStudents() {
-  const gradeStudents = [];
-  const schoolStudents = [];
-
+function generateSampleStudents() {
+  const students = [];
+  let seq = 0;
   for (let g = 1; g <= 3; g++) {
     for (let c = 1; c <= 7; c++) {
-      for (let n = 1; n <= 28; n++) {
-        const isOurClass = (g === 2 && c === 3);
-        if (isOurClass) {
-          const student = INITIAL_STUDENTS_28[n - 1];
-          if (g === 2) gradeStudents.push(student);
-          schoolStudents.push(student);
-        } else {
-          const factor = 0.72 + (Math.sin(g * 17 + c * 9 + n) + 1) * 0.28;
-          const st = {
-            id: `s_${g}_${c}_${n}`,
-            number: n,
-            grade: g,
-            classNum: c,
-            realName: `학생${g}-${c}-${n}`,
-            nickname: `${g}학년${c}반_${n}번러너`,
-            mannersScore: Math.round(410 * factor),
-            typingScore: Math.round(460 * factor),
-            readingScore: Math.round(330 * factor),
-            totalPoints: Math.round(1200 * factor),
-            typingBestCPM: Math.round(315 * factor),
-            typingAcc: 94,
-            streak: Math.max(1, Math.round(6 * factor)),
-            checked: (n % 4 !== 0),
-            quizDone: (n % 3 !== 0),
-            comment: `${g}학년 ${c}반 아침 루틴에 성실히 참여하고 있습니다.`
-          };
-          if (g === 2) gradeStudents.push(st);
-          schoolStudents.push(st);
-        }
+      for (let n = 1; n <= 10; n++) {
+        seq++;
+        // 학급마다 점수 분포가 달라 보이도록 결정적(매번 같은) 값 사용
+        const factor = 0.55 + (Math.sin(g * 17 + c * 9 + n * 3) + 1) * 0.3;
+        const mannersScore = Math.round(420 * factor / 10) * 10;
+        const typingScore = Math.round(460 * factor / 10) * 10;
+        const readingScore = Math.round(340 * factor / 10) * 10;
+        students.push({
+          id: `sample_${g}_${c}_${n}`,
+          isSample: true,
+          role: 'student',
+          number: n,
+          grade: g,
+          classNum: c,
+          realName: SAMPLE_FAMILY_NAMES[(seq * 7) % SAMPLE_FAMILY_NAMES.length] + SAMPLE_GIVEN_NAMES[(seq * 11) % SAMPLE_GIVEN_NAMES.length],
+          nickname: SAMPLE_NICKNAMES[(seq * 13) % SAMPLE_NICKNAMES.length],
+          mannersScore,
+          typingScore,
+          readingScore,
+          totalPoints: mannersScore + typingScore + readingScore,
+          typingBestCPM: Math.round(330 * factor),
+          typingAcc: Math.min(100, Math.round(88 + factor * 10)),
+          streak: Math.max(1, Math.round(10 * factor)),
+          checked: n % 4 !== 0,
+          quizDone: n % 3 !== 0,
+          comment: SAMPLE_COMMENTS[(seq * 3) % SAMPLE_COMMENTS.length],
+          hasSticker: n % 5 === 1
+        });
       }
     }
   }
-
-  return { gradeStudents, schoolStudents };
+  return students;
 }
 
-const { gradeStudents: GRADE_STUDENTS_ALL, schoolStudents: SCHOOL_STUDENTS_ALL } = generateExpandedStudents();
+export const SAMPLE_STUDENTS = generateSampleStudents();
 
 export const BADGES = [
-  { id: 'first_step', name: '첫 발자국', desc: '바름5분 첫 활동 완료', icon: '🌱', req: (s) => s.totalPoints >= 20 },
+  { id: 'first_step', name: '첫 발자국', desc: '바름 5분 첫 활동 완료', icon: '🌱', req: (s) => s.totalPoints >= 20 },
   { id: 'streak_3', name: '3일의 결심', desc: '3일 연속 아침 루틴 달성', icon: '🔥', req: (s) => s.streak >= 3 },
   { id: 'streak_7', name: '아침의 지배자', desc: '7일 연속 아침 루틴 달성', icon: '👑', req: (s) => s.streak >= 7 },
   { id: 'typer_250', name: '타자 루키', desc: '타자 연습 250타 달성', icon: '⌨️', req: (s) => s.typingBestCPM >= 250 },
@@ -581,7 +79,11 @@ export class AppState {
   constructor() {
     this.listeners = [];
     this.state = this.loadState();
+    // 실제 학생 데이터를 받기 전에는 예시 학생으로 화면 채우기
+    this.setStudentList(SAMPLE_STUDENTS);
     this.listenToAllUsers();
+    this.listenToCustomDictionary();
+    this.unknownWordsUnsub = null;
   }
 
   getTodayString() {
@@ -600,9 +102,17 @@ export class AppState {
             parsed.lastActiveDate = today;
             parsed.todaySubChecked = {};
             parsed.todayQuizDone = false;
+            parsed.todayTypingRecords = [];
           }
+          if (!parsed.todayTypingRecords) parsed.todayTypingRecords = [];
+          if (!parsed.unknownWords) parsed.unknownWords = [];
+          if (!parsed.customDictionary) parsed.customDictionary = {};
           if (!parsed.recommendedBooks || parsed.recommendedBooks.length === 0) {
             parsed.recommendedBooks = [...MIDDLE_SCHOOL_BOOKS];
+          } else {
+            // 새로 추가된 기본 추천도서를 기존 저장 목록에도 반영
+            const savedIds = new Set(parsed.recommendedBooks.map(b => b.id));
+            parsed.recommendedBooks.push(...MIDDLE_SCHOOL_BOOKS.filter(b => !savedIds.has(b.id)));
           }
           if (!parsed.selectedClassKey) {
             parsed.selectedClassKey = '2-3';
@@ -663,7 +173,10 @@ export class AppState {
       teacherProposals: INITIAL_TEACHER_PROPOSALS,
       recommendedBooks: [...MIDDLE_SCHOOL_BOOKS],
       classGoalPoints: 35000,
-      myReadingLogs: []
+      myReadingLogs: [],
+      todayTypingRecords: [], // 오늘 통과한 타자 연습 기록 [{ cpm, acc, mode, time }]
+      unknownWords: [],       // 챗봇이 답하지 못한 단어 (테스트 계정/오프라인용 로컬 사본)
+      customDictionary: {}    // 관리자가 추가한 챗봇 사전 단어
     };
   }
 
@@ -696,6 +209,7 @@ export class AppState {
         totalPoints: this.state.totalPoints,
         typingBestCPM: this.state.typingBestCPM,
         typingAcc: this.state.typingAcc,
+        typingAvgCPM: this.getTypingRecordSummary().avgCPM,
         streak: this.state.streak,
         updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
       };
@@ -900,8 +414,7 @@ export class AppState {
   getStudentsByClass(grade = 2, classNum = 3) {
     const g = Number(grade);
     const c = Number(classNum);
-    if (g === 2 && c === 3) return this.state.students;
-    return this.state.schoolStudents.filter(s => s.grade === g && s.classNum === c);
+    return this.state.schoolStudents.filter(s => Number(s.grade) === g && Number(s.classNum) === c);
   }
 
   // Scoring methods
@@ -935,6 +448,149 @@ export class AppState {
     this.syncCurrentStudentToClassList();
     this.save();
     this.saveToFirebase();
+  }
+
+  // 통과한 타자 연습 결과를 오늘 기록에 추가
+  recordTypingResult(cpm, acc, mode) {
+    if (!this.state.todayTypingRecords) this.state.todayTypingRecords = [];
+    this.state.todayTypingRecords.push({ cpm, acc, mode, time: Date.now() });
+    if (this.state.todayTypingRecords.length > 200) this.state.todayTypingRecords.shift();
+    this.save();
+  }
+
+  // 이전 타수(직전 통과 기록)와 오늘 연습 평균 타수
+  getTypingRecordSummary() {
+    const records = this.state.todayTypingRecords || [];
+    const count = records.length;
+    const prevCPM = count > 0 ? records[count - 1].cpm : 0;
+    const avgCPM = count > 0 ? Math.round(records.reduce((sum, r) => sum + r.cpm, 0) / count) : 0;
+    return { count, prevCPM, avgCPM };
+  }
+
+  // ===== 챗봇 미등록 단어 / 관리자 사전 =====
+  normalizeWordId(word) {
+    return String(word).trim().slice(0, 50).replace(/\//g, '_') || '_';
+  }
+
+  // 챗봇이 답하지 못한 단어를 기록 (같은 단어는 요청 횟수만 증가)
+  async recordUnknownWord(word) {
+    const text = String(word).trim().slice(0, 50);
+    if (!text) return;
+    const id = this.normalizeWordId(text);
+
+    const local = this.state.unknownWords.find(w => w.id === id);
+    if (local) {
+      local.count += 1;
+      local.lastAskedAt = Date.now();
+    } else {
+      this.state.unknownWords.unshift({ id, word: text, count: 1, lastAskedAt: Date.now() });
+    }
+    this.save();
+
+    if (!this.isLoggedIn() || this.isTestAccount()) return;
+    try {
+      const FieldValue = window.firebase.firestore.FieldValue;
+      await db.collection('unknownWords').doc(id).set({
+        word: text,
+        count: FieldValue.increment(1),
+        lastAskedAt: FieldValue.serverTimestamp(),
+        lastAskedBy: this.state.auth.uid
+      }, { merge: true });
+    } catch (e) {
+      console.error('Unknown word save error:', e);
+    }
+  }
+
+  // 교사 대시보드에서 미등록 단어 실시간 조회 (교사만 읽기 권한)
+  listenToUnknownWords(onChange = () => {}) {
+    this.onUnknownWordsChange = onChange;
+    if (this.unknownWordsUnsub || !this.isVerifiedTeacher() || this.isTestAccount()) return;
+    try {
+      this.unknownWordsUnsub = db.collection('unknownWords').onSnapshot(snapshot => {
+        const words = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          words.push({
+            id: doc.id,
+            word: data.word || doc.id,
+            count: data.count || 1,
+            lastAskedAt: data.lastAskedAt ? data.lastAskedAt.toMillis() : 0
+          });
+        });
+        const changed = JSON.stringify(words.map(w => [w.id, w.count])) !==
+          JSON.stringify(this.state.unknownWords.map(w => [w.id, w.count]));
+        this.state.unknownWords = words;
+        this.save();
+        if (changed) this.onUnknownWordsChange();
+      }, err => {
+        console.warn('unknownWords listen error:', err);
+        this.unknownWordsUnsub = null;
+      });
+    } catch (e) {
+      console.warn('unknownWords listen error:', e);
+    }
+  }
+
+  getUnknownWords() {
+    return [...(this.state.unknownWords || [])].sort((a, b) => b.count - a.count || b.lastAskedAt - a.lastAskedAt);
+  }
+
+  listenToCustomDictionary() {
+    if (typeof window.firebase === 'undefined') return;
+    try {
+      db.collection('slangDictionary').onSnapshot(snapshot => {
+        const dict = {};
+        snapshot.forEach(doc => {
+          const { word, etymology, meaning, correct } = doc.data();
+          dict[word || doc.id] = { etymology, meaning, correct };
+        });
+        this.state.customDictionary = dict;
+        this.save();
+      }, err => console.warn('slangDictionary listen error:', err));
+    } catch (e) {
+      console.warn('slangDictionary listen error:', e);
+    }
+  }
+
+  getCustomDictionary() {
+    return this.state.customDictionary || {};
+  }
+
+  // 관리자(교사)가 단어 뜻을 사전에 추가하고 미등록 목록에서 제거
+  async addDictionaryWord({ word, etymology, meaning, correct }) {
+    const text = String(word).trim().slice(0, 50);
+    const id = this.normalizeWordId(text);
+    const entry = { etymology: etymology.trim(), meaning: meaning.trim(), correct: correct.trim() };
+
+    this.state.customDictionary = { ...this.getCustomDictionary(), [text]: entry };
+    this.state.unknownWords = this.state.unknownWords.filter(w => w.id !== id);
+    this.save();
+
+    if (!this.isLoggedIn() || this.isTestAccount()) return true;
+    try {
+      await db.collection('slangDictionary').doc(id).set({
+        word: text,
+        ...entry,
+        addedBy: this.state.auth.uid,
+        updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
+      });
+      await db.collection('unknownWords').doc(id).delete();
+      return true;
+    } catch (e) {
+      console.error('Dictionary save error:', e);
+      return false;
+    }
+  }
+
+  async deleteUnknownWord(id) {
+    this.state.unknownWords = this.state.unknownWords.filter(w => w.id !== id);
+    this.save();
+    if (!this.isLoggedIn() || this.isTestAccount()) return;
+    try {
+      await db.collection('unknownWords').doc(id).delete();
+    } catch (e) {
+      console.error('Unknown word delete error:', e);
+    }
   }
 
   addReadingScore(points, readingEntry) {
@@ -990,8 +646,10 @@ export class AppState {
   }
 
   syncCurrentStudentToClassList() {
-    const num = this.state.userProfile.number;
-    const idx = this.state.students.findIndex(s => s.number === num);
+    const { number: num, grade, classNum } = this.state.userProfile;
+    // 예시 학생 데이터는 내 기록으로 덮어쓰지 않음
+    const idx = this.state.students.findIndex(s => !s.isSample && s.number === num
+      && Number(s.grade) === Number(grade) && Number(s.classNum) === Number(classNum));
     if (idx >= 0) {
       this.state.students[idx] = {
         ...this.state.students[idx],
@@ -1068,6 +726,17 @@ export class AppState {
     return BADGES.filter(b => b.req(this.state));
   }
 
+  setStudentList(list) {
+    this.state.students = list.map(s => ({ ...s }));
+    this.state.schoolStudents = this.state.students;
+    this.state.gradeStudents = this.state.students.filter(s => s.grade === this.state.userProfile.grade);
+  }
+
+  // 아직 실제 학생 데이터가 없어 예시 학생을 보여주는 중인지
+  isShowingSampleStudents() {
+    return this.state.students.length > 0 && this.state.students.every(s => s.isSample);
+  }
+
   listenToAllUsers() {
     if (typeof window.firebase === 'undefined') return;
     try {
@@ -1080,10 +749,11 @@ export class AppState {
             realStudents.push({ ...data, uid: doc.id });
           }
         });
-        this.state.students = realStudents;
-        this.state.schoolStudents = this.state.students;
-        this.state.gradeStudents = this.state.students.filter(s => s.grade === this.state.userProfile.grade);
+        this.setStudentList(realStudents.length ? realStudents : SAMPLE_STUDENTS);
         this.notify();
+      }, err => {
+        // 권한이 없으면 예시 학생 데이터를 그대로 유지
+        console.warn('Firestore listenToAllUsers error:', err.code || err);
       });
     } catch (e) {
       console.warn("Firestore listenToAllUsers error:", e);

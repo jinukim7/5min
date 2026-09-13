@@ -40,6 +40,8 @@
   font-size: 1.15rem;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
   cursor: pointer;
 }
 

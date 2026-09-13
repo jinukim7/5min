@@ -1,4 +1,4 @@
-// 바름5분 챗봇용 Gemini 중계 서버 (Cloudflare Worker)
+// 바름 5분 챗봇용 Gemini 중계 서버 (Cloudflare Worker)
 //
 // 목적: Gemini API 키를 사이트 코드(공개 GitHub 저장소)에 두지 않기 위해,
 //      사이트는 이 Worker만 호출하고, 실제 키는 Cloudflare의 비밀 변수로만 보관합니다.

@@ -1,5 +1,6 @@
 // src/js/chatbot.js
 import { SLANG_DICTIONARY } from "./chatbot-dictionary.js";
+import { appState } from "./state.js";
 //
 const API_KEY = "";
 // Gemini API 키는 이 파일(공개 GitHub 저장소)에 절대 넣지 않습니다.
@@ -142,18 +143,21 @@ export function initChatbot() {
     } catch (err) {
       removeTyping();
       // Fallback
+      // 기본 사전 + 관리자(교사)가 추가한 단어
+      const dictionary = { ...SLANG_DICTIONARY, ...appState.getCustomDictionary() };
       let fallback = null;
-      for (const [slang, info] of Object.entries(SLANG_DICTIONARY)) {
+      for (const [slang, info] of Object.entries(dictionary)) {
         if (text.includes(slang)) fallback = info;
       }
 
       if (fallback) {
-        let reply = `💡 '<strong>${escapeHtml(text)}</strong>'는 본래 ${fallback.etymology}<br><br>`;
-        reply += `현재는 ${fallback.meaning}<br><br>`;
-        reply += `👉 우리 학교에서는 '<strong>${fallback.correct}</strong>' (이)라고 표현해 보는 건 어떨까요? 😊`;
+        let reply = `💡 '<strong>${escapeHtml(text)}</strong>'는 본래 ${escapeHtml(fallback.etymology)}<br><br>`;
+        reply += `현재는 ${escapeHtml(fallback.meaning)}<br><br>`;
+        reply += `👉 우리 학교에서는 '<strong>${escapeHtml(fallback.correct)}</strong>' (이)라고 표현해 보는 건 어떨까요? 😊`;
         addMessage(reply);
       } else {
-        addMessage("입력해주신 단어에 대해 지금은 답변하기 어려워요. 다른 단어를 물어보시겠어요? 🥲");
+        appState.recordUnknownWord(text);
+        addMessage(`'<strong>${escapeHtml(text)}</strong>'에 대해서는 지금은 답변하기 어려워요. 🥲<br><br>이 단어는 기록해 두었다가 다음 업데이트 때 알려드릴게요. 궁금한 다른 단어가 있다면 또 물어봐 주세요! 📝`);
       }
     } finally {
       sendBtn.disabled = false;

@@ -69,6 +69,159 @@
   border-color: #4F46E5;
 }
 
+/* 책 선택 카드: '내가 읽은 도서'를 크게, 색으로 강조 */
+.book-source-picker {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.book-source-cards {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1rem;
+}
+
+.book-source-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--border-light);
+  border-radius: 16px;
+  background: #F8FAFC;
+  color: #334155;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.book-source-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+
+.book-source-card.active {
+  border-color: #4F46E5;
+  background: #EEF2FF;
+}
+
+.book-source-card-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+  border-radius: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+.book-source-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.book-source-card-title {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.book-source-card-sub {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.book-source-card-primary {
+  padding: 1.35rem 1.5rem;
+  border-color: transparent;
+  background: linear-gradient(135deg, #FB923C 0%, #F43F5E 55%, #A855F7 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.25);
+}
+
+.book-source-card-primary .book-source-card-icon {
+  width: 76px;
+  height: 76px;
+  font-size: 2.8rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.book-source-card-primary .book-source-card-title {
+  font-size: 1.35rem;
+}
+
+.book-source-card-primary .book-source-card-sub {
+  font-size: 0.88rem;
+  opacity: 0.95;
+}
+
+.book-source-card-primary.active {
+  border-color: #FFFFFF;
+  background: linear-gradient(135deg, #FB923C 0%, #F43F5E 55%, #A855F7 100%);
+  box-shadow: 0 0 0 3px #F43F5E, 0 10px 24px rgba(244, 63, 94, 0.3);
+}
+
+.book-source-card-primary:not(.active) {
+  opacity: 0.85;
+}
+
+.book-source-card-badge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.75rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-full);
+  background: #FFFFFF;
+  color: #F43F5E;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.book-source-detail {
+  margin-top: 1rem;
+}
+
+.custom-book-fields {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 0.75rem;
+}
+
+.custom-book-fields input {
+  padding: 0.85rem 1rem;
+  border: 2px solid #FDA4AF;
+  border-radius: 12px;
+  background: #FFF1F2;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  outline: none;
+}
+
+.custom-book-fields input:focus {
+  border-color: #F43F5E;
+  background: #FFFFFF;
+}
+
+@media (max-width: 640px) {
+  .book-source-cards,
+  .custom-book-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ============================================================
    Torn Grid Paper Worksheet Styling (PDF Pages 1 ~ 8)
 ============================================================ */
@@ -163,6 +316,14 @@
   color: #1E293B;
   outline: none;
   resize: vertical;
+}
+
+/* 예시 문장(placeholder)은 옅은 회색 — 입력을 시작하면 자동으로 사라짐 */
+.reading-container textarea::placeholder,
+.reading-container input::placeholder {
+  color: #B8C0CC;
+  font-weight: 500;
+  opacity: 1;
 }
 
 /* Worksheet Footer Student Meta */

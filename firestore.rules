@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// 바름5분 Firestore 보안 규칙
+// 바름 5분 Firestore 보안 규칙
 // - 교사 인증 코드는 teacherCodes/{코드} 문서로만 존재하며 누구도 읽을 수 없습니다.
 // - users/{uid} 의 role 을 'teacher' 로 저장하려면
 //   (1) 학교 교사 이메일이거나 (2) 존재하는 교사 인증 코드를 함께 보내야 합니다.
@@ -45,6 +45,27 @@ service cloud.firestore {
     // 교사 인증 코드: 클라이언트에서 조회·수정 불가 (Firebase 콘솔에서만 관리)
     match /teacherCodes/{code} {
       allow read, write: if false;
+    }
+
+    function isTeacher() {
+      return signedIn()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') == 'teacher';
+    }
+
+    // 챗봇이 답하지 못한 단어: 로그인 사용자는 기록만, 교사는 조회·삭제
+    match /unknownWords/{wordId} {
+      allow read, delete: if isTeacher();
+      allow create, update: if signedIn()
+        && request.resource.data.word is string
+        && request.resource.data.word.size() <= 50
+        && request.resource.data.count is int
+        && request.resource.data.lastAskedBy == request.auth.uid;
+    }
+
+    // 관리자(교사)가 추가한 챗봇 사전: 누구나 조회, 교사만 수정
+    match /slangDictionary/{wordId} {
+      allow read: if true;
+      allow write: if isTeacher();
     }
 
     // 사용자 프로필: 본인만 읽고 쓸 수 있으며 role 값은 위 조건을 통과해야 함

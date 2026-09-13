@@ -319,6 +319,307 @@
         "\uC0C1\uCC98\uB294 \uC228\uAE38\uC218\uB85D \uACEA\uC544\uAC00\uC9C0\uB9CC, \uD587\uBCD5 \uC544\uB798 \uAEBC\uB0B4\uB193\uC73C\uBA74 \uBE44\uB85C\uC18C \uC544\uBB3C\uAE30 \uC2DC\uC791\uD55C\uB2E4.",
         "\uC9C4\uC815\uD55C \uCE5C\uAD6C\uB294 \uB0B4 \uC544\uD514\uC744 \uB3D9\uC815\uD558\uB294 \uC0AC\uB78C\uC774 \uC544\uB2C8\uB77C \uBB35\uBB35\uD788 \uACC1\uC744 \uC9C0\uCF1C\uC8FC\uB294 \uC0AC\uB78C\uC774\uB2E4."
       ]
+    },
+    // ===== 추가 추천도서 30권 (구절은 기록 예시용 문구) =====
+    {
+      id: "b9",
+      title: "\uC644\uB4DD\uC774",
+      author: "\uAE40\uB824\uB839",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F94A}",
+      category: "\uCCAD\uC18C\uB144 \uC131\uC7A5",
+      desc: "\uAC00\uB09C\uACFC \uD3B8\uACAC \uC18D\uC5D0\uC11C\uB3C4 \uD0A5\uBCF5\uC2F1\uACFC \uAD34\uC9DC \uB2F4\uC784 \uB625\uC8FC\uB97C \uB9CC\uB098 \uC138\uC0C1\uC73C\uB85C \uD55C \uBC1C \uB098\uC544\uAC00\uB294 \uC644\uB4DD\uC774\uC758 \uC774\uC57C\uAE30",
+      quotes: ["\uB098\uB97C \uAC00\uB450\uACE0 \uC788\uB358 \uAC74 \uC138\uC0C1\uC774 \uC544\uB2C8\uB77C \uC2A4\uC2A4\uB85C \uCCD0 \uB193\uC740 \uC6B8\uD0C0\uB9AC\uC600\uB2E4.", "\uB118\uC5B4\uC838\uB3C4 \uAD1C\uCC2E\uB2E4. \uB2E4\uC2DC \uC77C\uC5B4\uC11C\uB294 \uBC95\uC744 \uBC30\uC6B0\uBA74 \uB41C\uB2E4."]
+    },
+    {
+      id: "b10",
+      title: "\uC6B0\uC544\uD55C \uAC70\uC9D3\uB9D0",
+      author: "\uAE40\uB824\uB839",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F9F6}",
+      category: "\uD559\uAD50\uC0DD\uD65C\xB7\uAD00\uACC4",
+      desc: "\uAC11\uC791\uC2A4\uB808 \uC138\uC0C1\uC744 \uB5A0\uB09C \uB3D9\uC0DD \uCC9C\uC9C0\uAC00 \uB0A8\uAE34 \uD138\uC2E4 \uBB49\uCE58 \uC18D \uBA54\uC2DC\uC9C0\uB97C \uB530\uB77C\uAC00\uBA70 \uB9C8\uC8FC\uD558\uB294 \uAD50\uC2E4 \uC18D \uC0C1\uCC98",
+      quotes: ["\uBB34\uC2EC\uCF54 \uB358\uC9C4 \uB9D0 \uD55C\uB9C8\uB514\uAC00 \uB204\uAD70\uAC00\uC5D0\uAC8C\uB294 \uD3C9\uC0DD\uC758 \uC0C1\uCC98\uAC00 \uB420 \uC218 \uC788\uB2E4.", "\uACC1\uC5D0 \uC788\uB294 \uC0AC\uB78C\uC758 \uC791\uC740 \uC2E0\uD638\uC5D0 \uADC0 \uAE30\uC6B8\uC774\uB294 \uAC83, \uADF8\uAC83\uC774 \uC6B0\uC815\uC758 \uC2DC\uC791\uC774\uB2E4."]
+    },
+    {
+      id: "b11",
+      title: "\uC704\uC800\uB4DC \uBCA0\uC774\uCEE4\uB9AC",
+      author: "\uAD6C\uBCD1\uBAA8",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F950}",
+      category: "\uD310\uD0C0\uC9C0\xB7\uC131\uC7A5",
+      desc: "\uC9D1\uC744 \uB098\uC628 \uC18C\uB144\uC774 \uB9C8\uBC95 \uBE75\uC744 \uD30C\uB294 \uC218\uC0C1\uD55C \uBE75\uC9D1\uC5D0 \uBA38\uBB3C\uBA70 \uC120\uD0DD\uACFC \uCC45\uC784\uC758 \uBB34\uAC8C\uB97C \uBC30\uC6B0\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uBAA8\uB4E0 \uC120\uD0DD\uC5D0\uB294 \uB300\uAC00\uAC00 \uB530\uB978\uB2E4. \uADF8\uB798\uC11C \uC120\uD0DD\uC740 \uB354 \uC2E0\uC911\uD574\uC57C \uD55C\uB2E4.", "\uACFC\uAC70\uB97C \uC9C0\uC6B0\uB294 \uB9C8\uBC95\uBCF4\uB2E4 \uC624\uB298\uC744 \uACAC\uB514\uB294 \uC6A9\uAE30\uAC00 \uB354 \uD544\uC694\uD558\uB2E4."]
+    },
+    {
+      id: "b12",
+      title: "\uB0B4 \uC774\uB984\uC740 \uB9DD\uACE0",
+      author: "\uCD94\uC815\uACBD",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F96D}",
+      category: "\uCCAD\uC18C\uB144 \uC131\uC7A5",
+      desc: "\uC5C4\uB9C8\uAC00 \uC0AC\uB77C\uC9C4 \uCE84\uBCF4\uB514\uC544\uC5D0\uC11C \uD640\uB85C \uC0B4\uC544\uB0A8\uC544\uC57C \uD558\uB294 \uC18C\uB140 \uC218\uC544\uAC00 \uC2A4\uC2A4\uB85C \uC774\uB984\uC744 \uCC3E\uC544\uAC00\uB294 \uC5EC\uC815",
+      quotes: ["\uB0AF\uC120 \uACF3\uC5D0\uC11C\uB3C4 \uB098\uB97C \uC9C0\uD0A4\uB294 \uAC83\uC740 \uACB0\uAD6D \uB0B4 \uC548\uC758 \uB2E8\uB2E8\uD55C \uB9C8\uC74C\uC774\uB2E4.", "\uB204\uAD70\uAC00\uC5D0\uAC8C \uAE30\uB300\uB294 \uBC95\uC744 \uBC30\uC6B0\uB294 \uAC83\uB3C4 \uC5B4\uB978\uC774 \uB418\uB294 \uACFC\uC815\uC774\uB2E4."]
+    },
+    {
+      id: "b13",
+      title: "\uBD88\uD3B8\uD55C \uD3B8\uC758\uC810",
+      author: "\uAE40\uD638\uC5F0",
+      publisher: "\uB098\uBB34\uC606\uC758\uC790",
+      coverIcon: "\u{1F3EA}",
+      category: "\uACF5\uAC10\xB7\uC6B0\uC815",
+      desc: "\uC11C\uC6B8\uC5ED \uB178\uC219\uC778 \uB3C5\uACE0 \uC528\uAC00 \uD3B8\uC758\uC810 \uC57C\uAC04 \uC54C\uBC14\uB97C \uD558\uBA70 \uC190\uB2D8\uB4E4\uACFC \uB530\uB73B\uD55C \uAD00\uACC4\uB97C \uB9CC\uB4E4\uC5B4 \uAC00\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uC0B6\uC740 \uAD00\uACC4\uC774\uACE0, \uAD00\uACC4\uB294 \uC18C\uD1B5\uC774\uB2E4.", "\uC791\uC740 \uCE5C\uC808\uC774 \uB204\uAD70\uAC00\uC758 \uD558\uB8E8\uB97C, \uC5B4\uCA4C\uBA74 \uC778\uC0DD\uC744 \uBC14\uAFB8\uAE30\uB3C4 \uD55C\uB2E4."]
+    },
+    {
+      id: "b14",
+      title: "\uB2EC\uB7EC\uAD6C\uD2B8 \uAFC8 \uBC31\uD654\uC810",
+      author: "\uC774\uBBF8\uC608",
+      publisher: "\uD329\uD1A0\uB9AC\uB098\uC778",
+      coverIcon: "\u{1F319}",
+      category: "\uD310\uD0C0\uC9C0",
+      desc: "\uC7A0\uB4E4\uC5B4\uC57C\uB9CC \uB4E4\uC5B4\uAC08 \uC218 \uC788\uB294 \uB9C8\uC744\uC5D0\uC11C \uAFC8\uC744 \uC0AC\uACE0\uD30C\uB294 \uBC31\uD654\uC810\uACFC \uC2E0\uC785 \uC9C1\uC6D0 \uD398\uB2C8\uC758 \uC131\uC7A5\uAE30",
+      quotes: ["\uC9C0\uB098\uAC04 \uD558\uB8E8\uB3C4, \uB2E4\uAC00\uC62C \uD558\uB8E8\uB3C4 \uC544\uB2CC \uC624\uB298 \uBC24\uC758 \uB0B4\uAC00 \uAC00\uC7A5 \uC18C\uC911\uD558\uB2E4.", "\uC88B\uC740 \uAFC8\uC740 \uACB0\uAD6D \uAE68\uC5B4\uB09C \uB4A4\uC758 \uC0B6\uC744 \uC870\uAE08 \uB354 \uD798\uB0B4\uAC8C \uD55C\uB2E4."]
+    },
+    {
+      id: "b15",
+      title: "\uAE34\uAE34\uBC24",
+      author: "\uB8E8\uB9AC",
+      publisher: "\uBB38\uD559\uB3D9\uB124",
+      coverIcon: "\u{1F98F}",
+      category: "\uC0DD\uBA85\xB7\uC5F0\uB300",
+      desc: "\uC138\uC0C1\uC758 \uB9C8\uC9C0\uB9C9 \uD770\uBC14\uC704\uCF54\uBFD4\uC18C \uB178\uB4E0\uACFC \uC5B4\uB9B0 \uD3AD\uADC4\uC774 \uBC14\uB2E4\uB97C \uCC3E\uC544 \uB5A0\uB098\uB294 \uAE34 \uC5EC\uC815",
+      quotes: ["\uD568\uAED8 \uAC78\uC5B4 \uC900 \uB204\uAD70\uAC00\uAC00 \uC788\uC5C8\uAE30\uC5D0 \uAE34\uAE34\uBC24\uC744 \uACAC\uB51C \uC218 \uC788\uC5C8\uB2E4.", "\uC6B0\uB9AC\uB294 \uC11C\uB85C\uC5D0\uAC8C \uAE30\uB300\uC5B4 \uC870\uAE08\uC529 \uC55E\uC73C\uB85C \uB098\uC544\uAC04\uB2E4."]
+    },
+    {
+      id: "b16",
+      title: "\uD478\uB978 \uC0AC\uC790 \uC640\uB2C8\uB2C8",
+      author: "\uC774\uD604",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F981}",
+      category: "\uC6A9\uAE30\xB7\uC131\uC7A5",
+      desc: "\uBB34\uB9AC\uC5D0\uC11C \uCAD3\uACA8\uB09C \uC791\uC740 \uC554\uC0AC\uC790 \uC640\uB2C8\uB2C8\uAC00 \uCE5C\uAD6C\uB4E4\uACFC \uD568\uAED8 \uCD08\uC6D0\uC5D0\uC11C \uC0B4\uC544\uB0A8\uC73C\uBA70 \uC9C4\uC815\uD55C \uAC15\uD568\uC744 \uAE68\uB2EB\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uAC15\uD55C \uAC83\uC740 \uD63C\uC790 \uC774\uAE30\uB294 \uAC83\uC774 \uC544\uB2C8\uB77C \uD568\uAED8 \uC0B4\uC544\uB0A8\uB294 \uAC83\uC774\uB2E4.", "\uC791\uB2E4\uACE0 \uD574\uC11C \uC4F8\uBAA8\uC5C6\uB294 \uC874\uC7AC\uB294 \uC5C6\uB2E4."]
+    },
+    {
+      id: "b17",
+      title: "\uB108\uB3C4 \uD558\uB298\uB9D0\uB098\uB9AC\uC57C",
+      author: "\uC774\uAE08\uC774",
+      publisher: "\uBC24\uD2F0",
+      coverIcon: "\u{1F338}",
+      category: "\uAC00\uC871\xB7\uC131\uC7A5",
+      desc: "\uC800\uB9C8\uB2E4\uC758 \uC0C1\uCC98\uB97C \uAC00\uC9C4 \uC138 \uC544\uC774 \uBBF8\uB974, \uC18C\uD76C, \uBC14\uC6B0\uAC00 \uC2DC\uACE8 \uB9C8\uC744\uC5D0\uC11C \uC11C\uB85C\uB97C \uC774\uD574\uD558\uBA70 \uC790\uB77C\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uC678\uB85C\uC6C0\uC740 \uB204\uAD70\uAC00\uC640 \uB9C8\uC74C\uC744 \uB098\uB20C \uB54C \uC870\uAE08\uC529 \uC791\uC544\uC9C4\uB2E4.", "\uAF43\uC740 \uBC14\uB78C\uC744 \uACAC\uB514\uBA70 \uB354 \uACE7\uAC8C \uC120\uB2E4."]
+    },
+    {
+      id: "b18",
+      title: "\uBABD\uC2E4 \uC5B8\uB2C8",
+      author: "\uAD8C\uC815\uC0DD",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F467}",
+      category: "\uD55C\uAD6D\uBB38\uD559\xB7\uC5ED\uC0AC",
+      desc: "\uC804\uC7C1\uACFC \uAC00\uB09C \uC18D\uC5D0\uC11C\uB3C4 \uB3D9\uC0DD\uB4E4\uC744 \uC9C0\uD0A4\uBA70 \uAFCB\uAFCB\uD558\uAC8C \uC0B4\uC544\uAC00\uB294 \uBABD\uC2E4\uC774\uC758 \uC774\uC57C\uAE30",
+      quotes: ["\uC544\uBB34\uB9AC \uD798\uB4E0 \uC2DC\uC808\uC5D0\uB3C4 \uC0AC\uB78C\uC744 \uBBF8\uC6CC\uD558\uC9C0 \uC54A\uB294 \uB9C8\uC74C\uC774 \uBABD\uC2E4\uC774\uB97C \uC9C0\uCF30\uB2E4.", "\uC9C4\uC9DC \uC5B4\uB978\uC740 \uB098\uC774\uAC00 \uC544\uB2C8\uB77C \uCC45\uC784\uC744 \uC9C0\uB294 \uB9C8\uC74C\uC73C\uB85C \uB9CC\uB4E4\uC5B4\uC9C4\uB2E4."]
+    },
+    {
+      id: "b19",
+      title: "\uAD2D\uC774\uBD80\uB9AC\uB9D0 \uC544\uC774\uB4E4",
+      author: "\uAE40\uC911\uBBF8",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F3D8}\uFE0F",
+      category: "\uACF5\uB3D9\uCCB4",
+      desc: "\uC778\uCC9C\uC758 \uAC00\uB09C\uD55C \uB3D9\uB124 \uAD2D\uC774\uBD80\uB9AC\uB9D0\uC5D0\uC11C \uC11C\uB85C\uC758 \uAC00\uC871\uC774 \uB418\uC5B4 \uC8FC\uB294 \uC544\uC774\uB4E4\uACFC \uC5B4\uB978\uB4E4\uC758 \uC774\uC57C\uAE30",
+      quotes: ["\uAC00\uC9C4 \uAC83\uC774 \uC801\uC5B4\uB3C4 \uB098\uB20C \uC218 \uC788\uB294 \uB9C8\uC74C\uC740 \uB204\uAD6C\uC5D0\uAC8C\uB098 \uC788\uB2E4.", "\uC11C\uB85C\uB97C \uB3CC\uBCF4\uB294 \uC0AC\uB78C\uB4E4\uC774 \uBAA8\uC774\uBA74 \uADF8\uACF3\uC774 \uACE7 \uC9D1\uC774 \uB41C\uB2E4."]
+    },
+    {
+      id: "b20",
+      title: "\uB9C8\uB2F9\uC744 \uB098\uC628 \uC554\uD0C9",
+      author: "\uD669\uC120\uBBF8",
+      publisher: "\uC0AC\uACC4\uC808",
+      coverIcon: "\u{1F414}",
+      category: "\uC0DD\uBA85\xB7\uAFC8",
+      desc: "\uC54C\uC744 \uD488\uACE0 \uC2F6\uB2E4\uB294 \uC18C\uB9DD \uD558\uB098\uB85C \uC591\uACC4\uC7A5\uC744 \uB098\uC628 \uC554\uD0C9 \uC78E\uC2F9\uC758 \uC6A9\uAE30 \uC788\uB294 \uC0B6",
+      quotes: ["\uC18C\uB9DD\uC774 \uC788\uC5C8\uB2E4. \uC54C\uC744 \uD488\uC5B4\uC11C \uBCD1\uC544\uB9AC\uC758 \uD0C4\uC0DD\uC744 \uBCF4\uB294 \uAC83.", "\uAFC8\uC744 \uD5A5\uD574 \uB098\uC544\uAC00\uB294 \uC0B6\uC740 \uB450\uB835\uC9C0\uB9CC \uADF8\uB798\uC11C \uB354 \uC544\uB984\uB2F5\uB2E4."]
+    },
+    {
+      id: "b21",
+      title: "\uD6CC\uD6CC",
+      author: "\uBB38\uACBD\uBBFC",
+      publisher: "\uBB38\uD559\uB3D9\uB124",
+      coverIcon: "\u{1F343}",
+      category: "\uAC00\uC871\xB7\uC131\uC7A5",
+      desc: "\uC785\uC591\uC544 \uC720\uB9AC\uAC00 \uAC11\uC790\uAE30 \uC0DD\uAE34 \uC5B4\uB9B0 \uB3D9\uC0DD \uC5F0\uC6B0\uB97C \uB3CC\uBCF4\uBA70 \uAC00\uC871\uC758 \uC758\uBBF8\uB97C \uC0C8\uB86D\uAC8C \uBC1C\uACAC\uD558\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uBB34\uAC70\uC6B4 \uB9C8\uC74C\uB3C4 \uB204\uAD70\uAC00\uC640 \uB098\uB204\uBA74 \uD6CC\uD6CC \uAC00\uBCBC\uC6CC\uC9C8 \uC218 \uC788\uB2E4.", "\uAC00\uC871\uC740 \uD53C\uB85C \uC815\uD574\uC9C0\uB294 \uAC83\uC774 \uC544\uB2C8\uB77C \uD568\uAED8\uD55C \uC2DC\uAC04\uC73C\uB85C \uB9CC\uB4E4\uC5B4\uC9C4\uB2E4."]
+    },
+    {
+      id: "b22",
+      title: "\uC2A4\uD504\uB9C1 \uBC85",
+      author: "\uBC30\uC720\uC548",
+      publisher: "\uCC3D\uBE44",
+      coverIcon: "\u{1F98C}",
+      category: "\uD559\uAD50\uC0DD\uD65C\xB7\uC9C4\uB85C",
+      desc: "\uC55E\uB9CC \uBCF4\uACE0 \uB2EC\uB9AC\uB294 \uC2A4\uD504\uB9C1\uBC85\uCC98\uB7FC \uACBD\uC7C1\uC5D0 \uB0B4\uBAB0\uB9B0 \uCCAD\uC18C\uB144\uB4E4\uC774 \uC790\uC2E0\uC758 \uC18D\uB3C4\uB97C \uCC3E\uC544\uAC00\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uC65C \uB2EC\uB9AC\uB294\uC9C0\uB3C4 \uBAA8\uB978 \uCC44 \uB2EC\uB9AC\uACE0 \uC788\uB2E4\uBA74 \uC7A0\uC2DC \uBA48\uCDB0 \uC11C\uB3C4 \uAD1C\uCC2E\uB2E4.", "\uB0A8\uACFC \uBE44\uAD50\uD558\uC9C0 \uC54A\uC744 \uB54C \uBE44\uB85C\uC18C \uB098\uC758 \uAE38\uC774 \uBCF4\uC778\uB2E4."]
+    },
+    {
+      id: "b23",
+      title: "\uC9C0\uAD6C \uB05D\uC758 \uC628\uC2E4",
+      author: "\uAE40\uCD08\uC5FD",
+      publisher: "\uC790\uC774\uC5B8\uD2B8\uBD81\uC2A4",
+      coverIcon: "\u{1F33F}",
+      category: "SF\xB7\uD658\uACBD",
+      desc: "\uB354\uC2A4\uD2B8 \uC7AC\uB09C \uC774\uD6C4\uC758 \uC138\uC0C1\uC5D0\uC11C \uC2DD\uBB3C \uBAA8\uC2A4\uBC14\uB098\uC640 \uADF8\uAC83\uC744 \uC9C0\uCF1C \uB0B8 \uC0AC\uB78C\uB4E4\uC758 \uBE44\uBC00\uC744 \uCD94\uC801\uD558\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uC138\uC0C1\uC744 \uAD6C\uD55C \uAC83\uC740 \uC601\uC6C5\uC774 \uC544\uB2C8\uB77C \uC11C\uB85C\uB97C \uB3CC\uBCF8 \uD3C9\uBC94\uD55C \uC0AC\uB78C\uB4E4\uC774\uC5C8\uB2E4.", "\uC791\uC740 \uC2DD\uBB3C \uD558\uB098\uC5D0\uB3C4 \uC138\uC0C1\uC744 \uB418\uC0B4\uB9AC\uB294 \uD798\uC774 \uC788\uB2E4."]
+    },
+    {
+      id: "b24",
+      title: "\uC6B0\uB9AC\uAC00 \uBE5B\uC758 \uC18D\uB3C4\uB85C \uAC08 \uC218 \uC5C6\uB2E4\uBA74",
+      author: "\uAE40\uCD08\uC5FD",
+      publisher: "\uD5C8\uBE14",
+      coverIcon: "\u{1F680}",
+      category: "SF",
+      desc: "\uACFC\uD559\uAE30\uC220\uC774 \uBC1C\uB2EC\uD55C \uBBF8\uB798\uC5D0\uB3C4 \uC5EC\uC804\uD788 \uB0A8\uB294 \uC774\uD574\uC640 \uC5F0\uACB0, \uADF8\uB9AC\uC6C0\uC744 \uADF8\uB9B0 SF \uB2E8\uD3B8\uC9D1",
+      quotes: ["\uB2FF\uC744 \uC218 \uC5C6\uB294 \uAC70\uB9AC\uC5D0\uC11C\uB3C4 \uB204\uAD70\uAC00\uB97C \uC774\uD574\uD558\uB824\uB294 \uB9C8\uC74C\uC740 \uBA48\uCD94\uC9C0 \uC54A\uB294\uB2E4.", "\uB2E4\uB984\uC744 \uC774\uD574\uD558\uB824\uB294 \uB178\uB825\uC774 \uC6B0\uB9AC\uB97C \uB354 \uB113\uC740 \uC138\uACC4\uB85C \uC774\uB048\uB2E4."]
+    },
+    {
+      id: "b25",
+      title: "\uC5F4\uB450 \uBC1C\uC790\uAD6D",
+      author: "\uC815\uC7AC\uC2B9",
+      publisher: "\uC5B4\uD06C\uB85C\uC2A4",
+      coverIcon: "\u{1F9E0}",
+      category: "\uACFC\uD559\xB7\uAD50\uC591",
+      desc: "\uB1CC\uACFC\uD559\uC73C\uB85C \uC0B4\uD3B4\uBCF4\uB294 \uC120\uD0DD, \uACB0\uC815, \uCC3D\uC758\uC131, \uADF8\uB9AC\uACE0 \uB354 \uB098\uC740 \uC0B6\uC744 \uC704\uD55C \uC5F4\uB450 \uAC00\uC9C0 \uC0DD\uAC01",
+      quotes: ["\uACB0\uC815\uC744 \uC798\uD558\uB294 \uC0AC\uB78C\uC740 \uC2E4\uD328\uB97C \uB450\uB824\uC6CC\uD558\uAE30\uBCF4\uB2E4 \uC2E4\uD328\uC5D0\uC11C \uBC30\uC6B0\uB294 \uC0AC\uB78C\uC774\uB2E4.", "\uCC3D\uC758\uC131\uC740 \uC11C\uB85C \uB2E4\uB978 \uAC83\uB4E4\uC744 \uC5F0\uACB0\uD558\uB294 \uD798\uC5D0\uC11C \uC2DC\uC791\uB41C\uB2E4."]
+    },
+    {
+      id: "b26",
+      title: "\uCE68\uBB35\uC758 \uBD04",
+      author: "\uB808\uC774\uCCBC \uCE74\uC2A8",
+      publisher: "\uC5D0\uCF54\uB9AC\uBE0C\uB974",
+      coverIcon: "\u{1F426}",
+      category: "\uD658\uACBD\xB7\uAD50\uC591",
+      desc: "\uC0B4\uCDA9\uC81C\uAC00 \uC0DD\uD0DC\uACC4\uC5D0 \uBBF8\uCE58\uB294 \uC601\uD5A5\uC744 \uACE0\uBC1C\uD558\uBA70 \uD604\uB300 \uD658\uACBD \uC6B4\uB3D9\uC758 \uCD9C\uBC1C\uC810\uC774 \uB41C \uCC45",
+      quotes: ["\uC0C8\uB4E4\uC758 \uB178\uB7AB\uC18C\uB9AC\uAC00 \uC0AC\uB77C\uC9C4 \uBD04\uC740 \uC6B0\uB9AC\uC5D0\uAC8C \uBB34\uC5C7\uC744 \uACBD\uACE0\uD558\uB294\uAC00.", "\uC790\uC5F0\uC744 \uC9C0\uBC30\uD558\uB824\uB294 \uD0DC\uB3C4\uAC00 \uACB0\uAD6D \uC778\uAC04 \uC790\uC2E0\uC744 \uC704\uD611\uD55C\uB2E4."]
+    },
+    {
+      id: "b27",
+      title: "\uB370\uBBF8\uC548",
+      author: "\uD5E4\uB974\uB9CC \uD5E4\uC138",
+      publisher: "\uBBFC\uC74C\uC0AC",
+      coverIcon: "\u{1F95A}",
+      category: "\uC138\uACC4\uACE0\uC804",
+      desc: "\uC18C\uB144 \uC2F1\uD074\uB808\uC5B4\uAC00 \uCE5C\uAD6C \uB370\uBBF8\uC548\uC744 \uD1B5\uD574 \uC120\uACFC \uC545, \uC790\uAE30 \uC790\uC2E0\uC744 \uCC3E\uC544\uAC00\uB294 \uC131\uC7A5 \uC18C\uC124",
+      quotes: ["\uC0C8\uB294 \uC54C\uC5D0\uC11C \uB098\uC624\uB824\uACE0 \uD22C\uC7C1\uD55C\uB2E4. \uC54C\uC740 \uC138\uACC4\uC774\uB2E4. \uD0DC\uC5B4\uB098\uB824\uB294 \uC790\uB294 \uD558\uB098\uC758 \uC138\uACC4\uB97C \uAE68\uB728\uB824\uC57C \uD55C\uB2E4.", "\uB098\uB294 \uB0B4 \uC18D\uC5D0\uC11C \uC800\uC808\uB85C \uC6B0\uB7EC\uB098\uC624\uB294 \uAC83, \uBC14\uB85C \uADF8\uAC83\uC744 \uC0B4\uC544 \uBCF4\uB824 \uD588\uC744 \uBFD0\uC774\uB2E4."]
+    },
+    {
+      id: "b28",
+      title: "\uC218\uB808\uBC14\uD034 \uC544\uB798\uC11C",
+      author: "\uD5E4\uB974\uB9CC \uD5E4\uC138",
+      publisher: "\uBBFC\uC74C\uC0AC",
+      coverIcon: "\u2699\uFE0F",
+      category: "\uC138\uACC4\uACE0\uC804",
+      desc: "\uC8FC\uC704\uC758 \uAE30\uB300\uC640 \uACBD\uC7C1\uC5D0 \uC9D3\uB20C\uB9B0 \uBAA8\uBC94\uC0DD \uD55C\uC2A4\uC758 \uC131\uC7A5\uACFC \uC88C\uC808\uC744 \uD1B5\uD574 \uAD50\uC721\uC758 \uC758\uBBF8\uB97C \uBB3B\uB294 \uC18C\uC124",
+      quotes: ["\uC9C0\uCE58\uC9C0 \uC54A\uC73C\uB824\uBA74 \uC218\uB808\uBC14\uD034 \uC544\uB798\uC5D0 \uAE54\uB9AC\uC9C0 \uC54A\uB3C4\uB85D \uC2A4\uC2A4\uB85C\uB97C \uB3CC\uBD10\uC57C \uD55C\uB2E4.", "\uACF5\uBD80\uBCF4\uB2E4 \uBA3C\uC800 \uBC30\uC6CC\uC57C \uD560 \uAC83\uC740 \uB098 \uC790\uC2E0\uC744 \uC544\uB07C\uB294 \uBC95\uC774\uB2E4."]
+    },
+    {
+      id: "b29",
+      title: "\uAC08\uB9E4\uAE30\uC758 \uAFC8",
+      author: "\uB9AC\uCC98\uB4DC \uBC14\uD06C",
+      publisher: "\uD604\uBB38\uBBF8\uB514\uC5B4",
+      coverIcon: "\u{1F54A}\uFE0F",
+      category: "\uAFC8\xB7\uB3C4\uC804",
+      desc: "\uBA39\uC774\uBCF4\uB2E4 \uB098\uB294 \uAC83 \uC790\uCCB4\uB97C \uC0AC\uB791\uD55C \uAC08\uB9E4\uAE30 \uC870\uB098\uB2E8\uC774 \uD55C\uACC4\uB97C \uB118\uC5B4 \uC790\uC720\uB97C \uCC3E\uC544\uAC00\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uAC00\uC7A5 \uB192\uC774 \uB098\uB294 \uC0C8\uAC00 \uAC00\uC7A5 \uBA40\uB9AC \uBCF8\uB2E4.", "\uD55C\uACC4\uB294 \uC2A4\uC2A4\uB85C \uC815\uD55C \uC0DD\uAC01 \uC18D\uC5D0\uB9CC \uC874\uC7AC\uD55C\uB2E4."]
+    },
+    {
+      id: "b30",
+      title: "\uBAA8\uBAA8",
+      author: "\uBBF8\uD558\uC5D8 \uC5D4\uB370",
+      publisher: "\uBE44\uB8E1\uC18C",
+      coverIcon: "\u23F0",
+      category: "\uC138\uACC4\uACE0\uC804",
+      desc: "\uD68C\uC0C9 \uC2E0\uC0AC\uB4E4\uC5D0\uAC8C \uC2DC\uAC04\uC744 \uBE7C\uC557\uAE34 \uC0AC\uB78C\uB4E4\uC744 \uC704\uD574 \uC2DC\uAC04\uC744 \uB418\uCC3E\uC73C\uB7EC \uB098\uC120 \uC18C\uB140 \uBAA8\uBAA8\uC758 \uBAA8\uD5D8",
+      quotes: ["\uBAA8\uBAA8\uB294 \uADF8\uC800 \uAC00\uB9CC\uD788 \uC549\uC544 \uC628 \uB9C8\uC74C\uC73C\uB85C \uADC0 \uAE30\uC6B8\uC5EC \uB4E4\uC744 \uBFD0\uC774\uC5C8\uB2E4.", "\uC2DC\uAC04\uC740 \uACE7 \uC0B6\uC774\uBA70, \uC0B6\uC740 \uC6B0\uB9AC \uB9C8\uC74C\uC18D\uC5D0 \uAE43\uB4E4\uC5B4 \uC788\uB2E4."]
+    },
+    {
+      id: "b31",
+      title: "\uAE30\uC5B5 \uC804\uB2EC\uC790",
+      author: "\uB85C\uC774\uC2A4 \uB85C\uB9AC",
+      publisher: "\uBE44\uB8E1\uC18C",
+      coverIcon: "\u{1F381}",
+      category: "SF\xB7\uB514\uC2A4\uD1A0\uD53C\uC544",
+      desc: "\uACE0\uD1B5\uB3C4 \uC0C9\uAE54\uB3C4 \uC5C6\uB294 \uC644\uBCBD\uD55C \uACF5\uB3D9\uCCB4\uC5D0\uC11C \uAE30\uC5B5\uC744 \uC804\uB2EC\uBC1B\uAC8C \uB41C \uC18C\uB144 \uC870\uB108\uC2A4\uC758 \uC120\uD0DD",
+      quotes: ["\uAE30\uC068\uC744 \uB290\uB07C\uB824\uBA74 \uC2AC\uD514\uC744 \uAE30\uC5B5\uD560 \uC904\uB3C4 \uC54C\uC544\uC57C \uD55C\uB2E4.", "\uC120\uD0DD\uD560 \uC218 \uC5C6\uB294 \uD3C9\uD654\uB294 \uC9C4\uC815\uD55C \uD3C9\uD654\uAC00 \uC544\uB2C8\uB2E4."]
+    },
+    {
+      id: "b32",
+      title: "\uB098\uC758 \uB77C\uC784\uC624\uB80C\uC9C0\uB098\uBB34",
+      author: "J.M. \uBC14\uC2A4\uCF58\uC140\uB85C\uC2A4",
+      publisher: "\uB3D9\uB158",
+      coverIcon: "\u{1F333}",
+      category: "\uC138\uACC4\uACE0\uC804",
+      desc: "\uAC00\uB09C\uD558\uC9C0\uB9CC \uC0C1\uC0C1\uB825 \uD48D\uBD80\uD55C \uB2E4\uC12F \uC0B4 \uC81C\uC81C\uAC00 \uB77C\uC784\uC624\uB80C\uC9C0\uB098\uBB34\uC640 \uBF40\uB974\uB69C\uAC00 \uC544\uC800\uC528\uB97C \uD1B5\uD574 \uC0AC\uB791\uC744 \uBC30\uC6B0\uB294 \uC774\uC57C\uAE30",
+      quotes: ["\uC0AC\uB791\uBC1B\uB294\uB2E4\uB294 \uAC83\uC744 \uC54C\uAC8C \uB41C \uC21C\uAC04, \uC138\uC0C1\uC740 \uC870\uAE08 \uB35C \uC544\uD320\uB2E4.", "\uB2E4\uC815\uD55C \uC5B4\uB978 \uD55C \uC0AC\uB78C\uC774 \uC544\uC774\uC758 \uC138\uC0C1\uC744 \uBC14\uAFC0 \uC218 \uC788\uB2E4."]
+    },
+    {
+      id: "b33",
+      title: "\uCC3D\uAC00\uC758 \uD1A0\uD1A0",
+      author: "\uAD6C\uB85C\uC57C\uB098\uAE30 \uD14C\uCE20\uCF54",
+      publisher: "\uAE40\uC601\uC0AC",
+      coverIcon: "\u{1F683}",
+      category: "\uD559\uAD50\uC0DD\uD65C",
+      desc: "\uC804\uCCA0 \uAD50\uC2E4\uC774 \uC788\uB294 \uB3C4\uBAA8\uC5D0 \uD559\uC6D0\uC5D0\uC11C \uC790\uC2E0\uB2E4\uC6C0\uC744 \uC778\uC815\uBC1B\uC73C\uBA70 \uC790\uB77C\uB294 \uD1A0\uD1A0\uC758 \uC2E4\uD654",
+      quotes: ["\uB108\uB294 \uC815\uB9D0\uC740 \uCC29\uD55C \uC544\uC774\uB780\uB2E4.", "\uC544\uC774\uC758 \uB2E4\uB984\uC744 \uBBFF\uC5B4 \uC8FC\uB294 \uD559\uAD50\uC5D0\uC11C \uC544\uC774\uB294 \uC2A4\uC2A4\uB85C \uBE5B\uB09C\uB2E4."]
+    },
+    {
+      id: "b34",
+      title: "\uC548\uB124\uC758 \uC77C\uAE30",
+      author: "\uC548\uB124 \uD504\uB791\uD06C",
+      publisher: "\uBB38\uD559\uC0AC\uC0C1",
+      coverIcon: "\u{1F4D4}",
+      category: "\uC5ED\uC0AC\xB7\uC778\uAD8C",
+      desc: "\uB098\uCE58\uB97C \uD53C\uD574 \uC740\uC2E0\uCC98\uC5D0 \uC228\uC5B4 \uC9C0\uB0B8 \uC18C\uB140 \uC548\uB124\uAC00 2\uB144\uAC04 \uC368 \uB0B4\uB824\uAC04 \uD76C\uB9DD\uACFC \uC131\uC7A5\uC758 \uAE30\uB85D",
+      quotes: ["\uC774 \uBAA8\uB4E0 \uC77C\uC5D0\uB3C4 \uBD88\uAD6C\uD558\uACE0 \uB098\uB294 \uC5EC\uC804\uD788 \uC0AC\uB78C\uB4E4\uC758 \uB9C8\uC74C\uC18D\uC5D0 \uC120\uD568\uC774 \uC788\uB2E4\uACE0 \uBBFF\uB294\uB2E4.", "\uC885\uC774\uB294 \uC0AC\uB78C\uBCF4\uB2E4 \uCC38\uC744\uC131\uC774 \uC788\uB2E4."]
+    },
+    {
+      id: "b35",
+      title: "\uC575\uBB34\uC0C8 \uC8FD\uC774\uAE30",
+      author: "\uD558\uD37C \uB9AC",
+      publisher: "\uC5F4\uB9B0\uCC45\uB4E4",
+      coverIcon: "\u2696\uFE0F",
+      category: "\uC138\uACC4\uACE0\uC804\xB7\uC778\uAD8C",
+      desc: "\uC778\uC885\uCC28\uBCC4\uC774 \uB9CC\uC5F0\uD55C \uBBF8\uAD6D \uB0A8\uBD80\uC5D0\uC11C \uC815\uC758\uB97C \uC9C0\uD0A4\uB824\uB294 \uBCC0\uD638\uC0AC \uC560\uD2F0\uCEE4\uC2A4\uC640 \uB538 \uC2A4\uCE74\uC6C3\uC758 \uC774\uC57C\uAE30",
+      quotes: ["\uB204\uAD70\uAC00\uB97C \uC9C4\uC815\uC73C\uB85C \uC774\uD574\uD558\uB824\uBA74 \uADF8 \uC0AC\uB78C\uC758 \uC785\uC7A5\uC774 \uB418\uC5B4 \uBCF4\uC544\uC57C \uD55C\uB2E4.", "\uC6A9\uAE30\uB780 \uC9C8 \uAC83\uC744 \uC54C\uBA74\uC11C\uB3C4 \uC2DC\uC791\uD558\uACE0 \uB05D\uAE4C\uC9C0 \uD574\uB0B4\uB294 \uAC83\uC774\uB2E4."]
+    },
+    {
+      id: "b36",
+      title: "\uB3D9\uBB3C\uB18D\uC7A5",
+      author: "\uC870\uC9C0 \uC624\uC6F0",
+      publisher: "\uBBFC\uC74C\uC0AC",
+      coverIcon: "\u{1F437}",
+      category: "\uC138\uACC4\uACE0\uC804\xB7\uC0AC\uD68C",
+      desc: "\uC778\uAC04\uC744 \uBAB0\uC544\uB0B8 \uB3D9\uBB3C\uB4E4\uC774 \uC138\uC6B4 \uB18D\uC7A5\uC774 \uC810\uC810 \uC0C8\uB85C\uC6B4 \uB3C5\uC7AC\uB85C \uBCC0\uD574 \uAC00\uB294 \uACFC\uC815\uC744 \uADF8\uB9B0 \uC6B0\uD654",
+      quotes: ["\uBAA8\uB4E0 \uB3D9\uBB3C\uC740 \uD3C9\uB4F1\uD558\uB2E4. \uADF8\uB7EC\uB098 \uC5B4\uB5A4 \uB3D9\uBB3C\uC740 \uB354 \uD3C9\uB4F1\uD558\uB2E4.", "\uAC10\uC2DC\uD558\uC9C0 \uC54A\uB294 \uAD8C\uB825\uC740 \uC5B8\uC81C\uB4E0 \uCC98\uC74C\uC758 \uC57D\uC18D\uC744 \uC78A\uB294\uB2E4."]
+    },
+    {
+      id: "b37",
+      title: "\uD30C\uB9AC\uB300\uC655",
+      author: "\uC70C\uB9AC\uC5C4 \uACE8\uB529",
+      publisher: "\uBBFC\uC74C\uC0AC",
+      coverIcon: "\u{1F3DD}\uFE0F",
+      category: "\uC138\uACC4\uACE0\uC804",
+      desc: "\uBB34\uC778\uB3C4\uC5D0 \uACE0\uB9BD\uB41C \uC18C\uB144\uB4E4\uC774 \uADDC\uCE59\uC744 \uC783\uC5B4 \uAC00\uBA70 \uB4DC\uB7EC\uB098\uB294 \uC778\uAC04 \uBCF8\uC131\uC744 \uADF8\uB9B0 \uC18C\uC124",
+      quotes: ["\uC9C8\uC11C\uB294 \uC800\uC808\uB85C \uC9C0\uCF1C\uC9C0\uB294 \uAC83\uC774 \uC544\uB2C8\uB77C \uBAA8\uB450\uAC00 \uD568\uAED8 \uC9C0\uCF1C\uC57C \uC720\uC9C0\uB41C\uB2E4.", "\uB450\uB824\uC6C0\uC740 \uC6B0\uB9AC \uBC16\uC774 \uC544\uB2C8\uB77C \uC6B0\uB9AC \uC548\uC5D0 \uC788\uC5C8\uB2E4."]
+    },
+    {
+      id: "b38",
+      title: "\uB09C\uC7A5\uC774\uAC00 \uC3D8\uC544\uC62C\uB9B0 \uC791\uC740 \uACF5",
+      author: "\uC870\uC138\uD76C",
+      publisher: "\uC774\uC131\uACFC\uD798",
+      coverIcon: "\u{1F388}",
+      category: "\uD55C\uAD6D\uBB38\uD559\xB7\uC0AC\uD68C",
+      desc: "\uB3C4\uC2DC \uAC1C\uBC1C \uC18D\uC5D0\uC11C \uC0B6\uC758 \uD130\uC804\uC744 \uC783\uC5B4 \uAC00\uB294 \uB09C\uC7A5\uC774 \uAC00\uC871\uC744 \uD1B5\uD574 \uC18C\uC678\uB41C \uC774\uC6C3\uC744 \uB3CC\uC544\uBCF4\uB294 \uC5F0\uC791 \uC18C\uC124",
+      quotes: ["\uC791\uC740 \uACF5 \uD558\uB098\uC5D0\uB3C4 \uB354 \uB098\uC740 \uC138\uC0C1\uC744 \uBC14\uB77C\uB294 \uB9C8\uC74C\uC774 \uB2F4\uACA8 \uC788\uC5C8\uB2E4.", "\uD568\uAED8 \uC0AC\uB294 \uC138\uC0C1\uC740 \uAC00\uC7A5 \uB0AE\uC740 \uACF3\uC758 \uBAA9\uC18C\uB9AC\uB97C \uB4E3\uB294 \uB370\uC11C \uC2DC\uC791\uB41C\uB2E4."]
     }
   ];
   var INITIAL_READING_LOGS = [
@@ -389,557 +690,61 @@
 
   // src/js/state.js
   var STORAGE_KEY = "pyeonhakwi_ms_state_v4";
-  var INITIAL_STUDENTS_28 = [
-    {
-      number: 1,
-      grade: 2,
-      classNum: 3,
-      realName: "\uAE40\uBBFC\uC900",
-      nickname: "\uBCC4\uBE5B\uB2EC\uBE5B",
-      mannersScore: 480,
-      typingScore: 540,
-      readingScore: 320,
-      totalPoints: 1340,
-      typingBestCPM: 365,
-      typingAcc: 98,
-      streak: 8,
-      checked: true,
-      quizDone: true,
-      comment: "\uC544\uCE68 \uC778\uC0AC\uB97C \uBA3C\uC800 \uBC1D\uAC8C \uAC74\uB124\uB2C8 \uD558\uB8E8\uAC00 \uC0C1\uCF8C\uD569\uB2C8\uB2E4!",
-      hasSticker: true
-    },
-    {
-      number: 2,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC774\uC11C\uC5F0",
-      nickname: "\uCC45\uC77D\uB294\uC0AC\uC790",
-      mannersScore: 520,
-      typingScore: 610,
-      readingScore: 490,
-      totalPoints: 1620,
-      typingBestCPM: 425,
-      typingAcc: 99,
-      streak: 11,
-      checked: true,
-      quizDone: true,
-      comment: "\u300A\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810\u300B\uC744 \uC77D\uACE0 \uB9E4\uC77C 5\uBD84\uC758 \uC18C\uC911\uD568\uC744 \uC2E4\uAC10\uD588\uC5B4\uC694.",
-      hasSticker: true
-    },
-    {
-      number: 3,
-      grade: 2,
-      classNum: 3,
-      realName: "\uBC15\uB3C4\uC724",
-      nickname: "\uC0C8\uBCBD\uAD6C\uB984",
-      mannersScore: 390,
-      typingScore: 410,
-      readingScore: 280,
-      totalPoints: 1080,
-      typingBestCPM: 295,
-      typingAcc: 94,
-      streak: 5,
-      checked: true,
-      quizDone: false,
-      comment: "\uCC45\uC0C1 \uC704 \uAD50\uACFC\uC11C \uC815\uB3C8\uACFC \uBCF5\uB3C4 \uC6B0\uCE21\uD1B5\uD589\uC744 \uC9C0\uD0A4\uACE0 \uC788\uC5B4\uC694.",
-      hasSticker: false
-    },
-    {
-      number: 4,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC815\uC608\uC740",
-      nickname: "\uAFC8\uAFB8\uB294\uACE0\uB798",
-      mannersScore: 510,
-      typingScore: 480,
-      readingScore: 460,
-      totalPoints: 1450,
-      typingBestCPM: 380,
-      typingAcc: 97,
-      streak: 9,
-      checked: true,
-      quizDone: true,
-      comment: "\uCE5C\uAD6C\uB4E4\uC5D0\uAC8C \uACE0\uC6B4 \uB9D0 \uC4F0\uAE30\uB97C \uC628\xB7\uC624\uD504\uB77C\uC778\uC5D0\uC11C \uBAA8\uB450 \uC2E4\uCC9C \uC911\uC785\uB2C8\uB2E4.",
-      hasSticker: true
-    },
-    {
-      number: 5,
-      grade: 2,
-      classNum: 3,
-      realName: "\uCD5C\uC2DC\uC6B0",
-      nickname: "\uD478\uB978\uD558\uB298",
-      mannersScore: 310,
-      typingScore: 330,
-      readingScore: 210,
-      totalPoints: 850,
-      typingBestCPM: 240,
-      typingAcc: 91,
-      streak: 3,
-      checked: false,
-      quizDone: false,
-      comment: "\uD55C\uCEF4 \uC790\uB9AC\uC5F0\uC2B5\uC73C\uB85C \uAE30\uBCF8\uAE30\uBD80\uD130 \uD0C4\uD0C4\uD788 \uCC44\uC6B0\uACE0 \uC788\uC2B5\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 6,
-      grade: 2,
-      classNum: 3,
-      realName: "\uAC15\uC9C0\uC544",
-      nickname: "\uBC14\uB78C\uC18C\uB9AC",
-      mannersScore: 560,
-      typingScore: 640,
-      readingScore: 520,
-      totalPoints: 1720,
-      typingBestCPM: 460,
-      typingAcc: 100,
-      streak: 14,
-      checked: true,
-      quizDone: true,
-      comment: "\u300A\uC6D0\uB354\u300B\uC758 \uCE5C\uC808 \uBA85\uC5B8\uCC98\uB7FC \uCE5C\uAD6C\uC758 \uC2E4\uC218\uB97C \uB530\uB73B\uD558\uAC8C \uC548\uC544\uC904\uAC8C\uC694.",
-      hasSticker: true
-    },
-    {
-      number: 7,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC724\uD558\uC900",
-      nickname: "\uB2EC\uCF64\uCD08\uCF54",
-      mannersScore: 420,
-      typingScore: 390,
-      readingScore: 310,
-      totalPoints: 1120,
-      typingBestCPM: 315,
-      typingAcc: 95,
-      streak: 6,
-      checked: true,
-      quizDone: false,
-      comment: "\uAE09\uC2DD\uC2E4\uC5D0\uC11C \uC0C8\uCE58\uAE30 \uC548 \uD558\uACE0 \uC2E4\uBB34\uC0AC\uB2D8\uAED8 \uAC10\uC0AC \uC778\uC0AC\uD558\uAE30 \uC131\uACF5!",
-      hasSticker: false
-    },
-    {
-      number: 8,
-      grade: 2,
-      classNum: 3,
-      realName: "\uD55C\uC18C\uC728",
-      nickname: "\uC740\uD558\uC218\uBCC4",
-      mannersScore: 460,
-      typingScore: 490,
-      readingScore: 390,
-      totalPoints: 1340,
-      typingBestCPM: 350,
-      typingAcc: 96,
-      streak: 7,
-      checked: true,
-      quizDone: true,
-      comment: "\uC544\uCE68 \uB3C5\uC11C \uD6C4 \uC9E7\uC740 \uAE00 \uD0C0\uC790 \uC5F0\uC2B5\uC744 \uD558\uB2C8 \uC9D1\uC911\uB825\uC774 \uD6E8\uC52C \uB192\uC544\uC838\uC694.",
-      hasSticker: false
-    },
-    {
-      number: 9,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC1A1\uC9C0\uD638",
-      nickname: "\uB0A0\uC544\uB77C\uC6B0\uC8FC",
-      mannersScore: 280,
-      typingScore: 290,
-      readingScore: 180,
-      totalPoints: 750,
-      typingBestCPM: 210,
-      typingAcc: 89,
-      streak: 2,
-      checked: false,
-      quizDone: false,
-      comment: "\uB3C5\uC218\uB9AC \uD0C0\uBC95 \uBC97\uC5B4\uB098\uAE30 1\uB2E8\uACC4 \uAE30\uBCF8\uC790\uB9AC \uB9C8\uC2A4\uD130 \uB3C4\uC804!",
-      hasSticker: false
-    },
-    {
-      number: 10,
-      grade: 2,
-      classNum: 3,
-      realName: "\uBC30\uCC44\uC6D0",
-      nickname: "\uCD08\uB85D\uD480\uC78E",
-      mannersScore: 490,
-      typingScore: 520,
-      readingScore: 410,
-      totalPoints: 1420,
-      typingBestCPM: 390,
-      typingAcc: 98,
-      streak: 8,
-      checked: true,
-      quizDone: true,
-      comment: "\uC120\uC0DD\uB2D8 \uC124\uBA85\uD558\uC2E4 \uB54C \uB514\uBC97 \uD654\uBA74 \uB36E\uAE30 \uADDC\uCE59\uC744 \uD655\uC2E4\uD558\uAC8C \uC9C0\uD0B5\uB2C8\uB2E4.",
-      hasSticker: true
-    },
-    {
-      number: 11,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC624\uC740\uC6B0",
-      nickname: "\uBBF8\uC18C\uCC9C\uC0AC",
-      mannersScore: 440,
-      typingScore: 460,
-      readingScore: 350,
-      totalPoints: 1250,
-      typingBestCPM: 330,
-      typingAcc: 95,
-      streak: 6,
-      checked: true,
-      quizDone: true,
-      comment: "\uB4F1\uAD63\uAE38 \uC2A4\uB9C8\uD2B8\uD3F0 \uB300\uC2E0 \uC8FC\uBCC0 \uCE5C\uAD6C\uB4E4\uC5D0\uAC8C \uBC1D\uC740 \uC544\uCE68 \uC778\uC0AC\uB97C \uAC74\uB138\uC5B4\uC694.",
-      hasSticker: false
-    },
-    {
-      number: 12,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC784\uC218\uC544",
-      nickname: "\uC6A9\uAC10\uD55C\uD638\uB791\uC774",
-      mannersScore: 380,
-      typingScore: 370,
-      readingScore: 290,
-      totalPoints: 1040,
-      typingBestCPM: 285,
-      typingAcc: 93,
-      streak: 4,
-      checked: true,
-      quizDone: false,
-      comment: "\u300A\uC544\uBAAC\uB4DC\u300B\uB97C \uC77D\uACE0 \uC9C4\uC815\uD55C \uACF5\uAC10\uC758 \uC758\uBBF8\uB97C \uBC30\uC6B0\uACE0 \uC788\uC2B5\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 13,
-      grade: 2,
-      classNum: 3,
-      realName: "\uAD8C\uD604\uC6B0",
-      nickname: "\uD587\uC0B4\uAC00\uB4DD",
-      mannersScore: 320,
-      typingScore: 310,
-      readingScore: 220,
-      totalPoints: 850,
-      typingBestCPM: 250,
-      typingAcc: 90,
-      streak: 3,
-      checked: false,
-      quizDone: false,
-      comment: "\uB0B4\uC77C\uBD80\uD130\uB294 10\uBD84 \uC77C\uCC0D \uB4F1\uAD50\uD558\uC5EC \uC544\uCE68 \uB3C5\uC11C\uC5D0 \uBE60\uC838\uBCF4\uACA0\uC2B5\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 14,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC2E0\uC720\uB098",
-      nickname: "\uC9C0\uD61C\uC62C\uBE7C\uBBF8",
-      mannersScore: 530,
-      typingScore: 560,
-      readingScore: 480,
-      totalPoints: 1570,
-      typingBestCPM: 410,
-      typingAcc: 98,
-      streak: 10,
-      checked: true,
-      quizDone: true,
-      comment: "\uCE5C\uAD6C \uCE6D\uCC2C \uD55C\uB9C8\uB514\uC640 \uB514\uBC97 \uC548\uC804 \uCDA9\uC804\uC73C\uB85C \uD558\uB8E8\uB97C \uBCF4\uB78C\uCC28\uAC8C \uB9C8\uBB34\uB9AC\uD569\uB2C8\uB2E4.",
-      hasSticker: true
-    },
-    {
-      number: 15,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC720\uC7AC\uC6D0",
-      nickname: "\uBB34\uC9C0\uAC1C\uBE5B",
-      mannersScore: 510,
-      typingScore: 590,
-      readingScore: 440,
-      totalPoints: 1540,
-      typingBestCPM: 435,
-      typingAcc: 99,
-      streak: 11,
-      checked: true,
-      quizDone: true,
-      comment: "\uC601\uBB38 \uD0C0\uC790\uC640 \uD55C\uAE00 \uD0C0\uC790 \uBAA8\uB450 400\uD0C0 \uB3CC\uD30C \uBAA9\uD45C!",
-      hasSticker: true
-    },
-    {
-      number: 16,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC870\uD558\uC740",
-      nickname: "\uB9D1\uC740\uC0D8\uBB3C",
-      mannersScore: 470,
-      typingScore: 450,
-      readingScore: 370,
-      totalPoints: 1290,
-      typingBestCPM: 340,
-      typingAcc: 96,
-      streak: 7,
-      checked: true,
-      quizDone: true,
-      comment: "\uC774\uB3D9 \uC218\uC5C5 \uC2DC \uB2E4\uB978 \uBC18 \uAD50\uC2E4 \uBCF5\uB3C4\uC5D0\uC11C \uC815\uC219\uD558\uAC8C \uAC77\uAE30 \uC2E4\uCC9C \uC911!",
-      hasSticker: false
-    },
-    {
-      number: 17,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC11C\uC9C4\uC6B0",
-      nickname: "\uBD04\uB0A0\uC758\uD587\uC0B4",
-      mannersScore: 360,
-      typingScore: 350,
-      readingScore: 270,
-      totalPoints: 980,
-      typingBestCPM: 275,
-      typingAcc: 92,
-      streak: 4,
-      checked: true,
-      quizDone: false,
-      comment: "\uC2DD\uD310 \uBC18\uB0A9\uD560 \uB54C \uC218\uC800 \uBD84\uB9AC\uC640 \uC794\uBC18 \uCC98\uB9AC\uB97C \uAE68\uB057\uC774 \uD588\uC2B5\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 18,
-      grade: 2,
-      classNum: 3,
-      realName: "\uBB38\uCC44\uC740",
-      nickname: "\uD478\uB978\uBC14\uB2E4",
-      mannersScore: 450,
-      typingScore: 480,
-      readingScore: 400,
-      totalPoints: 1330,
-      typingBestCPM: 360,
-      typingAcc: 97,
-      streak: 8,
-      checked: true,
-      quizDone: true,
-      comment: "\u300A\uCCB4\uB9AC\uC0C8\uC6B0\u300B\uB97C \uC77D\uACE0 \uB0B4 \uC18C\uC2E0\uC744 \uB2E4\uC815\uD558\uAC8C \uB9D0\uD558\uB294 \uBC95\uC744 \uBC30\uC6E0\uC5B4\uC694.",
-      hasSticker: false
-    },
-    {
-      number: 19,
-      grade: 2,
-      classNum: 3,
-      realName: "\uD669\uB3C4\uD604",
-      nickname: "\uC740\uBE5B\uB0A0\uAC1C",
-      mannersScore: 290,
-      typingScore: 320,
-      readingScore: 190,
-      totalPoints: 800,
-      typingBestCPM: 230,
-      typingAcc: 89,
-      streak: 2,
-      checked: false,
-      quizDone: false,
-      comment: "\uD0C0\uC790 \uC18D\uB3C4\uB97C \uC870\uAE08\uC529 \uC62C\uB9AC\uB294 \uC131\uCDE8\uAC10\uC774 \uC3E0\uC3E0\uD569\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 20,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC548\uC11C\uC9C4",
-      nickname: "\uC232\uC18D\uC694\uC815",
-      mannersScore: 490,
-      typingScore: 510,
-      readingScore: 430,
-      totalPoints: 1430,
-      typingBestCPM: 375,
-      typingAcc: 97,
-      streak: 9,
-      checked: true,
-      quizDone: true,
-      comment: "\uBC30\uC6C0\uD130 \uC9C0\uD0B4\uC774 \uC120\uC0DD\uB2D8\uAED8 \uB4DC\uB9B0 \uC544\uCE68 \uC778\uC0AC\uC5D0 \uD558\uB8E8\uAC00 \uD658\uD574\uC84C\uC2B5\uB2C8\uB2E4.",
-      hasSticker: true
-    },
-    {
-      number: 21,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC7A5\uBBFC\uC11C",
-      nickname: "\uC740\uBE5B\uBC14\uB78C",
-      mannersScore: 430,
-      typingScore: 470,
-      readingScore: 360,
-      totalPoints: 1260,
-      typingBestCPM: 345,
-      typingAcc: 96,
-      streak: 6,
-      checked: true,
-      quizDone: true,
-      comment: "\uCE5C\uAD6C\uB4E4\uACFC \uC11C\uB85C \uC874\uC911\uD558\uBA70 \uD558\uB8E8\uB97C \uC2DC\uC791\uD569\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 22,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC1A1\uD0DC\uC591",
-      nickname: "\uD574\uC624\uB984",
-      mannersScore: 370,
-      typingScore: 420,
-      readingScore: 290,
-      totalPoints: 1080,
-      typingBestCPM: 290,
-      typingAcc: 93,
-      streak: 5,
-      checked: true,
-      quizDone: false,
-      comment: "\uC544\uCE68 \uB3C5\uC11C\uB85C \uB9C8\uC74C\uC744 \uAC00\uB2E4\uB4EC\uACE0 \uC218\uC5C5\uC5D0 \uC9D1\uC911\uD574\uC694.",
-      hasSticker: false
-    },
-    {
-      number: 23,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC804\uC9C0\uC6B0",
-      nickname: "\uD478\uB978\uC232",
-      mannersScore: 500,
-      typingScore: 530,
-      readingScore: 450,
-      totalPoints: 1480,
-      typingBestCPM: 400,
-      typingAcc: 98,
-      streak: 9,
-      checked: true,
-      quizDone: true,
-      comment: "\uB514\uBC97 \uC548\uC804 \uC218\uCE59\uC744 \uC798 \uC9C0\uCF1C \uBAA8\uBC94\uC774 \uB418\uACA0\uC2B5\uB2C8\uB2E4.",
-      hasSticker: true
-    },
-    {
-      number: 24,
-      grade: 2,
-      classNum: 3,
-      realName: "\uD669\uBCF4\uBBFC",
-      nickname: "\uC0C8\uC194",
-      mannersScore: 340,
-      typingScore: 360,
-      readingScore: 240,
-      totalPoints: 940,
-      typingBestCPM: 260,
-      typingAcc: 91,
-      streak: 3,
-      checked: true,
-      quizDone: false,
-      comment: "\uC790\uB9AC\uC5F0\uC2B5\uBD80\uD130 \uCC28\uADFC\uCC28\uADFC \uD0C0\uC218\uB97C \uB298\uB824\uAC00\uACE0 \uC788\uC5B4\uC694.",
-      hasSticker: false
-    },
-    {
-      number: 25,
-      grade: 2,
-      classNum: 3,
-      realName: "\uACE0\uB3C4\uD604",
-      nickname: "\uC0DB\uBCC4",
-      mannersScore: 460,
-      typingScore: 490,
-      readingScore: 380,
-      totalPoints: 1330,
-      typingBestCPM: 355,
-      typingAcc: 96,
-      streak: 7,
-      checked: true,
-      quizDone: true,
-      comment: "\uAE09\uC2DD\uC2E4 \uC9C8\uC11C\uC640 \uC794\uBC18 \uC904\uC774\uAE30\uB97C \uC55E\uC7A5\uC11C\uC11C \uC2E4\uCC9C\uD569\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 26,
-      grade: 2,
-      classNum: 3,
-      realName: "\uB0A8\uAD81\uC740",
-      nickname: "\uB2EC\uBE5B\uC18C\uB098\uD0C0",
-      mannersScore: 520,
-      typingScore: 580,
-      readingScore: 470,
-      totalPoints: 1570,
-      typingBestCPM: 415,
-      typingAcc: 99,
-      streak: 11,
-      checked: true,
-      quizDone: true,
-      comment: "\u300A\uD398\uC778\uD2B8\u300B\uB97C \uC77D\uACE0 \uC9C4\uC815\uD55C \uAC00\uC871\uACFC \uC131\uC7A5\uC758 \uC758\uBBF8\uB97C \uAE68\uB2EC\uC558\uC5B4\uC694.",
-      hasSticker: true
-    },
-    {
-      number: 27,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC870\uC2DC\uC724",
-      nickname: "\uBB3C\uBCF4\uB77C",
-      mannersScore: 390,
-      typingScore: 380,
-      readingScore: 300,
-      totalPoints: 1070,
-      typingBestCPM: 280,
-      typingAcc: 92,
-      streak: 4,
-      checked: true,
-      quizDone: false,
-      comment: "\uBCF5\uB3C4\uC5D0\uC11C \uB6F0\uC9C0 \uC54A\uACE0 \uC6B0\uCE21\uBCF4\uD589\uC744 \uCCA0\uC800\uD788 \uC9C0\uD0B5\uB2C8\uB2E4.",
-      hasSticker: false
-    },
-    {
-      number: 28,
-      grade: 2,
-      classNum: 3,
-      realName: "\uC720\uC11C\uC9C4",
-      nickname: "\uCD08\uB85D\uBCC4",
-      mannersScore: 480,
-      typingScore: 510,
-      readingScore: 410,
-      totalPoints: 1400,
-      typingBestCPM: 370,
-      typingAcc: 97,
-      streak: 8,
-      checked: true,
-      quizDone: true,
-      comment: "\uC544\uCE68 \uC778\uC0AC\uB97C \uBC1D\uAC8C \uB098\uB204\uB2C8 \uD558\uB8E8\uC758 \uC2DC\uC791\uC774 \uD65C\uAE30\uCC28\uC694!",
-      hasSticker: true
-    }
+  var SAMPLE_FAMILY_NAMES = ["\uAE40", "\uC774", "\uBC15", "\uCD5C", "\uC815", "\uAC15", "\uC870", "\uC724", "\uC7A5", "\uC784", "\uD55C", "\uC624", "\uC11C", "\uC2E0", "\uAD8C", "\uD669", "\uC548", "\uC1A1", "\uB958", "\uD64D"];
+  var SAMPLE_GIVEN_NAMES = ["\uBBFC\uC900", "\uC11C\uC5F0", "\uB3C4\uC724", "\uD558\uC740", "\uC2DC\uC6B0", "\uC9C0\uC544", "\uD558\uC900", "\uC11C\uC724", "\uC8FC\uC6D0", "\uC9C0\uC720", "\uC608\uC900", "\uCC44\uC6D0", "\uC9C0\uD638", "\uC218\uC544", "\uAC74\uC6B0", "\uB2E4\uC740", "\uC6B0\uC9C4", "\uC608\uB9B0", "\uC120\uC6B0", "\uC18C\uC728", "\uC5F0\uC6B0", "\uC724\uC11C", "\uC720\uCC2C", "\uC9C0\uBBFC", "\uC740\uC6B0", "\uD558\uB9B0", "\uD0DC\uC724", "\uC544\uC778", "\uBBFC\uC7AC", "\uC11C\uC544"];
+  var SAMPLE_NICKNAMES = ["\uBCC4\uBE5B\uB2EC\uBE5B", "\uCC45\uC77D\uB294\uC0AC\uC790", "\uC0C8\uBCBD\uAD6C\uB984", "\uAFC8\uAFB8\uB294\uACE0\uB798", "\uD478\uB978\uD558\uB298", "\uBC14\uB78C\uC18C\uB9AC", "\uB2EC\uCF64\uCD08\uCF54", "\uC740\uD558\uC218\uBCC4", "\uB0A0\uC544\uB77C\uC6B0\uC8FC", "\uCD08\uB85D\uD480\uC78E", "\uBBF8\uC18C\uCC9C\uC0AC", "\uC6A9\uAC10\uD55C\uD638\uB791\uC774", "\uD587\uC0B4\uAC00\uB4DD", "\uC9C0\uD61C\uC62C\uBE7C\uBBF8", "\uBB34\uC9C0\uAC1C\uBE5B", "\uB9D1\uC740\uC0D8\uBB3C", "\uBD04\uB0A0\uC758\uD587\uC0B4", "\uD478\uB978\uBC14\uB2E4", "\uC740\uBE5B\uB0A0\uAC1C", "\uC232\uC18D\uC694\uC815", "\uD574\uC624\uB984", "\uC0DB\uBCC4", "\uB2EC\uBE5B\uC18C\uB098\uD0C0", "\uBB3C\uBCF4\uB77C", "\uCD08\uB85D\uBCC4", "\uAD6C\uB984\uBE75", "\uBC18\uC9DD\uBC18\uB527\uBD88", "\uB178\uC744\uBE5B", "\uC885\uC774\uBE44\uD589\uAE30", "\uD589\uBCF5\uD55C\uD3AD\uADC4"];
+  var SAMPLE_COMMENTS = [
+    "\uC544\uCE68 \uC778\uC0AC\uB97C \uBA3C\uC800 \uBC1D\uAC8C \uAC74\uB124\uB2C8 \uD558\uB8E8\uAC00 \uC0C1\uCF8C\uD569\uB2C8\uB2E4!",
+    "\u300A\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810\u300B\uC744 \uC77D\uACE0 \uB9E4\uC77C 5\uBD84\uC758 \uC18C\uC911\uD568\uC744 \uC2E4\uAC10\uD588\uC5B4\uC694.",
+    "\uCC45\uC0C1 \uC704 \uAD50\uACFC\uC11C \uC815\uB3C8\uACFC \uBCF5\uB3C4 \uC6B0\uCE21\uD1B5\uD589\uC744 \uC9C0\uD0A4\uACE0 \uC788\uC5B4\uC694.",
+    "\uCE5C\uAD6C\uB4E4\uC5D0\uAC8C \uACE0\uC6B4 \uB9D0 \uC4F0\uAE30\uB97C \uC628\xB7\uC624\uD504\uB77C\uC778\uC5D0\uC11C \uBAA8\uB450 \uC2E4\uCC9C \uC911\uC785\uB2C8\uB2E4.",
+    "\uC790\uB9AC\uC5F0\uC2B5\uBD80\uD130 \uCC28\uADFC\uCC28\uADFC \uD0C0\uC218\uB97C \uB298\uB824\uAC00\uACE0 \uC788\uC5B4\uC694.",
+    "\u300A\uC6D0\uB354\u300B\uC758 \uCE5C\uC808 \uBA85\uC5B8\uCC98\uB7FC \uCE5C\uAD6C\uC758 \uC2E4\uC218\uB97C \uB530\uB73B\uD558\uAC8C \uC548\uC544\uC904\uAC8C\uC694.",
+    "\uAE09\uC2DD\uC2E4\uC5D0\uC11C \uC0C8\uCE58\uAE30 \uC548 \uD558\uACE0 \uAC10\uC0AC \uC778\uC0AC\uD558\uAE30 \uC131\uACF5!",
+    "\uC544\uCE68 \uB3C5\uC11C \uD6C4 \uC9E7\uC740 \uAE00 \uD0C0\uC790 \uC5F0\uC2B5\uC744 \uD558\uB2C8 \uC9D1\uC911\uB825\uC774 \uB192\uC544\uC838\uC694.",
+    "\uC120\uC0DD\uB2D8 \uC124\uBA85\uD558\uC2E4 \uB54C \uB514\uBC97 \uD654\uBA74 \uB36E\uAE30 \uADDC\uCE59\uC744 \uC9C0\uD0B5\uB2C8\uB2E4.",
+    "\uBCF5\uB3C4\uC5D0\uC11C \uB6F0\uC9C0 \uC54A\uACE0 \uC6B0\uCE21\uBCF4\uD589\uC744 \uCCA0\uC800\uD788 \uC9C0\uD0B5\uB2C8\uB2E4."
   ];
-  INITIAL_STUDENTS_28.forEach((s, idx) => {
-    if (!s.id) s.id = `s_2_3_${s.number || idx + 1}`;
-  });
-  function generateExpandedStudents() {
-    const gradeStudents = [];
-    const schoolStudents = [];
+  function generateSampleStudents() {
+    const students = [];
+    let seq = 0;
     for (let g = 1; g <= 3; g++) {
       for (let c = 1; c <= 7; c++) {
-        for (let n = 1; n <= 28; n++) {
-          const isOurClass = g === 2 && c === 3;
-          if (isOurClass) {
-            const student = INITIAL_STUDENTS_28[n - 1];
-            if (g === 2) gradeStudents.push(student);
-            schoolStudents.push(student);
-          } else {
-            const factor = 0.72 + (Math.sin(g * 17 + c * 9 + n) + 1) * 0.28;
-            const st = {
-              id: `s_${g}_${c}_${n}`,
-              number: n,
-              grade: g,
-              classNum: c,
-              realName: `\uD559\uC0DD${g}-${c}-${n}`,
-              nickname: `${g}\uD559\uB144${c}\uBC18_${n}\uBC88\uB7EC\uB108`,
-              mannersScore: Math.round(410 * factor),
-              typingScore: Math.round(460 * factor),
-              readingScore: Math.round(330 * factor),
-              totalPoints: Math.round(1200 * factor),
-              typingBestCPM: Math.round(315 * factor),
-              typingAcc: 94,
-              streak: Math.max(1, Math.round(6 * factor)),
-              checked: n % 4 !== 0,
-              quizDone: n % 3 !== 0,
-              comment: `${g}\uD559\uB144 ${c}\uBC18 \uC544\uCE68 \uB8E8\uD2F4\uC5D0 \uC131\uC2E4\uD788 \uCC38\uC5EC\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4.`
-            };
-            if (g === 2) gradeStudents.push(st);
-            schoolStudents.push(st);
-          }
+        for (let n = 1; n <= 10; n++) {
+          seq++;
+          const factor = 0.55 + (Math.sin(g * 17 + c * 9 + n * 3) + 1) * 0.3;
+          const mannersScore = Math.round(420 * factor / 10) * 10;
+          const typingScore = Math.round(460 * factor / 10) * 10;
+          const readingScore = Math.round(340 * factor / 10) * 10;
+          students.push({
+            id: `sample_${g}_${c}_${n}`,
+            isSample: true,
+            role: "student",
+            number: n,
+            grade: g,
+            classNum: c,
+            realName: SAMPLE_FAMILY_NAMES[seq * 7 % SAMPLE_FAMILY_NAMES.length] + SAMPLE_GIVEN_NAMES[seq * 11 % SAMPLE_GIVEN_NAMES.length],
+            nickname: SAMPLE_NICKNAMES[seq * 13 % SAMPLE_NICKNAMES.length],
+            mannersScore,
+            typingScore,
+            readingScore,
+            totalPoints: mannersScore + typingScore + readingScore,
+            typingBestCPM: Math.round(330 * factor),
+            typingAcc: Math.min(100, Math.round(88 + factor * 10)),
+            streak: Math.max(1, Math.round(10 * factor)),
+            checked: n % 4 !== 0,
+            quizDone: n % 3 !== 0,
+            comment: SAMPLE_COMMENTS[seq * 3 % SAMPLE_COMMENTS.length],
+            hasSticker: n % 5 === 1
+          });
         }
       }
     }
-    return { gradeStudents, schoolStudents };
+    return students;
   }
-  var { gradeStudents: GRADE_STUDENTS_ALL, schoolStudents: SCHOOL_STUDENTS_ALL } = generateExpandedStudents();
+  var SAMPLE_STUDENTS = generateSampleStudents();
   var BADGES = [
-    { id: "first_step", name: "\uCCAB \uBC1C\uC790\uAD6D", desc: "\uBC14\uB9845\uBD84 \uCCAB \uD65C\uB3D9 \uC644\uB8CC", icon: "\u{1F331}", req: (s) => s.totalPoints >= 20 },
+    { id: "first_step", name: "\uCCAB \uBC1C\uC790\uAD6D", desc: "\uBC14\uB984 5\uBD84 \uCCAB \uD65C\uB3D9 \uC644\uB8CC", icon: "\u{1F331}", req: (s) => s.totalPoints >= 20 },
     { id: "streak_3", name: "3\uC77C\uC758 \uACB0\uC2EC", desc: "3\uC77C \uC5F0\uC18D \uC544\uCE68 \uB8E8\uD2F4 \uB2EC\uC131", icon: "\u{1F525}", req: (s) => s.streak >= 3 },
     { id: "streak_7", name: "\uC544\uCE68\uC758 \uC9C0\uBC30\uC790", desc: "7\uC77C \uC5F0\uC18D \uC544\uCE68 \uB8E8\uD2F4 \uB2EC\uC131", icon: "\u{1F451}", req: (s) => s.streak >= 7 },
     { id: "typer_250", name: "\uD0C0\uC790 \uB8E8\uD0A4", desc: "\uD0C0\uC790 \uC5F0\uC2B5 250\uD0C0 \uB2EC\uC131", icon: "\u2328\uFE0F", req: (s) => s.typingBestCPM >= 250 },
@@ -952,7 +757,10 @@
     constructor() {
       this.listeners = [];
       this.state = this.loadState();
+      this.setStudentList(SAMPLE_STUDENTS);
       this.listenToAllUsers();
+      this.listenToCustomDictionary();
+      this.unknownWordsUnsub = null;
     }
     getTodayString() {
       const d = /* @__PURE__ */ new Date();
@@ -969,9 +777,19 @@
               parsed.lastActiveDate = today;
               parsed.todaySubChecked = {};
               parsed.todayQuizDone = false;
+              parsed.todayTypingRecords = [];
             }
+            if (!parsed.todayTypingRecords)
+              parsed.todayTypingRecords = [];
+            if (!parsed.unknownWords)
+              parsed.unknownWords = [];
+            if (!parsed.customDictionary)
+              parsed.customDictionary = {};
             if (!parsed.recommendedBooks || parsed.recommendedBooks.length === 0) {
               parsed.recommendedBooks = [...MIDDLE_SCHOOL_BOOKS];
+            } else {
+              const savedIds = new Set(parsed.recommendedBooks.map((b) => b.id));
+              parsed.recommendedBooks.push(...MIDDLE_SCHOOL_BOOKS.filter((b) => !savedIds.has(b.id)));
             }
             if (!parsed.selectedClassKey) {
               parsed.selectedClassKey = "2-3";
@@ -1029,7 +847,13 @@
         teacherProposals: INITIAL_TEACHER_PROPOSALS,
         recommendedBooks: [...MIDDLE_SCHOOL_BOOKS],
         classGoalPoints: 35e3,
-        myReadingLogs: []
+        myReadingLogs: [],
+        todayTypingRecords: [],
+        // 오늘 통과한 타자 연습 기록 [{ cpm, acc, mode, time }]
+        unknownWords: [],
+        // 챗봇이 답하지 못한 단어 (테스트 계정/오프라인용 로컬 사본)
+        customDictionary: {}
+        // 관리자가 추가한 챗봇 사전 단어
       };
     }
     save() {
@@ -1043,9 +867,11 @@
       this.notify();
     }
     async saveToFirebase() {
-      if (!this.isLoggedIn() || this.isTestAccount()) return;
+      if (!this.isLoggedIn() || this.isTestAccount())
+        return;
       const uid = this.state.auth.uid;
-      if (!uid) return;
+      if (!uid)
+        return;
       try {
         const dataToSave = {
           grade: this.state.userProfile.grade,
@@ -1059,6 +885,7 @@
           totalPoints: this.state.totalPoints,
           typingBestCPM: this.state.typingBestCPM,
           typingAcc: this.state.typingAcc,
+          typingAvgCPM: this.getTypingRecordSummary().avgCPM,
           streak: this.state.streak,
           updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
         };
@@ -1109,12 +936,14 @@
         realName: isTeacher ? "\uD14C\uC2A4\uD2B8 \uC120\uC0DD\uB2D8" : "\uAE40\uBBFC\uC900",
         nickname: isTeacher ? "\uB2F4\uC784\uC120\uC0DD\uB2D8" : "\uBCC4\uBE5B\uB2EC\uBE5B"
       };
-      if (!isTeacher) this.syncCurrentStudentToClassList();
+      if (!isTeacher)
+        this.syncCurrentStudentToClassList();
       this.save();
     }
     // 화면 모드 전환 (교사 화면은 인증된 교사만 가능)
     setRole(role) {
-      if (role === "teacher" && !this.isVerifiedTeacher()) return false;
+      if (role === "teacher" && !this.isVerifiedTeacher())
+        return false;
       this.state.userProfile.role = role;
       this.save();
       return true;
@@ -1192,7 +1021,8 @@
     }
     voteSympathy(proposalId, teacherId = "t_curr") {
       const prop = this.state.teacherProposals.find((p) => p.id === proposalId);
-      if (!prop) return false;
+      if (!prop)
+        return false;
       if (!prop.votes.includes(teacherId)) {
         prop.votes.push(teacherId);
       }
@@ -1242,8 +1072,7 @@
     getStudentsByClass(grade = 2, classNum = 3) {
       const g = Number(grade);
       const c = Number(classNum);
-      if (g === 2 && c === 3) return this.state.students;
-      return this.state.schoolStudents.filter((s) => s.grade === g && s.classNum === c);
+      return this.state.schoolStudents.filter((s) => Number(s.grade) === g && Number(s.classNum) === c);
     }
     // Scoring methods
     addMannersScore(points) {
@@ -1274,11 +1103,150 @@
       this.save();
       this.saveToFirebase();
     }
+    // 통과한 타자 연습 결과를 오늘 기록에 추가
+    recordTypingResult(cpm, acc, mode) {
+      if (!this.state.todayTypingRecords)
+        this.state.todayTypingRecords = [];
+      this.state.todayTypingRecords.push({ cpm, acc, mode, time: Date.now() });
+      if (this.state.todayTypingRecords.length > 200)
+        this.state.todayTypingRecords.shift();
+      this.save();
+    }
+    // 이전 타수(직전 통과 기록)와 오늘 연습 평균 타수
+    getTypingRecordSummary() {
+      const records = this.state.todayTypingRecords || [];
+      const count = records.length;
+      const prevCPM = count > 0 ? records[count - 1].cpm : 0;
+      const avgCPM = count > 0 ? Math.round(records.reduce((sum, r) => sum + r.cpm, 0) / count) : 0;
+      return { count, prevCPM, avgCPM };
+    }
+    // ===== 챗봇 미등록 단어 / 관리자 사전 =====
+    normalizeWordId(word) {
+      return String(word).trim().slice(0, 50).replace(/\//g, "_") || "_";
+    }
+    // 챗봇이 답하지 못한 단어를 기록 (같은 단어는 요청 횟수만 증가)
+    async recordUnknownWord(word) {
+      const text = String(word).trim().slice(0, 50);
+      if (!text)
+        return;
+      const id = this.normalizeWordId(text);
+      const local = this.state.unknownWords.find((w) => w.id === id);
+      if (local) {
+        local.count += 1;
+        local.lastAskedAt = Date.now();
+      } else {
+        this.state.unknownWords.unshift({ id, word: text, count: 1, lastAskedAt: Date.now() });
+      }
+      this.save();
+      if (!this.isLoggedIn() || this.isTestAccount())
+        return;
+      try {
+        const FieldValue = window.firebase.firestore.FieldValue;
+        await db.collection("unknownWords").doc(id).set({
+          word: text,
+          count: FieldValue.increment(1),
+          lastAskedAt: FieldValue.serverTimestamp(),
+          lastAskedBy: this.state.auth.uid
+        }, { merge: true });
+      } catch (e) {
+        console.error("Unknown word save error:", e);
+      }
+    }
+    // 교사 대시보드에서 미등록 단어 실시간 조회 (교사만 읽기 권한)
+    listenToUnknownWords(onChange = () => {
+    }) {
+      this.onUnknownWordsChange = onChange;
+      if (this.unknownWordsUnsub || !this.isVerifiedTeacher() || this.isTestAccount())
+        return;
+      try {
+        this.unknownWordsUnsub = db.collection("unknownWords").onSnapshot((snapshot) => {
+          const words = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            words.push({
+              id: doc.id,
+              word: data.word || doc.id,
+              count: data.count || 1,
+              lastAskedAt: data.lastAskedAt ? data.lastAskedAt.toMillis() : 0
+            });
+          });
+          const changed = JSON.stringify(words.map((w) => [w.id, w.count])) !== JSON.stringify(this.state.unknownWords.map((w) => [w.id, w.count]));
+          this.state.unknownWords = words;
+          this.save();
+          if (changed)
+            this.onUnknownWordsChange();
+        }, (err) => {
+          console.warn("unknownWords listen error:", err);
+          this.unknownWordsUnsub = null;
+        });
+      } catch (e) {
+        console.warn("unknownWords listen error:", e);
+      }
+    }
+    getUnknownWords() {
+      return [...this.state.unknownWords || []].sort((a, b) => b.count - a.count || b.lastAskedAt - a.lastAskedAt);
+    }
+    listenToCustomDictionary() {
+      if (typeof window.firebase === "undefined")
+        return;
+      try {
+        db.collection("slangDictionary").onSnapshot((snapshot) => {
+          const dict = {};
+          snapshot.forEach((doc) => {
+            const { word, etymology, meaning, correct } = doc.data();
+            dict[word || doc.id] = { etymology, meaning, correct };
+          });
+          this.state.customDictionary = dict;
+          this.save();
+        }, (err) => console.warn("slangDictionary listen error:", err));
+      } catch (e) {
+        console.warn("slangDictionary listen error:", e);
+      }
+    }
+    getCustomDictionary() {
+      return this.state.customDictionary || {};
+    }
+    // 관리자(교사)가 단어 뜻을 사전에 추가하고 미등록 목록에서 제거
+    async addDictionaryWord({ word, etymology, meaning, correct }) {
+      const text = String(word).trim().slice(0, 50);
+      const id = this.normalizeWordId(text);
+      const entry = { etymology: etymology.trim(), meaning: meaning.trim(), correct: correct.trim() };
+      this.state.customDictionary = { ...this.getCustomDictionary(), [text]: entry };
+      this.state.unknownWords = this.state.unknownWords.filter((w) => w.id !== id);
+      this.save();
+      if (!this.isLoggedIn() || this.isTestAccount())
+        return true;
+      try {
+        await db.collection("slangDictionary").doc(id).set({
+          word: text,
+          ...entry,
+          addedBy: this.state.auth.uid,
+          updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
+        });
+        await db.collection("unknownWords").doc(id).delete();
+        return true;
+      } catch (e) {
+        console.error("Dictionary save error:", e);
+        return false;
+      }
+    }
+    async deleteUnknownWord(id) {
+      this.state.unknownWords = this.state.unknownWords.filter((w) => w.id !== id);
+      this.save();
+      if (!this.isLoggedIn() || this.isTestAccount())
+        return;
+      try {
+        await db.collection("unknownWords").doc(id).delete();
+      } catch (e) {
+        console.error("Unknown word delete error:", e);
+      }
+    }
     addReadingScore(points, readingEntry) {
       this.state.readingScore += points;
       this.state.totalPoints += points;
       if (readingEntry) {
-        if (!this.state.myReadingLogs) this.state.myReadingLogs = [];
+        if (!this.state.myReadingLogs)
+          this.state.myReadingLogs = [];
         this.state.myReadingLogs.unshift({
           ...readingEntry,
           date: this.getTodayString(),
@@ -1291,7 +1259,8 @@
       this.saveToFirebase();
     }
     completeQuiz(points = 20) {
-      if (this.state.todayQuizDone) return false;
+      if (this.state.todayQuizDone)
+        return false;
       this.state.todayQuizDone = true;
       this.state.mannersScore += points;
       this.state.totalPoints += points;
@@ -1323,8 +1292,8 @@
       return false;
     }
     syncCurrentStudentToClassList() {
-      const num = this.state.userProfile.number;
-      const idx = this.state.students.findIndex((s) => s.number === num);
+      const { number: num, grade, classNum } = this.state.userProfile;
+      const idx = this.state.students.findIndex((s) => !s.isSample && s.number === num && Number(s.grade) === Number(grade) && Number(s.classNum) === Number(classNum));
       if (idx >= 0) {
         this.state.students[idx] = {
           ...this.state.students[idx],
@@ -1395,8 +1364,18 @@
     checkBadges() {
       return BADGES.filter((b) => b.req(this.state));
     }
+    setStudentList(list) {
+      this.state.students = list.map((s) => ({ ...s }));
+      this.state.schoolStudents = this.state.students;
+      this.state.gradeStudents = this.state.students.filter((s) => s.grade === this.state.userProfile.grade);
+    }
+    // 아직 실제 학생 데이터가 없어 예시 학생을 보여주는 중인지
+    isShowingSampleStudents() {
+      return this.state.students.length > 0 && this.state.students.every((s) => s.isSample);
+    }
     listenToAllUsers() {
-      if (typeof window.firebase === "undefined") return;
+      if (typeof window.firebase === "undefined")
+        return;
       try {
         const db2 = window.firebase.firestore();
         db2.collection("users").onSnapshot((snapshot) => {
@@ -1407,19 +1386,21 @@
               realStudents.push({ ...data, uid: doc.id });
             }
           });
-          this.state.students = realStudents;
-          this.state.schoolStudents = this.state.students;
-          this.state.gradeStudents = this.state.students.filter((s) => s.grade === this.state.userProfile.grade);
+          this.setStudentList(realStudents.length ? realStudents : SAMPLE_STUDENTS);
           this.notify();
+        }, (err) => {
+          console.warn("Firestore listenToAllUsers error:", err.code || err);
         });
       } catch (e) {
         console.warn("Firestore listenToAllUsers error:", e);
       }
     }
     async logActivity(type, points, details = "") {
-      if (!this.isLoggedIn() || this.isTestAccount()) return;
+      if (!this.isLoggedIn() || this.isTestAccount())
+        return;
       const uid = this.state.auth.uid;
-      if (!uid) return;
+      if (!uid)
+        return;
       try {
         const db2 = window.firebase.firestore();
         await db2.collection("activities").add({
@@ -1738,15 +1719,15 @@
       { text: "\uC644\uBCBD\uD55C \uBD80\uBAA8\uB3C4, \uC790\uB140\uB3C4 \uC5C6\uB2E4. \uC6B0\uB9AC\uB294 \uC11C\uB85C \uB9C8\uC8FC\uD558\uBA70 \uC790\uB780\uB2E4.", source: "\uC774\uD76C\uC601, \uD398\uC778\uD2B8" },
       { text: "\uC2DC\uC791\uC774 \uBC18\uC774\uB2E4. \uB450\uB824\uC6C0\uC744 \uB5A8\uCE58\uACE0 \uC77C\uB2E8 \uB3C4\uC804\uD574 \uBCF4\uB294 \uAC83\uC774 \uC911\uC694\uD558\uB2E4.", source: "\uACA9\uC5B8" },
       { text: "\uC6B0\uB9AC\uAC00 \uBB34\uC2EC\uCF54 \uD758\uB824\uBCF4\uB0B4\uB294 \uC624\uB298\uC740 \uC5B4\uC81C \uC8FD\uC740 \uC774\uAC00 \uADF8\uD1A0\uB85D \uBC14\uB77C\uB358 \uB0B4\uC77C\uC774\uB2E4.", source: "\uACA9\uC5B8" },
-      { text: "\uAD50\uBB38 \uC55E \uC120\uC0DD\uB2D8\uACFC \uBC30\uC6C0\uD130 \uC9C0\uD0B4\uC774 \uC120\uC0DD\uB2D8\uAED8 \uBA48\uCD94\uC5B4 \uC11C\uC11C \uACF5\uC190\uD788 \uC778\uC0AC\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uAE09\uC2DD\uC2E4\uC5D0\uC11C\uB294 \uC0C8\uCE58\uAE30 \uC5C6\uC774 \uD55C \uC904\uB85C \uC11C\uC11C \uBC30\uC2DD\uBC1B\uACE0 \uAC10\uC0AC \uC778\uC0AC\uB97C \uC804\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uC218\uC5C5 \uC885\uC774 \uC6B8\uB9AC\uAE30 \uC804\uC5D0 \uC790\uB9AC\uC5D0 \uC549\uC544 \uAD50\uACFC\uC11C\uC640 \uD544\uAE30\uB3C4\uAD6C\uB97C \uC900\uBE44\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uBCF5\uB3C4\uC640 \uACC4\uB2E8\uC5D0\uC11C\uB294 \uC6B0\uCE21\uD1B5\uD589\uC744 \uD558\uBA70 \uB6F0\uC9C0 \uC54A\uACE0 \uC0AC\uBFD0\uC0AC\uBFD0 \uAC77\uC2B5\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uD654\uC7A5\uC2E4\uC744 \uAE68\uB057\uD558\uAC8C \uC0AC\uC6A9\uD558\uACE0, \uB098\uAC08 \uB54C\uB294 \uBD88\uC774 \uAEBC\uC838 \uC788\uB294\uC9C0 \uD655\uC778\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uCE5C\uAD6C\uC758 \uC758\uACAC\uC774 \uB098\uC640 \uB2E4\uB974\uB354\uB77C\uB3C4 \uC911\uAC04\uC5D0 \uB04A\uC9C0 \uC54A\uACE0 \uB05D\uAE4C\uC9C0 \uACBD\uCCAD\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uCCB4\uC721 \uC2DC\uAC04\uC5D0\uB294 \uADDC\uCE59\uC744 \uC900\uC218\uD558\uACE0, \uC2B9\uD328\uBCF4\uB2E4 \uC815\uC815\uB2F9\uB2F9\uD55C \uACFC\uC815\uC744 \uC990\uAE41\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uD558\uAD50\uD560 \uB54C\uB294 \uC758\uC790\uB97C \uCC45\uC0C1 \uBC11\uC5D0 \uB123\uACE0, \uB0B4 \uC790\uB9AC \uC8FC\uBCC0\uC758 \uC4F0\uB808\uAE30\uB97C \uC90D\uC2B5\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
-      { text: "\uC2A4\uB9C8\uD2B8\uD3F0\uC740 \uC218\uC5C5 \uC2DC\uAC04 \uC804\uC5D0 \uBC18\uB4DC\uC2DC \uC804\uC6D0\uC744 \uB044\uAC70\uB098 \uBB34\uC74C\uC73C\uB85C \uC124\uC815\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" }
+      { text: "\uAD50\uBB38 \uC55E \uC120\uC0DD\uB2D8\uACFC \uBC30\uC6C0\uD130 \uC9C0\uD0B4\uC774 \uC120\uC0DD\uB2D8\uAED8 \uBA48\uCD94\uC5B4 \uC11C\uC11C \uACF5\uC190\uD788 \uC778\uC0AC\uD569\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uAE09\uC2DD\uC2E4\uC5D0\uC11C\uB294 \uC0C8\uCE58\uAE30 \uC5C6\uC774 \uD55C \uC904\uB85C \uC11C\uC11C \uBC30\uC2DD\uBC1B\uACE0 \uAC10\uC0AC \uC778\uC0AC\uB97C \uC804\uD569\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uC218\uC5C5 \uC885\uC774 \uC6B8\uB9AC\uAE30 \uC804\uC5D0 \uC790\uB9AC\uC5D0 \uC549\uC544 \uAD50\uACFC\uC11C\uC640 \uD544\uAE30\uB3C4\uAD6C\uB97C \uC900\uBE44\uD569\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uBCF5\uB3C4\uC640 \uACC4\uB2E8\uC5D0\uC11C\uB294 \uC6B0\uCE21\uD1B5\uD589\uC744 \uD558\uBA70 \uB6F0\uC9C0 \uC54A\uACE0 \uC0AC\uBFD0\uC0AC\uBFD0 \uAC77\uC2B5\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uD654\uC7A5\uC2E4\uC744 \uAE68\uB057\uD558\uAC8C \uC0AC\uC6A9\uD558\uACE0, \uB098\uAC08 \uB54C\uB294 \uBD88\uC774 \uAEBC\uC838 \uC788\uB294\uC9C0 \uD655\uC778\uD569\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uCE5C\uAD6C\uC758 \uC758\uACAC\uC774 \uB098\uC640 \uB2E4\uB974\uB354\uB77C\uB3C4 \uC911\uAC04\uC5D0 \uB04A\uC9C0 \uC54A\uACE0 \uB05D\uAE4C\uC9C0 \uACBD\uCCAD\uD569\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uCCB4\uC721 \uC2DC\uAC04\uC5D0\uB294 \uADDC\uCE59\uC744 \uC900\uC218\uD558\uACE0, \uC2B9\uD328\uBCF4\uB2E4 \uC815\uC815\uB2F9\uB2F9\uD55C \uACFC\uC815\uC744 \uC990\uAE41\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uD558\uAD50\uD560 \uB54C\uB294 \uC758\uC790\uB97C \uCC45\uC0C1 \uBC11\uC5D0 \uB123\uACE0, \uB0B4 \uC790\uB9AC \uC8FC\uBCC0\uC758 \uC4F0\uB808\uAE30\uB97C \uC90D\uC2B5\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" },
+      { text: "\uC2A4\uB9C8\uD2B8\uD3F0\uC740 \uC218\uC5C5 \uC2DC\uAC04 \uC804\uC5D0 \uBC18\uB4DC\uC2DC \uC804\uC6D0\uC744 \uB044\uAC70\uB098 \uBB34\uC74C\uC73C\uB85C \uC124\uC815\uD569\uB2C8\uB2E4.", source: "\uBC14\uB984 5\uBD84 \uC9C0\uCE68" }
     ],
     3: [
       { text: "\uBAA8\uB4E0 \uC0AC\uB78C\uC5D0\uAC8C \uCE5C\uC808\uD574\uB77C. \uB124\uAC00 \uB9CC\uB098\uB294 \uBAA8\uB4E0 \uC0AC\uB78C\uC740 \uC9C0\uAE08 \uD798\uB4E0 \uC2F8\uC6C0\uC744 \uD558\uACE0 \uC788\uC73C\uB2C8\uAE4C.", source: "\uD50C\uB77C\uD1A4" },
@@ -1922,12 +1903,15 @@
     "\u3162": ["\u3161", "\u3163"]
   };
   function atomizeJamo(j) {
-    if (COMPOSITE_CONSONANTS[j]) return COMPOSITE_CONSONANTS[j];
-    if (COMPOSITE_VOWELS[j]) return COMPOSITE_VOWELS[j];
+    if (COMPOSITE_CONSONANTS[j])
+      return COMPOSITE_CONSONANTS[j];
+    if (COMPOSITE_VOWELS[j])
+      return COMPOSITE_VOWELS[j];
     return [j];
   }
   function decomposeHangul(char) {
-    if (!char) return [];
+    if (!char)
+      return [];
     const code = char.charCodeAt(0);
     if (code >= 12593 && code <= 12622) {
       return atomizeJamo(char);
@@ -1951,13 +1935,17 @@
     return [char];
   }
   function isHangulPrefix(partialChar, fullChar) {
-    if (!partialChar || !fullChar) return false;
-    if (partialChar === fullChar) return true;
+    if (!partialChar || !fullChar)
+      return false;
+    if (partialChar === fullChar)
+      return true;
     const pJamos = decomposeHangul(partialChar);
     const fJamos = decomposeHangul(fullChar);
-    if (pJamos.length > fJamos.length) return false;
+    if (pJamos.length > fJamos.length)
+      return false;
     for (let i = 0; i < pJamos.length; i++) {
-      if (pJamos[i] !== fJamos[i]) return false;
+      if (pJamos[i] !== fJamos[i])
+        return false;
     }
     return true;
   }
@@ -2101,7 +2089,8 @@
     "P": "\uC624\uB978\uC190 \uC0C8\uB07C"
   };
   function getCharStrokeCount(char) {
-    if (!char) return 0;
+    if (!char)
+      return 0;
     const code = char.charCodeAt(0);
     if (code >= 44032 && code <= 55203) {
       const sIndex = code - 44032;
@@ -2110,8 +2099,10 @@
       const tIndex = sIndex % 28;
       let count = 2;
       const jung = JUNGSUNG[vIndex];
-      if (["\u3158", "\u3159", "\u315A", "\u315D", "\u315E", "\u315F", "\u3162", "\u3152", "\u3156"].includes(jung)) count += 1;
-      if (["\u3132", "\u3138", "\u3143", "\u3146", "\u3149"].includes(CHOSUNG[lIndex])) count += 1;
+      if (["\u3158", "\u3159", "\u315A", "\u315D", "\u315E", "\u315F", "\u3162", "\u3152", "\u3156"].includes(jung))
+        count += 1;
+      if (["\u3132", "\u3138", "\u3143", "\u3146", "\u3149"].includes(CHOSUNG[lIndex]))
+        count += 1;
       if (tIndex > 0) {
         count += 1;
         const jong = JONGSUNG[tIndex];
@@ -2121,7 +2112,8 @@
       }
       return count;
     }
-    if (/[A-Z]/.test(char)) return 2;
+    if (/[A-Z]/.test(char))
+      return 2;
     return 1;
   }
   var KeyPracticeSession = class {
@@ -2146,8 +2138,10 @@
       return KEY_FINGER_GUIDE[key] || "\uC790\uC5F0\uC2A4\uB7EC\uC6B4 \uC190\uAC00\uB77D";
     }
     handleKeyDown(event) {
-      if (this.isFinished) return;
-      if (!this.startTime) this.startTime = Date.now();
+      if (this.isFinished)
+        return;
+      if (!this.startTime)
+        this.startTime = Date.now();
       const targetKey = this.getCurrentKey();
       let pressedKey = event.key;
       const koreanFromCode = KEYCODE_TO_KOREAN[event.code];
@@ -2213,14 +2207,16 @@
       this.isFinished = false;
     }
     start() {
-      if (this.startTime) return;
+      if (this.startTime)
+        return;
       this.startTime = Date.now();
       this.timerInterval = setInterval(() => {
         this.onUpdate(this.getStatus());
       }, 100);
     }
     handleInput(val) {
-      if (this.isFinished) return;
+      if (this.isFinished)
+        return;
       if (!this.startTime && val.length > 0) {
         this.start();
       }
@@ -2232,7 +2228,8 @@
       }
     }
     submitLine() {
-      if (this.isFinished) return;
+      if (this.isFinished)
+        return;
       if (!this.startTime && this.input.length > 0) {
         this.start();
       }
@@ -2255,7 +2252,8 @@
           correctChars += 0.8;
         }
       }
-      const accuracy = this.input.length > 0 ? Math.min(100, Math.max(0, Math.round(correctChars / this.input.length * 100))) : 100;
+      const denominator = this.isFinished ? Math.max(this.input.length, this.targetText.length) : this.input.length;
+      const accuracy = denominator > 0 ? Math.min(100, Math.max(0, Math.round(correctChars / denominator * 100))) : 100;
       const cpm = elapsedMinutes > 0 ? Math.round(typedStrokes / elapsedMinutes) : 0;
       const progress = Math.min(100, Math.round(this.input.length / this.targetText.length * 100));
       const elapsedSeconds = this.startTime ? Math.floor(((this.endTime || Date.now()) - this.startTime) / 1e3) : 0;
@@ -2271,7 +2269,8 @@
       };
     }
     finish() {
-      if (this.isFinished) return;
+      if (this.isFinished)
+        return;
       this.isFinished = true;
       this.endTime = Date.now();
       clearInterval(this.timerInterval);
@@ -2312,9 +2311,11 @@
       return this.enabled;
     }
     playKeyTick() {
-      if (!this.enabled) return;
+      if (!this.enabled)
+        return;
       this.init();
-      if (!this.ctx) return;
+      if (!this.ctx)
+        return;
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -2330,9 +2331,11 @@
       }
     }
     playClick() {
-      if (!this.enabled) return;
+      if (!this.enabled)
+        return;
       this.init();
-      if (!this.ctx) return;
+      if (!this.ctx)
+        return;
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -2349,9 +2352,11 @@
       }
     }
     playSuccess() {
-      if (!this.enabled) return;
+      if (!this.enabled)
+        return;
       this.init();
-      if (!this.ctx) return;
+      if (!this.ctx)
+        return;
       try {
         const notes = [523.25, 659.25, 783.99, 1046.5];
         notes.forEach((freq, idx) => {
@@ -2372,9 +2377,11 @@
       }
     }
     playError() {
-      if (!this.enabled) return;
+      if (!this.enabled)
+        return;
       this.init();
-      if (!this.ctx) return;
+      if (!this.ctx)
+        return;
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -2391,9 +2398,11 @@
       }
     }
     playCelebration() {
-      if (!this.enabled) return;
+      if (!this.enabled)
+        return;
       this.init();
-      if (!this.ctx) return;
+      if (!this.ctx)
+        return;
       try {
         const chord = [523.25, 659.25, 783.99, 987.77, 1046.5, 1318.51];
         chord.forEach((freq, idx) => {
@@ -2489,17 +2498,22 @@
   }
   function parseStudentEmail(email = "") {
     const { localPart, domain } = splitEmail(email);
-    if (domain !== SCHOOL_DOMAIN) return null;
+    if (domain !== SCHOOL_DOMAIN)
+      return null;
     const match = localPart.match(STUDENT_ID_PATTERN);
-    if (!match) return null;
+    if (!match)
+      return null;
     const [, year, grade, classNum, number] = match.map(Number);
     return { entryYear: 2e3 + year, grade, classNum, number };
   }
   function detectRoleFromEmail(email = "") {
     const { localPart, domain } = splitEmail(email);
-    if (!localPart || !domain) return null;
-    if (parseStudentEmail(email)) return "student";
-    if (domain === SCHOOL_DOMAIN || EXTRA_TEACHER_DOMAINS.includes(domain)) return "teacher";
+    if (!localPart || !domain)
+      return null;
+    if (parseStudentEmail(email))
+      return "student";
+    if (domain === SCHOOL_DOMAIN || EXTRA_TEACHER_DOMAINS.includes(domain))
+      return "teacher";
     return null;
   }
   function resolveAccountRole(email, stored = {}) {
@@ -2507,7 +2521,8 @@
       return { role: "teacher", roleSource: "code" };
     }
     const detected = detectRoleFromEmail(email);
-    if (detected) return { role: detected, roleSource: "auto" };
+    if (detected)
+      return { role: detected, roleSource: "auto" };
     return { role: "student", roleSource: "default" };
   }
   async function verifyTestTeacherCode(code = "") {
@@ -2581,7 +2596,8 @@
     auth.onAuthStateChanged(async (user) => {
       try {
         if (user) {
-          if (!appState.isTestAccount()) await syncAccount(user);
+          if (!appState.isTestAccount())
+            await syncAccount(user);
         } else if (appState.isLoggedIn() && !appState.isTestAccount()) {
           appState.clearAccount();
         }
@@ -2603,7 +2619,8 @@
       }
     }).catch((error) => {
       console.error("Google \uB85C\uADF8\uC778 \uC5D0\uB7EC", error);
-      if (error.code === "auth/popup-closed-by-user" || error.code === "auth/cancelled-popup-request") return;
+      if (error.code === "auth/popup-closed-by-user" || error.code === "auth/cancelled-popup-request")
+        return;
       const reason = LOGIN_ERROR_MESSAGES[error.code] || "\uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4\uD574 \uC8FC\uC138\uC694.";
       alert(`\uB85C\uADF8\uC778\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4.
 ${reason}
@@ -2689,8 +2706,10 @@ ${reason}
       };
       submitBtn.disabled = true;
       if (appState.isTestAccount()) {
-        if (await verifyTestTeacherCode(code)) promote();
-        else fail("\uC778\uC99D \uCF54\uB4DC\uAC00 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
+        if (await verifyTestTeacherCode(code))
+          promote();
+        else
+          fail("\uC778\uC99D \uCF54\uB4DC\uAC00 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
         return;
       }
       db.collection("users").doc(uid).set({
@@ -2709,7 +2728,8 @@ ${reason}
     };
     submitBtn.onclick = submit;
     input.onkeydown = (e) => {
-      if (e.key === "Enter") submit();
+      if (e.key === "Enter")
+        submit();
     };
   }
   function openProfileOnboardingModal(onSuccess = () => {
@@ -3145,20 +3165,24 @@ ${reason}
   function setChatbotEnabled(enabled) {
     chatbotEnabled = enabled;
     const container = document.querySelector(".chatbot-container");
-    if (container) container.style.display = enabled ? "" : "none";
+    if (container)
+      container.style.display = enabled ? "" : "none";
   }
   var escapeHtml = (text) => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   var formatReply = (text) => escapeHtml(text).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
   async function askGemini(word) {
-    if (!PROXY_URL) throw new Error("\uC911\uACC4 \uC11C\uBC84\uAC00 \uC544\uC9C1 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
+    if (!PROXY_URL)
+      throw new Error("\uC911\uACC4 \uC11C\uBC84\uAC00 \uC544\uC9C1 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.");
     const res = await fetch(PROXY_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ word })
     });
-    if (!res.ok) throw new Error(`\uC911\uACC4 \uC11C\uBC84 \uC624\uB958 (${res.status})`);
+    if (!res.ok)
+      throw new Error(`\uC911\uACC4 \uC11C\uBC84 \uC624\uB958 (${res.status})`);
     const data = await res.json();
-    if (!data.reply) throw new Error("\uBE48 \uC751\uB2F5");
+    if (!data.reply)
+      throw new Error("\uBE48 \uC751\uB2F5");
     return data.reply;
   }
   function initChatbot() {
@@ -3239,11 +3263,13 @@ ${reason}
     };
     const removeTyping = () => {
       const el = document.getElementById("typing-ind");
-      if (el) el.remove();
+      if (el)
+        el.remove();
     };
     const handleSend = async () => {
       const text = input.value.trim();
-      if (!text) return;
+      if (!text)
+        return;
       input.value = "";
       addMessage(escapeHtml(text), true);
       showTyping();
@@ -3254,17 +3280,20 @@ ${reason}
         addMessage(formatReply(reply));
       } catch (err) {
         removeTyping();
+        const dictionary = { ...SLANG_DICTIONARY, ...appState.getCustomDictionary() };
         let fallback = null;
-        for (const [slang, info] of Object.entries(SLANG_DICTIONARY)) {
-          if (text.includes(slang)) fallback = info;
+        for (const [slang, info] of Object.entries(dictionary)) {
+          if (text.includes(slang))
+            fallback = info;
         }
         if (fallback) {
-          let reply = `\u{1F4A1} '<strong>${escapeHtml(text)}</strong>'\uB294 \uBCF8\uB798 ${fallback.etymology}<br><br>`;
-          reply += `\uD604\uC7AC\uB294 ${fallback.meaning}<br><br>`;
-          reply += `\u{1F449} \uC6B0\uB9AC \uD559\uAD50\uC5D0\uC11C\uB294 '<strong>${fallback.correct}</strong>' (\uC774)\uB77C\uACE0 \uD45C\uD604\uD574 \uBCF4\uB294 \uAC74 \uC5B4\uB5A8\uAE4C\uC694? \u{1F60A}`;
+          let reply = `\u{1F4A1} '<strong>${escapeHtml(text)}</strong>'\uB294 \uBCF8\uB798 ${escapeHtml(fallback.etymology)}<br><br>`;
+          reply += `\uD604\uC7AC\uB294 ${escapeHtml(fallback.meaning)}<br><br>`;
+          reply += `\u{1F449} \uC6B0\uB9AC \uD559\uAD50\uC5D0\uC11C\uB294 '<strong>${escapeHtml(fallback.correct)}</strong>' (\uC774)\uB77C\uACE0 \uD45C\uD604\uD574 \uBCF4\uB294 \uAC74 \uC5B4\uB5A8\uAE4C\uC694? \u{1F60A}`;
           addMessage(reply);
         } else {
-          addMessage("\uC785\uB825\uD574\uC8FC\uC2E0 \uB2E8\uC5B4\uC5D0 \uB300\uD574 \uC9C0\uAE08\uC740 \uB2F5\uBCC0\uD558\uAE30 \uC5B4\uB824\uC6CC\uC694. \uB2E4\uB978 \uB2E8\uC5B4\uB97C \uBB3C\uC5B4\uBCF4\uC2DC\uACA0\uC5B4\uC694? \u{1F972}");
+          appState.recordUnknownWord(text);
+          addMessage(`'<strong>${escapeHtml(text)}</strong>'\uC5D0 \uB300\uD574\uC11C\uB294 \uC9C0\uAE08\uC740 \uB2F5\uBCC0\uD558\uAE30 \uC5B4\uB824\uC6CC\uC694. \u{1F972}<br><br>\uC774 \uB2E8\uC5B4\uB294 \uAE30\uB85D\uD574 \uB450\uC5C8\uB2E4\uAC00 \uB2E4\uC74C \uC5C5\uB370\uC774\uD2B8 \uB54C \uC54C\uB824\uB4DC\uB9B4\uAC8C\uC694. \uAD81\uAE08\uD55C \uB2E4\uB978 \uB2E8\uC5B4\uAC00 \uC788\uB2E4\uBA74 \uB610 \uBB3C\uC5B4\uBD10 \uC8FC\uC138\uC694! \u{1F4DD}`);
         }
       } finally {
         sendBtn.disabled = false;
@@ -3272,14 +3301,18 @@ ${reason}
     };
     sendBtn.onclick = handleSend;
     input.onkeydown = (e) => {
-      if (e.key === "Enter" && !e.isComposing && !sendBtn.disabled) handleSend();
+      if (e.key === "Enter" && !e.isComposing && !sendBtn.disabled)
+        handleSend();
     };
   }
 
   // src/js/app.js
+  var TYPING_PASS_ACCURACY = 95;
+  var escapeAttr = (text) => String(text ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   function showToast(message, icon = "\u2728") {
     const container = document.getElementById("toast-container");
-    if (!container) return;
+    if (!container)
+      return;
     const toast = document.createElement("div");
     toast.className = "toast";
     toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
@@ -3308,7 +3341,8 @@ ${reason}
       this.sentenceSession = null;
       this.passageIndex = 0;
       this.readingTemplate = "quote_cards";
-      this.bookSourceType = "recommended";
+      this.bookSourceType = "custom";
+      this.customBook = { title: "", author: "" };
       this.selectedBookId = "b1";
       this.readingLogs = [...INITIAL_READING_LOGS];
       this.tableFilter = "all";
@@ -3348,7 +3382,8 @@ ${reason}
         googleBtn.addEventListener("click", () => {
           sounds.playClick();
           if (appState.isLoggedIn()) {
-            if (!confirm("\uB85C\uADF8\uC544\uC6C3 \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?")) return;
+            if (!confirm("\uB85C\uADF8\uC544\uC6C3 \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"))
+              return;
             signOutUser(() => {
               this.updateHeaderStats();
               this.navigate("home");
@@ -3440,32 +3475,43 @@ ${reason}
       const roleIconEl = document.getElementById("header-role-icon");
       const classEl = document.getElementById("header-school-class");
       const modeBtn = document.getElementById("btn-mode-toggle");
-      if (ptsEl) ptsEl.textContent = `\u{1F31F} ${totalPoints.toLocaleString()}P`;
-      if (streakEl) streakEl.textContent = `\u{1F525} ${streak}\uC77C \uC5F0\uC18D`;
-      if (classEl) classEl.textContent = `\uC62C\uBC14\uB978 \uB8E8\uD2F4 \uD504\uB85C\uC81D\uD2B8`;
+      if (ptsEl)
+        ptsEl.textContent = `\u{1F31F} ${totalPoints.toLocaleString()}P`;
+      if (streakEl)
+        streakEl.textContent = `\u{1F525} ${streak}\uC77C \uC5F0\uC18D`;
+      if (classEl)
+        classEl.textContent = `\uC62C\uBC14\uB978 \uB8E8\uD2F4 \uD504\uB85C\uC81D\uD2B8`;
       const loggedIn = appState.isLoggedIn();
       const authLabelEl = document.querySelector("#btn-google-auth span");
-      if (authLabelEl) authLabelEl.textContent = loggedIn ? appState.isTestAccount() ? "\uD14C\uC2A4\uD2B8 \uC885\uB8CC" : "\uB85C\uADF8\uC544\uC6C3" : "\uB85C\uADF8\uC778";
+      if (authLabelEl)
+        authLabelEl.textContent = loggedIn ? appState.isTestAccount() ? "\uD14C\uC2A4\uD2B8 \uC885\uB8CC" : "\uB85C\uADF8\uC544\uC6C3" : "\uB85C\uADF8\uC778";
       ["header-points", "header-streak", "user-profile-chip", "btn-mode-toggle"].forEach((id) => {
         const el = document.getElementById(id);
-        if (el) el.style.display = loggedIn ? "" : "none";
+        if (el)
+          el.style.display = loggedIn ? "" : "none";
       });
       const navMenu = document.querySelector(".nav-menu");
-      if (navMenu) navMenu.style.visibility = loggedIn ? "" : "hidden";
+      if (navMenu)
+        navMenu.style.visibility = loggedIn ? "" : "hidden";
       setChatbotEnabled(loggedIn);
       const teacherNavBtn = document.querySelector('[data-view="teacher"]');
-      if (teacherNavBtn) teacherNavBtn.style.display = userProfile.role === "teacher" ? "flex" : "none";
+      if (teacherNavBtn)
+        teacherNavBtn.style.display = userProfile.role === "teacher" ? "flex" : "none";
       const testMark = appState.isTestAccount() ? "\u{1F9EA} " : "";
       if (userProfile.role === "teacher") {
-        if (roleIconEl) roleIconEl.textContent = "\u{1F469}\u200D\u{1F3EB}";
-        if (nameEl) nameEl.textContent = `${testMark}${userProfile.realName} (\uC120\uC0DD\uB2D8)`;
+        if (roleIconEl)
+          roleIconEl.textContent = "\u{1F469}\u200D\u{1F3EB}";
+        if (nameEl)
+          nameEl.textContent = `${testMark}${userProfile.realName} (\uC120\uC0DD\uB2D8)`;
         if (modeBtn) {
           modeBtn.textContent = "\uD559\uC0DD \uBAA8\uB4DC\uB85C \uC804\uD658";
           modeBtn.classList.add("teacher-active");
         }
       } else {
-        if (roleIconEl) roleIconEl.textContent = "\u{1F392}";
-        if (nameEl) nameEl.textContent = `${testMark}${userProfile.nickname}`;
+        if (roleIconEl)
+          roleIconEl.textContent = "\u{1F392}";
+        if (nameEl)
+          nameEl.textContent = `${testMark}${userProfile.nickname}`;
         if (modeBtn) {
           modeBtn.textContent = "\uAD50\uC0AC \uBAA8\uB4DC";
           modeBtn.classList.remove("teacher-active");
@@ -3478,7 +3524,8 @@ ${reason}
         btn.classList.toggle("active", btn.dataset.view === view);
       });
       const mainContainer = document.getElementById("main-content");
-      if (!mainContainer) return;
+      if (!mainContainer)
+        return;
       window.scrollTo({ top: 0, behavior: "smooth" });
       if (!appState.isLoggedIn()) {
         this.renderLoginGate(mainContainer);
@@ -3516,16 +3563,19 @@ ${reason}
       const top3 = rankedStudents.slice(0, 3);
       const others4to20 = rankedStudents.slice(3, 20);
       const getScoreDisplay = (student) => {
-        if (this.leaderboardCategory === "manners") return `${student.mannersScore}P`;
-        if (this.leaderboardCategory === "typing") return `${student.typingBestCPM}\uD0C0 (${student.typingScore}P)`;
-        if (this.leaderboardCategory === "reading") return `${student.readingScore}P`;
+        if (this.leaderboardCategory === "manners")
+          return `${student.mannersScore}P`;
+        if (this.leaderboardCategory === "typing")
+          return `${student.typingBestCPM}\uD0C0 (${student.typingScore}P)`;
+        if (this.leaderboardCategory === "reading")
+          return `${student.readingScore}P`;
         return `${student.totalPoints.toLocaleString()}P`;
       };
       const scopeLabel = this.leaderboardScope === "class" ? "2\uD559\uB144 3\uBC18" : this.leaderboardScope === "grade" ? "2\uD559\uB144 \uC804\uCCB4" : "\uC804\uAD50\uC0DD";
       container.innerHTML = `
       <section class="hero-section">
         <div class="hero-pill-tag">
-          <span>\u2728</span> \uACBD\uD76C\uC911\uD559\uAD50 \xB7 \uB9E4\uC77C 5\uBD84 \uC62C\uBC14\uB978 \uB8E8\uD2F4
+          <span>\u2728</span> \uACBD\uD76C\uC911\uD559\uAD50 \xB7 \uB9E4\uC77C 5\uBD84 \uC62C\uBC14\uB978 \uB8E8\uD2F4 \uD504\uB85C\uC81D\uD2B8
         </div>
         <h1 class="hero-title">
           \uB9E4\uB108, \uC2A4\uB9C8\uD2B8 \uD0C0\uC774\uD551, \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C<br>
@@ -3584,6 +3634,9 @@ ${reason}
           <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.5rem;">
             \uD604\uC7AC \uBC94\uC704: <strong>${scopeLabel}</strong> | ${appState.state.userProfile.role === "teacher" ? "\uAD50\uC0AC \uD654\uBA74 (\uC2E4\uBA85+\uB2C9\uB124\uC784 \uBCD1\uAE30)" : "\uD559\uC0DD \uD654\uBA74 (\uB2C9\uB124\uC784\uB9CC \uD45C\uC2DC)"}
           </p>
+          ${appState.isShowingSampleStudents() ? `
+            <p style="margin-top: 0.4rem;"><span class="badge badge-orange">\u{1F9EA} \uC608\uC2DC \uB370\uC774\uD130 \u2014 \uC2E4\uC81C \uD559\uC0DD \uAE30\uB85D\uC774 \uB4F1\uB85D\uB418\uBA74 \uC790\uB3D9\uC73C\uB85C \uBC14\uB01D\uB2C8\uB2E4</span></p>
+          ` : ""}
 
           <!-- Scope Selector (\uD559\uAE09 / \uD559\uB144 / \uC804\uAD50\uC0DD) -->
           <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.25rem;">
@@ -3812,7 +3865,8 @@ ${reason}
           </div>
           ${(() => {
         const approvedProps = (appState.state.teacherProposals || []).filter((p) => p.domainId === activeDomain.id && (p.status === "approved" || p.votes.length / p.totalTeachers >= 0.7));
-        if (approvedProps.length === 0) return "";
+        if (approvedProps.length === 0)
+          return "";
         return `
               <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 2px dashed #CBD5E1;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem;">
@@ -4030,6 +4084,30 @@ ${reason}
         this.renderLongPracticeMode(stageContent);
       }
     }
+    // 이전 타수 / 평균 타수 HUD 칸 (통과한 기록 기준)
+    renderTypingRecordHudHtml(prefix) {
+      const { prevCPM, avgCPM, count } = appState.getTypingRecordSummary();
+      return `
+      <div class="hud-stat-box">
+        <div class="hud-label">\uC774\uC804 \uD0C0\uC218</div>
+        <div class="hud-value" id="${prefix}-hud-prev">${prevCPM}<span class="hud-unit">CPM</span></div>
+      </div>
+      <div class="hud-stat-box">
+        <div class="hud-label">\uD3C9\uADE0 \uD0C0\uC218 (\uC624\uB298 ${count}\uD68C)</div>
+        <div class="hud-value" id="${prefix}-hud-avg">${avgCPM}<span class="hud-unit">CPM</span></div>
+      </div>
+    `;
+    }
+    // 정확도 95% 이상일 때만 통과: 통과 시 기록 저장 후 true 반환
+    passTypingAttempt(status, mode) {
+      if (status.accuracy < TYPING_PASS_ACCURACY) {
+        sounds.playError();
+        showToast(`\uC815\uD655\uB3C4 ${status.accuracy}% \u2014 ${TYPING_PASS_ACCURACY}% \uC774\uC0C1\uC774\uC5B4\uC57C \uD1B5\uACFC\uD560 \uC218 \uC788\uC5B4\uC694. \uB2E4\uC2DC \uB3C4\uC804!`, "\u{1F501}");
+        return false;
+      }
+      appState.recordTypingResult(status.cpm, status.accuracy, mode);
+      return true;
+    }
     // --- 1. 자리 연습 ---
     renderKeyPracticeMode(container) {
       const STAGES = this.typingLang === "ko" ? KR_KEY_STAGES : EN_KEY_STAGES;
@@ -4053,6 +4131,7 @@ ${reason}
             <div class="hud-label">\uC815\uD655\uB3C4</div>
             <div class="hud-value" id="key-hud-acc">100<span class="hud-unit">%</span></div>
           </div>
+          ${this.renderTypingRecordHudHtml("key")}
           <div class="hud-stat-box">
             <div class="hud-label">\uC9C4\uD589\uB3C4</div>
             <div class="hud-value" id="key-hud-prog">0<span class="hud-unit">%</span></div>
@@ -4112,21 +4191,33 @@ ${reason}
           this.highlightKeyboardKey(status.currentKey);
         },
         (finalStatus) => {
+          const rerender = () => setTimeout(() => {
+            if (this.typingMode === "key" && container.isConnected)
+              this.renderKeyPracticeMode(container);
+          }, 1500);
+          if (!this.passTypingAttempt(finalStatus, "key")) {
+            rerender();
+            return;
+          }
           sounds.playCelebration();
           triggerConfetti();
           const earned = Math.round(finalStatus.cpm / 10 + 20);
           appState.addTypingScore(earned, finalStatus.cpm, finalStatus.accuracy);
-          showToast(`\uC790\uB9AC \uC5F0\uC2B5 \uC644\uB8CC! +${earned}P \uC801\uB9BD (\uD0C0\uC218: ${finalStatus.cpm} CPM)`, "\u{1F3AF}");
+          showToast(`\uC790\uB9AC \uC5F0\uC2B5 \uC644\uB8CC! +${earned}P \uC801\uB9BD (\uD0C0\uC218: ${finalStatus.cpm} CPM, \uC815\uD655\uB3C4 ${finalStatus.accuracy}%)`, "\u{1F3AF}");
+          rerender();
         }
       );
       this.highlightKeyboardKey(stage.keys[0]);
       const keyHandler = (e) => {
-        if (this.typingMode !== "key") return;
-        if (["Shift", "Control", "Alt", "Meta", "Tab"].includes(e.key)) return;
+        if (this.typingMode !== "key")
+          return;
+        if (["Shift", "Control", "Alt", "Meta", "Tab"].includes(e.key))
+          return;
         e.preventDefault();
         sounds.playKeyTick();
         const matched = this.keySession.handleKeyDown(e);
-        if (!matched) sounds.playError();
+        if (!matched)
+          sounds.playError();
       };
       window.removeEventListener("keydown", this._keyHandler);
       this._keyHandler = keyHandler;
@@ -4239,6 +4330,7 @@ ${reason}
       const wordBubble = container.querySelector("#word-target-bubble");
       const countEl = container.querySelector("#word-hud-count");
       const ptsEl = container.querySelector("#word-hud-points");
+      wordInput.focus();
       wordInput.addEventListener("keydown", (e) => {
         sounds.playKeyTick();
         if (e.key === " " || e.key === "Enter") {
@@ -4289,6 +4381,7 @@ ${reason}
             <div class="hud-label">\uC815\uD655\uB3C4</div>
             <div class="hud-value" id="st-hud-acc">100<span class="hud-unit">%</span></div>
           </div>
+          ${this.renderTypingRecordHudHtml("st")}
           <div class="hud-stat-box">
             <div class="hud-label">\uACBD\uACFC \uC2DC\uAC04</div>
             <div class="hud-value" id="st-hud-time">00:00</div>
@@ -4323,7 +4416,7 @@ ${reason}
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
           <button class="btn btn-secondary" id="btn-restart-short">\u{1F504} \uB2E4\uC2DC \uCE58\uAE30</button>
           <div style="font-size: 0.85rem; color: var(--text-muted);">
-            \u2328\uFE0F \uC9C1\uC811 \uBCF4\uC774\uB294 \uC785\uB825\uCC3D\uC5D0 \uD0C0\uC774\uD551\uD558\uC138\uC694. [Enter] \uD0A4\uB85C \uBB38\uC7A5\uC744 \uC81C\uCD9C\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
+            \u2328\uFE0F [Enter] \uD0A4\uB85C \uBB38\uC7A5\uC744 \uC81C\uCD9C\uD569\uB2C8\uB2E4. \uC815\uD655\uB3C4 ${TYPING_PASS_ACCURACY}% \uC774\uC0C1\uC774\uBA74 \uD1B5\uACFC!
           </div>
         </div>
       </div>
@@ -4348,24 +4441,35 @@ ${reason}
           hudTime.textContent = `${min}:${sec}`;
         },
         (status) => {
+          if (!this.passTypingAttempt(status, "short")) {
+            setTimeout(() => {
+              if (this.typingMode === "short" && container.isConnected)
+                this.renderShortPracticeMode(container);
+            }, 1200);
+            return;
+          }
           sounds.playCelebration();
           triggerConfetti();
           const earned = Math.round(status.cpm / 10 + 25) * this.typingLevel;
           appState.addTypingScore(earned, status.cpm, status.accuracy);
           showToast(`\uC9E7\uC740 \uAE00 \uD0C0\uC790 \uC644\uC131! +${earned}P \uC801\uB9BD (${status.cpm} CPM, \uC815\uD655\uB3C4 ${status.accuracy}%)`, "\u{1F389}");
           setTimeout(() => {
+            if (this.typingMode !== "short" || !container.isConnected)
+              return;
             this.sentenceIndex = (this.sentenceIndex + 1) % list.length;
             this.renderShortPracticeMode(container);
           }, 1500);
         }
       );
+      visibleInput.focus();
       visibleInput.addEventListener("input", (e) => {
         sounds.playKeyTick();
         this.sentenceSession.handleInput(e.target.value);
       });
       visibleInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
-          if (e.isComposing) return;
+          if (e.isComposing)
+            return;
           const currentVal = visibleInput.value.trim();
           if (e.key === " " && currentVal !== current.text && !this.sentenceSession.isFinished) {
             return;
@@ -4374,7 +4478,8 @@ ${reason}
           if (currentVal === current.text || this.sentenceSession.isFinished || currentVal.length >= current.text.length * 0.8) {
             this.sentenceSession.submitLine();
           } else {
-            if (e.key === "Enter") showToast("\uBB38\uC7A5\uC744 \uB05D\uAE4C\uC9C0 \uC785\uB825\uD574 \uC8FC\uC138\uC694.", "\u2328\uFE0F");
+            if (e.key === "Enter")
+              showToast("\uBB38\uC7A5\uC744 \uB05D\uAE4C\uC9C0 \uC785\uB825\uD574 \uC8FC\uC138\uC694.", "\u2328\uFE0F");
           }
         }
       });
@@ -4420,6 +4525,7 @@ ${reason}
             <div class="hud-label">\uC815\uD655\uB3C4</div>
             <div class="hud-value" id="lg-hud-acc">100<span class="hud-unit">%</span></div>
           </div>
+          ${this.renderTypingRecordHudHtml("lg")}
           <div class="hud-stat-box">
             <div class="hud-label">\uC9C4\uD589\uB3C4</div>
             <div class="hud-value" id="lg-hud-prog">0<span class="hud-unit">%</span></div>
@@ -4449,7 +4555,7 @@ ${reason}
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
           <button class="btn btn-secondary" id="btn-restart-long">\u{1F504} \uB2E4\uC2DC \uCE58\uAE30</button>
           <div style="font-size: 0.85rem; color: var(--text-muted);">
-            \uAE34 \uAE00 \uC644\uB3C5 \uD0C0\uC774\uD551 \uC2DC \uB808\uBCA8\uC5D0 \uBE44\uB840\uD558\uC5EC \uB300\uB7C9\uC758 \uC131\uC7A5 \uD3EC\uC778\uD2B8\uAC00 \uC801\uB9BD\uB429\uB2C8\uB2E4.
+            \uC815\uD655\uB3C4 ${TYPING_PASS_ACCURACY}% \uC774\uC0C1\uC73C\uB85C \uC644\uC131\uD558\uBA74 \uB808\uBCA8\uC5D0 \uBE44\uB840\uD55C \uD3EC\uC778\uD2B8\uAC00 \uC801\uB9BD\uB429\uB2C8\uB2E4.
           </div>
         </div>
       </div>
@@ -4470,20 +4576,31 @@ ${reason}
           hudProg.innerHTML = `${status.progress}<span class="hud-unit">%</span>`;
         },
         (status) => {
+          const rerender = (delay) => setTimeout(() => {
+            if (this.typingMode === "long" && container.isConnected)
+              this.renderLongPracticeMode(container);
+          }, delay);
+          if (!this.passTypingAttempt(status, "long")) {
+            rerender(1200);
+            return;
+          }
           sounds.playCelebration();
           triggerConfetti();
           const earned = Math.round(status.cpm / 10 + 60) * this.typingLevel;
           appState.addTypingScore(earned, status.cpm, status.accuracy);
-          showToast(`\uAE34 \uAE00 \uC644\uB3C5 \uD0C0\uC774\uD551 \uC644\uB8CC! +${earned}P \uC801\uB9BD!`, "\u{1F3C6}");
+          showToast(`\uAE34 \uAE00 \uC644\uB3C5 \uD0C0\uC774\uD551 \uC644\uB8CC! +${earned}P \uC801\uB9BD! (${status.cpm} CPM, \uC815\uD655\uB3C4 ${status.accuracy}%)`, "\u{1F3C6}");
+          rerender(1500);
         }
       );
+      visibleInput.focus();
       visibleInput.addEventListener("input", (e) => {
         sounds.playKeyTick();
         this.sentenceSession.handleInput(e.target.value);
       });
       visibleInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
-          if (e.isComposing) return;
+          if (e.isComposing)
+            return;
           e.preventDefault();
           const currentVal = visibleInput.value.trim();
           if (currentVal === current.text || this.sentenceSession.isFinished || currentVal.length >= current.text.length * 0.7) {
@@ -4567,34 +4684,38 @@ ${reason}
         </div>
 
         <!-- Book Selection (\uCD94\uCC9C\uB3C4\uC11C \uC120\uD0DD vs \uC9C1\uC811 \uC785\uB825) -->
-        <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-xs);">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-            <div style="font-weight: 800; font-size: 0.95rem;">
-              \u{1F4D6} \uC77D\uC740 \uCC45 \uC120\uD0DD \uBC29\uC2DD
-            </div>
-            <div class="book-source-toggle" style="margin: 0;">
-              <button class="book-source-btn ${!isCustom ? "active" : ""}" id="btn-src-rec">
-                \uCD94\uCC9C\uB3C4\uC11C ${books.length}\uAD8C\uC5D0\uC11C \uC120\uD0DD
-              </button>
-              <button class="book-source-btn ${isCustom ? "active" : ""}" id="btn-src-custom">
-                \u270D\uFE0F \uB0B4\uAC00 \uC77D\uC740 \uB3C4\uC11C \uC9C1\uC811 \uC785\uB825
-              </button>
-            </div>
+        <div class="book-source-picker">
+          <div class="book-source-cards">
+            <button class="book-source-card book-source-card-primary ${isCustom ? "active" : ""}" id="btn-src-custom">
+              <span class="book-source-card-icon">\u270D\uFE0F</span>
+              <span class="book-source-card-text">
+                <span class="book-source-card-title">\uB0B4\uAC00 \uC77D\uC740 \uB3C4\uC11C \uAE30\uB85D\uD558\uAE30</span>
+                <span class="book-source-card-sub">\uC9C0\uAE08 \uC77D\uACE0 \uC788\uB294 \uCC45, \uC9C1\uC811 \uACE0\uB978 \uCC45\uC744 \uBA3C\uC800 \uAE30\uB85D\uD574\uC694</span>
+              </span>
+              <span class="book-source-card-badge">\uCD94\uCC9C</span>
+            </button>
+            <button class="book-source-card ${!isCustom ? "active" : ""}" id="btn-src-rec">
+              <span class="book-source-card-icon">\u{1F4DA}</span>
+              <span class="book-source-card-text">
+                <span class="book-source-card-title">\uCD94\uCC9C\uB3C4\uC11C\uC5D0\uC11C \uACE0\uB974\uAE30</span>
+                <span class="book-source-card-sub">\uC911\uD559\uC0DD \uCD94\uCC9C\uB3C4\uC11C ${books.length}\uAD8C</span>
+              </span>
+            </button>
           </div>
 
-          <div style="margin-top: 1rem;">
+          <div class="book-source-detail ${isCustom ? "is-custom" : ""}">
             ${!isCustom ? `
               <select id="ws-rec-book" style="width: 100%; padding: 0.65rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
                 ${books.map((b) => `
-                  <option value="${b.id}" ${b.id === this.selectedBookId ? "selected" : ""}>
+                  <option value="${b.id}" ${b.id === selectedBook.id ? "selected" : ""}>
                     ${b.isTeacherAdded ? "\u{1F31F} [\uC120\uC0DD\uB2D8 \uCD94\uCC9C] " : ""}${b.title} (${b.author} \uC800 \xB7 ${b.publisher || "\uCD94\uCC9C\uB3C4\uC11C"})
                   </option>
                 `).join("")}
               </select>
             ` : `
-              <div style="display: grid; grid-template-columns: 2fr 1.5fr; gap: 1rem;">
-                <input type="text" id="ws-custom-title" placeholder="\uCC45 \uC81C\uBAA9\uC744 \uC785\uB825\uD558\uC138\uC694" style="padding: 0.65rem; border: 1px solid #4F46E5; border-radius: var(--radius-md); font-weight: 700;">
-                <input type="text" id="ws-custom-author" placeholder="\uC800\uC790\uB97C \uC785\uB825\uD558\uC138\uC694" style="padding: 0.65rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              <div class="custom-book-fields">
+                <input type="text" id="ws-custom-title" placeholder="\u{1F4D6} \uB0B4\uAC00 \uC77D\uC740 \uCC45 \uC81C\uBAA9" value="${escapeAttr(this.customBook.title)}">
+                <input type="text" id="ws-custom-author" placeholder="\uC800\uC790" value="${escapeAttr(this.customBook.author)}">
               </div>
             `}
           </div>
@@ -4665,6 +4786,17 @@ ${reason}
           sounds.playClick();
           this.bookSourceType = "custom";
           this.renderReading(container);
+          container.querySelector("#ws-custom-title")?.focus();
+        });
+      }
+      const customTitleInput = container.querySelector("#ws-custom-title");
+      const customAuthorInput = container.querySelector("#ws-custom-author");
+      if (customTitleInput && customAuthorInput) {
+        customTitleInput.addEventListener("input", (e) => {
+          this.customBook.title = e.target.value;
+        });
+        customAuthorInput.addEventListener("input", (e) => {
+          this.customBook.author = e.target.value;
         });
       }
       const recSelect = container.querySelector("#ws-rec-book");
@@ -4730,14 +4862,14 @@ ${reason}
 
         <!-- 2 Torn Grid Note Paper Blocks -->
         <div class="torn-paper-box">
-          <textarea class="worksheet-textarea" id="ws-q1-text" placeholder="\uAE30\uC5B5\uD558\uACE0 \uC2F6\uC740 \uCCAB \uBC88\uC9F8 \uAD6C\uC808\uC744 \uAE30\uB85D\uD574 \uBCF4\uC138\uC694.">${!isCustom && book.quotes[0] ? book.quotes[0] : ""}</textarea>
+          <textarea class="worksheet-textarea" id="ws-q1-text" placeholder="${escapeAttr(!isCustom && book.quotes[0] ? `\uC608\uC2DC) ${book.quotes[0]}` : "\uAE30\uC5B5\uD558\uACE0 \uC2F6\uC740 \uCCAB \uBC88\uC9F8 \uAD6C\uC808\uC744 \uAE30\uB85D\uD574 \uBCF4\uC138\uC694.")}"></textarea>
           <div class="torn-page-tag">
             ( <input type="text" class="page-num-input" id="ws-q1-page" placeholder="  "> \uD398\uC774\uC9C0 )
           </div>
         </div>
 
         <div class="torn-paper-box">
-          <textarea class="worksheet-textarea" id="ws-q2-text" placeholder="\uAE30\uC5B5\uD558\uACE0 \uC2F6\uC740 \uB450 \uBC88\uC9F8 \uAD6C\uC808\uC744 \uAE30\uB85D\uD574 \uBCF4\uC138\uC694.">${!isCustom && book.quotes[1] ? book.quotes[1] : ""}</textarea>
+          <textarea class="worksheet-textarea" id="ws-q2-text" placeholder="${escapeAttr(!isCustom && book.quotes[1] ? `\uC608\uC2DC) ${book.quotes[1]}` : "\uAE30\uC5B5\uD558\uACE0 \uC2F6\uC740 \uB450 \uBC88\uC9F8 \uAD6C\uC808\uC744 \uAE30\uB85D\uD574 \uBCF4\uC138\uC694.")}"></textarea>
           <div class="torn-page-tag">
             ( <input type="text" class="page-num-input" id="ws-q2-page" placeholder="  "> \uD398\uC774\uC9C0 )
           </div>
@@ -5034,11 +5166,11 @@ ${reason}
       container.innerHTML = `
       <section class="hero-section">
         <div class="hero-pill-tag">
-          <span>\u2728</span> \uACBD\uD76C\uC911\uD559\uAD50 \xB7 \uB9E4\uC77C 5\uBD84 \uC62C\uBC14\uB978 \uB8E8\uD2F4
+          <span>\u2728</span> \uACBD\uD76C\uC911\uD559\uAD50 \xB7 \uB9E4\uC77C 5\uBD84 \uC62C\uBC14\uB978 \uB8E8\uD2F4 \uD504\uB85C\uC81D\uD2B8
         </div>
         <h1 class="hero-title">
           \uB85C\uADF8\uC778\uD558\uACE0<br>
-          <span class="highlight-gradient">\uBC14\uB9845\uBD84\uC744 \uC2DC\uC791\uD574 \uBCF4\uC138\uC694</span>
+          <span class="highlight-gradient">\uBC14\uB984 5\uBD84\uC744 \uC2DC\uC791\uD574 \uBCF4\uC138\uC694</span>
         </h1>
         <p class="hero-desc">
           \uC544\uCE68 \uC2DC\uAC04\uBFD0\uB9CC \uC544\uB2C8\uB77C \uC26C\uB294 \uC2DC\uAC04\xB7\uC810\uC2EC\uC2DC\uAC04 \uB4F1 \uC9EC\uB0A0 \uB54C\uB9C8\uB2E4 \uB4E4\uC5B4\uC640\uC11C \uB9E4\uB108 \uC2E4\uCC9C, \uC2A4\uB9C8\uD2B8 \uD0C0\uC774\uD551, \uB3C5\uC11C\uAE30\uB85D\uC744 \uC774\uC5B4\uAC00\uC694!
@@ -5135,6 +5267,11 @@ ${reason}
       }
       const proposals = appState.state.teacherProposals || [];
       const recommendedBooks = appState.getRecommendedBooks();
+      appState.listenToUnknownWords(() => {
+        if (this.currentView === "teacher" && container.isConnected)
+          this.renderTeacher(container);
+      });
+      const unknownWords = appState.getUnknownWords();
       container.innerHTML = `
       <div class="teacher-dashboard">
         <div class="teacher-header">
@@ -5304,6 +5441,44 @@ ${reason}
           </div>
         </div>
 
+        <!-- Chatbot Unknown Words Management Panel -->
+        <div class="teacher-proposal-panel" style="margin-top: 2rem;">
+          <div class="proposal-panel-header">
+            <div>
+              <h3 style="font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
+                <span>\u{1F331}</span> \uBC14\uB978\uB9D0 \uCC57\uBD07 \uBBF8\uB4F1\uB85D \uB2E8\uC5B4 \uAD00\uB9AC (${unknownWords.length}\uAC1C)
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+                \uD559\uC0DD\uC774 \uBB3C\uC5B4\uBD24\uC9C0\uB9CC \uCC57\uBD07\uC774 \uB2F5\uD558\uC9C0 \uBABB\uD55C \uB2E8\uC5B4\uC785\uB2C8\uB2E4. \uB73B\uACFC \uBC14\uB978 \uD45C\uD604\uC744 \uCD94\uAC00\uD558\uBA74 \uB2E4\uC74C\uBD80\uD130 \uCC57\uBD07\uC774 \uBC14\uB85C \uC548\uB0B4\uD569\uB2C8\uB2E4.
+              </p>
+            </div>
+            <button class="btn btn-primary btn-add-dict-word" data-word="" style="font-size: 0.85rem; background: #059669;">
+              \u2795 \uB2E8\uC5B4 \uC9C1\uC811 \uCD94\uAC00\uD558\uAE30
+            </button>
+          </div>
+
+          ${unknownWords.length === 0 ? `
+            <div style="text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+              \uC544\uC9C1 \uAE30\uB85D\uB41C \uBBF8\uB4F1\uB85D \uB2E8\uC5B4\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4. \u{1F389}
+            </div>
+          ` : `
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; margin-top: 1.25rem;">
+              ${unknownWords.map((w) => `
+                <div class="card" style="padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+                    <strong style="font-size: 1.05rem; color: #1E293B; word-break: break-all;">${escapeAttr(w.word)}</strong>
+                    <span class="badge badge-orange">${w.count}\uD68C \uC9C8\uBB38</span>
+                  </div>
+                  <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-primary btn-add-dict-word" data-word="${escapeAttr(w.word)}" style="flex: 1; font-size: 0.8rem; padding: 0.4rem;">\u{1F4DD} \uB73B \uB4F1\uB85D</button>
+                    <button class="btn btn-secondary btn-delete-unknown-word" data-word-id="${escapeAttr(w.id)}" style="font-size: 0.8rem; padding: 0.4rem 0.75rem;">\uC0AD\uC81C</button>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          `}
+        </div>
+
         <!-- Student Management Table (RealName + Nickname) -->
         <div class="table-container-card">
           <div class="table-toolbar">
@@ -5367,7 +5542,7 @@ ${reason}
         <div class="exhibition-top-bar">
           <div class="exhibition-brand">
             <div class="logo-badge" style="background: #3B82F6;">Q</div>
-            <div style="font-size: 1.3rem; font-weight: 800;">\uBC14\uB9845\uBD84 \uC804\uC2DC \uBAA8\uB4DC \u2014 2\uD559\uB144 3\uBC18</div>
+            <div style="font-size: 1.3rem; font-weight: 800;">\uBC14\uB984 5\uBD84 \uC804\uC2DC \uBAA8\uB4DC \u2014 2\uD559\uB144 3\uBC18</div>
             <span class="exhibition-badge">LIVE MORNING SHOWCASE</span>
           </div>
           <button class="exhibition-btn-close" id="btn-close-exhibition">\u2715 \uB2EB\uAE30 (ESC)</button>
@@ -5420,6 +5595,23 @@ ${reason}
           this.openTeacherBookModal(container);
         });
       }
+      container.querySelectorAll(".btn-add-dict-word").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          sounds.playClick();
+          this.openDictionaryWordModal(container, e.currentTarget.dataset.word);
+        });
+      });
+      container.querySelectorAll(".btn-delete-unknown-word").forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          const wordId = e.currentTarget.dataset.wordId;
+          if (!confirm("\uC774 \uB2E8\uC5B4\uB97C \uBBF8\uB4F1\uB85D \uBAA9\uB85D\uC5D0\uC11C \uC0AD\uC81C\uD560\uAE4C\uC694?"))
+            return;
+          sounds.playClick();
+          await appState.deleteUnknownWord(wordId);
+          showToast("\uBBF8\uB4F1\uB85D \uB2E8\uC5B4\uB97C \uC0AD\uC81C\uD588\uC2B5\uB2C8\uB2E4.", "\u{1F5D1}\uFE0F");
+          this.renderTeacher(container);
+        });
+      });
       container.querySelectorAll(".table-filter-btn").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           sounds.playClick();
@@ -5454,14 +5646,14 @@ ${reason}
         btnExport.addEventListener("click", () => {
           sounds.playSuccess();
           const header = "\uBC88\uD638,\uC2E4\uBA85,\uB2C9\uB124\uC784,\uB9E4\uB108\uC810\uC218,\uD0C0\uC790\uC810\uC218,\uB3C5\uC11C\uC810\uC218,\uCD1D\uD569\uD3EC\uC778\uD2B8,\uCD5C\uACE0\uD0C0\uC218,\uB2E4\uC9D0\n";
-          const rows = appState.state.students.map(
+          const rows = this.getSelectedClassStudents().map(
             (s) => `${s.number},${s.realName},${s.nickname},${s.mannersScore},${s.typingScore},${s.readingScore},${s.totalPoints},${s.typingBestCPM},"${s.comment || ""}"`
           ).join("\n");
           const blob = new Blob(["\uFEFF" + header + rows], { type: "text/csv;charset=utf-8;" });
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = `\uBC14\uB9845\uBD84_2\uD559\uB1443\uBC18_\uAE30\uB85D_${appState.getTodayString()}.csv`;
+          a.download = `\uBC14\uB984 5\uBD84_2\uD559\uB1443\uBC18_\uAE30\uB85D_${appState.getTodayString()}.csv`;
           a.click();
           URL.revokeObjectURL(url);
           showToast("\uD559\uAE09 \uD65C\uB3D9 \uAE30\uB85D CSV \uD30C\uC77C \uB2E4\uC6B4\uB85C\uB4DC \uC644\uB8CC", "\u{1F4E5}");
@@ -5533,6 +5725,79 @@ ${reason}
         sounds.playSuccess();
         modal.classList.remove("active");
         showToast("\uC0C8 \uB9E4\uB108 \uC9C0\uCE68\uC774 \uC81C\uC548\uB418\uC5C8\uC2B5\uB2C8\uB2E4. (\uB3D9\uB8CC \uAD50\uC0AC \uD22C\uD45C \uC2DC\uC791)", "\u{1F5F3}\uFE0F");
+        this.renderTeacher(parentContainer);
+      };
+    }
+    // Chatbot Dictionary Word Modal (관리자 단어 등록)
+    openDictionaryWordModal(parentContainer, word = "") {
+      let modal = document.getElementById("dict-word-modal");
+      if (!modal) {
+        modal = document.createElement("div");
+        modal.className = "modal-overlay";
+        modal.id = "dict-word-modal";
+        const fieldStyle = "width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-family: inherit; font-size: 0.9rem;";
+        const labelStyle = "font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;";
+        modal.innerHTML = `
+        <div class="modal-content" style="max-width: 500px; text-align: left;">
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">\u{1F331} \uCC57\uBD07 \uC0AC\uC804\uC5D0 \uB2E8\uC5B4 \uB4F1\uB85D</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+            \uB4F1\uB85D\uD558\uBA74 \uD559\uC0DD\uC774 \uC774 \uB2E8\uC5B4\uB97C \uBB3C\uC5B4\uBCFC \uB54C \uCC57\uBD07\uC774 \uC544\uB798 \uB0B4\uC6A9\uC73C\uB85C \uC548\uB0B4\uD569\uB2C8\uB2E4.
+          </p>
+          <div style="margin-bottom: 1rem;">
+            <label style="${labelStyle}">\uB2E8\uC5B4</label>
+            <input type="text" id="dict-word-input" maxlength="50" placeholder="\uC608: \uD0B9\uBC1B\uB124" style="${fieldStyle} font-weight: 700;">
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="${labelStyle}">\uC5B4\uC6D0 (\uBCF8\uB798 \uB73B) \u2014 "'\uB2E8\uC5B4'\uB294 \uBCF8\uB798 ..." \uB4A4\uC5D0 \uC774\uC5B4\uC9D1\uB2C8\uB2E4</label>
+            <textarea id="dict-etymology-input" rows="2" placeholder="\uC608: '\uC5F4\uBC1B\uB124'\uC758 '\uC5F4'\uC744 \uC601\uC5B4 'King'\uC73C\uB85C \uBC14\uAFD4 \uAC15\uC870\uD55C \uC2E0\uC870\uC5B4\uC785\uB2C8\uB2E4." style="${fieldStyle}"></textarea>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="${labelStyle}">\uD604\uC7AC \uC4F0\uC784 \u2014 "\uD604\uC7AC\uB294 ..." \uB4A4\uC5D0 \uC774\uC5B4\uC9D1\uB2C8\uB2E4</label>
+            <textarea id="dict-meaning-input" rows="2" placeholder="\uC608: \uBAB9\uC2DC \uD654\uAC00 \uB098\uAC70\uB098 \uC9DC\uC99D \uB0A0 \uB54C \uC4F0\uC785\uB2C8\uB2E4." style="${fieldStyle}"></textarea>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="${labelStyle}">\uBC14\uB978 \uD45C\uD604</label>
+            <input type="text" id="dict-correct-input" placeholder="\uC608: \uC815\uB9D0 \uC18D\uC0C1\uD558\uB2E4" style="${fieldStyle}">
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn btn-secondary" id="btn-close-dict" style="flex: 1;">\uCDE8\uC18C</button>
+            <button class="btn btn-primary" id="btn-save-dict" style="flex: 1; background: #059669;">\uC0AC\uC804\uC5D0 \uB4F1\uB85D\uD558\uAE30</button>
+          </div>
+        </div>
+      `;
+        document.body.appendChild(modal);
+      }
+      const wordInput = modal.querySelector("#dict-word-input");
+      const etymologyInput = modal.querySelector("#dict-etymology-input");
+      const meaningInput = modal.querySelector("#dict-meaning-input");
+      const correctInput = modal.querySelector("#dict-correct-input");
+      wordInput.value = word;
+      etymologyInput.value = "";
+      meaningInput.value = "";
+      correctInput.value = "";
+      modal.classList.add("active");
+      (word ? etymologyInput : wordInput).focus();
+      modal.querySelector("#btn-close-dict").onclick = () => modal.classList.remove("active");
+      modal.querySelector("#btn-save-dict").onclick = async () => {
+        const entry = {
+          word: wordInput.value.trim(),
+          etymology: etymologyInput.value.trim(),
+          meaning: meaningInput.value.trim(),
+          correct: correctInput.value.trim()
+        };
+        if (!entry.word || !entry.etymology || !entry.meaning || !entry.correct) {
+          showToast("\uB2E8\uC5B4, \uC5B4\uC6D0, \uD604\uC7AC \uC4F0\uC784, \uBC14\uB978 \uD45C\uD604\uC744 \uBAA8\uB450 \uC785\uB825\uD574\uC8FC\uC138\uC694.", "\u26A0\uFE0F");
+          return;
+        }
+        const ok = await appState.addDictionaryWord(entry);
+        modal.classList.remove("active");
+        if (ok) {
+          sounds.playSuccess();
+          showToast(`'${entry.word}' \uB2E8\uC5B4\uAC00 \uCC57\uBD07 \uC0AC\uC804\uC5D0 \uB4F1\uB85D\uB418\uC5C8\uC2B5\uB2C8\uB2E4.`, "\u{1F331}");
+        } else {
+          sounds.playError();
+          showToast("\uC11C\uBC84 \uC800\uC7A5\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4. \uAD50\uC0AC \uAD8C\uD55C\uACFC \uB124\uD2B8\uC6CC\uD06C\uB97C \uD655\uC778\uD574\uC8FC\uC138\uC694.", "\u26A0\uFE0F");
+        }
         this.renderTeacher(parentContainer);
       };
     }
@@ -5640,7 +5905,8 @@ ${reason}
     // TV Exhibition
     openExhibition() {
       const overlay = document.getElementById("exhibition-view");
-      if (!overlay) return;
+      if (!overlay)
+        return;
       overlay.classList.add("active");
       this.exhibitionIndex = 0;
       this.updateExhibitionSlide();
@@ -5649,11 +5915,14 @@ ${reason}
         this.nextExhibitionSlide();
       }, 5e3);
       const closeBtn = document.getElementById("btn-close-exhibition");
-      if (closeBtn) closeBtn.onclick = () => this.closeExhibition();
+      if (closeBtn)
+        closeBtn.onclick = () => this.closeExhibition();
       const prevBtn = document.getElementById("btn-ex-prev");
       const nextBtn = document.getElementById("btn-ex-next");
-      if (prevBtn) prevBtn.onclick = () => this.prevExhibitionSlide();
-      if (nextBtn) nextBtn.onclick = () => this.nextExhibitionSlide();
+      if (prevBtn)
+        prevBtn.onclick = () => this.prevExhibitionSlide();
+      if (nextBtn)
+        nextBtn.onclick = () => this.nextExhibitionSlide();
       const escHandler = (e) => {
         if (e.key === "Escape") {
           this.closeExhibition();
@@ -5662,26 +5931,34 @@ ${reason}
       };
       window.addEventListener("keydown", escHandler);
     }
+    getSelectedClassStudents() {
+      const [g, c] = (appState.state.selectedClassKey || "2-3").split("-").map(Number);
+      return appState.getStudentsByClass(g, c);
+    }
     closeExhibition() {
       const overlay = document.getElementById("exhibition-view");
-      if (overlay) overlay.classList.remove("active");
+      if (overlay)
+        overlay.classList.remove("active");
       clearInterval(this.exhibitionTimer);
     }
     nextExhibitionSlide() {
-      const students = appState.state.students.filter((s) => s.comment);
-      if (!students.length) return;
+      const students = this.getSelectedClassStudents().filter((s) => s.comment);
+      if (!students.length)
+        return;
       this.exhibitionIndex = (this.exhibitionIndex + 1) % students.length;
       this.updateExhibitionSlide();
     }
     prevExhibitionSlide() {
-      const students = appState.state.students.filter((s) => s.comment);
-      if (!students.length) return;
+      const students = this.getSelectedClassStudents().filter((s) => s.comment);
+      if (!students.length)
+        return;
       this.exhibitionIndex = (this.exhibitionIndex - 1 + students.length) % students.length;
       this.updateExhibitionSlide();
     }
     updateExhibitionSlide() {
-      const students = appState.state.students.filter((s) => s.comment);
-      if (!students.length) return;
+      const students = this.getSelectedClassStudents().filter((s) => s.comment);
+      if (!students.length)
+        return;
       const student = students[this.exhibitionIndex];
       const stage = document.getElementById("exhibition-stage-content");
       const dots = document.getElementById("exhibition-dots");

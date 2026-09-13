@@ -304,8 +304,12 @@ export class HancomSentenceSession {
       }
     }
 
-    const accuracy = this.input.length > 0 
-      ? Math.min(100, Math.max(0, Math.round((correctChars / this.input.length) * 100))) 
+    // 입력 중에는 친 글자 기준, 제출(완료) 시에는 입력하지 않은 글자까지 포함해 채점
+    const denominator = this.isFinished
+      ? Math.max(this.input.length, this.targetText.length)
+      : this.input.length;
+    const accuracy = denominator > 0
+      ? Math.min(100, Math.max(0, Math.round((correctChars / denominator) * 100)))
       : 100;
 
     const cpm = elapsedMinutes > 0 ? Math.round(typedStrokes / elapsedMinutes) : 0;
