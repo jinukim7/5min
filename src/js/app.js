@@ -1,7 +1,7 @@
 import { appState, BADGES } from './state.js';
 import { ETIQUETTE_DOMAINS, MIDDLE_SCHOOL_QUIZZES } from './etiquette-data.js';
 import { MIDDLE_SCHOOL_BOOKS, INITIAL_READING_LOGS } from './reading-data.js';
-import { HANCOM_KEY_STAGES, WORD_PRACTICE_LIST, SHORT_SENTENCES, LONG_PASSAGES } from './typing-texts.js';
+import { KR_KEY_STAGES, EN_KEY_STAGES, KR_WORDS, EN_WORDS, KR_SHORT_SENTENCES, EN_SHORT_SENTENCES, KR_LONG_PASSAGES, EN_LONG_PASSAGES } from './typing-texts.js';
 import { KeyPracticeSession, HancomSentenceSession, isHangulPrefix } from './typing-engine.js';
 import { sounds } from './sound.js';
 import { triggerConfetti } from './confetti.js';
@@ -38,6 +38,8 @@ class App {
     // Typing state
     this.typingMode = 'short'; // 'key' | 'word' | 'short' | 'long'
     this.keyStageIndex = 0;
+    this.typingLang = 'ko';
+    this.typingLevel = 1;
     this.keySession = null;
     this.sentenceIndex = 0;
     this.sentenceSession = null;
@@ -742,28 +744,58 @@ class App {
   }
 
   // ================= TYPING PRACTICE VIEW (VISIBLE INPUT ENGINE) =================
+  // ================= TYPING PRACTICE VIEW (VISIBLE INPUT ENGINE) =================
   renderTyping(container) {
     container.innerHTML = `
       <div class="typing-container">
+        <!-- Config Bar: Language & Level -->
+        <div class="typing-config-bar" style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; background: #fff; padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
+          <div style="font-weight: 700; font-size: 0.95rem;">⚙️ 설정:</div>
+          <select id="select-typing-lang" style="padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid #CBD5E1; font-weight: 600;">
+            <option value="ko" ${this.typingLang === 'ko' ? 'selected' : ''}>🇰🇷 한글 연습</option>
+            <option value="en" ${this.typingLang === 'en' ? 'selected' : ''}>🇺🇸 영어 연습</option>
+          </select>
+          <select id="select-typing-level" style="padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid #CBD5E1; font-weight: 600;">
+            <option value="1" ${this.typingLevel === 1 ? 'selected' : ''}>🌱 1단계 (초급)</option>
+            <option value="2" ${this.typingLevel === 2 ? 'selected' : ''}>🌿 2단계 (중급)</option>
+            <option value="3" ${this.typingLevel === 3 ? 'selected' : ''}>🌳 3단계 (고급)</option>
+          </select>
+        </div>
+
         <!-- 4-Stage Tab Bar -->
         <div class="typing-stage-tabs">
           <button class="stage-tab-btn ${this.typingMode === 'key' ? 'active' : ''}" data-mode="key">
-            <span>🎯</span> 1단계: 자리 연습
+            <span>🎯</span> 키 연습
           </button>
           <button class="stage-tab-btn ${this.typingMode === 'word' ? 'active' : ''}" data-mode="word">
-            <span>📝</span> 2단계: 낱말 연습
+            <span>📝</span> 낱말 연습
           </button>
           <button class="stage-tab-btn ${this.typingMode === 'short' ? 'active' : ''}" data-mode="short">
-            <span>✨</span> 3단계: 짧은 글 연습
+            <span>✨</span> 짧은 글 연습
           </button>
           <button class="stage-tab-btn ${this.typingMode === 'long' ? 'active' : ''}" data-mode="long">
-            <span>📖</span> 4단계: 긴 글 연습
+            <span>📖</span> 긴 글 연습
           </button>
         </div>
 
         <div id="typing-stage-content"></div>
       </div>
     `;
+
+    container.querySelector('#select-typing-lang').addEventListener('change', (e) => {
+      this.typingLang = e.target.value;
+      this.keyStageIndex = 0; // reset
+      this.sentenceIndex = 0;
+      this.passageIndex = 0;
+      this.renderTyping(container);
+    });
+
+    container.querySelector('#select-typing-level').addEventListener('change', (e) => {
+      this.typingLevel = parseInt(e.target.value, 10);
+      this.sentenceIndex = 0;
+      this.passageIndex = 0;
+      this.renderTyping(container);
+    });
 
     container.querySelectorAll('.stage-tab-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -787,11 +819,12 @@ class App {
 
   // --- 1. 자리 연습 ---
   renderKeyPracticeMode(container) {
-    const stage = HANCOM_KEY_STAGES[this.keyStageIndex % HANCOM_KEY_STAGES.length];
+    const STAGES = this.typingLang === 'ko' ? KR_KEY_STAGES : EN_KEY_STAGES;
+    const stage = STAGES[this.keyStageIndex % STAGES.length];
 
     container.innerHTML = `
       <div class="substage-pills">
-        ${HANCOM_KEY_STAGES.map((s, idx) => `
+        ${STAGES.map((s, idx) => `
           <button class="substage-pill ${idx === this.keyStageIndex ? 'active' : ''}" data-stage-idx="${idx}">
             ${s.name}
           </button>
@@ -912,7 +945,7 @@ class App {
 
   highlightKeyboardKey(targetKey) {
     document.querySelectorAll('#key-visual-layout .kb-key').forEach(k => {
-      k.classList.toggle('target-glow', k.dataset.keyChar === targetKey);
+      k.classList.toggle('target-glow', k.dataset.keyChar.toLowerCase() === targetKey.toLowerCase());
     });
   }
 
@@ -971,8 +1004,8 @@ class App {
 
   // --- 2. 낱말 연습 ---
   renderWordPracticeMode(container) {
+    const words = this.typingLang === 'ko' ? KR_WORDS : EN_WORDS;
     let wordIdx = 0;
-    const words = WORD_PRACTICE_LIST;
     let score = 0;
 
     container.innerHTML = `
@@ -1037,14 +1070,15 @@ class App {
 
   // --- 3. 짧은 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
   renderShortPracticeMode(container) {
-    const list = SHORT_SENTENCES;
+    const dataSource = this.typingLang === 'ko' ? KR_SHORT_SENTENCES : EN_SHORT_SENTENCES;
+    const list = dataSource[this.typingLevel] || dataSource[1];
     const current = list[this.sentenceIndex % list.length];
 
     container.innerHTML = `
-      <div class="substage-pills">
+      <div class="substage-pills" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem;">
         ${list.map((item, idx) => `
-          <button class="substage-pill ${idx === this.sentenceIndex ? 'active' : ''}" data-sentence-idx="${idx}">
-            ${idx + 1}. 《${item.book}》
+          <button class="substage-pill ${idx === this.sentenceIndex ? 'active' : ''}" data-sentence-idx="${idx}" style="min-width: 32px; padding: 0.4rem 0.8rem;">
+            ${idx + 1}
           </button>
         `).join('')}
       </div>
@@ -1070,7 +1104,7 @@ class App {
         </div>
 
         <div style="font-size: 0.9rem; font-weight: 700; color: #4F46E5; margin-bottom: 0.75rem;">
-          출처: 《${current.book}》 — ${current.author}
+          출처: ${current.source}
         </div>
 
         <!-- Hancom Taja Official Web Layout -->
@@ -1123,7 +1157,7 @@ class App {
       (status) => {
         sounds.playCelebration();
         triggerConfetti();
-        const earned = Math.round(status.cpm / 10 + 25);
+        const earned = Math.round(status.cpm / 10 + 25) * this.typingLevel;
         appState.addTypingScore(earned, status.cpm, status.accuracy);
         showToast(`짧은 글 타자 완성! +${earned}P 적립 (${status.cpm} CPM, 정확도 ${status.accuracy}%)`, '🎉');
 
@@ -1173,14 +1207,15 @@ class App {
 
   // --- 4. 긴 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
   renderLongPracticeMode(container) {
-    const list = LONG_PASSAGES;
+    const dataSource = this.typingLang === 'ko' ? KR_LONG_PASSAGES : EN_LONG_PASSAGES;
+    const list = dataSource[this.typingLevel] || dataSource[1];
     const current = list[this.passageIndex % list.length];
 
     container.innerHTML = `
       <div class="substage-pills">
         ${list.map((item, idx) => `
           <button class="substage-pill ${idx === this.passageIndex ? 'active' : ''}" data-passage-idx="${idx}">
-            ${idx + 1}. 《${item.book}》 ${item.title}
+            ${idx + 1}. ${item.title}
           </button>
         `).join('')}
       </div>
@@ -1200,9 +1235,9 @@ class App {
             <div class="hud-value" id="lg-hud-prog">0<span class="hud-unit">%</span></div>
           </div>
           <div class="hud-stat-box">
-            <div class="hud-label">문학 작품</div>
+            <div class="hud-label">선택된 글</div>
             <div class="hud-value" style="font-size: 1.15rem; color: #4F46E5;">
-              《${current.book}》
+              ${current.title}
             </div>
           </div>
         </div>
@@ -1212,8 +1247,8 @@ class App {
             ${this.renderTargetCharHighlights(current.text, '')}
           </div>
 
-          <textarea class="hancom-real-input" id="lg-visible-input" rows="3"
-                    placeholder="위 문학 작품을 보고 편안하게 타이핑하세요. (완성 후 Enter)" 
+          <textarea class="hancom-real-input" id="lg-visible-input" rows="4"
+                    placeholder="위 작품을 보고 편안하게 타이핑하세요. (완성 후 Enter)" 
                     autocomplete="off" spellcheck="false" autofocus></textarea>
 
           <div class="typing-progress-bar">
@@ -1224,7 +1259,7 @@ class App {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
           <button class="btn btn-secondary" id="btn-restart-long">🔄 다시 치기</button>
           <div style="font-size: 0.85rem; color: var(--text-muted);">
-            긴 글 완독 타이핑 시 대량의 성장 포인트(+60P)가 적립됩니다.
+            긴 글 완독 타이핑 시 레벨에 비례하여 대량의 성장 포인트가 적립됩니다.
           </div>
         </div>
       </div>
@@ -1249,9 +1284,9 @@ class App {
       (status) => {
         sounds.playCelebration();
         triggerConfetti();
-        const earned = Math.round(status.cpm / 10 + 60);
+        const earned = Math.round(status.cpm / 10 + 60) * this.typingLevel;
         appState.addTypingScore(earned, status.cpm, status.accuracy);
-        showToast(`긴 글 문학 완독 타이핑 완료! +${earned}P 적립!`, '🏆');
+        showToast(`긴 글 완독 타이핑 완료! +${earned}P 적립!`, '🏆');
       }
     );
 
@@ -1291,7 +1326,6 @@ class App {
       });
     }
   }
-
   // Live Highlight Renderer with Hangul IME Prefix Support
   renderTargetCharHighlights(target, typed) {
     let html = '';

@@ -1,5 +1,6 @@
 // src/js/chatbot.js
 //
+const API_KEY = "";
 // Gemini API 키는 이 파일(공개 GitHub 저장소)에 절대 넣지 않습니다.
 // 대신 Cloudflare Worker 중계 서버를 통해 호출합니다. 키는 Worker의 비밀 변수로만 존재합니다.
 // 배포 방법: cloudflare-worker/gemini-proxy.js 상단 주석 참고.

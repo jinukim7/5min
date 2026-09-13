@@ -1431,37 +1431,60 @@
   var appState = new AppState();
 
   // src/js/typing-texts.js
-  var HANCOM_KEY_STAGES = [
+  var KR_KEY_STAGES = [
     {
-      id: "stage_home",
+      id: "kr_stage_home",
       name: "1\uB2E8\uACC4: \uAE30\uBCF8\uC790\uB9AC (Home Row)",
-      desc: "\uC67C\uC190(\u3141 \u3134 \u3147 \u3139)\uACFC \uC624\uB978\uC190(\u3153 \u314F \u3163 ;)\uC758 \uAE30\uBCF8 \uC190\uAC00\uB77D \uC704\uCE58 \uC5F0\uC2B5",
+      desc: "\uC67C\uC190(\u3141 \u3134 \u3147 \u3139)\uACFC \uC624\uB978\uC190(\u3153 \u314F \u3163 ;) \uC5F0\uC2B5",
       keys: ["\u3141", "\u3134", "\u3147", "\u3139", "\u3153", "\u314F", "\u3163", ";"],
       keyCodes: ["KeyA", "KeyS", "KeyD", "KeyF", "KeyJ", "KeyK", "KeyL", "Semicolon"]
     },
     {
-      id: "stage_top",
+      id: "kr_stage_top",
       name: "2\uB2E8\uACC4: \uC717\uC790\uB9AC (Top Row)",
       desc: "\uC67C\uC190 \uC717\uAE00\uC1E0(\u3142 \u3148 \u3137 \u3131 \u3145)\uC640 \uC624\uB978\uC190 \uC717\uAE00\uC1E0(\u315B \u3155 \u3151 \u3150 \u3154)",
       keys: ["\u3142", "\u3148", "\u3137", "\u3131", "\u3145", "\u315B", "\u3155", "\u3151", "\u3150", "\u3154"],
       keyCodes: ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP"]
     },
     {
-      id: "stage_bottom",
+      id: "kr_stage_bottom",
       name: "3\uB2E8\uACC4: \uC544\uB7AB\uC790\uB9AC (Bottom Row)",
       desc: "\uC67C\uC190 \uC544\uB7AB\uAE00\uC1E0(\u314B \u314C \u314A \u314D)\uC640 \uC624\uB978\uC190 \uC544\uB7AB\uAE00\uC1E0(\u3160 \u315C \u3161)",
       keys: ["\u314B", "\u314C", "\u314A", "\u314D", "\u3160", "\u315C", "\u3161"],
       keyCodes: ["KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM"]
     },
     {
-      id: "stage_symbols",
-      name: "4\uB2E8\uACC4: \uC22B\uC790 \uBC0F \uAE30\uD638 \uC790\uB9AC",
-      desc: "\uC0C1\uB2E8 \uC22B\uC790\uC5F4(1 2 3 4 5 6 7 8 9 0) \uBC0F \uBB38\uC7A5\uBD80\uD638(! . , ?)",
+      id: "kr_stage_symbols",
+      name: "4\uB2E8\uACC4: \uC22B\uC790 \uBC0F \uAE30\uD638",
+      desc: "\uC0C1\uB2E8 \uC22B\uC790 \uBC0F \uBB38\uC7A5\uBD80\uD638(! . , ?)",
       keys: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", ".", ",", "?"],
       keyCodes: ["Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Digit1", "Period", "Comma", "Slash"]
     }
   ];
-  var WORD_PRACTICE_LIST = [
+  var EN_KEY_STAGES = [
+    {
+      id: "en_stage_home",
+      name: "1\uB2E8\uACC4: \uAE30\uBCF8\uC790\uB9AC (Home Row)",
+      desc: "\uC67C\uC190(A S D F)\uACFC \uC624\uB978\uC190(J K L ;) \uC5F0\uC2B5",
+      keys: ["A", "S", "D", "F", "J", "K", "L", ";", "a", "s", "d", "f", "j", "k", "l"],
+      keyCodes: ["KeyA", "KeyS", "KeyD", "KeyF", "KeyJ", "KeyK", "KeyL", "Semicolon"]
+    },
+    {
+      id: "en_stage_top",
+      name: "2\uB2E8\uACC4: \uC717\uC790\uB9AC (Top Row)",
+      desc: "\uC67C\uC190(Q W E R T)\uACFC \uC624\uB978\uC190(Y U I O P)",
+      keys: ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+      keyCodes: ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP"]
+    },
+    {
+      id: "en_stage_bottom",
+      name: "3\uB2E8\uACC4: \uC544\uB7AB\uC790\uB9AC (Bottom Row)",
+      desc: "\uC67C\uC190(Z X C V B)\uACFC \uC624\uB978\uC190(N M , . /)",
+      keys: ["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "z", "x", "c", "v", "b", "n", "m"],
+      keyCodes: ["KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash"]
+    }
+  ];
+  var KR_WORDS = [
     "\uBC30\uB824",
     "\uC57D\uC18D",
     "\uC2DC\uAC04",
@@ -1484,90 +1507,229 @@
     "\uACF5\uAC10",
     "\uCE5C\uC808",
     "\uB9C8\uC74C",
-    "\uB514\uBC97",
     "\uC218\uC5C5",
     "\uCCAD\uACB0",
     "\uC548\uC804",
     "\uCE5C\uAD6C",
     "\uC6A9\uAE30",
     "\uC2E4\uCC9C",
-    "\uC9C0\uD61C"
+    "\uC9C0\uD61C",
+    "\uD611\uB3D9"
   ];
-  var SHORT_SENTENCES = [
-    {
-      book: "\uC6D0\uB354 (Wonder)",
-      author: "R.J. \uD314\uB77C\uC2DC\uC624",
-      text: "\uC633\uC74C\uACFC \uCE5C\uC808\uD568 \uC911 \uD558\uB098\uB97C \uC120\uD0DD\uD574\uC57C \uD55C\uB2E4\uBA74, \uD56D\uC0C1 \uCE5C\uC808\uD568\uC744 \uC120\uD0DD\uD558\uB77C."
-    },
-    {
-      book: "\uC544\uBAAC\uB4DC",
-      author: "\uC190\uC6D0\uD3C9",
-      text: "\uAD6C\uD560 \uC218 \uC5C6\uB294 \uC778\uAC04\uC774\uB780 \uC5C6\uB2E4. \uAD6C\uD558\uB824\uB294 \uC190\uAE38\uC744 \uBA48\uCD94\uC9C0\uB9CC \uC54A\uB294\uB2E4\uBA74."
-    },
-    {
-      book: "\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810",
-      author: "\uAE40\uC120\uC601",
-      text: "\uC2DC\uAC04\uC740 \uBD99\uC7A1\uC544 \uB458 \uC218\uB3C4 \uC5C6\uACE0 \uBBF8\uB9AC \uAC00\uBD88\uD560 \uC218\uB3C4 \uC5C6\uB2E4. \uC624\uC9C1 \uC9C0\uAE08 \uC774 \uC21C\uAC04\uC5D0\uB9CC \uC874\uC7AC\uD55C\uB2E4."
-    },
-    {
-      book: "\uCCB4\uB9AC\uC0C8\uC6B0: \uBE44\uBC00\uAE00\uC785\uB2C8\uB2E4",
-      author: "\uD669\uC601\uBBF8",
-      text: "\uB098\uB97C \uC2EB\uC5B4\uD558\uB294 \uC0AC\uB78C\uC5D0\uAC8C \uC2E0\uACBD \uC4F0\uB290\uB77C, \uC815\uC791 \uB098\uB97C \uC88B\uC544\uD558\uB294 \uC0AC\uB78C\uB4E4\uC5D0\uAC8C \uC18C\uD640\uD558\uC9C0 \uB9D0\uC790."
-    },
-    {
-      book: "\uD398\uC778\uD2B8",
-      author: "\uC774\uD76C\uC601",
-      text: "\uC644\uBCBD\uD55C \uBD80\uBAA8\uB3C4, \uC644\uBCBD\uD55C \uC790\uB140\uB3C4 \uC5C6\uB2E4. \uC6B0\uB9AC\uB294 \uC11C\uB85C\uB97C \uB9C8\uC8FC\uD558\uBA70 \uD568\uAED8 \uBC30\uC6B0\uACE0 \uC790\uB780\uB2E4."
-    },
-    {
-      book: "\uC5B4\uB9B0 \uC655\uC790",
-      author: "\uC0DD\uD14D\uC950\uD398\uB9AC",
-      text: "\uAC00\uC7A5 \uC911\uC694\uD55C \uAC83\uC740 \uB208\uC5D0 \uBCF4\uC774\uC9C0 \uC54A\uC544. \uB9C8\uC74C\uC73C\uB85C \uBCF4\uC544\uC57C\uB9CC \uBD84\uBA85\uD558\uAC8C \uBCFC \uC218 \uC788\uC5B4."
-    },
-    {
-      book: "\uC790\uC804\uAC70 \uB3C4\uB451",
-      author: "\uBC15\uC644\uC11C",
-      text: "\uBC14\uB78C\uC774 \uBD88\uC5B4 \uB118\uC5B4\uB728\uB9B0 \uC790\uC804\uAC70\uB97C \uC138\uC6CC \uB450\uACE0 \uB3CC\uC544\uC124 \uB54C\uC758 \uBD80\uB044\uB7EC\uC6C0, \uADF8\uAC83\uC774 \uB0B4 \uC591\uC2EC\uC774\uC5C8\uB2E4."
-    },
-    {
-      book: "\uC720\uC9C4\uACFC \uC720\uC9C4",
-      author: "\uC774\uAE08\uC774",
-      text: "\uC0C1\uCC98\uB294 \uC228\uAE38\uC218\uB85D \uACEA\uC544\uAC00\uC9C0\uB9CC, \uD587\uBCD5 \uC544\uB798 \uAEBC\uB0B4\uB193\uC73C\uBA74 \uBE44\uB85C\uC18C \uC544\uBB3C\uAE30 \uC2DC\uC791\uD55C\uB2E4."
-    },
-    {
-      book: "\uC911\uD559 \uB4F1\uAD50 \uC608\uC808",
-      author: "\uBC14\uB9845\uBD84 \uC9C0\uCE68",
-      text: "\uAD50\uBB38 \uC55E \uC120\uC0DD\uB2D8\uACFC \uBC30\uC6C0\uD130 \uC9C0\uD0B4\uC774 \uC120\uC0DD\uB2D8\uAED8 \uBA48\uCD94\uC5B4 \uC11C\uC11C \uACF5\uC190\uD788 \uD5C8\uB9AC \uC219\uC5EC \uC778\uC0AC\uD569\uB2C8\uB2E4."
-    },
-    {
-      book: "\uAE09\uC2DD\uC2E4 \uC608\uC808",
-      author: "\uBC14\uB9845\uBD84 \uC9C0\uCE68",
-      text: "\uC0C8\uCE58\uAE30 \uC5C6\uC774 \uD55C \uC904\uB85C \uC11C\uC11C \uBC30\uC2DD\uBC1B\uACE0 \uC870\uB9AC\uC2E4\uBB34\uC0AC\uB2D8\uAED8 \uC9C4\uC2EC\uC73C\uB85C \uAC10\uC0AC \uC778\uC0AC\uB97C \uC804\uD569\uB2C8\uB2E4."
-    }
+  var EN_WORDS = [
+    "apple",
+    "friend",
+    "school",
+    "smile",
+    "dream",
+    "happy",
+    "world",
+    "peace",
+    "love",
+    "hope",
+    "water",
+    "music",
+    "study",
+    "class",
+    "teacher",
+    "student",
+    "book",
+    "paper",
+    "pencil",
+    "color",
+    "green",
+    "blue",
+    "morning",
+    "night",
+    "sun",
+    "moon",
+    "star",
+    "space",
+    "earth",
+    "nature"
   ];
-  var LONG_PASSAGES = [
-    {
-      id: "long_1",
-      book: "\uC544\uBAAC\uB4DC",
-      author: "\uC190\uC6D0\uD3C9",
-      title: "\uC724\uC7AC\uC758 \uB3C5\uBC31\uACFC \uACF5\uAC10",
-      text: "\uB450\uB824\uC6C0\uB3C4 \uBD84\uB178\uB3C4 \uB0B4\uAC90 \uC5C6\uC5C8\uB2E4. \uD558\uC9C0\uB9CC \uB0B4\uAC8C \uC5C6\uB294 \uADF8\uAC83\uC744 \uB0A8\uB4E4\uC740 \uACB0\uD568\uC774\uB77C \uBD88\uB800\uB2E4. \uC138\uC0C1 \uC0AC\uB78C\uB4E4\uC740 \uC27D\uAC8C \uD310\uB2E8\uD558\uACE0 \uC27D\uAC8C \uB2E8\uC815 \uC9D3\uB294\uB2E4. \uADF8\uB7EC\uB098 \uC138\uC0C1\uC744 \uC774\uD574\uD558\uB294 \uAC00\uC7A5 \uD655\uC2E4\uD55C \uAE38\uC740 \uC0C1\uB300\uBC29\uC758 \uC785\uC7A5\uC5D0\uC11C \uD55C \uAC78\uC74C \uBA48\uCD94\uC5B4 \uC11C\uC11C \uBC14\uB77C\uBCF4\uB294 \uC77C\uC774\uB2E4. \uB9C8\uC74C\uC758 \uBB38\uC740 \uC5B8\uC81C\uB098 \uC791\uC740 \uC190\uAE38\uC5D0\uC11C \uC5F4\uB9B0\uB2E4."
-    },
-    {
-      id: "long_2",
-      book: "\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810",
-      author: "\uAE40\uC120\uC601",
-      title: "\uC9C0\uAE08 \uC774 \uC21C\uAC04\uC758 \uAE30\uC801",
-      text: "\uC6B0\uB9AC\uAC00 \uBB34\uC2EC\uCF54 \uD758\uB824\uBCF4\uB0B4\uB294 \uC624\uB298\uC740 \uC5B4\uC81C \uC0DD\uC744 \uB9C8\uAC10\uD55C \uC774\uB4E4\uC774 \uADF8\uD1A0\uB85D \uAC04\uC808\uD788 \uBC14\uB77C\uB358 \uB0B4\uC77C\uC774\uB2E4. \uACFC\uAC70\uC5D0 \uC5BD\uB9E4\uC5EC \uC790\uCC45\uD558\uAC70\uB098 \uC624\uC9C0 \uC54A\uC740 \uBBF8\uB798\uB97C \uBBF8\uB9AC \uBD88\uC548\uD574\uD560 \uD544\uC694\uB294 \uC5C6\uB2E4. \uC9C0\uAE08 \uC228 \uC26C\uACE0 \uB300\uD654\uD558\uBA70 \uCC45\uC744 \uC77D\uB294 \uC774 \uCC2C\uB780\uD55C \uC21C\uAC04\uC5D0 \uC628 \uB9C8\uC74C\uC744 \uB2E4\uD574 \uC9D1\uC911\uD558\uB294 \uAC83, \uADF8\uAC83\uC774 \uC2DC\uAC04\uC758 \uC0C1\uC810\uC774 \uC6B0\uB9AC\uC5D0\uAC8C \uAC00\uB974\uCCD0 \uC900 \uC0B6\uC758 \uBE44\uBC00\uC774\uB2E4."
-    },
-    {
-      id: "long_3",
-      book: "\uCCB4\uB9AC\uC0C8\uC6B0: \uBE44\uBC00\uAE00\uC785\uB2C8\uB2E4",
-      author: "\uD669\uC601\uBBF8",
-      title: "\uC740\uB530\uC758 \uB450\uB824\uC6C0\uC744 \uB118\uC5B4\uC11C",
-      text: "\uCE5C\uAD6C\uB4E4\uC758 \uB208\uCE58\uB97C \uBCF4\uBA70 \uBB34\uB9AC\uC5D0\uC11C \uC18C\uC678\uB420\uAE4C \uC804\uC804\uAE0D\uAE0D\uD558\uB358 \uB0A0\uB4E4\uC774 \uC788\uC5C8\uB2E4. \uD558\uC9C0\uB9CC \uBAA8\uB4E0 \uC0AC\uB78C\uC774 \uB098\uB97C \uC88B\uC544\uD560 \uC218\uB294 \uC5C6\uB2E4. \uB0B4 \uC9C4\uC815\uD55C \uAC00\uCE58\uB294 \uB0A8\uC758 \uC2DC\uC120\uC774 \uC544\uB2C8\uB77C \uB0B4\uAC00 \uC2A4\uC2A4\uB85C\uB97C \uC5BC\uB9C8\uB098 \uC544\uB07C\uACE0 \uC874\uC911\uD558\uB294\uAC00\uC5D0 \uB2EC\uB824 \uC788\uB2E4. \uC11C\uB85C \uB2E4\uB978 \uC6B0\uB9AC\uAC00 \uBAA8\uC5EC \uBE44\uB85C\uC18C \uC544\uB984\uB2E4\uC6B4 \uC6B0\uB9AC \uBC18 \uAD50\uC2E4\uC744 \uC774\uB8EC\uB2E4."
-    }
-  ];
+  var KR_SHORT_SENTENCES = {
+    1: [
+      { text: "\uC778\uC0AC\uB294 \uC6B0\uB9AC\uC758 \uB9C8\uC74C\uC744 \uC5FD\uB2C8\uB2E4.", source: "\uD559\uAD50 \uC608\uC808" },
+      { text: "\uC624\uB298 \uD558\uB8E8\uB3C4 \uD65C\uAE30\uCC28\uAC8C \uC2DC\uC791\uD574\uC694.", source: "\uD559\uAD50 \uC608\uC808" },
+      { text: "\uC791\uC740 \uCE5C\uC808\uC774 \uC138\uC0C1\uC744 \uBC14\uAFC9\uB2C8\uB2E4.", source: "\uB3C4\uB355" },
+      { text: "\uCE5C\uAD6C\uC758 \uB9D0\uC744 \uB05D\uAE4C\uC9C0 \uB4E4\uC5B4\uC8FC\uC138\uC694.", source: "\uB300\uD654 \uC608\uC808" },
+      { text: "\uC6B0\uB9AC\uB294 \uB9E4\uC77C \uC870\uAE08\uC529 \uC131\uC7A5\uD569\uB2C8\uB2E4.", source: "\uC131\uC7A5" },
+      { text: "\uCC45 \uC18D\uC5D0 \uC218\uB9CE\uC740 \uAE38\uC774 \uC788\uC2B5\uB2C8\uB2E4.", source: "\uB3C5\uC11C" },
+      { text: "\uC6A9\uAE30 \uB0B4\uC5B4 \uBA3C\uC800 \uB2E4\uAC00\uAC00 \uBCF4\uC138\uC694.", source: "\uC6B0\uC815" },
+      { text: "\uC2E4\uC218\uB294 \uBC30\uC6C0\uC758 \uB610 \uB2E4\uB978 \uC774\uB984\uC785\uB2C8\uB2E4.", source: "\uC131\uC7A5" },
+      { text: "\uACE0\uB9C8\uC6B4 \uB9C8\uC74C\uC740 \uD45C\uD604\uD560\uC218\uB85D \uCEE4\uC838\uC694.", source: "\uAC10\uC0AC" },
+      { text: "\uB098\uB97C \uC0AC\uB791\uD574\uC57C \uB0A8\uB3C4 \uC0AC\uB791\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.", source: "\uC790\uC874\uAC10" },
+      { text: "\uBC1D\uC740 \uBBF8\uC18C\uB294 \uAC00\uC7A5 \uC88B\uC740 \uC778\uC0AC\uC785\uB2C8\uB2E4.", source: "\uD559\uAD50 \uC608\uC808" },
+      { text: "\uAC70\uC9D3\uB9D0\uC740 \uC5B8\uC820\uAC00 \uB4DC\uB7EC\uB098\uAC8C \uB9C8\uB828\uC785\uB2C8\uB2E4.", source: "\uC815\uC9C1" },
+      { text: "\uBC30\uB824\uD558\uB294 \uB9C8\uC74C\uC774 \uC544\uB984\uB2E4\uC6B4 \uAD50\uC2E4\uC744 \uB9CC\uB4ED\uB2C8\uB2E4.", source: "\uD559\uAD50 \uC608\uC808" },
+      { text: "\uD568\uAED8 \uB540 \uD758\uB9AC\uB294 \uC2DC\uAC04\uC740 \uADC0\uC911\uD569\uB2C8\uB2E4.", source: "\uD611\uB3D9" },
+      { text: "\uB178\uB825\uC740 \uACB0\uCF54 \uC6B0\uB9AC\uB97C \uBC30\uC2E0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.", source: "\uB178\uB825" },
+      { text: "\uAFC8\uC744 \uD5A5\uD574 \uD55C \uAC78\uC74C\uC529 \uB098\uC544\uAC00\uC138\uC694.", source: "\uD76C\uB9DD" },
+      { text: "\uBC14\uB978 \uB9D0 \uACE0\uC6B4 \uB9D0\uC744 \uC0DD\uD65C\uD654\uD569\uC2DC\uB2E4.", source: "\uC5B8\uC5B4 \uC608\uC808" },
+      { text: "\uC591\uBCF4\uD558\uB294 \uB2F9\uC2E0\uC774 \uC9C4\uC815\uD55C \uCC54\uD53C\uC5B8\uC785\uB2C8\uB2E4.", source: "\uBC30\uB824" },
+      { text: "\uC2DC\uAC04\uC740 \uB3CC\uC544\uC624\uC9C0 \uC54A\uC73C\uB2C8 \uC18C\uC911\uD788 \uC4F0\uC138\uC694.", source: "\uC2DC\uAC04 \uAD00\uB9AC" },
+      { text: "\uB9C8\uC74C\uC744 \uC5F4\uBA74 \uC0C8\uB85C\uC6B4 \uC138\uC0C1\uC774 \uBCF4\uC785\uB2C8\uB2E4.", source: "\uACF5\uAC10" }
+    ],
+    2: [
+      { text: "\uC544\uB294 \uAC83\uC744 \uC548\uB2E4\uACE0 \uD558\uACE0 \uBAA8\uB974\uB294 \uAC83\uC744 \uBAA8\uB978\uB2E4\uACE0 \uD558\uB294 \uAC83, \uADF8\uAC83\uC774 \uACE7 \uC54E\uC774\uB2E4.", source: "\uACF5\uC790" },
+      { text: "\uAD6C\uD560 \uC218 \uC5C6\uB294 \uC778\uAC04\uC774\uB780 \uC5C6\uB2E4. \uAD6C\uD558\uB824\uB294 \uC190\uAE38\uC744 \uBA48\uCD94\uC9C0\uB9CC \uC54A\uB294\uB2E4\uBA74.", source: "\uC190\uC6D0\uD3C9, \uC544\uBAAC\uB4DC" },
+      { text: "\uC633\uC74C\uACFC \uCE5C\uC808\uD568 \uC911 \uD558\uB098\uB97C \uC120\uD0DD\uD574\uC57C \uD55C\uB2E4\uBA74, \uD56D\uC0C1 \uCE5C\uC808\uD568\uC744 \uC120\uD0DD\uD558\uB77C.", source: "R.J. \uD314\uB77C\uC2DC\uC624, \uC6D0\uB354" },
+      { text: "\uAC00\uC7A5 \uC911\uC694\uD55C \uAC83\uC740 \uB208\uC5D0 \uBCF4\uC774\uC9C0 \uC54A\uC544. \uB9C8\uC74C\uC73C\uB85C \uBCF4\uC544\uC57C\uB9CC \uD574.", source: "\uC5B4\uB9B0 \uC655\uC790" },
+      { text: "\uB098\uB97C \uC2EB\uC5B4\uD558\uB294 \uC0AC\uB78C\uC5D0\uAC8C \uC2E0\uACBD \uC4F0\uB290\uB77C, \uC88B\uC544\uD558\uB294 \uC0AC\uB78C\uB4E4\uC5D0\uAC8C \uC18C\uD640\uD558\uC9C0 \uB9D0\uC790.", source: "\uCCB4\uB9AC\uC0C8\uC6B0: \uBE44\uBC00\uAE00\uC785\uB2C8\uB2E4" },
+      { text: "\uBC14\uB78C\uC774 \uBD88\uC5B4 \uB118\uC5B4\uB728\uB9B0 \uC790\uC804\uAC70\uB97C \uC138\uC6CC \uB450\uACE0 \uB3CC\uC544\uC124 \uB54C\uC758 \uBD80\uB044\uB7EC\uC6C0.", source: "\uBC15\uC644\uC11C, \uC790\uC804\uAC70 \uB3C4\uB451" },
+      { text: "\uC0C1\uCC98\uB294 \uC228\uAE38\uC218\uB85D \uACEA\uC544\uAC00\uC9C0\uB9CC, \uD587\uBCD5 \uC544\uB798 \uAEBC\uB0B4\uB193\uC73C\uBA74 \uC544\uBB3C\uAE30 \uC2DC\uC791\uD55C\uB2E4.", source: "\uC774\uAE08\uC774, \uC720\uC9C4\uACFC \uC720\uC9C4" },
+      { text: "\uC2DC\uAC04\uC740 \uBD99\uC7A1\uC544 \uB458 \uC218\uB3C4 \uC5C6\uACE0 \uBBF8\uB9AC \uAC00\uBD88\uD560 \uC218\uB3C4 \uC5C6\uB2E4.", source: "\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810" },
+      { text: "\uC644\uBCBD\uD55C \uBD80\uBAA8\uB3C4, \uC790\uB140\uB3C4 \uC5C6\uB2E4. \uC6B0\uB9AC\uB294 \uC11C\uB85C \uB9C8\uC8FC\uD558\uBA70 \uC790\uB780\uB2E4.", source: "\uC774\uD76C\uC601, \uD398\uC778\uD2B8" },
+      { text: "\uC2DC\uC791\uC774 \uBC18\uC774\uB2E4. \uB450\uB824\uC6C0\uC744 \uB5A8\uCE58\uACE0 \uC77C\uB2E8 \uB3C4\uC804\uD574 \uBCF4\uB294 \uAC83\uC774 \uC911\uC694\uD558\uB2E4.", source: "\uACA9\uC5B8" },
+      { text: "\uC6B0\uB9AC\uAC00 \uBB34\uC2EC\uCF54 \uD758\uB824\uBCF4\uB0B4\uB294 \uC624\uB298\uC740 \uC5B4\uC81C \uC8FD\uC740 \uC774\uAC00 \uADF8\uD1A0\uB85D \uBC14\uB77C\uB358 \uB0B4\uC77C\uC774\uB2E4.", source: "\uACA9\uC5B8" },
+      { text: "\uAD50\uBB38 \uC55E \uC120\uC0DD\uB2D8\uACFC \uBC30\uC6C0\uD130 \uC9C0\uD0B4\uC774 \uC120\uC0DD\uB2D8\uAED8 \uBA48\uCD94\uC5B4 \uC11C\uC11C \uACF5\uC190\uD788 \uC778\uC0AC\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uAE09\uC2DD\uC2E4\uC5D0\uC11C\uB294 \uC0C8\uCE58\uAE30 \uC5C6\uC774 \uD55C \uC904\uB85C \uC11C\uC11C \uBC30\uC2DD\uBC1B\uACE0 \uAC10\uC0AC \uC778\uC0AC\uB97C \uC804\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uC218\uC5C5 \uC885\uC774 \uC6B8\uB9AC\uAE30 \uC804\uC5D0 \uC790\uB9AC\uC5D0 \uC549\uC544 \uAD50\uACFC\uC11C\uC640 \uD544\uAE30\uB3C4\uAD6C\uB97C \uC900\uBE44\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uBCF5\uB3C4\uC640 \uACC4\uB2E8\uC5D0\uC11C\uB294 \uC6B0\uCE21\uD1B5\uD589\uC744 \uD558\uBA70 \uB6F0\uC9C0 \uC54A\uACE0 \uC0AC\uBFD0\uC0AC\uBFD0 \uAC77\uC2B5\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uD654\uC7A5\uC2E4\uC744 \uAE68\uB057\uD558\uAC8C \uC0AC\uC6A9\uD558\uACE0, \uB098\uAC08 \uB54C\uB294 \uBD88\uC774 \uAEBC\uC838 \uC788\uB294\uC9C0 \uD655\uC778\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uCE5C\uAD6C\uC758 \uC758\uACAC\uC774 \uB098\uC640 \uB2E4\uB974\uB354\uB77C\uB3C4 \uC911\uAC04\uC5D0 \uB04A\uC9C0 \uC54A\uACE0 \uB05D\uAE4C\uC9C0 \uACBD\uCCAD\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uCCB4\uC721 \uC2DC\uAC04\uC5D0\uB294 \uADDC\uCE59\uC744 \uC900\uC218\uD558\uACE0, \uC2B9\uD328\uBCF4\uB2E4 \uC815\uC815\uB2F9\uB2F9\uD55C \uACFC\uC815\uC744 \uC990\uAE41\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uD558\uAD50\uD560 \uB54C\uB294 \uC758\uC790\uB97C \uCC45\uC0C1 \uBC11\uC5D0 \uB123\uACE0, \uB0B4 \uC790\uB9AC \uC8FC\uBCC0\uC758 \uC4F0\uB808\uAE30\uB97C \uC90D\uC2B5\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" },
+      { text: "\uC2A4\uB9C8\uD2B8\uD3F0\uC740 \uC218\uC5C5 \uC2DC\uAC04 \uC804\uC5D0 \uBC18\uB4DC\uC2DC \uC804\uC6D0\uC744 \uB044\uAC70\uB098 \uBB34\uC74C\uC73C\uB85C \uC124\uC815\uD569\uB2C8\uB2E4.", source: "\uBC14\uB9845\uBD84 \uC9C0\uCE68" }
+    ],
+    3: [
+      { text: "\uBAA8\uB4E0 \uC0AC\uB78C\uC5D0\uAC8C \uCE5C\uC808\uD574\uB77C. \uB124\uAC00 \uB9CC\uB098\uB294 \uBAA8\uB4E0 \uC0AC\uB78C\uC740 \uC9C0\uAE08 \uD798\uB4E0 \uC2F8\uC6C0\uC744 \uD558\uACE0 \uC788\uC73C\uB2C8\uAE4C.", source: "\uD50C\uB77C\uD1A4" },
+      { text: "\uC6B0\uB9AC\uAC00 \uC2E4\uD328\uC5D0\uC11C \uBC30\uC6B0\uC9C0 \uBABB\uD55C\uB2E4\uBA74, \uADF8 \uC2E4\uD328\uB294 \uC601\uC6D0\uD55C \uD749\uD130\uB85C \uB0A8\uC744 \uBFD0\uC774\uB2E4.", source: "\uBA85\uC5B8" },
+      { text: "\uBE44\uB85D \uB0B4\uC77C \uC138\uACC4\uC758 \uC885\uB9D0\uC774 \uC628\uB2E4 \uD560\uC9C0\uB77C\uB3C4, \uB098\uB294 \uC624\uB298 \uD55C \uADF8\uB8E8\uC758 \uC0AC\uACFC\uB098\uBB34\uB97C \uC2EC\uACA0\uB2E4.", source: "\uC2A4\uD53C\uB178\uC790" },
+      { text: "\uC9C4\uC815\uD55C \uC6A9\uAE30\uB780 \uB450\uB824\uC6C0\uC774 \uC5C6\uB294 \uAC83\uC774 \uC544\uB2C8\uB77C, \uB450\uB824\uC6C0\uC5D0\uB3C4 \uBD88\uAD6C\uD558\uACE0 \uD589\uB3D9\uD558\uB294 \uAC83\uC774\uB2E4.", source: "\uB12C\uC2A8 \uB9CC\uB378\uB77C" },
+      { text: "\uB2E4\uB978 \uC0AC\uB78C\uC744 \uAE4E\uC544\uB0B4\uB9B0\uB2E4\uACE0 \uD574\uC11C \uB2F9\uC2E0\uC758 \uAC00\uCE58\uAC00 \uC62C\uB77C\uAC00\uB294 \uAC83\uC740 \uACB0\uCF54 \uC544\uB2C8\uB2E4.", source: "\uC778\uC131 \uBA85\uC5B8" },
+      { text: "\uC778\uC0DD\uC740 \uD758\uB7EC\uAC00\uB294 \uAC83\uC774 \uC544\uB2C8\uB77C, \uB0B4\uAC00 \uC9C1\uC811 \uB178\uB97C \uC800\uC5B4 \uB098\uC544\uAC00\uB294 \uD56D\uD574\uC640 \uAC19\uB2E4.", source: "\uBA85\uC5B8" },
+      { text: "\uB9D0\uC740 \uC785\uC744 \uB5A0\uB098\uBA74 \uC8FC\uC6CC \uB2F4\uC744 \uC218 \uC5C6\uC73C\uB2C8, \uC138 \uBC88 \uC0DD\uAC01\uD558\uACE0 \uD55C \uBC88 \uB9D0\uD558\uB294 \uC2B5\uAD00\uC744 \uB4E4\uC774\uC790.", source: "\uC5B8\uC5B4 \uC608\uC808" },
+      { text: "\uC2A4\uC2A4\uB85C\uB97C \uC874\uC911\uD558\uB294 \uB9C8\uC74C\uC774 \uC788\uC5B4\uC57C \uBE44\uB85C\uC18C \uD0C0\uC778\uB3C4 \uC9C4\uC2EC\uC73C\uB85C \uC874\uC911\uD560 \uC218 \uC788\uB294 \uBC95\uC774\uB2E4.", source: "\uC790\uC874\uAC10" },
+      { text: "\uC544\uB984\uB2E4\uC6B4 \uACB0\uACFC\uB294 \uD6CC\uB96D\uD55C \uACFC\uC815\uC744 \uD1B5\uD574\uC11C\uB9CC \uC5BB\uC5B4\uC9C4\uB2E4. \uC694\uD589\uC744 \uBC14\uB77C\uC9C0 \uB9C8\uB77C.", source: "\uBA85\uC5B8" },
+      { text: "\uC6B0\uB9AC\uAC00 \uC77D\uB294 \uCC45\uC774 \uC6B0\uB9AC \uBA38\uB9AC\uB97C \uC8FC\uBA39\uC73C\uB85C \uD55C \uB300 \uCCD0\uC11C \uC7A0\uC5D0\uC11C \uAE68\uC6B0\uC9C0 \uC54A\uB294\uB2E4\uBA74, \uB3C4\uB300\uCCB4 \uC65C \uCC45\uC744 \uC77D\uB294\uAC00?", source: "\uCE74\uD504\uCE74" },
+      { text: "\uBC30\uC6B0\uAE30\uB9CC \uD558\uACE0 \uC0DD\uAC01\uD558\uC9C0 \uC54A\uC73C\uBA74 \uC5BB\uC74C\uC774 \uC5C6\uACE0, \uC0DD\uAC01\uD558\uAE30\uB9CC \uD558\uACE0 \uBC30\uC6B0\uC9C0 \uC54A\uC73C\uBA74 \uC704\uD0DC\uB86D\uB2E4.", source: "\uACF5\uC790" },
+      { text: "\uCC9C \uB9AC \uAE38\uB3C4 \uD55C \uAC78\uC74C\uBD80\uD130\uB77C\uB294 \uB9D0\uCC98\uB7FC, \uC6D0\uB300\uD55C \uBAA9\uD45C\uB3C4 \uC624\uB298\uC758 \uC791\uC740 \uC2E4\uCC9C\uC5D0\uC11C \uC2DC\uC791\uB41C\uB2E4.", source: "\uBA85\uC5B8" },
+      { text: "\uAC70\uC13C \uD3ED\uD48D\uC6B0\uAC00 \uC9C0\uB098\uAC04 \uB4A4\uC5D0 \uB098\uD0C0\uB098\uB294 \uBB34\uC9C0\uAC1C\uAC00 \uB354\uC6B1 \uC120\uBA85\uD558\uACE0 \uC544\uB984\uB2F5\uAC8C \uBE5B\uB09C\uB2E4.", source: "\uBA85\uC5B8" },
+      { text: "\uC5B4\uB460\uC744 \uD0D3\uD558\uAE30\uBCF4\uB2E4\uB294 \uC2A4\uC2A4\uB85C \uC791\uC740 \uCD1B\uBD88 \uD558\uB098\uB97C \uCF1C\uB294 \uC0AC\uB78C\uC774 \uB418\uC5B4 \uC138\uC0C1\uC744 \uBC1D\uD600\uB77C.", source: "\uBA85\uC5B8" },
+      { text: "\uC544\uBB34\uAC83\uB3C4 \uD558\uC9C0 \uC54A\uC73C\uBA74 \uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0 \uC54A\uB294\uB2E4. \uC2E4\uD328\uB97C \uB450\uB824\uC6CC \uB9D0\uACE0 \uB3C4\uC804\uD558\uB77C.", source: "\uBA85\uC5B8" },
+      { text: "\uCE5C\uAD6C\uC758 \uB2E8\uC810\uC744 \uB36E\uC5B4\uC8FC\uACE0 \uC7A5\uC810\uC744 \uCE6D\uCC2C\uD574 \uC8FC\uB294 \uC5EC\uC720\uB85C\uC6B4 \uB9C8\uC74C\uAC00\uC9D0\uC774 \uD544\uC694\uD558\uB2E4.", source: "\uC778\uC131 \uBA85\uC5B8" },
+      { text: "\uC790\uC2E0\uC758 \uC798\uBABB\uC744 \uC194\uC9C1\uD558\uAC8C \uC778\uC815\uD558\uACE0 \uC0AC\uACFC\uD558\uB294 \uAC83\uC740 \uBD80\uB044\uB7EC\uC6B4 \uC77C\uC774 \uC544\uB2C8\uB77C \uD6CC\uB96D\uD55C \uC6A9\uAE30\uB2E4.", source: "\uC778\uC131 \uBA85\uC5B8" },
+      { text: "\uB2E4\uB978 \uC0AC\uB78C\uC758 \uC785\uC7A5\uC5D0\uC11C \uBA3C\uC800 \uC0DD\uAC01\uD574 \uBCF4\uB294 \uC5ED\uC9C0\uC0AC\uC9C0\uC758 \uD0DC\uB3C4\uAC00 \uAC08\uB4F1\uC744 \uC608\uBC29\uD55C\uB2E4.", source: "\uC778\uC131 \uBA85\uC5B8" },
+      { text: "\uC624\uB298 \uD758\uB9B0 \uB540\uBC29\uC6B8\uC740 \uB0B4\uC77C\uC758 \uC6C3\uC74C\uAF43\uC744 \uD53C\uC6B0\uB294 \uC18C\uC911\uD55C \uBC11\uAC70\uB984\uC774 \uB420 \uAC83\uC774\uB2E4.", source: "\uBA85\uC5B8" },
+      { text: "\uB2E4\uC591\uC131\uC744 \uC778\uC815\uD558\uACE0 \uCC28\uC774\uB97C \uC874\uC911\uD560 \uB54C, \uC6B0\uB9AC\uC758 \uAD50\uC2E4\uC740 \uB354\uC6B1 \uD48D\uC694\uB85C\uC6CC\uC9C8 \uC218 \uC788\uB2E4.", source: "\uB2E4\uC591\uC131" }
+    ]
+  };
+  var EN_SHORT_SENTENCES = {
+    1: [
+      { text: "Hello, world!", source: "Basic" },
+      { text: "Have a good day.", source: "Greeting" },
+      { text: "Be kind to others.", source: "Etiquette" },
+      { text: "Time is gold.", source: "Proverb" },
+      { text: "Never give up.", source: "Hope" },
+      { text: "Knowledge is power.", source: "Proverb" },
+      { text: "Love yourself first.", source: "Self-esteem" },
+      { text: "Read a book today.", source: "Reading" },
+      { text: "Smile changes everything.", source: "Happiness" },
+      { text: "You are so special.", source: "Encouragement" },
+      { text: "Practice makes perfect.", source: "Proverb" },
+      { text: "Honesty is the best policy.", source: "Proverb" },
+      { text: "Keep your promise.", source: "Etiquette" },
+      { text: "Make a new friend.", source: "Friendship" },
+      { text: "Action speaks louder.", source: "Proverb" },
+      { text: "Dream big dreams.", source: "Hope" },
+      { text: "Do your best today.", source: "Effort" },
+      { text: "Listen to your heart.", source: "Wisdom" },
+      { text: "Respect your teachers.", source: "Etiquette" },
+      { text: "School is fun.", source: "School Life" }
+    ],
+    2: [
+      { text: "A friend in need is a friend indeed.", source: "Proverb" },
+      { text: "Don't judge a book by its cover.", source: "Proverb" },
+      { text: "Where there is a will, there is a way.", source: "Proverb" },
+      { text: "Rome was not built in a day.", source: "Proverb" },
+      { text: "Two heads are better than one.", source: "Proverb" },
+      { text: "The early bird catches the worm.", source: "Proverb" },
+      { text: "Every cloud has a silver lining.", source: "Proverb" },
+      { text: "No pain, no gain. Keep pushing forward.", source: "Proverb" },
+      { text: "The pen is mightier than the sword.", source: "Proverb" },
+      { text: "Actions speak louder than words.", source: "Proverb" },
+      { text: "It is never too late to learn something new.", source: "Wisdom" },
+      { text: "To teach is to learn twice over.", source: "Education" },
+      { text: "Education is the key to unlocking the world.", source: "Education" },
+      { text: "A journey of a thousand miles begins with a single step.", source: "Lao Tzu" },
+      { text: "What you do today can improve all your tomorrows.", source: "Ralph Marston" },
+      { text: "Believe you can and you're halfway there.", source: "Theodore Roosevelt" },
+      { text: "Change your thoughts and you change your world.", source: "Norman Vincent Peale" },
+      { text: "It always seems impossible until it is done.", source: "Nelson Mandela" },
+      { text: "Success is not final, failure is not fatal.", source: "Winston Churchill" },
+      { text: "Keep your face always toward the sunshine.", source: "Walt Whitman" }
+    ],
+    3: [
+      { text: "In the middle of every difficulty lies opportunity. Do not give up easily.", source: "Albert Einstein" },
+      { text: "The only limit to our realization of tomorrow will be our doubts of today.", source: "Franklin D. Roosevelt" },
+      { text: "Do not go where the path may lead, go instead where there is no path and leave a trail.", source: "Ralph Waldo Emerson" },
+      { text: "Happiness is not something ready made. It comes from your own actions.", source: "Dalai Lama" },
+      { text: "The greatest glory in living lies not in never falling, but in rising every time we fall.", source: "Nelson Mandela" },
+      { text: "The future belongs to those who believe in the beauty of their dreams.", source: "Eleanor Roosevelt" },
+      { text: "You must be the change you wish to see in the world. Start with yourself today.", source: "Mahatma Gandhi" },
+      { text: "Education is the most powerful weapon which you can use to change the world.", source: "Nelson Mandela" },
+      { text: "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.", source: "Buddha" },
+      { text: "Life is like riding a bicycle. To keep your balance, you must keep moving.", source: "Albert Einstein" },
+      { text: "Success usually comes to those who are too busy to be looking for it.", source: "Henry David Thoreau" },
+      { text: "If you want to live a happy life, tie it to a goal, not to people or things.", source: "Albert Einstein" },
+      { text: "Never let the fear of striking out keep you from playing the game.", source: "Babe Ruth" },
+      { text: "Money and success don\u2019t change people; they merely amplify what is already there.", source: "Will Smith" },
+      { text: "Your time is limited, so don't waste it living someone else's life. Stay hungry, stay foolish.", source: "Steve Jobs" },
+      { text: "If life were predictable it would cease to be life, and be without flavor.", source: "Eleanor Roosevelt" },
+      { text: "The whole secret of a successful life is to find out what is one's destiny to do, and then do it.", source: "Henry Ford" },
+      { text: "Not how long, but how well you have lived is the main thing. Live a purposeful life.", source: "Seneca" },
+      { text: "Life is short, and it is up to you to make it sweet. Enjoy the little things.", source: "Sarah Louise Delany" },
+      { text: "The best way to predict your future is to create it. Take charge of your destiny today.", source: "Abraham Lincoln" }
+    ]
+  };
+  var KR_LONG_PASSAGES = {
+    1: [
+      { title: "\uAC00\uC744 \uD558\uB298", text: "\uAC00\uC744 \uD558\uB298\uC740 \uC720\uB09C\uD788 \uB192\uACE0 \uD478\uB985\uB2C8\uB2E4. \uC2DC\uC6D0\uD55C \uBC14\uB78C\uC774 \uBD88\uC5B4\uC624\uBA74 \uB098\uBB47\uC78E\uB4E4\uC774 \uCDA4\uC744 \uCDA5\uB2C8\uB2E4. \uCE5C\uAD6C\uB4E4\uACFC \uBC16\uC73C\uB85C \uB098\uAC00 \uB9C8\uC74C\uAECF \uB6F0\uC5B4\uB180\uAE30 \uCC38 \uC88B\uC740 \uACC4\uC808\uC785\uB2C8\uB2E4. \uC790\uC5F0\uC774 \uC8FC\uB294 \uC120\uBB3C\uC744 \uB9C8\uC74C\uAECF \uC990\uACA8\uBD05\uC2DC\uB2E4." },
+      { title: "\uB098\uC758 \uAFC8", text: "\uB204\uAD6C\uC5D0\uAC8C\uB098 \uAC00\uC2B4 \uB6F0\uB294 \uAFC8\uC774 \uC788\uC2B5\uB2C8\uB2E4. \uB2F9\uC7A5 \uC774\uB8E8\uC5B4\uC9C0\uC9C0 \uC54A\uC544\uB3C4 \uAD1C\uCC2E\uC2B5\uB2C8\uB2E4. \uB9E4\uC77C \uC870\uAE08\uC529 \uB178\uB825\uD558\uB2E4 \uBCF4\uBA74 \uC5B8\uC820\uAC00 \uADF8 \uAFC8\uC5D0 \uB2FF\uC544 \uC788\uC744 \uAC83\uC785\uB2C8\uB2E4. \uC911\uC694\uD55C \uAC83\uC740 \uD3EC\uAE30\uD558\uC9C0 \uC54A\uB294 \uB048\uAE30\uC785\uB2C8\uB2E4." },
+      { title: "\uC791\uC740 \uCE5C\uC808", text: "\uBCF5\uB3C4\uC5D0\uC11C \uB9C8\uC8FC\uCE5C \uCE5C\uAD6C\uC5D0\uAC8C \uAC74\uB124\uB294 \uB530\uB73B\uD55C \uC778\uC0AC \uD55C\uB9C8\uB514, \uBB34\uAC70\uC6B4 \uC9D0\uC744 \uB4DC\uB294 \uC120\uC0DD\uB2D8\uC744 \uB3C4\uC640\uB4DC\uB9AC\uB294 \uC791\uC740 \uD589\uB3D9. \uC774\uB7F0 \uC0AC\uC18C\uD55C \uCE5C\uC808\uB4E4\uC774 \uBAA8\uC5EC \uC6B0\uB9AC \uD559\uAD50\uB97C \uB354 \uC544\uB984\uB2E4\uC6B4 \uACF3\uC73C\uB85C \uB9CC\uB4ED\uB2C8\uB2E4." },
+      { title: "\uB3C5\uC11C\uC758 \uC990\uAC70\uC6C0", text: "\uCC45\uC744 \uD3BC\uCE58\uBA74 \uC0C8\uB85C\uC6B4 \uC138\uACC4\uAC00 \uB208\uC55E\uC5D0 \uB098\uD0C0\uB0A9\uB2C8\uB2E4. \uB0B4\uAC00 \uACBD\uD5D8\uD558\uC9C0 \uBABB\uD55C \uC2DC\uB300\uB97C \uC5EC\uD589\uD560 \uC218\uB3C4 \uC788\uACE0, \uB2E4\uB978 \uC0AC\uB78C\uC758 \uB9C8\uC74C\uC18D\uC744 \uB4E4\uC5EC\uB2E4\uBCFC \uC218\uB3C4 \uC788\uC2B5\uB2C8\uB2E4. \uD558\uB8E8 \uC2ED \uBD84, \uB3C5\uC11C\uC758 \uBC14\uB2E4\uC5D0 \uBE60\uC838\uBCF4\uC138\uC694." },
+      { title: "\uAC00\uC871\uC758 \uC0AC\uB791", text: "\uC138\uC0C1\uC5D0\uC11C \uAC00\uC7A5 \uD3B8\uC548\uD55C \uC548\uC2DD\uCC98\uB294 \uAC00\uC871\uC785\uB2C8\uB2E4. \uBC16\uC5D0\uC11C \uC544\uBB34\uB9AC \uD798\uB4E4\uACE0 \uC9C0\uCCD0\uB3C4 \uC9D1\uC5D0 \uB3CC\uC544\uAC00\uBA74 \uB530\uB73B\uD55C \uC704\uB85C\uB97C \uBC1B\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uC624\uB298 \uC800\uB141\uC5D0\uB294 \uBD80\uBAA8\uB2D8\uAED8 \uC0AC\uB791\uD55C\uB2E4\uACE0 \uB9D0\uD574\uBCF4\uB294 \uAC74 \uC5B4\uB5A8\uAE4C\uC694." }
+    ],
+    2: [
+      { title: "\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810 (\uBC1C\uCDCC)", text: "\uC6B0\uB9AC\uAC00 \uBB34\uC2EC\uCF54 \uD758\uB824\uBCF4\uB0B4\uB294 \uC624\uB298\uC740 \uC5B4\uC81C \uC0DD\uC744 \uB9C8\uAC10\uD55C \uC774\uB4E4\uC774 \uADF8\uD1A0\uB85D \uAC04\uC808\uD788 \uBC14\uB77C\uB358 \uB0B4\uC77C\uC774\uB2E4. \uACFC\uAC70\uC5D0 \uC5BD\uB9E4\uC5EC \uC790\uCC45\uD558\uAC70\uB098 \uC624\uC9C0 \uC54A\uC740 \uBBF8\uB798\uB97C \uBBF8\uB9AC \uBD88\uC548\uD574\uD560 \uD544\uC694\uB294 \uC5C6\uB2E4. \uC9C0\uAE08 \uC228 \uC26C\uACE0 \uB300\uD654\uD558\uBA70 \uCC45\uC744 \uC77D\uB294 \uC774 \uCC2C\uB780\uD55C \uC21C\uAC04\uC5D0 \uC628 \uB9C8\uC74C\uC744 \uB2E4\uD574 \uC9D1\uC911\uD558\uB294 \uAC83, \uADF8\uAC83\uC774 \uC2DC\uAC04\uC758 \uC0C1\uC810\uC774 \uC6B0\uB9AC\uC5D0\uAC8C \uAC00\uB974\uCCD0 \uC900 \uC0B6\uC758 \uBE44\uBC00\uC774\uB2E4." },
+      { title: "\uCCB4\uB9AC\uC0C8\uC6B0: \uBE44\uBC00\uAE00\uC785\uB2C8\uB2E4", text: "\uCE5C\uAD6C\uB4E4\uC758 \uB208\uCE58\uB97C \uBCF4\uBA70 \uBB34\uB9AC\uC5D0\uC11C \uC18C\uC678\uB420\uAE4C \uC804\uC804\uAE0D\uAE0D\uD558\uB358 \uB0A0\uB4E4\uC774 \uC788\uC5C8\uB2E4. \uD558\uC9C0\uB9CC \uBAA8\uB4E0 \uC0AC\uB78C\uC774 \uB098\uB97C \uC88B\uC544\uD560 \uC218\uB294 \uC5C6\uB2E4. \uB0B4 \uC9C4\uC815\uD55C \uAC00\uCE58\uB294 \uB0A8\uC758 \uC2DC\uC120\uC774 \uC544\uB2C8\uB77C \uB0B4\uAC00 \uC2A4\uC2A4\uB85C\uB97C \uC5BC\uB9C8\uB098 \uC544\uB07C\uACE0 \uC874\uC911\uD558\uB294\uAC00\uC5D0 \uB2EC\uB824 \uC788\uB2E4. \uC11C\uB85C \uB2E4\uB978 \uC6B0\uB9AC\uAC00 \uBAA8\uC5EC \uBE44\uB85C\uC18C \uC544\uB984\uB2E4\uC6B4 \uC6B0\uB9AC \uBC18 \uAD50\uC2E4\uC744 \uC774\uB8EC\uB2E4." },
+      { title: "\uC544\uBAAC\uB4DC (\uBC1C\uCDCC)", text: "\uB450\uB824\uC6C0\uB3C4 \uBD84\uB178\uB3C4 \uB0B4\uAC90 \uC5C6\uC5C8\uB2E4. \uD558\uC9C0\uB9CC \uB0B4\uAC8C \uC5C6\uB294 \uADF8\uAC83\uC744 \uB0A8\uB4E4\uC740 \uACB0\uD568\uC774\uB77C \uBD88\uB800\uB2E4. \uC138\uC0C1 \uC0AC\uB78C\uB4E4\uC740 \uC27D\uAC8C \uD310\uB2E8\uD558\uACE0 \uC27D\uAC8C \uB2E8\uC815 \uC9D3\uB294\uB2E4. \uADF8\uB7EC\uB098 \uC138\uC0C1\uC744 \uC774\uD574\uD558\uB294 \uAC00\uC7A5 \uD655\uC2E4\uD55C \uAE38\uC740 \uC0C1\uB300\uBC29\uC758 \uC785\uC7A5\uC5D0\uC11C \uD55C \uAC78\uC74C \uBA48\uCD94\uC5B4 \uC11C\uC11C \uBC14\uB77C\uBCF4\uB294 \uC77C\uC774\uB2E4. \uB9C8\uC74C\uC758 \uBB38\uC740 \uC5B8\uC81C\uB098 \uC791\uC740 \uC190\uAE38\uC5D0\uC11C \uC5F4\uB9B0\uB2E4." },
+      { title: "\uC6B0\uC815\uC758 \uC758\uBBF8", text: "\uC9C4\uC815\uD55C \uCE5C\uAD6C\uB780 \uB0B4\uAC00 \uC2E4\uC218\uD558\uACE0 \uB118\uC5B4\uC84C\uC744 \uB54C \uBE44\uC6C3\uC9C0 \uC54A\uACE0 \uC190\uC744 \uB0B4\uBC00\uC5B4 \uC8FC\uB294 \uC0AC\uB78C\uC774\uB2E4. \uAE30\uC060 \uB54C \uD568\uAED8 \uC6C3\uC5B4\uC8FC\uACE0, \uC2AC\uD50C \uB54C \uB9D0\uC5C6\uC774 \uACC1\uC744 \uC9C0\uCF1C\uC8FC\uB294 \uC874\uC7AC\uAC00 \uC788\uB2E4\uB294 \uAC83\uC740 \uC778\uC0DD\uC5D0\uC11C \uAC00\uC7A5 \uD070 \uCD95\uBCF5\uC774\uB2E4. \uC88B\uC740 \uCE5C\uAD6C\uB97C \uC5BB\uC73C\uB824\uBA74 \uB0B4\uAC00 \uBA3C\uC800 \uC88B\uC740 \uCE5C\uAD6C\uAC00 \uB418\uC5B4\uC57C \uD55C\uB2E4." },
+      { title: "\uB3C4\uC804\uACFC \uC2E4\uD328", text: "\uC2E4\uD328\uB97C \uB450\uB824\uC6CC\uD558\uC5EC \uC544\uBB34\uAC83\uB3C4 \uC2DC\uB3C4\uD558\uC9C0 \uC54A\uB294 \uAC83\uC774 \uAC00\uC7A5 \uD070 \uC2E4\uD328\uB2E4. \uC790\uC804\uAC70\uB97C \uCC98\uC74C \uBC30\uC6B8 \uB54C \uC218\uC5C6\uC774 \uB118\uC5B4\uC9C0\uBA74\uC11C \uADE0\uD615 \uC7A1\uB294 \uBC95\uC744 \uD130\uB4DD\uD558\uB4EF, \uC6B0\uB9AC\uB294 \uC2E4\uD328\uB97C \uD1B5\uD574 \uBB34\uC5C7\uC774 \uC798\uBABB\uB418\uC5C8\uB294\uC9C0 \uBC30\uC6B0\uACE0 \uB354 \uB098\uC740 \uBC29\uBC95\uC744 \uCC3E\uC544\uB0B8\uB2E4. \uB118\uC5B4\uC9C0\uB294 \uAC83\uC744 \uB450\uB824\uC6CC\uD558\uC9C0 \uB9D0\uC790." }
+    ],
+    3: [
+      { title: "\uBBFC\uC8FC\uC8FC\uC758\uC640 \uCC45\uC784", text: "\uBBFC\uC8FC \uC0AC\uD68C\uC758 \uC2DC\uBBFC\uC73C\uB85C\uC11C \uC6B0\uB9AC\uB294 \uC790\uC720\uC640 \uAD8C\uB9AC\uB97C \uB204\uB9AC\uB294 \uB3D9\uC2DC\uC5D0 \uADF8\uC5D0 \uB530\uB974\uB294 \uB9C9\uC911\uD55C \uCC45\uC784\uC744 \uB2E4\uD574\uC57C \uD569\uB2C8\uB2E4. \uAD50\uC2E4 \uC548\uC5D0\uC11C\uB3C4 \uB9C8\uCC2C\uAC00\uC9C0\uC785\uB2C8\uB2E4. \uD559\uAE09 \uD68C\uC758\uC5D0\uC11C \uC790\uC2E0\uC758 \uC758\uACAC\uC744 \uB2F9\uB2F9\uD558\uAC8C \uB9D0\uD558\uB418, \uB2E4\uB978 \uCE5C\uAD6C\uB4E4\uC758 \uC758\uACAC\uB3C4 \uACBD\uCCAD\uD558\uACE0 \uB2E4\uC218\uACB0\uC758 \uC6D0\uCE59\uC5D0 \uC2B9\uBCF5\uD558\uB294 \uD0DC\uB3C4\uB97C \uAC00\uC838\uC57C \uD569\uB2C8\uB2E4. \uC18C\uC218 \uC758\uACAC\uC744 \uC874\uC911\uD558\uB294 \uBC30\uB824\uC2EC\uC774\uC57C\uB9D0\uB85C \uC131\uC219\uD55C \uBBFC\uC8FC \uC2DC\uBBFC\uC758 \uAE30\uBCF8 \uC694\uAC74\uC785\uB2C8\uB2E4." },
+      { title: "\uD658\uACBD \uBCF4\uD638\uC758 \uC911\uC694\uC131", text: "\uC9C0\uAD6C\uB294 \uC778\uB958\uAC00 \uB300\uB300\uC190\uC190 \uC0B4\uC544\uAC08 \uC720\uC77C\uD55C \uD130\uC804\uC785\uB2C8\uB2E4. \uC77C\uD68C\uC6A9\uD488 \uC0AC\uC6A9\uC744 \uC904\uC774\uACE0 \uC7AC\uD65C\uC6A9\uC744 \uC2E4\uCC9C\uD558\uB294 \uC791\uC740 \uD589\uB3D9\uB4E4\uC774 \uBAA8\uC77C \uB54C, \uC2EC\uAC01\uD55C \uAE30\uD6C4 \uC704\uAE30\uB97C \uADF9\uBCF5\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uC6B0\uB9AC\uAC00 \uBB34\uC2EC\uCF54 \uBC84\uB9B0 \uD50C\uB77C\uC2A4\uD2F1\uC774 \uBC14\uB2E4 \uC0DD\uD0DC\uACC4\uB97C \uD30C\uAD34\uD558\uACE0 \uACB0\uAD6D \uC778\uAC04\uC5D0\uAC8C \uB3CC\uC544\uC628\uB2E4\uB294 \uC0AC\uC2E4\uC744 \uBA85\uC2EC\uD574\uC57C \uD569\uB2C8\uB2E4. \uD558\uB098\uBFD0\uC778 \uC9C0\uAD6C\uB97C \uC9C0\uD0A4\uB294 \uC77C\uC740 \uBC14\uB85C \uB098\uBD80\uD130 \uC2DC\uC791\uD574\uC57C \uD569\uB2C8\uB2E4." },
+      { title: "\uC5ED\uC0AC\uB97C \uC78A\uC740 \uBBFC\uC871\uC5D0\uAC8C \uBBF8\uB798\uB294 \uC5C6\uB2E4", text: "\uACFC\uAC70\uB97C \uC78A\uC740 \uBBFC\uC871\uC740 \uACB0\uCF54 \uBC1D\uC740 \uBBF8\uB798\uB97C \uB9DE\uC774\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4. \uC218\uB9CE\uC740 \uC120\uC5F4\uB4E4\uC774 \uD53C\uC640 \uB540\uC73C\uB85C \uC9C0\uCF1C\uB0B8 \uC6B0\uB9AC\uC758 \uC544\uD508 \uC5ED\uC0AC\uB97C \uC62C\uBC14\uB85C \uAE30\uC5B5\uD558\uACE0 \uAD50\uD6C8\uC744 \uC0BC\uC744 \uB54C, \uAC19\uC740 \uC2E4\uC218\uB97C \uBC18\uBCF5\uD558\uC9C0 \uC54A\uC744 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uC5ED\uC0AC \uACF5\uBD80\uB294 \uB2E8\uC21C\uD55C \uC554\uAE30\uAC00 \uC544\uB2C8\uB77C \uD604\uC7AC\uB97C \uC774\uD574\uD558\uACE0 \uBBF8\uB798\uB97C \uC124\uACC4\uD558\uB294 \uAC00\uC7A5 \uC911\uC694\uD55C \uB098\uCE68\uBC18\uC785\uB2C8\uB2E4." },
+      { title: "\uC778\uACF5\uC9C0\uB2A5 \uC2DC\uB300\uC758 \uC778\uC131", text: "\uCCA8\uB2E8 \uAE30\uC220\uACFC \uC778\uACF5\uC9C0\uB2A5\uC774 \uB208\uBD80\uC2DC\uAC8C \uBC1C\uC804\uD558\uB294 \uC2DC\uB300\uC77C\uC218\uB85D \uC778\uAC04\uB9CC\uC774 \uAC00\uC9C8 \uC218 \uC788\uB294 \uB530\uB73B\uD55C \uAC10\uC131\uACFC \uACF5\uAC10 \uB2A5\uB825\uC774 \uB354\uC6B1 \uBE5B\uC744 \uBC1C\uD569\uB2C8\uB2E4. \uAE30\uACC4\uAC00 \uB300\uCCB4\uD560 \uC218 \uC5C6\uB294 \uCC3D\uC758\uB825\uACFC \uB3C4\uB355\uC801 \uD310\uB2E8\uB825, \uADF8\uB9AC\uACE0 \uD0C0\uC778\uACFC \uD611\uB825\uD558\uB294 \uC18C\uD1B5 \uB2A5\uB825\uC740 \uC55E\uC73C\uB85C \uB2E4\uAC00\uC62C \uBBF8\uB798 \uC0AC\uD68C\uC5D0\uC11C \uAC00\uC7A5 \uD575\uC2EC\uC801\uC778 \uACBD\uC7C1\uB825\uC774 \uB420 \uAC83\uC785\uB2C8\uB2E4. \uAE30\uC220\uC744 \uC62C\uBC14\uB974\uAC8C \uB2E4\uB8E8\uB294 \uC9C0\uD61C\uB97C \uAE38\uB7EC\uC57C \uD569\uB2C8\uB2E4." },
+      { title: "\uB2E4\uC591\uC131 \uC874\uC911\uACFC \uC138\uACC4 \uC2DC\uBBFC", text: "\uC138\uACC4\uD654 \uC2DC\uB300\uC5D0 \uBC1C\uB9DE\uCD94\uC5B4 \uC6B0\uB9AC\uB294 \uC11C\uB85C \uB2E4\uB978 \uBB38\uD654\uC640 \uAC00\uCE58\uAD00\uC744 \uD3B8\uACAC \uC5C6\uC774 \uBC1B\uC544\uB4E4\uC774\uB294 \uC5F4\uB9B0 \uB9C8\uC74C\uC744 \uAC00\uC838\uC57C \uD569\uB2C8\uB2E4. \uB098\uC640 \uD53C\uBD80\uC0C9\uC774 \uB2E4\uB974\uACE0 \uC5B8\uC5B4\uAC00 \uB2E4\uB974\uB2E4\uACE0 \uD574\uC11C \uBC30\uCC99\uD558\uB294 \uAC83\uC740 \uC5B4\uB9AC\uC11D\uC740 \uC77C\uC785\uB2C8\uB2E4. \uC11C\uB85C\uC758 \uCC28\uC774\uB97C \uC778\uC815\uD558\uACE0 \uC874\uC911\uD558\uBA70 \uC5B4\uC6B0\uB7EC\uC9C8 \uB54C, \uC778\uB958\uB294 \uBE44\uB85C\uC18C \uAC08\uB4F1\uC744 \uB118\uC5B4 \uD3C9\uD654\uB85C\uC6B4 \uACF5\uC874\uC758 \uC2DC\uB300\uB85C \uB098\uC544\uAC08 \uC218 \uC788\uC744 \uAC83\uC785\uB2C8\uB2E4." }
+    ]
+  };
+  var EN_LONG_PASSAGES = {
+    1: [
+      { title: "My Daily Routine", text: "I wake up at seven o'clock in the morning. I wash my face and brush my teeth. Then I eat a delicious breakfast with my family. I usually have bread and milk. After breakfast, I pack my bag and walk to school with my friends. It is a good start to the day." },
+      { title: "My Best Friend", text: "My best friend is kind and smart. We always play together after school. We like to ride our bicycles in the park. Sometimes we study math together in the library. I am very happy to have such a wonderful friend. I hope our friendship lasts forever." },
+      { title: "A Rainy Day", text: "It is raining outside today. I look out the window and see the raindrops falling. The sound of the rain is very peaceful. I read a book in my room while drinking hot chocolate. Rainy days are perfect for relaxing and enjoying a quiet time at home." },
+      { title: "Spring Is Here", text: "Spring has finally arrived. The weather is getting warmer, and the flowers are starting to bloom. Beautiful butterflies are flying around the garden. I can hear the birds singing sweet songs. Spring is my favorite season because everything looks so alive and fresh." },
+      { title: "My Pet Dog", text: "I have a cute little dog named Max. He has soft brown fur and big shiny eyes. When I come home from school, Max wags his tail and jumps around happily. I take him for a walk every evening. Max is not just a pet; he is an important member of my family." }
+    ],
+    2: [
+      { title: "The Importance of Reading", text: "Reading books is one of the best ways to learn about the world. When you read a good book, you can travel to amazing places without leaving your room. Books help improve your vocabulary and imagination. They also teach valuable life lessons. If you make reading a daily habit, you will discover a whole new universe waiting for you." },
+      { title: "Protecting Our Earth", text: "Our planet Earth is facing many serious environmental problems like pollution and climate change. We must take action immediately to protect our home. Simple things like turning off lights when leaving a room, recycling plastic bottles, and planting trees can make a huge difference. If everyone works together, we can save the Earth for future generations." },
+      { title: "The Value of Friendship", text: "True friendship is a treasure that is hard to find. A real friend accepts you for who you are and stands by you during difficult times. Friendship is built on trust, honesty, and mutual respect. To have a good friend, you must first learn how to be a good friend yourself. Small acts of kindness strengthen the bond between friends." },
+      { title: "Overcoming Fear", text: "Everyone experiences fear at some point in their lives. It is a natural human emotion. However, letting fear stop you from trying new things will limit your potential. Courage is not the absence of fear, but the ability to take action despite being afraid. When you face your fears directly, you will grow stronger and more confident." },
+      { title: "Healthy Habits", text: "Maintaining a healthy lifestyle is essential for both your physical and mental well-being. Eating a balanced diet with plenty of fruits and vegetables gives you the energy you need. Exercising regularly keeps your body strong and reduces stress. Also, getting enough sleep is crucial for your brain to function properly and learn new things at school." }
+    ],
+    3: [
+      { title: "The Impact of Artificial Intelligence", text: "Artificial intelligence is rapidly transforming the way we live and work. From self-driving cars to advanced medical diagnostics, AI technologies are bringing unprecedented changes to human society. However, with these advancements come significant ethical challenges. We must carefully consider issues such as data privacy, algorithmic bias, and job displacement. As AI becomes more integrated into our daily lives, it is crucial that we establish strong moral frameworks and regulations to ensure that these powerful technologies are developed and utilized for the benefit of all humanity." },
+      { title: "Global Citizenship in the 21st Century", text: "In today's highly interconnected world, being a responsible citizen extends beyond national borders. Global citizenship requires an understanding that our actions can impact people across the globe. Issues like climate change, poverty, and human rights violations cannot be solved by a single nation alone. They demand international cooperation and a shared sense of responsibility. By embracing cultural diversity, advocating for equality, and actively participating in global problem-solving, we can build a more peaceful and sustainable future for everyone on this planet." },
+      { title: "The Power of Critical Thinking", text: "In an era overflowing with information, the ability to think critically is more important than ever. We are constantly bombarded with news, opinions, and advertisements from various media sources. Critical thinking involves questioning the validity of information, analyzing evidence objectively, and identifying logical fallacies. It prevents us from blindly accepting fake news or being easily manipulated. By developing strong critical thinking skills, students can make informed decisions, solve complex problems creatively, and become active participants in a democratic society." },
+      { title: "The Pursuit of Happiness", text: "Throughout history, philosophers and scientists have debated the true meaning of happiness. While many people associate happiness with wealth or material possessions, psychological studies consistently show that true fulfillment comes from deeper sources. Meaningful relationships, a sense of purpose, and contributing to the well-being of others are the primary drivers of lasting joy. Furthermore, practicing gratitude and mindfulness can significantly increase our daily life satisfaction. Ultimately, happiness is not a destination to be reached, but a continuous journey of personal growth and self-discovery." },
+      { title: "Space Exploration and Human Destiny", text: "Since the dawn of civilization, humans have looked up at the stars with a sense of wonder and curiosity. Space exploration is the ultimate expression of our desire to understand the universe and our place within it. Venturing into the cosmos pushes the boundaries of human knowledge and technological capability. The innovations derived from space research have practically improved life on Earth in countless ways. As we look forward to future missions to Mars and beyond, space exploration continues to inspire the next generation of scientists, engineers, and dreamers to reach for the impossible." }
+    ]
+  };
 
   // src/js/typing-engine.js
   var CHOSUNG = ["\u3131", "\u3132", "\u3134", "\u3137", "\u3138", "\u3139", "\u3141", "\u3142", "\u3143", "\u3145", "\u3146", "\u3147", "\u3148", "\u3149", "\u314A", "\u314B", "\u314C", "\u314D", "\u314E"];
@@ -1687,6 +1849,7 @@
     "Slash": "?"
   };
   var KEY_FINGER_GUIDE = {
+    // 한글
     "\u3142": "\uC67C\uC190 \uC0C8\uB07C",
     "\u3141": "\uC67C\uC190 \uC0C8\uB07C",
     "\u314B": "\uC67C\uC190 \uC0C8\uB07C",
@@ -1723,7 +1886,64 @@
     "\u3150": "\uC624\uB978\uC190 \uC0C8\uB07C",
     "\u3154": "\uC624\uB978\uC190 \uC0C8\uB07C",
     ";": "\uC624\uB978\uC190 \uC0C8\uB07C",
-    "0": "\uC624\uB978\uC190 \uC0C8\uB07C"
+    "0": "\uC624\uB978\uC190 \uC0C8\uB07C",
+    // 영어 소문자
+    "q": "\uC67C\uC190 \uC0C8\uB07C",
+    "a": "\uC67C\uC190 \uC0C8\uB07C",
+    "z": "\uC67C\uC190 \uC0C8\uB07C",
+    "w": "\uC67C\uC190 \uC57D\uC9C0",
+    "s": "\uC67C\uC190 \uC57D\uC9C0",
+    "x": "\uC67C\uC190 \uC57D\uC9C0",
+    "e": "\uC67C\uC190 \uC911\uC9C0",
+    "d": "\uC67C\uC190 \uC911\uC9C0",
+    "c": "\uC67C\uC190 \uC911\uC9C0",
+    "r": "\uC67C\uC190 \uAC80\uC9C0",
+    "f": "\uC67C\uC190 \uAC80\uC9C0",
+    "v": "\uC67C\uC190 \uAC80\uC9C0",
+    "t": "\uC67C\uC190 \uAC80\uC9C0",
+    "g": "\uC67C\uC190 \uAC80\uC9C0",
+    "b": "\uC67C\uC190 \uAC80\uC9C0",
+    "y": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "h": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "n": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "u": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "j": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "m": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "i": "\uC624\uB978\uC190 \uC911\uC9C0",
+    "k": "\uC624\uB978\uC190 \uC911\uC9C0",
+    ",": "\uC624\uB978\uC190 \uC911\uC9C0",
+    "o": "\uC624\uB978\uC190 \uC57D\uC9C0",
+    "l": "\uC624\uB978\uC190 \uC57D\uC9C0",
+    ".": "\uC624\uB978\uC190 \uC57D\uC9C0",
+    "p": "\uC624\uB978\uC190 \uC0C8\uB07C",
+    "/": "\uC624\uB978\uC190 \uC0C8\uB07C",
+    // 영어 대문자
+    "Q": "\uC67C\uC190 \uC0C8\uB07C",
+    "A": "\uC67C\uC190 \uC0C8\uB07C",
+    "Z": "\uC67C\uC190 \uC0C8\uB07C",
+    "W": "\uC67C\uC190 \uC57D\uC9C0",
+    "S": "\uC67C\uC190 \uC57D\uC9C0",
+    "X": "\uC67C\uC190 \uC57D\uC9C0",
+    "E": "\uC67C\uC190 \uC911\uC9C0",
+    "D": "\uC67C\uC190 \uC911\uC9C0",
+    "C": "\uC67C\uC190 \uC911\uC9C0",
+    "R": "\uC67C\uC190 \uAC80\uC9C0",
+    "F": "\uC67C\uC190 \uAC80\uC9C0",
+    "V": "\uC67C\uC190 \uAC80\uC9C0",
+    "T": "\uC67C\uC190 \uAC80\uC9C0",
+    "G": "\uC67C\uC190 \uAC80\uC9C0",
+    "B": "\uC67C\uC190 \uAC80\uC9C0",
+    "Y": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "H": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "N": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "U": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "J": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "M": "\uC624\uB978\uC190 \uAC80\uC9C0",
+    "I": "\uC624\uB978\uC190 \uC911\uC9C0",
+    "K": "\uC624\uB978\uC190 \uC911\uC9C0",
+    "O": "\uC624\uB978\uC190 \uC57D\uC9C0",
+    "L": "\uC624\uB978\uC190 \uC57D\uC9C0",
+    "P": "\uC624\uB978\uC190 \uC0C8\uB07C"
   };
   function getCharStrokeCount(char) {
     if (!char) return 0;
@@ -2664,6 +2884,8 @@ ${reason}
       this.currentQuizIndex = 0;
       this.typingMode = "short";
       this.keyStageIndex = 0;
+      this.typingLang = "ko";
+      this.typingLevel = 1;
       this.keySession = null;
       this.sentenceIndex = 0;
       this.sentenceSession = null;
@@ -3316,28 +3538,56 @@ ${reason}
       }
     }
     // ================= TYPING PRACTICE VIEW (VISIBLE INPUT ENGINE) =================
+    // ================= TYPING PRACTICE VIEW (VISIBLE INPUT ENGINE) =================
     renderTyping(container) {
       container.innerHTML = `
       <div class="typing-container">
+        <!-- Config Bar: Language & Level -->
+        <div class="typing-config-bar" style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; background: #fff; padding: 1rem; border-radius: var(--radius-lg); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);">
+          <div style="font-weight: 700; font-size: 0.95rem;">\u2699\uFE0F \uC124\uC815:</div>
+          <select id="select-typing-lang" style="padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid #CBD5E1; font-weight: 600;">
+            <option value="ko" ${this.typingLang === "ko" ? "selected" : ""}>\u{1F1F0}\u{1F1F7} \uD55C\uAE00 \uC5F0\uC2B5</option>
+            <option value="en" ${this.typingLang === "en" ? "selected" : ""}>\u{1F1FA}\u{1F1F8} \uC601\uC5B4 \uC5F0\uC2B5</option>
+          </select>
+          <select id="select-typing-level" style="padding: 0.4rem 0.6rem; border-radius: var(--radius-md); border: 1px solid #CBD5E1; font-weight: 600;">
+            <option value="1" ${this.typingLevel === 1 ? "selected" : ""}>\u{1F331} 1\uB2E8\uACC4 (\uCD08\uAE09)</option>
+            <option value="2" ${this.typingLevel === 2 ? "selected" : ""}>\u{1F33F} 2\uB2E8\uACC4 (\uC911\uAE09)</option>
+            <option value="3" ${this.typingLevel === 3 ? "selected" : ""}>\u{1F333} 3\uB2E8\uACC4 (\uACE0\uAE09)</option>
+          </select>
+        </div>
+
         <!-- 4-Stage Tab Bar -->
         <div class="typing-stage-tabs">
           <button class="stage-tab-btn ${this.typingMode === "key" ? "active" : ""}" data-mode="key">
-            <span>\u{1F3AF}</span> 1\uB2E8\uACC4: \uC790\uB9AC \uC5F0\uC2B5
+            <span>\u{1F3AF}</span> \uD0A4 \uC5F0\uC2B5
           </button>
           <button class="stage-tab-btn ${this.typingMode === "word" ? "active" : ""}" data-mode="word">
-            <span>\u{1F4DD}</span> 2\uB2E8\uACC4: \uB0B1\uB9D0 \uC5F0\uC2B5
+            <span>\u{1F4DD}</span> \uB0B1\uB9D0 \uC5F0\uC2B5
           </button>
           <button class="stage-tab-btn ${this.typingMode === "short" ? "active" : ""}" data-mode="short">
-            <span>\u2728</span> 3\uB2E8\uACC4: \uC9E7\uC740 \uAE00 \uC5F0\uC2B5
+            <span>\u2728</span> \uC9E7\uC740 \uAE00 \uC5F0\uC2B5
           </button>
           <button class="stage-tab-btn ${this.typingMode === "long" ? "active" : ""}" data-mode="long">
-            <span>\u{1F4D6}</span> 4\uB2E8\uACC4: \uAE34 \uAE00 \uC5F0\uC2B5
+            <span>\u{1F4D6}</span> \uAE34 \uAE00 \uC5F0\uC2B5
           </button>
         </div>
 
         <div id="typing-stage-content"></div>
       </div>
     `;
+      container.querySelector("#select-typing-lang").addEventListener("change", (e) => {
+        this.typingLang = e.target.value;
+        this.keyStageIndex = 0;
+        this.sentenceIndex = 0;
+        this.passageIndex = 0;
+        this.renderTyping(container);
+      });
+      container.querySelector("#select-typing-level").addEventListener("change", (e) => {
+        this.typingLevel = parseInt(e.target.value, 10);
+        this.sentenceIndex = 0;
+        this.passageIndex = 0;
+        this.renderTyping(container);
+      });
       container.querySelectorAll(".stage-tab-btn").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           sounds.playClick();
@@ -3358,10 +3608,11 @@ ${reason}
     }
     // --- 1. 자리 연습 ---
     renderKeyPracticeMode(container) {
-      const stage = HANCOM_KEY_STAGES[this.keyStageIndex % HANCOM_KEY_STAGES.length];
+      const STAGES = this.typingLang === "ko" ? KR_KEY_STAGES : EN_KEY_STAGES;
+      const stage = STAGES[this.keyStageIndex % STAGES.length];
       container.innerHTML = `
       <div class="substage-pills">
-        ${HANCOM_KEY_STAGES.map((s, idx) => `
+        ${STAGES.map((s, idx) => `
           <button class="substage-pill ${idx === this.keyStageIndex ? "active" : ""}" data-stage-idx="${idx}">
             ${s.name}
           </button>
@@ -3473,7 +3724,7 @@ ${reason}
     }
     highlightKeyboardKey(targetKey) {
       document.querySelectorAll("#key-visual-layout .kb-key").forEach((k) => {
-        k.classList.toggle("target-glow", k.dataset.keyChar === targetKey);
+        k.classList.toggle("target-glow", k.dataset.keyChar.toLowerCase() === targetKey.toLowerCase());
       });
     }
     renderVisualKeyboardHtml() {
@@ -3530,8 +3781,8 @@ ${reason}
     }
     // --- 2. 낱말 연습 ---
     renderWordPracticeMode(container) {
+      const words = this.typingLang === "ko" ? KR_WORDS : EN_WORDS;
       let wordIdx = 0;
-      const words = WORD_PRACTICE_LIST;
       let score = 0;
       container.innerHTML = `
       <div class="typing-arena-card">
@@ -3592,13 +3843,14 @@ ${reason}
     }
     // --- 3. 짧은 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
     renderShortPracticeMode(container) {
-      const list = SHORT_SENTENCES;
+      const dataSource = this.typingLang === "ko" ? KR_SHORT_SENTENCES : EN_SHORT_SENTENCES;
+      const list = dataSource[this.typingLevel] || dataSource[1];
       const current = list[this.sentenceIndex % list.length];
       container.innerHTML = `
-      <div class="substage-pills">
+      <div class="substage-pills" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem;">
         ${list.map((item, idx) => `
-          <button class="substage-pill ${idx === this.sentenceIndex ? "active" : ""}" data-sentence-idx="${idx}">
-            ${idx + 1}. \u300A${item.book}\u300B
+          <button class="substage-pill ${idx === this.sentenceIndex ? "active" : ""}" data-sentence-idx="${idx}" style="min-width: 32px; padding: 0.4rem 0.8rem;">
+            ${idx + 1}
           </button>
         `).join("")}
       </div>
@@ -3624,7 +3876,7 @@ ${reason}
         </div>
 
         <div style="font-size: 0.9rem; font-weight: 700; color: #4F46E5; margin-bottom: 0.75rem;">
-          \uCD9C\uCC98: \u300A${current.book}\u300B \u2014 ${current.author}
+          \uCD9C\uCC98: ${current.source}
         </div>
 
         <!-- Hancom Taja Official Web Layout -->
@@ -3674,7 +3926,7 @@ ${reason}
         (status) => {
           sounds.playCelebration();
           triggerConfetti();
-          const earned = Math.round(status.cpm / 10 + 25);
+          const earned = Math.round(status.cpm / 10 + 25) * this.typingLevel;
           appState.addTypingScore(earned, status.cpm, status.accuracy);
           showToast(`\uC9E7\uC740 \uAE00 \uD0C0\uC790 \uC644\uC131! +${earned}P \uC801\uB9BD (${status.cpm} CPM, \uC815\uD655\uB3C4 ${status.accuracy}%)`, "\u{1F389}");
           setTimeout(() => {
@@ -3718,13 +3970,14 @@ ${reason}
     }
     // --- 4. 긴 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
     renderLongPracticeMode(container) {
-      const list = LONG_PASSAGES;
+      const dataSource = this.typingLang === "ko" ? KR_LONG_PASSAGES : EN_LONG_PASSAGES;
+      const list = dataSource[this.typingLevel] || dataSource[1];
       const current = list[this.passageIndex % list.length];
       container.innerHTML = `
       <div class="substage-pills">
         ${list.map((item, idx) => `
           <button class="substage-pill ${idx === this.passageIndex ? "active" : ""}" data-passage-idx="${idx}">
-            ${idx + 1}. \u300A${item.book}\u300B ${item.title}
+            ${idx + 1}. ${item.title}
           </button>
         `).join("")}
       </div>
@@ -3744,9 +3997,9 @@ ${reason}
             <div class="hud-value" id="lg-hud-prog">0<span class="hud-unit">%</span></div>
           </div>
           <div class="hud-stat-box">
-            <div class="hud-label">\uBB38\uD559 \uC791\uD488</div>
+            <div class="hud-label">\uC120\uD0DD\uB41C \uAE00</div>
             <div class="hud-value" style="font-size: 1.15rem; color: #4F46E5;">
-              \u300A${current.book}\u300B
+              ${current.title}
             </div>
           </div>
         </div>
@@ -3756,8 +4009,8 @@ ${reason}
             ${this.renderTargetCharHighlights(current.text, "")}
           </div>
 
-          <textarea class="hancom-real-input" id="lg-visible-input" rows="3"
-                    placeholder="\uC704 \uBB38\uD559 \uC791\uD488\uC744 \uBCF4\uACE0 \uD3B8\uC548\uD558\uAC8C \uD0C0\uC774\uD551\uD558\uC138\uC694. (\uC644\uC131 \uD6C4 Enter)" 
+          <textarea class="hancom-real-input" id="lg-visible-input" rows="4"
+                    placeholder="\uC704 \uC791\uD488\uC744 \uBCF4\uACE0 \uD3B8\uC548\uD558\uAC8C \uD0C0\uC774\uD551\uD558\uC138\uC694. (\uC644\uC131 \uD6C4 Enter)" 
                     autocomplete="off" spellcheck="false" autofocus></textarea>
 
           <div class="typing-progress-bar">
@@ -3768,7 +4021,7 @@ ${reason}
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
           <button class="btn btn-secondary" id="btn-restart-long">\u{1F504} \uB2E4\uC2DC \uCE58\uAE30</button>
           <div style="font-size: 0.85rem; color: var(--text-muted);">
-            \uAE34 \uAE00 \uC644\uB3C5 \uD0C0\uC774\uD551 \uC2DC \uB300\uB7C9\uC758 \uC131\uC7A5 \uD3EC\uC778\uD2B8(+60P)\uAC00 \uC801\uB9BD\uB429\uB2C8\uB2E4.
+            \uAE34 \uAE00 \uC644\uB3C5 \uD0C0\uC774\uD551 \uC2DC \uB808\uBCA8\uC5D0 \uBE44\uB840\uD558\uC5EC \uB300\uB7C9\uC758 \uC131\uC7A5 \uD3EC\uC778\uD2B8\uAC00 \uC801\uB9BD\uB429\uB2C8\uB2E4.
           </div>
         </div>
       </div>
@@ -3791,9 +4044,9 @@ ${reason}
         (status) => {
           sounds.playCelebration();
           triggerConfetti();
-          const earned = Math.round(status.cpm / 10 + 60);
+          const earned = Math.round(status.cpm / 10 + 60) * this.typingLevel;
           appState.addTypingScore(earned, status.cpm, status.accuracy);
-          showToast(`\uAE34 \uAE00 \uBB38\uD559 \uC644\uB3C5 \uD0C0\uC774\uD551 \uC644\uB8CC! +${earned}P \uC801\uB9BD!`, "\u{1F3C6}");
+          showToast(`\uAE34 \uAE00 \uC644\uB3C5 \uD0C0\uC774\uD551 \uC644\uB8CC! +${earned}P \uC801\uB9BD!`, "\u{1F3C6}");
         }
       );
       visibleInput.addEventListener("input", (e) => {
