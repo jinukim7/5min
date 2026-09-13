@@ -605,6 +605,10 @@ export class AppState {
           if (!parsed.selectedClassKey) {
             parsed.selectedClassKey = '2-3';
           }
+          // 인증된 교사 계정이 아니면 교사 화면 모드를 해제
+          if (!parsed.auth || !parsed.auth.uid || parsed.auth.accountRole !== 'teacher') {
+            parsed.userProfile.role = 'student';
+          }
           return parsed;
         }
       }
@@ -677,8 +681,38 @@ export class AppState {
     this.listeners.forEach(fn => fn(this.state));
   }
 
+  // 로그인된 계정이 교사 권한(자동 구분 또는 코드 승격)을 가졌는지
+  isVerifiedTeacher() {
+    const { auth } = this.state;
+    return !!(auth && auth.isLoggedIn && auth.uid && auth.accountRole === 'teacher');
+  }
+
+  // 화면 모드 전환 (교사 화면은 인증된 교사만 가능)
   setRole(role) {
+    if (role === 'teacher' && !this.isVerifiedTeacher()) return false;
     this.state.userProfile.role = role;
+    this.save();
+    return true;
+  }
+
+  // 로그인 세션의 계정 정보와 권한을 반영
+  applyAccount({ uid, email, accountRole, roleSource }) {
+    this.state.auth = {
+      ...this.state.auth,
+      isLoggedIn: true,
+      provider: 'google',
+      uid,
+      email,
+      accountRole,
+      roleSource
+    };
+    this.state.userProfile.role = accountRole;
+    this.save();
+  }
+
+  clearAccount() {
+    this.state.auth = { isLoggedIn: false, provider: 'google', uid: null, email: '', accountRole: 'student', roleSource: 'default' };
+    this.state.userProfile.role = 'student';
     this.save();
   }
 

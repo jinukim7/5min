@@ -5,7 +5,7 @@ import { HANCOM_KEY_STAGES, WORD_PRACTICE_LIST, SHORT_SENTENCES, LONG_PASSAGES }
 import { KeyPracticeSession, HancomSentenceSession, isHangulPrefix } from './typing-engine.js';
 import { sounds } from './sound.js';
 import { triggerConfetti } from './confetti.js';
-import { openGoogleLoginModal, openProfileOnboardingModal } from './auth.js';
+import { openGoogleLoginModal, openProfileOnboardingModal, openTeacherUpgradeModal, initAuthSession, signOutUser } from './auth.js';
 import { initChatbot } from './chatbot.js';
 
 export function showToast(message, icon = '✨') {
@@ -62,6 +62,10 @@ class App {
     appState.subscribe(() => this.updateHeaderStats());
     initChatbot();
     this.navigate('home');
+    initAuthSession(() => {
+      this.updateHeaderStats();
+      this.navigate(this.currentView);
+    });
   }
 
   bindHeader() {
@@ -86,11 +90,21 @@ class App {
     if (googleBtn) {
       googleBtn.addEventListener('click', () => {
         sounds.playClick();
+        if (appState.state.auth && appState.state.auth.uid) {
+          if (!confirm('로그아웃 하시겠습니까?')) return;
+          signOutUser(() => {
+            this.updateHeaderStats();
+            this.navigate('home');
+            showToast('로그아웃되었습니다.', '👋');
+          });
+          return;
+        }
         showToast('학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.', '🏫');
         openGoogleLoginModal(() => {
           this.updateHeaderStats();
           this.navigate(this.currentView);
-          showToast('학교 워크스페이스 계정이 연결되었습니다.', '👤');
+          const roleText = appState.isVerifiedTeacher() ? '교사' : '학생';
+          showToast(`${roleText} 계정으로 로그인되었습니다.`, '👤');
         });
       });
     }
@@ -112,7 +126,10 @@ class App {
       modeBtn.addEventListener('click', () => {
         sounds.playClick();
         const newRole = appState.state.userProfile.role === 'student' ? 'teacher' : 'student';
-        appState.setRole(newRole);
+        if (!appState.setRole(newRole)) {
+          this.promptTeacherAccess();
+          return;
+        }
         this.updateHeaderStats();
         if (newRole === 'teacher') {
           showToast('교사 모드로 전환되었습니다. 학생들의 실명과 닉네임이 함께 표시됩니다.', '👩‍🏫');
@@ -127,6 +144,19 @@ class App {
     this.updateHeaderStats();
   }
 
+  // 교사 권한이 없을 때: 로그인 전이면 로그인 안내, 로그인 후면 [교사 권한 신청] 모달
+  promptTeacherAccess() {
+    if (!appState.state.auth || !appState.state.auth.uid) {
+      showToast('교사 화면은 교사 계정으로 로그인해야 이용할 수 있습니다.', '🔒');
+      return;
+    }
+    openTeacherUpgradeModal(() => {
+      this.updateHeaderStats();
+      showToast('교사 권한으로 전환되었습니다.', '👩‍🏫');
+      this.navigate('teacher');
+    });
+  }
+
   updateHeaderStats() {
     const { totalPoints, streak, userProfile } = appState.state;
     const ptsEl = document.getElementById('header-points');
@@ -139,6 +169,9 @@ class App {
     if (ptsEl) ptsEl.textContent = `🌟 ${totalPoints.toLocaleString()}P`;
     if (streakEl) streakEl.textContent = `🔥 ${streak}일 연속`;
     if (classEl) classEl.textContent = `경희중학교 올바른 루틴`;
+
+    const authLabelEl = document.querySelector('#btn-google-auth span');
+    if (authLabelEl) authLabelEl.textContent = appState.state.auth && appState.state.auth.uid ? '로그아웃' : '로그인';
 
     if (userProfile.role === 'teacher') {
       if (roleIconEl) roleIconEl.textContent = '👩‍🏫';
@@ -186,7 +219,11 @@ class App {
         this.renderBadges(mainContainer);
         break;
       case 'teacher':
-        this.renderTeacher(mainContainer);
+        if (appState.isVerifiedTeacher()) {
+          this.renderTeacher(mainContainer);
+        } else {
+          this.renderTeacherLocked(mainContainer);
+        }
         break;
     }
   }
@@ -1762,6 +1799,36 @@ class App {
         this.leaderboardCategory = e.currentTarget.dataset.subcat;
         this.renderBadges(container);
       });
+    });
+  }
+
+  // 교사 권한이 없는 사용자에게 보여줄 잠금 화면
+  renderTeacherLocked(container) {
+    const isLoggedIn = !!(appState.state.auth && appState.state.auth.uid);
+    container.innerHTML = `
+      <div class="app-container" style="padding-top: 3rem;">
+        <div class="card" style="max-width: 520px; margin: 0 auto; padding: 2.5rem 2rem; text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.75rem;">🔒</div>
+          <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">교사 전용 화면입니다</h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            ${isLoggedIn
+              ? `현재 계정(<strong>${appState.state.auth.email}</strong>)은 학생 권한입니다.<br>선생님이시라면 교사 인증 코드로 권한을 신청해 주세요.`
+              : '교사 계정으로 로그인하면 학급 경영 대시보드를 이용할 수 있습니다.<br>학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.'}
+          </p>
+          <button class="btn btn-primary" id="btn-locked-action" style="background: #4F46E5;">
+            ${isLoggedIn ? '🔑 교사 권한 신청' : '로그인하기'}
+          </button>
+        </div>
+      </div>
+    `;
+
+    container.querySelector('#btn-locked-action').addEventListener('click', () => {
+      sounds.playClick();
+      if (isLoggedIn) {
+        this.promptTeacherAccess();
+      } else {
+        document.getElementById('btn-google-auth').click();
+      }
     });
   }
 

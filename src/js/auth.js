@@ -1,49 +1,174 @@
-// Google Authentication & Onboarding Management
+// Google Authentication, Role Detection & Onboarding Management
 import { appState } from './state.js';
 import { sounds } from './sound.js';
 import { auth, googleProvider, db } from './firebase-config.js';
+import { resolveAccountRole, verifyTeacherCode } from './roles.js';
+
+const ROLE_LABELS = {
+  student: '👨‍🎓 학생',
+  teacher: '👩‍🏫 교사'
+};
+
+const ROLE_SOURCE_LABELS = {
+  auto: '이메일로 자동 구분',
+  code: '교사 인증 코드로 승격',
+  default: '자동 구분 안 됨 (기본 학생)'
+};
+
+// Firestore 프로필을 읽어 권한을 결정하고 role 필드를 저장한 뒤 세션 상태에 반영
+async function syncAccount(user) {
+  const ref = db.collection('users').doc(user.uid);
+  const doc = await ref.get();
+  const data = doc.exists ? doc.data() : {};
+  const { role, roleSource } = resolveAccountRole(user.email, data);
+
+  await ref.set({
+    uid: user.uid,
+    email: user.email,
+    role,
+    roleSource,
+    lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge: true });
+
+  appState.applyAccount({ uid: user.uid, email: user.email, accountRole: role, roleSource });
+
+  if (doc.exists) {
+    appState.updateProfile({
+      grade: data.grade || appState.state.userProfile.grade,
+      classNum: data.classNum || appState.state.userProfile.classNum,
+      number: data.number || appState.state.userProfile.number,
+      realName: data.realName || user.displayName || '',
+      nickname: data.nickname || user.displayName || ''
+    });
+  } else {
+    appState.updateProfile({
+      realName: user.displayName || '',
+      nickname: user.displayName || ''
+    });
+  }
+
+  return { isNewUser: !doc.exists || !data.nickname, role };
+}
+
+// 새로고침 후에도 Firebase 로그인 세션을 복원
+export function initAuthSession(onChange = () => {}) {
+  auth.onAuthStateChanged(async (user) => {
+    try {
+      if (user) {
+        await syncAccount(user);
+      } else if (appState.state.auth && appState.state.auth.uid) {
+        appState.clearAccount();
+      }
+    } catch (err) {
+      console.error('세션 동기화 실패', err);
+    }
+    onChange();
+  });
+}
 
 export function openGoogleLoginModal(onSuccess = () => {}) {
   auth.signInWithPopup(googleProvider)
-    .then((result) => {
-      const user = result.user;
-      
-      db.collection('users').doc(user.uid).get().then((doc) => {
-        if (doc.exists) {
-          // Returning user
-          const data = doc.data();
-          appState.state.auth.isLoggedIn = true;
-          appState.state.auth.email = user.email;
-          appState.state.auth.uid = user.uid;
-          
-          appState.state.userProfile.role = data.role || 'student';
-          appState.state.userProfile.grade = data.grade || 1;
-          appState.state.userProfile.classNum = data.classNum || 1;
-          appState.state.userProfile.number = data.number || 1;
-          appState.state.userProfile.realName = data.realName || user.displayName;
-          appState.state.userProfile.nickname = data.nickname || user.displayName;
-          
-          appState.save();
-          sounds.playSuccess();
-          onSuccess();
-        } else {
-          // New user -> setup onboarding
-          appState.state.auth.isLoggedIn = true;
-          appState.state.auth.email = user.email;
-          appState.state.auth.uid = user.uid;
-          appState.state.userProfile.realName = user.displayName || '';
-          appState.state.userProfile.nickname = user.displayName || '';
-          
-          appState.save();
-          sounds.playSuccess();
-          openProfileOnboardingModal(onSuccess, true);
-        }
-      });
+    .then(async (result) => {
+      const { isNewUser } = await syncAccount(result.user);
+      sounds.playSuccess();
+      if (isNewUser) {
+        openProfileOnboardingModal(onSuccess, true);
+      } else {
+        onSuccess();
+      }
     })
     .catch((error) => {
       console.error("Google 로그인 에러", error);
       alert("로그인에 실패했습니다.\n학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.");
     });
+}
+
+export function signOutUser(onDone = () => {}) {
+  auth.signOut()
+    .then(() => {
+      appState.clearAccount();
+      onDone();
+    })
+    .catch((error) => {
+      console.error('로그아웃 에러', error);
+      alert('로그아웃에 실패했습니다.');
+    });
+}
+
+// [교사 권한 신청] 모달: 교사 인증 코드 입력 시 role을 teacher로 승격
+export function openTeacherUpgradeModal(onSuccess = () => {}) {
+  if (!appState.state.auth || !appState.state.auth.uid) {
+    alert('교사 권한 신청은 로그인 후에 할 수 있습니다.\n우측 상단 로그인 버튼을 먼저 눌러 주세요.');
+    return;
+  }
+  if (appState.isVerifiedTeacher()) {
+    alert('이미 교사 권한이 있는 계정입니다.');
+    return;
+  }
+
+  let modal = document.getElementById('teacher-upgrade-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.id = 'teacher-upgrade-modal';
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width: 440px; text-align: left;">
+      <h3 style="font-size: 1.3rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <span>🔑</span> 교사 권한 신청
+      </h3>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1.25rem;">
+        현재 계정(<strong>${appState.state.auth.email}</strong>)은 교사로 자동 구분되지 않았습니다.<br>
+        학교에서 안내받은 <strong>교사 인증 코드</strong>를 입력하면 교사 권한으로 전환됩니다.
+      </p>
+      <input type="password" id="teacher-code-input" placeholder="교사 인증 코드" autocomplete="off"
+        style="width: 100%; padding: 0.7rem; border: 2px solid #4F46E5; border-radius: var(--radius-md); font-weight: 700; margin-bottom: 0.5rem;">
+      <div id="teacher-code-error" style="font-size: 0.8rem; color: #DC2626; min-height: 1.2em; margin-bottom: 0.75rem;"></div>
+      <div style="display: flex; gap: 0.75rem;">
+        <button class="btn btn-secondary" id="btn-cancel-teacher-code" style="flex: 1;">취소</button>
+        <button class="btn btn-primary" id="btn-submit-teacher-code" style="flex: 2; background: #4F46E5;">권한 전환하기</button>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('active');
+  const input = modal.querySelector('#teacher-code-input');
+  const errorEl = modal.querySelector('#teacher-code-error');
+  const submitBtn = modal.querySelector('#btn-submit-teacher-code');
+  input.focus();
+
+  modal.querySelector('#btn-cancel-teacher-code').onclick = () => modal.classList.remove('active');
+
+  const submit = () => {
+    if (!verifyTeacherCode(input.value)) {
+      sounds.playError();
+      errorEl.textContent = '인증 코드가 올바르지 않습니다.';
+      input.select();
+      return;
+    }
+
+    const { uid, email } = appState.state.auth;
+    submitBtn.disabled = true;
+    db.collection('users').doc(uid).set({
+      role: 'teacher',
+      roleSource: 'code',
+      roleUpdatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true }).then(() => {
+      appState.applyAccount({ uid, email, accountRole: 'teacher', roleSource: 'code' });
+      sounds.playCelebration();
+      modal.classList.remove('active');
+      onSuccess();
+    }).catch(err => {
+      console.error('교사 권한 저장 실패', err);
+      errorEl.textContent = '권한 저장에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+      submitBtn.disabled = false;
+    });
+  };
+
+  submitBtn.onclick = submit;
+  input.onkeydown = (e) => { if (e.key === 'Enter') submit(); };
 }
 
 export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = false) {
@@ -55,14 +180,18 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
   }
 
   const { userProfile } = appState.state;
+  const authInfo = appState.state.auth || {};
+  const isLoggedIn = !!authInfo.uid;
+  const accountRole = isLoggedIn ? (authInfo.accountRole || 'student') : 'student';
+  const roleSourceLabel = isLoggedIn ? (ROLE_SOURCE_LABELS[authInfo.roleSource] || ROLE_SOURCE_LABELS.default) : '로그인 전 (체험 모드)';
 
   modal.innerHTML = `
     <div class="modal-content" style="max-width: 520px; text-align: left;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
         <h3 style="font-size: 1.35rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
-          <span>🎒</span> 프로필 & 학적 정보 설정
+          <span>🎒</span> 마이페이지 · 프로필 설정
         </h3>
-        <span class="badge badge-green">Google 연동됨</span>
+        <span class="badge ${isLoggedIn ? 'badge-green' : 'badge-gray'}">${isLoggedIn ? 'Google 연동됨' : '로그인 전'}</span>
       </div>
 
       <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5;">
@@ -70,21 +199,16 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
         <span style="color: #4F46E5; font-weight: 700;">* 학생 화면에는 닉네임만 노출되며, 교사 화면에서만 실명이 함께 표시됩니다.</span>
       </p>
 
-      <!-- Role Picker -->
-      <div style="margin-bottom: 1.25rem;">
-        <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 0.4rem;">
-          구분 (사용자 역할)
-        </label>
-        <div style="display: flex; gap: 0.75rem;">
-          <label style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.65rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.9rem;" class="role-label ${userProfile.role === 'student' ? 'active-role' : ''}">
-            <input type="radio" name="profile-role" value="student" ${userProfile.role === 'student' ? 'checked' : ''} style="accent-color: #111827;">
-            <span>👨‍🎓 학생 (Student)</span>
-          </label>
-          <label style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.65rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.9rem;" class="role-label ${userProfile.role === 'teacher' ? 'active-role' : ''}">
-            <input type="radio" name="profile-role" value="teacher" ${userProfile.role === 'teacher' ? 'checked' : ''} style="accent-color: #4F46E5;">
-            <span>👩‍🏫 교사 (Teacher)</span>
-          </label>
+      <!-- Account Role (자동 구분, 직접 선택 불가) -->
+      <div style="margin-bottom: 1.25rem; padding: 0.85rem 1rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); background: var(--bg-subtle); display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">계정 권한</div>
+          <div style="font-size: 1rem; font-weight: 800;">${ROLE_LABELS[accountRole]}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">${isLoggedIn ? `${authInfo.email} · ` : ''}${roleSourceLabel}</div>
         </div>
+        ${isLoggedIn && accountRole !== 'teacher' ? `
+          <button class="btn btn-secondary" id="btn-request-teacher" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">🔑 교사 권한 신청</button>
+        ` : ''}
       </div>
 
       <!-- School Info -->
@@ -137,12 +261,13 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
   document.body.appendChild(modal);
   modal.classList.add('active');
 
-  modal.querySelectorAll('input[name="profile-role"]').forEach(radio => {
-    radio.onchange = (e) => {
-      modal.querySelectorAll('.role-label').forEach(l => l.classList.remove('active-role'));
-      e.target.closest('.role-label').classList.add('active-role');
+  const btnRequestTeacher = modal.querySelector('#btn-request-teacher');
+  if (btnRequestTeacher) {
+    btnRequestTeacher.onclick = () => {
+      modal.classList.remove('active');
+      openTeacherUpgradeModal(onSuccess);
     };
-  });
+  }
 
   const btnClose = modal.querySelector('#btn-close-onboarding');
   if (btnClose) {
@@ -152,7 +277,6 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
   const btnSave = modal.querySelector('#btn-save-onboarding');
   if (btnSave) {
     btnSave.onclick = () => {
-      const selectedRole = modal.querySelector('input[name="profile-role"]:checked').value;
       const grade = parseInt(modal.querySelector('#ob-grade').value, 10) || 2;
       const classNum = parseInt(modal.querySelector('#ob-class').value, 10) || 3;
       const number = parseInt(modal.querySelector('#ob-number').value, 10) || 1;
@@ -160,20 +284,19 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
       const nickname = modal.querySelector('#ob-nickname').value.trim() || '별빛달빛';
 
       appState.updateProfile({
-        role: selectedRole,
         grade,
         classNum,
         number,
         realName,
         nickname
       });
-      
+
       const { uid, email } = appState.state.auth;
       if (uid) {
+        // role 필드는 로그인/교사 코드 승격 흐름에서만 저장
         db.collection('users').doc(uid).set({
           uid,
           email,
-          role: selectedRole,
           grade,
           classNum,
           number,
