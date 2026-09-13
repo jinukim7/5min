@@ -2744,34 +2744,66 @@ ${reason}
         <div>
           <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">\uACC4\uC815 \uAD8C\uD55C</div>
           <div style="font-size: 1rem; font-weight: 800;">${ROLE_LABELS[accountRole]}</div>
-          <div style="font-size: 0.75rem; color: var(--text-muted);">${isLoggedIn ? `${authInfo.email} \xB7 ` : ""}${roleSourceLabel}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">${isLoggedIn ? `${authInfo.email}` : ""}</div>
         </div>
-        ${isLoggedIn && accountRole !== "teacher" ? `
-          <button class="btn btn-secondary" id="btn-request-teacher" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">\u{1F511} \uAD50\uC0AC \uAD8C\uD55C \uC2E0\uCCAD</button>
-        ` : ""}
       </div>
 
-      <!-- School Info -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
-        <div>
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uD559\uB144</label>
-          <select id="ob-grade" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
-            <option value="1" ${userProfile.grade === 1 ? "selected" : ""}>1\uD559\uB144</option>
-            <option value="2" ${userProfile.grade === 2 ? "selected" : ""}>2\uD559\uB144</option>
-            <option value="3" ${userProfile.grade === 3 ? "selected" : ""}>3\uD559\uB144</option>
-          </select>
+
+      <!-- Teacher vs Student Details -->
+      ${accountRole === "teacher" ? `
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">\uC5ED\uD560 \uAD6C\uBD84</label>
+          <div style="display: flex; gap: 1rem;">
+            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="radio" name="teacher_type" value="homeroom" ${userProfile.grade ? "checked" : "checked"} id="ob-teacher-homeroom"> \uB2F4\uC784 \uAD50\uC0AC
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="radio" name="teacher_type" value="subject" ${!userProfile.grade && userProfile.realName ? "checked" : ""} id="ob-teacher-subject"> \uAD50\uACFC(\uBE44\uB2F4\uC784) \uAD50\uC0AC
+            </label>
+          </div>
         </div>
-        <div>
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uBC18 (1~7\uBC18)</label>
-          <select id="ob-class" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
-            ${[1, 2, 3, 4, 5, 6, 7].map((c) => `<option value="${c}" ${userProfile.classNum === c ? "selected" : ""}>${c}\uBC18</option>`).join("")}
-          </select>
+        
+        <!-- School Info (Only for Homeroom Teachers) -->
+        <div id="ob-school-info-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uD559\uB144</label>
+            <select id="ob-grade" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              <option value="1" ${userProfile.grade === 1 ? "selected" : ""}>1\uD559\uB144</option>
+              <option value="2" ${userProfile.grade === 2 ? "selected" : ""}>2\uD559\uB144</option>
+              <option value="3" ${userProfile.grade === 3 ? "selected" : ""}>3\uD559\uB144</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uBC18 (1~7\uBC18)</label>
+            <select id="ob-class" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              ${[1, 2, 3, 4, 5, 6, 7].map((c) => `<option value="${c}" ${userProfile.classNum === c ? "selected" : ""}>${c}\uBC18</option>`).join("")}
+            </select>
+          </div>
         </div>
-        <div>
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uCD9C\uC11D \uBC88\uD638 (1~28\uBC88)</label>
-          <input type="number" id="ob-number" value="${userProfile.number}" min="1" max="28" style="width: 100%; padding: 0.55rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+      ` : `
+        <!-- School Info (Students) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uD559\uB144</label>
+            <select id="ob-grade" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              <option value="1" ${userProfile.grade === 1 ? "selected" : ""}>1\uD559\uB144</option>
+              <option value="2" ${userProfile.grade === 2 ? "selected" : ""}>2\uD559\uB144</option>
+              <option value="3" ${userProfile.grade === 3 ? "selected" : ""}>3\uD559\uB144</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uBC18 (1~7\uBC18)</label>
+            <select id="ob-class" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              ${[1, 2, 3, 4, 5, 6, 7].map((c) => `<option value="${c}" ${userProfile.classNum === c ? "selected" : ""}>${c}\uBC18</option>`).join("")}
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">\uCD9C\uC11D \uBC88\uD638 (1~28\uBC88)</label>
+            <input type="number" id="ob-number" value="${userProfile.number}" min="1" max="28" style="width: 100%; padding: 0.55rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+          </div>
         </div>
-      </div>
+      `}
+
 
       <!-- Real Name & Nickname -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem;">
@@ -3584,45 +3616,50 @@ ${reason}
         </div>
 
         <!-- 1st, 2nd, 3rd Podium Graphic -->
+        ${top3.length > 0 ? `
         <div class="podium-container">
           <!-- 2nd Place Silver -->
-          <div class="podium-card podium-2nd">
+          <div class="podium-card podium-2nd" style="visibility: ${top3[1] ? "visible" : "hidden"}">
             <div class="podium-rank-badge">\u{1F948}</div>
+            ${top3[1] ? `
             <div class="podium-student-name">${appState.formatStudentName(top3[1])}</div>
             <div class="podium-student-sub">${top3[1].grade || 2}\uD559\uB144 ${top3[1].classNum || 3}\uBC18 ${top3[1].number}\uBC88</div>
-            <div class="podium-score-pill" style="background: #F1F5F9; color: #475569;">
-              ${getScoreDisplay(top3[1])}
-            </div>
+            <div class="podium-score-pill" style="background: #F1F5F9; color: #475569;">${getScoreDisplay(top3[1])}</div>
             <div class="podium-quote">"${top3[1].comment || "\uD568\uAED8 \uC131\uC7A5\uD574\uC694!"}"</div>
+            ` : ""}
           </div>
 
           <!-- 1st Place Gold -->
-          <div class="podium-card podium-1st">
+          <div class="podium-card podium-1st" style="visibility: ${top3[0] ? "visible" : "hidden"}">
             <div class="podium-rank-badge">\u{1F451}</div>
-            <div style="font-size: 0.8rem; font-weight: 800; color: #D97706; text-transform: uppercase; margin-bottom: 0.2rem;">
-              \u{1F947} 1st Place Champion
-            </div>
-            <div class="podium-student-name" style="font-size: 1.45rem;">
-              ${appState.formatStudentName(top3[0])}
-            </div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: #D97706; text-transform: uppercase; margin-bottom: 0.2rem;">\u{1F947} 1st Place Champion</div>
+            ${top3[0] ? `
+            <div class="podium-student-name" style="font-size: 1.45rem;">${appState.formatStudentName(top3[0])}</div>
             <div class="podium-student-sub">${top3[0].grade || 2}\uD559\uB144 ${top3[0].classNum || 3}\uBC18 ${top3[0].number}\uBC88</div>
-            <div class="podium-score-pill" style="background: #FEF3C7; color: #B45309;">
-              \u{1F31F} ${getScoreDisplay(top3[0])}
-            </div>
+            <div class="podium-score-pill" style="background: #FEF3C7; color: #B45309;">\u{1F31F} ${getScoreDisplay(top3[0])}</div>
             <div class="podium-quote">"${top3[0].comment || "\uC544\uCE68\uC744 \uC131\uC2E4\uD788 \uCC44\uC6C1\uB2C8\uB2E4."}"</div>
+            ` : ""}
           </div>
 
           <!-- 3rd Place Bronze -->
-          <div class="podium-card podium-3rd">
+          <div class="podium-card podium-3rd" style="visibility: ${top3[2] ? "visible" : "hidden"}">
             <div class="podium-rank-badge">\u{1F949}</div>
+            ${top3[2] ? `
             <div class="podium-student-name">${appState.formatStudentName(top3[2])}</div>
             <div class="podium-student-sub">${top3[2].grade || 2}\uD559\uB144 ${top3[2].classNum || 3}\uBC18 ${top3[2].number}\uBC88</div>
-            <div class="podium-score-pill" style="background: #FFEDD5; color: #C2410C;">
-              ${getScoreDisplay(top3[2])}
-            </div>
+            <div class="podium-score-pill" style="background: #FFEDD5; color: #C2410C;">${getScoreDisplay(top3[2])}</div>
             <div class="podium-quote">"${top3[2].comment || "\uC624\uB298\uB3C4 \uD30C\uC774\uD305!"}"</div>
+            ` : ""}
           </div>
         </div>
+        ` : `
+        <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted); background: #F8FAFC; border-radius: var(--radius-lg); margin-top: 1.5rem; border: 1px dashed #CBD5E1;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">\u{1F331}</div>
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">\uC544\uC9C1 \uB4F1\uB85D\uB41C \uD559\uC0DD\uC774 \uC5C6\uC2B5\uB2C8\uB2E4</h3>
+          <p>\uC9C0\uAE08 \uBC14\uB85C \uC62C\uBC14\uB978 \uB8E8\uD2F4 \uD504\uB85C\uC81D\uD2B8\uC758 <strong>\uCCAB \uBC88\uC9F8 \uC8FC\uC778\uACF5</strong>\uC774 \uB418\uC5B4\uBCF4\uC138\uC694!</p>
+        </div>
+        `}
+
 
         <!-- 4th ~ 20th Moving Graphic Ticker -->
         <div class="ticker-card-container">
@@ -4346,6 +4383,7 @@ ${reason}
           sounds.playClick();
           this.sentenceIndex = parseInt(e.currentTarget.dataset.sentenceIdx, 10);
           this.renderShortPracticeMode(container);
+          setTimeout(() => container.querySelector("#st-visible-input").focus(), 100);
         });
       });
       const btnRestart = container.querySelector("#btn-restart-short");

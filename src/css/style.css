@@ -367,3 +367,48 @@
     padding: 0 1rem 3rem;
   }
 }
+
+/* =========================================
+   RESPONSIVE DESIGN IMPROVEMENTS 
+========================================= */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem !important;
+  }
+  .podium-container {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: center !important;
+  }
+  .podium-card {
+    width: 100% !important;
+    max-width: 320px !important;
+    transform: none !important;
+  }
+  .podium-1st {
+    order: -1; /* Always show 1st place on top in mobile */
+  }
+  .category-nav-pills {
+    flex-wrap: wrap !important;
+  }
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-floating-card {
+    margin-top: 1.5rem !important;
+    width: 100% !important;
+  }
+  header .container {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  header nav {
+    width: 100% !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+  .modal-content {
+    margin: 1rem !important;
+    width: auto !important;
+  }
+}

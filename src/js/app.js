@@ -386,45 +386,50 @@ class App {
         </div>
 
         <!-- 1st, 2nd, 3rd Podium Graphic -->
+        ${top3.length > 0 ? `
         <div class="podium-container">
           <!-- 2nd Place Silver -->
-          <div class="podium-card podium-2nd">
+          <div class="podium-card podium-2nd" style="visibility: ${top3[1] ? 'visible' : 'hidden'}">
             <div class="podium-rank-badge">🥈</div>
+            ${top3[1] ? `
             <div class="podium-student-name">${appState.formatStudentName(top3[1])}</div>
             <div class="podium-student-sub">${top3[1].grade || 2}학년 ${top3[1].classNum || 3}반 ${top3[1].number}번</div>
-            <div class="podium-score-pill" style="background: #F1F5F9; color: #475569;">
-              ${getScoreDisplay(top3[1])}
-            </div>
+            <div class="podium-score-pill" style="background: #F1F5F9; color: #475569;">${getScoreDisplay(top3[1])}</div>
             <div class="podium-quote">"${top3[1].comment || '함께 성장해요!'}"</div>
+            ` : ''}
           </div>
 
           <!-- 1st Place Gold -->
-          <div class="podium-card podium-1st">
+          <div class="podium-card podium-1st" style="visibility: ${top3[0] ? 'visible' : 'hidden'}">
             <div class="podium-rank-badge">👑</div>
-            <div style="font-size: 0.8rem; font-weight: 800; color: #D97706; text-transform: uppercase; margin-bottom: 0.2rem;">
-              🥇 1st Place Champion
-            </div>
-            <div class="podium-student-name" style="font-size: 1.45rem;">
-              ${appState.formatStudentName(top3[0])}
-            </div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: #D97706; text-transform: uppercase; margin-bottom: 0.2rem;">🥇 1st Place Champion</div>
+            ${top3[0] ? `
+            <div class="podium-student-name" style="font-size: 1.45rem;">${appState.formatStudentName(top3[0])}</div>
             <div class="podium-student-sub">${top3[0].grade || 2}학년 ${top3[0].classNum || 3}반 ${top3[0].number}번</div>
-            <div class="podium-score-pill" style="background: #FEF3C7; color: #B45309;">
-              🌟 ${getScoreDisplay(top3[0])}
-            </div>
+            <div class="podium-score-pill" style="background: #FEF3C7; color: #B45309;">🌟 ${getScoreDisplay(top3[0])}</div>
             <div class="podium-quote">"${top3[0].comment || '아침을 성실히 채웁니다.'}"</div>
+            ` : ''}
           </div>
 
           <!-- 3rd Place Bronze -->
-          <div class="podium-card podium-3rd">
+          <div class="podium-card podium-3rd" style="visibility: ${top3[2] ? 'visible' : 'hidden'}">
             <div class="podium-rank-badge">🥉</div>
+            ${top3[2] ? `
             <div class="podium-student-name">${appState.formatStudentName(top3[2])}</div>
             <div class="podium-student-sub">${top3[2].grade || 2}학년 ${top3[2].classNum || 3}반 ${top3[2].number}번</div>
-            <div class="podium-score-pill" style="background: #FFEDD5; color: #C2410C;">
-              ${getScoreDisplay(top3[2])}
-            </div>
+            <div class="podium-score-pill" style="background: #FFEDD5; color: #C2410C;">${getScoreDisplay(top3[2])}</div>
             <div class="podium-quote">"${top3[2].comment || '오늘도 파이팅!'}"</div>
+            ` : ''}
           </div>
         </div>
+        ` : `
+        <div style="text-align: center; padding: 4rem 1rem; color: var(--text-muted); background: #F8FAFC; border-radius: var(--radius-lg); margin-top: 1.5rem; border: 1px dashed #CBD5E1;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🌱</div>
+          <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">아직 등록된 학생이 없습니다</h3>
+          <p>지금 바로 올바른 루틴 프로젝트의 <strong>첫 번째 주인공</strong>이 되어보세요!</p>
+        </div>
+        `}
+
 
         <!-- 4th ~ 20th Moving Graphic Ticker -->
         <div class="ticker-card-container">
@@ -1201,6 +1206,7 @@ class App {
         sounds.playClick();
         this.sentenceIndex = parseInt(e.currentTarget.dataset.sentenceIdx, 10);
         this.renderShortPracticeMode(container);
+        setTimeout(() => container.querySelector('#st-visible-input').focus(), 100);
       });
     });
 

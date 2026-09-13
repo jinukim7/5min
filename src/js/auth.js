@@ -256,34 +256,66 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
         <div>
           <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">계정 권한</div>
           <div style="font-size: 1rem; font-weight: 800;">${ROLE_LABELS[accountRole]}</div>
-          <div style="font-size: 0.75rem; color: var(--text-muted);">${isLoggedIn ? `${authInfo.email} · ` : ''}${roleSourceLabel}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">${isLoggedIn ? `${authInfo.email}` : ''}</div>
         </div>
-        ${isLoggedIn && accountRole !== 'teacher' ? `
-          <button class="btn btn-secondary" id="btn-request-teacher" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">🔑 교사 권한 신청</button>
-        ` : ''}
       </div>
 
-      <!-- School Info -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
-        <div>
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">학년</label>
-          <select id="ob-grade" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
-            <option value="1" ${userProfile.grade === 1 ? 'selected' : ''}>1학년</option>
-            <option value="2" ${userProfile.grade === 2 ? 'selected' : ''}>2학년</option>
-            <option value="3" ${userProfile.grade === 3 ? 'selected' : ''}>3학년</option>
-          </select>
+
+      <!-- Teacher vs Student Details -->
+      ${accountRole === 'teacher' ? `
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">역할 구분</label>
+          <div style="display: flex; gap: 1rem;">
+            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="radio" name="teacher_type" value="homeroom" ${userProfile.grade ? 'checked' : 'checked'} id="ob-teacher-homeroom"> 담임 교사
+            </label>
+            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="radio" name="teacher_type" value="subject" ${!userProfile.grade && userProfile.realName ? 'checked' : ''} id="ob-teacher-subject"> 교과(비담임) 교사
+            </label>
+          </div>
         </div>
-        <div>
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">반 (1~7반)</label>
-          <select id="ob-class" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
-            ${[1, 2, 3, 4, 5, 6, 7].map(c => `<option value="${c}" ${userProfile.classNum === c ? 'selected' : ''}>${c}반</option>`).join('')}
-          </select>
+        
+        <!-- School Info (Only for Homeroom Teachers) -->
+        <div id="ob-school-info-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">학년</label>
+            <select id="ob-grade" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              <option value="1" ${userProfile.grade === 1 ? 'selected' : ''}>1학년</option>
+              <option value="2" ${userProfile.grade === 2 ? 'selected' : ''}>2학년</option>
+              <option value="3" ${userProfile.grade === 3 ? 'selected' : ''}>3학년</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">반 (1~7반)</label>
+            <select id="ob-class" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              ${[1, 2, 3, 4, 5, 6, 7].map(c => `<option value="${c}" ${userProfile.classNum === c ? 'selected' : ''}>${c}반</option>`).join('')}
+            </select>
+          </div>
         </div>
-        <div>
-          <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">출석 번호 (1~28번)</label>
-          <input type="number" id="ob-number" value="${userProfile.number}" min="1" max="28" style="width: 100%; padding: 0.55rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+      ` : `
+        <!-- School Info (Students) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">학년</label>
+            <select id="ob-grade" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              <option value="1" ${userProfile.grade === 1 ? 'selected' : ''}>1학년</option>
+              <option value="2" ${userProfile.grade === 2 ? 'selected' : ''}>2학년</option>
+              <option value="3" ${userProfile.grade === 3 ? 'selected' : ''}>3학년</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">반 (1~7반)</label>
+            <select id="ob-class" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+              ${[1, 2, 3, 4, 5, 6, 7].map(c => `<option value="${c}" ${userProfile.classNum === c ? 'selected' : ''}>${c}반</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">출석 번호 (1~28번)</label>
+            <input type="number" id="ob-number" value="${userProfile.number}" min="1" max="28" style="width: 100%; padding: 0.55rem; border: 1px solid var(--border-light); border-radius: var(--radius-md); font-weight: 700;">
+          </div>
         </div>
-      </div>
+      `}
+
 
       <!-- Real Name & Nickname -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem;">
