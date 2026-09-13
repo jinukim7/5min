@@ -7,5 +7,8 @@
     "dev": "node server.js",
     "start": "node server.js",
     "build": "esbuild src/js/app.js --bundle --outfile=dist/bundle.js --format=iife"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.2"
   }
 }
