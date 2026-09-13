@@ -2032,94 +2032,61 @@
     render();
   }
 
+  // src/js/firebase-config.js
+  var firebase2 = window.firebase;
+  var firebaseConfig = {
+    projectId: "better-school-life-260913",
+    appId: "1:333970857991:web:8b3165032a7fd38c158aa2",
+    storageBucket: "better-school-life-260913.firebasestorage.app",
+    apiKey: "AIzaSyDxCDJ-agfDGiFN6sBTdlk6TB-TodfeUDw",
+    authDomain: "better-school-life-260913.firebaseapp.com",
+    messagingSenderId: "333970857991"
+  };
+  if (!firebase2.apps.length) {
+    firebase2.initializeApp(firebaseConfig);
+  }
+  var auth = firebase2.auth();
+  var db = firebase2.firestore();
+  var googleProvider = new firebase2.auth.GoogleAuthProvider();
+
   // src/js/auth.js
   function openGoogleLoginModal(onSuccess = () => {
   }) {
-    let modal = document.getElementById("google-auth-modal");
-    if (!modal) {
-      modal = document.createElement("div");
-      modal.className = "modal-overlay";
-      modal.id = "google-auth-modal";
-      modal.innerHTML = `
-      <div class="modal-content" style="max-width: 460px;">
-        <div style="display: flex; justify-content: center; margin-bottom: 1.25rem;">
-          <svg width="48" height="48" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-          </svg>
-        </div>
-        <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;">\uAD6C\uAE00 \uACC4\uC815\uC73C\uB85C \uC2DC\uC791\uD558\uAE30</h3>
-        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.75rem;">
-          \uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(@school.ms.kr) \uB610\uB294 \uC77C\uBC18 \uAD6C\uAE00 \uACC4\uC815\uC73C\uB85C \uC548\uC804\uD558\uAC8C \uB85C\uADF8\uC778\uD558\uC138\uC694.
-        </p>
-
-        <!-- Quick Demo Google Accounts -->
-        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; text-align: left;">
-          <div class="google-account-pill card-interactive" data-email="minjun.kim@seoul-ms.kr" data-name="\uAE40\uBBFC\uC900" data-role="student" style="display: flex; align-items: center; gap: 0.85rem; padding: 0.85rem 1rem; border: 1px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer;">
-            <div style="width: 36px; height: 36px; border-radius: 50%; background: #3B82F6; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">\uBBFC</div>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; font-size: 0.9rem;">\uAE40\uBBFC\uC900 (\uD559\uC0DD)</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">minjun.kim@seoul-ms.kr</div>
-            </div>
-            <span class="badge badge-blue">\uD559\uC0DD</span>
-          </div>
-
-          <div class="google-account-pill card-interactive" data-email="teacher.lee@seoul-ms.kr" data-name="\uC774\uC0C1\uD601" data-role="teacher" style="display: flex; align-items: center; gap: 0.85rem; padding: 0.85rem 1rem; border: 1px solid var(--border-light); border-radius: var(--radius-lg); cursor: pointer;">
-            <div style="width: 36px; height: 36px; border-radius: 50%; background: #4F46E5; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">\uC774</div>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; font-size: 0.9rem;">\uC774\uC0C1\uD601 \uC120\uC0DD\uB2D8 (\uB2F4\uC784\uAD50\uC0AC)</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">teacher.lee@seoul-ms.kr</div>
-            </div>
-            <span class="badge badge-purple">\uAD50\uC0AC</span>
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 1rem;">
-          <button class="btn btn-secondary" id="btn-cancel-google" style="flex: 1; margin-right: 0.5rem;">\uCDE8\uC18C</button>
-          <button class="btn btn-primary" id="btn-custom-google" style="flex: 1;">\uC9C1\uC811 \uC785\uB825 \uB85C\uADF8\uC778</button>
-        </div>
-      </div>
-    `;
-      document.body.appendChild(modal);
-    }
-    modal.classList.add("active");
-    modal.querySelectorAll(".google-account-pill").forEach((pill) => {
-      pill.onclick = () => {
-        sounds.playSuccess();
-        const email = pill.dataset.email;
-        const name = pill.dataset.name;
-        const role = pill.dataset.role;
-        appState.state.auth.isLoggedIn = true;
-        appState.state.auth.email = email;
-        appState.state.userProfile.role = role;
-        if (role === "teacher") {
-          appState.state.userProfile.realName = name;
-          appState.state.userProfile.nickname = "2\uBC18\uB2F4\uC784";
+    auth.signInWithPopup(googleProvider).then((result) => {
+      const user = result.user;
+      db.collection("users").doc(user.uid).get().then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          appState.state.auth.isLoggedIn = true;
+          appState.state.auth.email = user.email;
+          appState.state.auth.uid = user.uid;
+          appState.state.userProfile.role = data.role || "student";
+          appState.state.userProfile.grade = data.grade || 1;
+          appState.state.userProfile.classNum = data.classNum || 1;
+          appState.state.userProfile.number = data.number || 1;
+          appState.state.userProfile.realName = data.realName || user.displayName;
+          appState.state.userProfile.nickname = data.nickname || user.displayName;
+          appState.save();
+          sounds.playSuccess();
+          onSuccess();
         } else {
-          appState.state.userProfile.realName = name;
+          appState.state.auth.isLoggedIn = true;
+          appState.state.auth.email = user.email;
+          appState.state.auth.uid = user.uid;
+          appState.state.userProfile.realName = user.displayName || "";
+          appState.state.userProfile.nickname = user.displayName || "";
+          appState.save();
+          sounds.playSuccess();
+          openProfileOnboardingModal(onSuccess, true);
         }
-        appState.save();
-        modal.classList.remove("active");
-        openProfileOnboardingModal(onSuccess);
-      };
+      });
+    }).catch((error) => {
+      console.error("Google \uB85C\uADF8\uC778 \uC5D0\uB7EC", error);
+      alert("\uAD6C\uAE00 \uB85C\uADF8\uC778\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4. \uB2E4\uC2DC \uC2DC\uB3C4\uD574 \uC8FC\uC138\uC694.");
     });
-    const btnCancel = modal.querySelector("#btn-cancel-google");
-    if (btnCancel) {
-      btnCancel.onclick = () => modal.classList.remove("active");
-    }
-    const btnCustom = modal.querySelector("#btn-custom-google");
-    if (btnCustom) {
-      btnCustom.onclick = () => {
-        sounds.playClick();
-        modal.classList.remove("active");
-        openProfileOnboardingModal(onSuccess);
-      };
-    }
   }
   function openProfileOnboardingModal(onSuccess = () => {
-  }) {
+  }, isNewUser = false) {
     let modal = document.getElementById("profile-onboarding-modal");
     if (!modal) {
       modal = document.createElement("div");
@@ -2197,7 +2164,7 @@
       </div>
 
       <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-        <button class="btn btn-secondary" id="btn-close-onboarding" style="flex: 1;">\uB2EB\uAE30</button>
+        ${!isNewUser ? `<button class="btn btn-secondary" id="btn-close-onboarding" style="flex: 1;">\uB2EB\uAE30</button>` : ""}
         <button class="btn btn-primary" id="btn-save-onboarding" style="flex: 2; background: #4F46E5;">
           \uC644\uB8CC\uD558\uACE0 \uC2DC\uC791\uD558\uAE30 \u2728
         </button>
@@ -2233,11 +2200,159 @@
           realName,
           nickname
         });
-        sounds.playCelebration();
-        modal.classList.remove("active");
-        onSuccess();
+        const { uid, email } = appState.state.auth;
+        if (uid) {
+          db.collection("users").doc(uid).set({
+            uid,
+            email,
+            role: selectedRole,
+            grade,
+            classNum,
+            number,
+            realName,
+            nickname,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true }).then(() => {
+            sounds.playCelebration();
+            modal.classList.remove("active");
+            onSuccess();
+          }).catch((err) => {
+            console.error("Failed to save profile", err);
+            alert("\uD504\uB85C\uD544 \uC800\uC7A5\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4.");
+          });
+        } else {
+          sounds.playCelebration();
+          modal.classList.remove("active");
+          onSuccess();
+        }
       };
     }
+  }
+
+  // src/js/chatbot.js
+  var API_KEY = "AQ.Ab8RN6Jm_G1zISqvyyWyiXeAswCh_7zfdO-X9IDVPMBTB8jaag";
+  var SLANG_DICTIONARY = {
+    "\uC874\uBC84": { meaning: "\uB05D\uAE4C\uC9C0 \uBC84\uD2F4\uB2E4\uB294 \uB73B\uC758 \uC18D\uC5B4", correct: "\uB05D\uAE4C\uC9C0 \uC778\uB0B4\uD558\uAE30, \uCC38\uACE0 \uACAC\uB514\uAE30" },
+    "\uD0B9\uBC1B\uB124": { meaning: "\uB9E4\uC6B0 \uD654\uAC00 \uB098\uAC70\uB098 \uC5B4\uC774\uC5C6\uB2E4\uB294 \uB73B", correct: "\uC815\uB9D0 \uD654\uB09C\uB2E4, \uC5B4\uC774\uC5C6\uB2E4" },
+    "\uC5B5\uD150": { meaning: "\uC5B5\uC9C0 \uD150\uC158, \uC5B5\uC9C0\uB85C \uC2E0\uB09C \uCC99\uD558\uB294 \uAC83", correct: "\uC5B5\uC9C0\uB85C \uAE30\uC6B4 \uB0B4\uAE30" },
+    "\uAC1C\uC774\uB4DD": { meaning: "\uC544\uC8FC \uD070 \uC774\uB4DD\uC744 \uBCF4\uC558\uB2E4\uB294 \uB73B", correct: "\uD070 \uC774\uC775, \uC544\uC8FC \uC88B\uC740 \uC77C" },
+    "\uB178\uC7BC": { meaning: "\uC7AC\uBBF8\uAC00 \uC5C6\uB2E4\uB294 \uB73B", correct: "\uC9C0\uB8E8\uD568, \uC7AC\uBBF8\uC5C6\uC74C" }
+  };
+  function initChatbot() {
+    const container = document.createElement("div");
+    container.className = "chatbot-container";
+    container.innerHTML = `
+    <div class="chatbot-bubble" id="chatbot-bubble">
+      <div class="chatbot-header">
+        <span>\u{1F331} \uBC14\uB978\uB9D0 \uCC57\uBD07</span>
+        <button id="chatbot-close-btn">&times;</button>
+      </div>
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="chat-msg bot-msg">\uC548\uB155\uD558\uC138\uC694! \uD3C9\uC18C\uC5D0 \uAD81\uAE08\uD588\uB358 \uBE44\uC18D\uC5B4\uB098 \uC740\uC5B4, \uC2E0\uC870\uC5B4\uB97C \uC785\uB825\uD574\uBCF4\uC138\uC694. \uC62C\uBC14\uB978 \uC6B0\uB9AC\uB9D0\uC744 \uC54C\uB824\uB4DC\uB9B4\uAC8C\uC694!</div>
+      </div>
+      <div class="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="\uC5EC\uAE30\uC5D0 \uB2E8\uC5B4\uB97C \uC785\uB825\uD558\uC138\uC694..." autocomplete="off">
+        <button id="chatbot-send-btn">\uC804\uC1A1</button>
+      </div>
+    </div>
+    <button class="chatbot-fab" id="chatbot-fab">\u{1F331}</button>
+  `;
+    document.body.appendChild(container);
+    const style = document.createElement("style");
+    style.textContent = `
+    .chatbot-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; font-family: var(--font-sans); }
+    .chatbot-fab { width: 56px; height: 56px; border-radius: 50%; background: var(--gradient-emerald); color: white; border: none; font-size: 1.5rem; box-shadow: var(--shadow-lg); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition-bounce); }
+    .chatbot-fab:hover { transform: scale(1.1); }
+    .chatbot-bubble { display: none; width: 320px; height: 420px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-radius: var(--radius-xl); box-shadow: var(--shadow-dark); border: 1px solid var(--border-light); flex-direction: column; overflow: hidden; position: absolute; bottom: 70px; right: 0; transform-origin: bottom right; animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .chatbot-bubble.active { display: flex; }
+    .chatbot-header { background: var(--gradient-emerald); color: white; padding: 1rem; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+    .chatbot-header button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .chatbot-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; }
+    .chat-msg { padding: 0.75rem 1rem; border-radius: var(--radius-lg); max-width: 85%; font-size: 0.85rem; line-height: 1.4; word-break: break-word; }
+    .bot-msg { background: var(--bg-subtle); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .user-msg { background: var(--color-emerald); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .chatbot-input-area { display: flex; padding: 0.75rem; border-top: 1px solid var(--border-light); background: white; }
+    .chatbot-input-area input { flex: 1; border: 1px solid var(--border-light); padding: 0.5rem 0.75rem; border-radius: var(--radius-full); outline: none; font-family: inherit; font-size: 0.85rem; }
+    .chatbot-input-area input:focus { border-color: var(--color-emerald); }
+    .chatbot-input-area button { background: var(--color-emerald); color: white; border: none; border-radius: var(--radius-full); padding: 0 1rem; margin-left: 0.5rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .chatbot-input-area button:hover { background: #059669; }
+    .typing-indicator { display: flex; gap: 4px; padding: 0.5rem 1rem; }
+    .typing-indicator span { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: typing 1s infinite; }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  `;
+    document.head.appendChild(style);
+    const fab = document.getElementById("chatbot-fab");
+    const bubble = document.getElementById("chatbot-bubble");
+    const closeBtn = document.getElementById("chatbot-close-btn");
+    const sendBtn = document.getElementById("chatbot-send-btn");
+    const input = document.getElementById("chatbot-input");
+    const messages = document.getElementById("chatbot-messages");
+    fab.onclick = () => {
+      bubble.classList.add("active");
+      fab.style.display = "none";
+    };
+    closeBtn.onclick = () => {
+      bubble.classList.remove("active");
+      fab.style.display = "flex";
+    };
+    const addMessage = (text, isUser = false) => {
+      const el = document.createElement("div");
+      el.className = "chat-msg " + (isUser ? "user-msg" : "bot-msg");
+      el.innerHTML = text;
+      messages.appendChild(el);
+      messages.scrollTop = messages.scrollHeight;
+    };
+    const showTyping = () => {
+      const el = document.createElement("div");
+      el.className = "chat-msg bot-msg typing-indicator";
+      el.id = "typing-ind";
+      el.innerHTML = "<span></span><span></span><span></span>";
+      messages.appendChild(el);
+      messages.scrollTop = messages.scrollHeight;
+    };
+    const removeTyping = () => {
+      const el = document.getElementById("typing-ind");
+      if (el) el.remove();
+    };
+    const handleSend = async () => {
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = "";
+      addMessage(text, true);
+      showTyping();
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: `\uD559\uC0DD\uC774 \uB2E4\uC74C \uB2E8\uC5B4\uC758 \uB73B\uACFC \uC62C\uBC14\uB978 \uC21C\uD654\uC5B4\uB97C \uBB3C\uC5B4\uBD24\uC2B5\uB2C8\uB2E4: "${text}". \uC774 \uB2E8\uC5B4\uAC00 \uBE44\uC18D\uC5B4\uB098 \uC740\uC5B4, \uC2E0\uC870\uC5B4\uB77C\uBA74 \uADF8 \uB73B\uC744 \uAC04\uB2E8\uD788 \uC124\uBA85\uD558\uACE0, \uD559\uC0DD\uC774 \uC77C\uC0C1\uC5D0\uC11C \uC4F8 \uC218 \uC788\uB294 \uAE0D\uC815\uC801\uC774\uACE0 \uBC14\uB978\uB9D0(\uC21C\uD654\uC5B4)\uB85C \uBC14\uAFB8\uC5B4 \uC548\uB0B4\uD574\uC8FC\uC138\uC694. \uC544\uC8FC \uCE5C\uC808\uD558\uACE0 \uB530\uB73B\uD55C \uC120\uC0DD\uB2D8 \uD1A4\uC73C\uB85C 3\uBB38\uC7A5 \uC774\uB0B4\uB85C \uC9E7\uAC8C \uB2F5\uBCC0\uD574\uC8FC\uC138\uC694.` }] }]
+          })
+        });
+        if (!res.ok) throw new Error("API failed");
+        const data = await res.json();
+        const reply = data.candidates[0].content.parts[0].text;
+        removeTyping();
+        addMessage(reply.replace(/\n/g, "<br>"));
+      } catch (err) {
+        removeTyping();
+        let fallback = null;
+        for (const [slang, info] of Object.entries(SLANG_DICTIONARY)) {
+          if (text.includes(slang)) fallback = info;
+        }
+        if (fallback) {
+          addMessage(`'<strong>${text}</strong>'\uB294 ${fallback.meaning}\uB97C \uC758\uBBF8\uD560 \uC218 \uC788\uC5B4\uC694. \uD559\uAD50\uC5D0\uC11C\uB294 '<strong>${fallback.correct}</strong>'(\uC774)\uB77C\uACE0 \uD45C\uD604\uD574\uBCF4\uB294 \uAC74 \uC5B4\uB5A8\uAE4C\uC694? \u{1F60A}`);
+        } else {
+          addMessage("\uC785\uB825\uD574\uC8FC\uC2E0 \uB2E8\uC5B4\uC5D0 \uB300\uD574 \uC9C0\uAE08\uC740 \uB2F5\uBCC0\uD558\uAE30 \uC5B4\uB824\uC6CC\uC694. \uB2E4\uB978 \uB2E8\uC5B4\uB97C \uBB3C\uC5B4\uBCF4\uC2DC\uACA0\uC5B4\uC694? \u{1F972}");
+        }
+      }
+    };
+    sendBtn.onclick = handleSend;
+    input.onkeypress = (e) => {
+      if (e.key === "Enter") handleSend();
+    };
   }
 
   // src/js/app.js
@@ -2282,6 +2397,7 @@
     init() {
       this.bindHeader();
       appState.subscribe(() => this.updateHeaderStats());
+      initChatbot();
       this.navigate("home");
     }
     bindHeader() {

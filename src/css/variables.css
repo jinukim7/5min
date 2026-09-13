@@ -1,60 +1,66 @@
 :root {
-  /* Color Palette - Modern SaaS Aesthetic */
-  --bg-primary: #FFFFFF;
-  --bg-subtle: #F8F9FA;
+  /* Color Palette - Juicebox / Vibrant Modern Aesthetic */
+  --bg-primary: #FAFAFC;
+  --bg-subtle: #F3F4F6;
   --bg-card: #FFFFFF;
-  --bg-dark: #121318;
-  --bg-dark-card: #1C1D24;
-  --bg-dark-card-hover: #252731;
+  --bg-dark: #0D0F12;
+  --bg-dark-card: #15181E;
+  --bg-dark-card-hover: #1C2028;
 
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #9CA3AF;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
   --text-inverse: #FFFFFF;
-  --text-inverse-muted: #9CA3AF;
+  --text-inverse-muted: #CBD5E1;
 
-  --border-light: #E5E7EB;
-  --border-subtle: #F1F3F5;
-  --border-dark: #2C2E38;
-  --border-focus: #111827;
+  --border-light: rgba(0, 0, 0, 0.06);
+  --border-subtle: rgba(0, 0, 0, 0.04);
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --border-focus: #4F46E5;
 
-  /* Accent Colors (Based on reference cards) */
+  /* Accent Colors (Vibrant & Playful) */
   --color-blue: #3B82F6;
   --color-blue-light: #EFF6FF;
-  --color-coral: #EF4444;
-  --color-coral-light: #FEF2F2;
+  --color-coral: #F43F5E;
+  --color-coral-light: #FFF1F2;
   --color-amber: #F59E0B;
   --color-amber-light: #FFFBEB;
   --color-emerald: #10B981;
   --color-emerald-light: #ECFDF5;
   --color-purple: #8B5CF6;
   --color-purple-light: #F5F3FF;
-
+  
   /* Brand / Primary */
-  --brand-black: #111827;
+  --brand-black: #0F172A;
   --brand-white: #FFFFFF;
-  --brand-gray: #6B7280;
+  --brand-gray: #64748B;
+  
+  /* Gradients for dynamic look */
+  --gradient-primary: linear-gradient(135deg, #4F46E5 0%, #EC4899 100%);
+  --gradient-amber: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+  --gradient-emerald: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
 
   /* Typography */
-  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'Plus Jakarta Sans', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-  /* Elevation / Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
-  --shadow-dark: 0 12px 36px rgba(0, 0, 0, 0.4);
+  /* Elevation / Shadows (Glassy & Soft) */
+  --shadow-xs: 0 2px 4px rgba(15, 23, 42, 0.02);
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 24px 48px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 8px 32px rgba(79, 70, 229, 0.15);
+  --shadow-dark: 0 12px 40px rgba(0, 0, 0, 0.3);
 
-  /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
+  /* Radii (More rounded, friendly look) */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
 
-  /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-base: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Transitions (Snappy & Bouncy) */
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }

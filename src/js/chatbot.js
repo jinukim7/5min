@@ -1,0 +1,137 @@
+// src/js/chatbot.js
+
+const API_KEY = "AQ.Ab8RN6Jm_G1zISqvyyWyiXeAswCh_7zfdO-X9IDVPMBTB8jaag";
+
+// Fallback dictionary for slang
+const SLANG_DICTIONARY = {
+  "존버": { meaning: "끝까지 버틴다는 뜻의 속어", correct: "끝까지 인내하기, 참고 견디기" },
+  "킹받네": { meaning: "매우 화가 나거나 어이없다는 뜻", correct: "정말 화난다, 어이없다" },
+  "억텐": { meaning: "억지 텐션, 억지로 신난 척하는 것", correct: "억지로 기운 내기" },
+  "개이득": { meaning: "아주 큰 이득을 보았다는 뜻", correct: "큰 이익, 아주 좋은 일" },
+  "노잼": { meaning: "재미가 없다는 뜻", correct: "지루함, 재미없음" }
+};
+
+export function initChatbot() {
+  // Create UI
+  const container = document.createElement('div');
+  container.className = 'chatbot-container';
+  container.innerHTML = `
+    <div class="chatbot-bubble" id="chatbot-bubble">
+      <div class="chatbot-header">
+        <span>🌱 바른말 챗봇</span>
+        <button id="chatbot-close-btn">&times;</button>
+      </div>
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="chat-msg bot-msg">안녕하세요! 평소에 궁금했던 비속어나 은어, 신조어를 입력해보세요. 올바른 우리말을 알려드릴게요!</div>
+      </div>
+      <div class="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="여기에 단어를 입력하세요..." autocomplete="off">
+        <button id="chatbot-send-btn">전송</button>
+      </div>
+    </div>
+    <button class="chatbot-fab" id="chatbot-fab">🌱</button>
+  `;
+  document.body.appendChild(container);
+
+  // Styling injected directly or via css
+  const style = document.createElement('style');
+  style.textContent = `
+    .chatbot-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; font-family: var(--font-sans); }
+    .chatbot-fab { width: 56px; height: 56px; border-radius: 50%; background: var(--gradient-emerald); color: white; border: none; font-size: 1.5rem; box-shadow: var(--shadow-lg); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition-bounce); }
+    .chatbot-fab:hover { transform: scale(1.1); }
+    .chatbot-bubble { display: none; width: 320px; height: 420px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-radius: var(--radius-xl); box-shadow: var(--shadow-dark); border: 1px solid var(--border-light); flex-direction: column; overflow: hidden; position: absolute; bottom: 70px; right: 0; transform-origin: bottom right; animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .chatbot-bubble.active { display: flex; }
+    .chatbot-header { background: var(--gradient-emerald); color: white; padding: 1rem; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+    .chatbot-header button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .chatbot-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; }
+    .chat-msg { padding: 0.75rem 1rem; border-radius: var(--radius-lg); max-width: 85%; font-size: 0.85rem; line-height: 1.4; word-break: break-word; }
+    .bot-msg { background: var(--bg-subtle); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .user-msg { background: var(--color-emerald); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .chatbot-input-area { display: flex; padding: 0.75rem; border-top: 1px solid var(--border-light); background: white; }
+    .chatbot-input-area input { flex: 1; border: 1px solid var(--border-light); padding: 0.5rem 0.75rem; border-radius: var(--radius-full); outline: none; font-family: inherit; font-size: 0.85rem; }
+    .chatbot-input-area input:focus { border-color: var(--color-emerald); }
+    .chatbot-input-area button { background: var(--color-emerald); color: white; border: none; border-radius: var(--radius-full); padding: 0 1rem; margin-left: 0.5rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .chatbot-input-area button:hover { background: #059669; }
+    .typing-indicator { display: flex; gap: 4px; padding: 0.5rem 1rem; }
+    .typing-indicator span { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: typing 1s infinite; }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  `;
+  document.head.appendChild(style);
+
+  const fab = document.getElementById('chatbot-fab');
+  const bubble = document.getElementById('chatbot-bubble');
+  const closeBtn = document.getElementById('chatbot-close-btn');
+  const sendBtn = document.getElementById('chatbot-send-btn');
+  const input = document.getElementById('chatbot-input');
+  const messages = document.getElementById('chatbot-messages');
+
+  fab.onclick = () => { bubble.classList.add('active'); fab.style.display = 'none'; };
+  closeBtn.onclick = () => { bubble.classList.remove('active'); fab.style.display = 'flex'; };
+
+  const addMessage = (text, isUser = false) => {
+    const el = document.createElement('div');
+    el.className = 'chat-msg ' + (isUser ? 'user-msg' : 'bot-msg');
+    el.innerHTML = text; // allow basic HTML like strong
+    messages.appendChild(el);
+    messages.scrollTop = messages.scrollHeight;
+  };
+
+  const showTyping = () => {
+    const el = document.createElement('div');
+    el.className = 'chat-msg bot-msg typing-indicator';
+    el.id = 'typing-ind';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    messages.appendChild(el);
+    messages.scrollTop = messages.scrollHeight;
+  };
+
+  const removeTyping = () => {
+    const el = document.getElementById('typing-ind');
+    if (el) el.remove();
+  };
+
+  const handleSend = async () => {
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addMessage(text, true);
+    showTyping();
+
+    try {
+      // Attempt Gemini API call
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: `학생이 다음 단어의 뜻과 올바른 순화어를 물어봤습니다: "${text}". 이 단어가 비속어나 은어, 신조어라면 그 뜻을 간단히 설명하고, 학생이 일상에서 쓸 수 있는 긍정적이고 바른말(순화어)로 바꾸어 안내해주세요. 아주 친절하고 따뜻한 선생님 톤으로 3문장 이내로 짧게 답변해주세요.` }] }]
+        })
+      });
+
+      if (!res.ok) throw new Error("API failed");
+      const data = await res.json();
+      const reply = data.candidates[0].content.parts[0].text;
+      removeTyping();
+      // Format response roughly (replace newlines with br)
+      addMessage(reply.replace(/\n/g, '<br>'));
+    } catch (err) {
+      removeTyping();
+      // Fallback
+      let fallback = null;
+      for (const [slang, info] of Object.entries(SLANG_DICTIONARY)) {
+        if (text.includes(slang)) fallback = info;
+      }
+      
+      if (fallback) {
+        addMessage(`'<strong>${text}</strong>'는 ${fallback.meaning}를 의미할 수 있어요. 학교에서는 '<strong>${fallback.correct}</strong>'(이)라고 표현해보는 건 어떨까요? 😊`);
+      } else {
+        addMessage("입력해주신 단어에 대해 지금은 답변하기 어려워요. 다른 단어를 물어보시겠어요? 🥲");
+      }
+    }
+  };
+
+  sendBtn.onclick = handleSend;
+  input.onkeypress = (e) => { if (e.key === 'Enter') handleSend(); };
+}

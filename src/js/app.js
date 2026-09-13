@@ -6,6 +6,7 @@ import { KeyPracticeSession, HancomSentenceSession, isHangulPrefix } from './typ
 import { sounds } from './sound.js';
 import { triggerConfetti } from './confetti.js';
 import { openGoogleLoginModal, openProfileOnboardingModal } from './auth.js';
+import { initChatbot } from './chatbot.js';
 
 export function showToast(message, icon = '✨') {
   const container = document.getElementById('toast-container');
@@ -59,6 +60,7 @@ class App {
   init() {
     this.bindHeader();
     appState.subscribe(() => this.updateHeaderStats());
+    initChatbot();
     this.navigate('home');
   }
 

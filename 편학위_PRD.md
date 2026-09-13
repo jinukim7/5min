@@ -35,10 +35,10 @@
 
 ## 기술 스택
 
-- **프런트엔드**: HTML/CSS/JavaScript (React 또는 순수 JS) — 디벗(태블릿) 브라우저 대응 반응형
+- **프런트엔드**: HTML/CSS/JavaScript (vite+React 또는 순수 JS) — 디벗(태블릿) 브라우저 대응 반응형
 - **백엔드/DB**: Firebase(Authentication + Firestore) 또는 Supabase — 서버 운영 부담 최소화
 - **배포**: Vercel / Netlify / Firebase Hosting (무료 티어)
-- **인증**: 학교 계정 또는 간편 코드 로그인(학번 기반)
+- **인증**: 학교 구글 계정 로그인(학번 기반)
 
 ## 범위 (할 것 vs 안 할 것)
 
