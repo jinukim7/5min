@@ -712,10 +712,14 @@
       for (let c = 1; c <= 7; c++) {
         for (let n = 1; n <= 10; n++) {
           seq++;
-          const factor = 0.55 + (Math.sin(g * 17 + c * 9 + n * 3) + 1) * 0.3;
-          const mannersScore = Math.round(420 * factor / 10) * 10;
-          const typingScore = Math.round(460 * factor / 10) * 10;
-          const readingScore = Math.round(340 * factor / 10) * 10;
+          const vary = (seed) => 0.45 + (Math.sin(seed) + 1) * 0.35;
+          const mannersFactor = vary(g * 17 + c * 9 + n * 3);
+          const typingFactor = vary(g * 31 + c * 5 + n * 7 + 1.3);
+          const readingFactor = vary(g * 11 + c * 23 + n * 13 + 2.7);
+          const factor = (mannersFactor + typingFactor + readingFactor) / 3;
+          const mannersScore = Math.round(440 * mannersFactor / 10) * 10;
+          const typingScore = Math.round(480 * typingFactor / 10) * 10;
+          const readingScore = Math.round(360 * readingFactor / 10) * 10;
           students.push({
             id: `sample_${g}_${c}_${n}`,
             isSample: true,
@@ -729,8 +733,8 @@
             typingScore,
             readingScore,
             totalPoints: mannersScore + typingScore + readingScore,
-            typingBestCPM: Math.round(330 * factor),
-            typingAcc: Math.min(100, Math.round(88 + factor * 10)),
+            typingBestCPM: Math.round(330 * typingFactor),
+            typingAcc: Math.min(100, Math.round(88 + typingFactor * 10)),
             streak: Math.max(1, Math.round(10 * factor)),
             checked: n % 4 !== 0,
             quizDone: n % 3 !== 0,
@@ -5115,7 +5119,7 @@ ${reason}
           <div style="display: flex; flex-direction: column; gap: 0.75rem;">
             ${ranked.slice(0, 20).map((s, idx) => {
         const rankIcon = idx === 0 ? "\u{1F947}" : idx === 1 ? "\u{1F948}" : idx === 2 ? "\u{1F949}" : `${idx + 1}\uC704`;
-        const isMe = s.number === appState.state.userProfile.number && s.classNum === appState.state.userProfile.classNum;
+        const isMe = !s.isSample && s.number === appState.state.userProfile.number && s.classNum === appState.state.userProfile.classNum;
         return `
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-radius: var(--radius-lg); background: ${isMe ? "var(--color-blue-light)" : "var(--bg-subtle)"}; border: 1px solid ${isMe ? "var(--color-blue)" : "var(--border-light)"};">
                   <div style="display: flex; align-items: center; gap: 1rem;">
@@ -5133,7 +5137,7 @@ ${reason}
                   </div>
                   <div style="text-align: right;">
                     <span class="point-pill" style="font-size: 0.95rem;">
-                      \u{1F31F} ${s.totalPoints.toLocaleString()}P
+                      ${this.leaderboardCategory === "manners" ? `\u{1F338} \uB9E4\uB108 ${s.mannersScore.toLocaleString()}P` : this.leaderboardCategory === "typing" ? `\u2328\uFE0F \uD0C0\uC790 ${s.typingScore.toLocaleString()}P` : this.leaderboardCategory === "reading" ? `\u{1F4DA} \uB3C5\uC11C ${s.readingScore.toLocaleString()}P` : `\u{1F31F} ${s.totalPoints.toLocaleString()}P`}
                     </span>
                     <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">
                       \uB9E4\uB108: ${s.mannersScore}P | \uD0C0\uC790: ${s.typingBestCPM}\uD0C0 | \uB3C5\uC11C: ${s.readingScore}P

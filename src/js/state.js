@@ -31,10 +31,15 @@ function generateSampleStudents() {
       for (let n = 1; n <= 10; n++) {
         seq++;
         // 학급마다 점수 분포가 달라 보이도록 결정적(매번 같은) 값 사용
-        const factor = 0.55 + (Math.sin(g * 17 + c * 9 + n * 3) + 1) * 0.3;
-        const mannersScore = Math.round(420 * factor / 10) * 10;
-        const typingScore = Math.round(460 * factor / 10) * 10;
-        const readingScore = Math.round(340 * factor / 10) * 10;
+        // 영역마다 다른 값을 써서 매너/타자/독서/통합 순위가 서로 다르게 나오도록 함
+        const vary = (seed) => 0.45 + (Math.sin(seed) + 1) * 0.35; // 0.45 ~ 1.15
+        const mannersFactor = vary(g * 17 + c * 9 + n * 3);
+        const typingFactor = vary(g * 31 + c * 5 + n * 7 + 1.3);
+        const readingFactor = vary(g * 11 + c * 23 + n * 13 + 2.7);
+        const factor = (mannersFactor + typingFactor + readingFactor) / 3;
+        const mannersScore = Math.round(440 * mannersFactor / 10) * 10;
+        const typingScore = Math.round(480 * typingFactor / 10) * 10;
+        const readingScore = Math.round(360 * readingFactor / 10) * 10;
         students.push({
           id: `sample_${g}_${c}_${n}`,
           isSample: true,
@@ -48,8 +53,8 @@ function generateSampleStudents() {
           typingScore,
           readingScore,
           totalPoints: mannersScore + typingScore + readingScore,
-          typingBestCPM: Math.round(330 * factor),
-          typingAcc: Math.min(100, Math.round(88 + factor * 10)),
+          typingBestCPM: Math.round(330 * typingFactor),
+          typingAcc: Math.min(100, Math.round(88 + typingFactor * 10)),
           streak: Math.max(1, Math.round(10 * factor)),
           checked: n % 4 !== 0,
           quizDone: n % 3 !== 0,

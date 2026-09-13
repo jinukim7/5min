@@ -1930,7 +1930,7 @@ class App {
           <div style="display: flex; flex-direction: column; gap: 0.75rem;">
             ${ranked.slice(0, 20).map((s, idx) => {
               const rankIcon = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx + 1}위`;
-              const isMe = (s.number === appState.state.userProfile.number && (s.classNum === appState.state.userProfile.classNum));
+              const isMe = !s.isSample && s.number === appState.state.userProfile.number && s.classNum === appState.state.userProfile.classNum;
               return `
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-radius: var(--radius-lg); background: ${isMe ? 'var(--color-blue-light)' : 'var(--bg-subtle)'}; border: 1px solid ${isMe ? 'var(--color-blue)' : 'var(--border-light)'};">
                   <div style="display: flex; align-items: center; gap: 1rem;">
@@ -1948,7 +1948,10 @@ class App {
                   </div>
                   <div style="text-align: right;">
                     <span class="point-pill" style="font-size: 0.95rem;">
-                      🌟 ${s.totalPoints.toLocaleString()}P
+                      ${this.leaderboardCategory === 'manners' ? `🌸 매너 ${s.mannersScore.toLocaleString()}P`
+                        : this.leaderboardCategory === 'typing' ? `⌨️ 타자 ${s.typingScore.toLocaleString()}P`
+                        : this.leaderboardCategory === 'reading' ? `📚 독서 ${s.readingScore.toLocaleString()}P`
+                        : `🌟 ${s.totalPoints.toLocaleString()}P`}
                     </span>
                     <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">
                       매너: ${s.mannersScore}P | 타자: ${s.typingBestCPM}타 | 독서: ${s.readingScore}P
