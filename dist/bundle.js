@@ -4327,14 +4327,17 @@ ${reason}
         this.sentenceSession.handleInput(e.target.value);
       });
       visibleInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" || e.key === " ") {
           if (e.isComposing) return;
-          e.preventDefault();
           const currentVal = visibleInput.value.trim();
+          if (e.key === " " && currentVal !== current.text && !this.sentenceSession.isFinished) {
+            return;
+          }
+          e.preventDefault();
           if (currentVal === current.text || this.sentenceSession.isFinished || currentVal.length >= current.text.length * 0.8) {
             this.sentenceSession.submitLine();
           } else {
-            showToast("\uBB38\uC7A5\uC744 \uB05D\uAE4C\uC9C0 \uC785\uB825\uD574 \uC8FC\uC138\uC694.", "\u2328\uFE0F");
+            if (e.key === "Enter") showToast("\uBB38\uC7A5\uC744 \uB05D\uAE4C\uC9C0 \uC785\uB825\uD574 \uC8FC\uC138\uC694.", "\u2328\uFE0F");
           }
         }
       });

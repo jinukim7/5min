@@ -1177,14 +1177,21 @@ class App {
     });
 
     visibleInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' || e.key === ' ') {
         if (e.isComposing) return;
-        e.preventDefault();
+        
         const currentVal = visibleInput.value.trim();
+        // 스페이스바 입력 시, 다 입력하지 않았으면 기본 공백 입력 처리(제출 안함)
+        if (e.key === ' ' && currentVal !== current.text && !this.sentenceSession.isFinished) {
+          return; 
+        }
+
+        e.preventDefault();
+        
         if (currentVal === current.text || this.sentenceSession.isFinished || currentVal.length >= current.text.length * 0.8) {
           this.sentenceSession.submitLine();
         } else {
-          showToast('문장을 끝까지 입력해 주세요.', '⌨️');
+          if (e.key === 'Enter') showToast('문장을 끝까지 입력해 주세요.', '⌨️');
         }
       }
     });
