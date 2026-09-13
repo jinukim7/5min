@@ -1048,7 +1048,10 @@
             if (!parsed.selectedClassKey) {
               parsed.selectedClassKey = "2-3";
             }
-            if (!parsed.auth || !parsed.auth.uid || parsed.auth.accountRole !== "teacher") {
+            if (!parsed.auth || !parsed.auth.uid) {
+              parsed.auth = { isLoggedIn: false, provider: "google", uid: null, email: "", accountRole: "student", roleSource: "default" };
+            }
+            if (parsed.auth.accountRole !== "teacher") {
               parsed.userProfile.role = "student";
             }
             return parsed;
@@ -1059,10 +1062,12 @@
       }
       return {
         auth: {
-          isLoggedIn: true,
+          isLoggedIn: false,
           provider: "google",
-          email: "minjun.kim@seoul-ms.kr",
-          avatarUrl: "https://api.dicebear.com/7.x/bottts/svg?seed=minjun"
+          uid: null,
+          email: "",
+          accountRole: "student",
+          roleSource: "default"
         },
         userProfile: {
           role: "student",
@@ -1118,10 +1123,41 @@
     notify() {
       this.listeners.forEach((fn) => fn(this.state));
     }
+    // 구글 로그인 또는 테스트 로그인 세션이 있는지
+    isLoggedIn() {
+      const { auth: auth2 } = this.state;
+      return !!(auth2 && auth2.isLoggedIn && auth2.uid);
+    }
+    isTestAccount() {
+      return this.isLoggedIn() && !!this.state.auth.isTestAccount;
+    }
     // 로그인된 계정이 교사 권한(자동 구분 또는 코드 승격)을 가졌는지
     isVerifiedTeacher() {
-      const { auth: auth2 } = this.state;
-      return !!(auth2 && auth2.isLoggedIn && auth2.uid && auth2.accountRole === "teacher");
+      return this.isLoggedIn() && this.state.auth.accountRole === "teacher";
+    }
+    // 개발용 테스트 로그인 (Firebase 없이 학생/교사 상황 체험)
+    loginAsTestAccount(role) {
+      const isTeacher = role === "teacher";
+      this.state.auth = {
+        isLoggedIn: true,
+        provider: "test",
+        isTestAccount: true,
+        uid: isTeacher ? "test-teacher" : "test-student",
+        email: isTeacher ? "test.teacher@kyunghee.sen.ms.kr" : "262301@kyunghee.sen.ms.kr",
+        accountRole: isTeacher ? "teacher" : "student",
+        roleSource: "test"
+      };
+      this.state.userProfile = {
+        ...this.state.userProfile,
+        role: isTeacher ? "teacher" : "student",
+        grade: 2,
+        classNum: 3,
+        number: 1,
+        realName: isTeacher ? "\uD14C\uC2A4\uD2B8 \uC120\uC0DD\uB2D8" : "\uAE40\uBBFC\uC900",
+        nickname: isTeacher ? "\uB2F4\uC784\uC120\uC0DD\uB2D8" : "\uBCC4\uBE5B\uB2EC\uBE5B"
+      };
+      if (!isTeacher) this.syncCurrentStudentToClassList();
+      this.save();
     }
     // 화면 모드 전환 (교사 화면은 인증된 교사만 가능)
     setRole(role) {
@@ -1135,7 +1171,7 @@
       this.state.auth = {
         ...this.state.auth,
         isLoggedIn: true,
-        provider: "google",
+        provider: this.state.auth && this.state.auth.isTestAccount ? "test" : "google",
         uid,
         email,
         accountRole,
@@ -2081,17 +2117,28 @@
   googleProvider.setCustomParameters({ prompt: "select_account" });
 
   // src/js/roles.js
-  var STUDENT_EMAIL_KEYWORDS = ["g."];
-  var STUDENT_DOMAINS = [];
-  var TEACHER_DOMAINS = ["kyunghee.sen.ms.kr", "sen.go.kr"];
+  var SCHOOL_DOMAIN = "kyunghee.sen.ms.kr";
+  var STUDENT_ID_PATTERN = /^(\d{2})(\d)(\d)(\d{2})$/;
+  var EXTRA_TEACHER_DOMAINS = ["sen.go.kr"];
   var TEACHER_SECRET_CODE = "TEACHER2026";
+  var DEV_TEST_LOGIN_ENABLED = true;
+  function splitEmail(email = "") {
+    const [localPart = "", domain = ""] = String(email).trim().toLowerCase().split("@");
+    return { localPart, domain };
+  }
+  function parseStudentEmail(email = "") {
+    const { localPart, domain } = splitEmail(email);
+    if (domain !== SCHOOL_DOMAIN) return null;
+    const match = localPart.match(STUDENT_ID_PATTERN);
+    if (!match) return null;
+    const [, year, grade, classNum, number] = match.map(Number);
+    return { entryYear: 2e3 + year, grade, classNum, number };
+  }
   function detectRoleFromEmail(email = "") {
-    const normalized = String(email).trim().toLowerCase();
-    const [localPart, domain] = normalized.split("@");
+    const { localPart, domain } = splitEmail(email);
     if (!localPart || !domain) return null;
-    if (STUDENT_EMAIL_KEYWORDS.some((k) => localPart.includes(k))) return "student";
-    if (STUDENT_DOMAINS.includes(domain)) return "student";
-    if (TEACHER_DOMAINS.includes(domain)) return "teacher";
+    if (parseStudentEmail(email)) return "student";
+    if (domain === SCHOOL_DOMAIN || EXTRA_TEACHER_DOMAINS.includes(domain)) return "teacher";
     return null;
   }
   function resolveAccountRole(email, stored = {}) {
@@ -2114,44 +2161,64 @@
   var ROLE_SOURCE_LABELS = {
     auto: "\uC774\uBA54\uC77C\uB85C \uC790\uB3D9 \uAD6C\uBD84",
     code: "\uAD50\uC0AC \uC778\uC99D \uCF54\uB4DC\uB85C \uC2B9\uACA9",
-    default: "\uC790\uB3D9 \uAD6C\uBD84 \uC548 \uB428 (\uAE30\uBCF8 \uD559\uC0DD)"
+    default: "\uC790\uB3D9 \uAD6C\uBD84 \uC548 \uB428 (\uAE30\uBCF8 \uD559\uC0DD)",
+    test: "\uAC1C\uBC1C\uC6A9 \uD14C\uC2A4\uD2B8 \uACC4\uC815"
+  };
+  var LOGIN_ERROR_MESSAGES = {
+    "auth/configuration-not-found": "Firebase \uCF58\uC194\uC5D0\uC11C Authentication(Google \uB85C\uADF8\uC778)\uC774 \uC544\uC9C1 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.",
+    "auth/operation-not-allowed": "Firebase \uCF58\uC194\uC5D0\uC11C Google \uB85C\uADF8\uC778 \uC81C\uACF5\uC5C5\uCCB4\uAC00 \uC0AC\uC6A9 \uC124\uC815\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.",
+    "auth/unauthorized-domain": "\uD604\uC7AC \uC0AC\uC774\uD2B8 \uC8FC\uC18C\uAC00 Firebase \uC2B9\uC778\uB41C \uB3C4\uBA54\uC778\uC5D0 \uB4F1\uB85D\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4.",
+    "auth/popup-blocked": "\uBE0C\uB77C\uC6B0\uC800\uAC00 \uB85C\uADF8\uC778 \uD31D\uC5C5\uC744 \uCC28\uB2E8\uD588\uC2B5\uB2C8\uB2E4. \uD31D\uC5C5\uC744 \uD5C8\uC6A9\uD574 \uC8FC\uC138\uC694.",
+    "auth/network-request-failed": "\uB124\uD2B8\uC6CC\uD06C \uC5F0\uACB0\uC744 \uD655\uC778\uD574 \uC8FC\uC138\uC694."
   };
   async function syncAccount(user) {
     const ref = db.collection("users").doc(user.uid);
-    const doc = await ref.get();
-    const data = doc.exists ? doc.data() : {};
+    const prevAuth = appState.state.auth || {};
+    let data = prevAuth.uid === user.uid ? { role: prevAuth.accountRole, roleSource: prevAuth.roleSource } : {};
+    let hasStoredProfile = false;
+    try {
+      const doc = await ref.get();
+      if (doc.exists) {
+        data = doc.data();
+        hasStoredProfile = !!data.nickname;
+      }
+    } catch (err) {
+      console.warn("Firestore \uD504\uB85C\uD544 \uC870\uD68C \uC2E4\uD328 (\uB85C\uCEEC \uC0C1\uD0DC\uB85C \uC9C4\uD589)", err);
+    }
     const { role, roleSource } = resolveAccountRole(user.email, data);
-    await ref.set({
+    ref.set({
       uid: user.uid,
       email: user.email,
       role,
       roleSource,
       lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
+    }, { merge: true }).catch((err) => console.warn("Firestore role \uC800\uC7A5 \uC2E4\uD328", err));
     appState.applyAccount({ uid: user.uid, email: user.email, accountRole: role, roleSource });
-    if (doc.exists) {
+    if (hasStoredProfile) {
       appState.updateProfile({
         grade: data.grade || appState.state.userProfile.grade,
         classNum: data.classNum || appState.state.userProfile.classNum,
         number: data.number || appState.state.userProfile.number,
         realName: data.realName || user.displayName || "",
-        nickname: data.nickname || user.displayName || ""
+        nickname: data.nickname
       });
-    } else {
+    } else if (prevAuth.uid !== user.uid) {
+      const studentInfo = role === "student" ? parseStudentEmail(user.email) : null;
       appState.updateProfile({
+        ...studentInfo ? { grade: studentInfo.grade, classNum: studentInfo.classNum, number: studentInfo.number } : {},
         realName: user.displayName || "",
         nickname: user.displayName || ""
       });
     }
-    return { isNewUser: !doc.exists || !data.nickname, role };
+    return { isNewUser: !hasStoredProfile && prevAuth.uid !== user.uid, role };
   }
   function initAuthSession(onChange = () => {
   }) {
     auth.onAuthStateChanged(async (user) => {
       try {
         if (user) {
-          await syncAccount(user);
-        } else if (appState.state.auth && appState.state.auth.uid) {
+          if (!appState.isTestAccount()) await syncAccount(user);
+        } else if (appState.isLoggedIn() && !appState.isTestAccount()) {
           appState.clearAccount();
         }
       } catch (err) {
@@ -2172,11 +2239,22 @@
       }
     }).catch((error) => {
       console.error("Google \uB85C\uADF8\uC778 \uC5D0\uB7EC", error);
-      alert("\uB85C\uADF8\uC778\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4.\n\uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(@kyunghee.sen.ms.kr)\uB85C \uB85C\uADF8\uC778\uD558\uC138\uC694.");
+      if (error.code === "auth/popup-closed-by-user" || error.code === "auth/cancelled-popup-request") return;
+      const reason = LOGIN_ERROR_MESSAGES[error.code] || "\uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4\uD574 \uC8FC\uC138\uC694.";
+      alert(`\uB85C\uADF8\uC778\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4.
+${reason}
+(\uC624\uB958 \uCF54\uB4DC: ${error.code || "unknown"})
+
+\uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(@kyunghee.sen.ms.kr)\uB85C \uB85C\uADF8\uC778\uD558\uC138\uC694.`);
     });
   }
   function signOutUser(onDone = () => {
   }) {
+    if (appState.isTestAccount()) {
+      appState.clearAccount();
+      onDone();
+      return;
+    }
     auth.signOut().then(() => {
       appState.clearAccount();
       onDone();
@@ -2187,7 +2265,7 @@
   }
   function openTeacherUpgradeModal(onSuccess = () => {
   }) {
-    if (!appState.state.auth || !appState.state.auth.uid) {
+    if (!appState.isLoggedIn()) {
       alert("\uAD50\uC0AC \uAD8C\uD55C \uC2E0\uCCAD\uC740 \uB85C\uADF8\uC778 \uD6C4\uC5D0 \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uC6B0\uCE21 \uC0C1\uB2E8 \uB85C\uADF8\uC778 \uBC84\uD2BC\uC744 \uBA3C\uC800 \uB20C\uB7EC \uC8FC\uC138\uC694.");
       return;
     }
@@ -2234,20 +2312,24 @@
         return;
       }
       const { uid, email } = appState.state.auth;
+      const promote = () => {
+        appState.applyAccount({ uid, email, accountRole: "teacher", roleSource: "code" });
+        sounds.playCelebration();
+        modal.classList.remove("active");
+        onSuccess();
+      };
+      if (appState.isTestAccount()) {
+        promote();
+        return;
+      }
       submitBtn.disabled = true;
       db.collection("users").doc(uid).set({
         role: "teacher",
         roleSource: "code",
         roleUpdatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true }).then(() => {
-        appState.applyAccount({ uid, email, accountRole: "teacher", roleSource: "code" });
-        sounds.playCelebration();
-        modal.classList.remove("active");
-        onSuccess();
-      }).catch((err) => {
-        console.error("\uAD50\uC0AC \uAD8C\uD55C \uC800\uC7A5 \uC2E4\uD328", err);
-        errorEl.textContent = "\uAD8C\uD55C \uC800\uC7A5\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4. \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4\uD574 \uC8FC\uC138\uC694.";
-        submitBtn.disabled = false;
+      }, { merge: true }).then(promote).catch((err) => {
+        console.warn("\uAD50\uC0AC \uAD8C\uD55C DB \uC800\uC7A5 \uC2E4\uD328 (\uC774 \uAE30\uAE30\uC5D0\uB9CC \uBC18\uC601)", err);
+        promote();
       });
     };
     submitBtn.onclick = submit;
@@ -2256,7 +2338,7 @@
     };
   }
   function openProfileOnboardingModal(onSuccess = () => {
-  }, isNewUser = false) {
+  }, isNewUser = false, onTeacherUpgrade = onSuccess) {
     let modal = document.getElementById("profile-onboarding-modal");
     if (!modal) {
       modal = document.createElement("div");
@@ -2265,7 +2347,7 @@
     }
     const { userProfile } = appState.state;
     const authInfo = appState.state.auth || {};
-    const isLoggedIn = !!authInfo.uid;
+    const isLoggedIn = appState.isLoggedIn();
     const accountRole = isLoggedIn ? authInfo.accountRole || "student" : "student";
     const roleSourceLabel = isLoggedIn ? ROLE_SOURCE_LABELS[authInfo.roleSource] || ROLE_SOURCE_LABELS.default : "\uB85C\uADF8\uC778 \uC804 (\uCCB4\uD5D8 \uBAA8\uB4DC)";
     modal.innerHTML = `
@@ -2346,7 +2428,7 @@
     if (btnRequestTeacher) {
       btnRequestTeacher.onclick = () => {
         modal.classList.remove("active");
-        openTeacherUpgradeModal(onSuccess);
+        openTeacherUpgradeModal(onTeacherUpgrade);
       };
     }
     const btnClose = modal.querySelector("#btn-close-onboarding");
@@ -2369,7 +2451,7 @@
           nickname
         });
         const { uid, email } = appState.state.auth;
-        if (uid) {
+        if (uid && !appState.isTestAccount()) {
           db.collection("users").doc(uid).set({
             uid,
             email,
@@ -2384,8 +2466,10 @@
             modal.classList.remove("active");
             onSuccess();
           }).catch((err) => {
-            console.error("Failed to save profile", err);
-            alert("\uD504\uB85C\uD544 \uC800\uC7A5\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4.");
+            console.warn("Firestore \uD504\uB85C\uD544 \uC800\uC7A5 \uC2E4\uD328 (\uC774 \uAE30\uAE30\uC5D0\uB9CC \uC800\uC7A5)", err);
+            sounds.playCelebration();
+            modal.classList.remove("active");
+            onSuccess();
           });
         } else {
           sounds.playCelebration();
@@ -2405,9 +2489,47 @@
     "\uAC1C\uC774\uB4DD": { meaning: "\uC544\uC8FC \uD070 \uC774\uB4DD\uC744 \uBCF4\uC558\uB2E4\uB294 \uB73B", correct: "\uD070 \uC774\uC775, \uC544\uC8FC \uC88B\uC740 \uC77C" },
     "\uB178\uC7BC": { meaning: "\uC7AC\uBBF8\uAC00 \uC5C6\uB2E4\uB294 \uB73B", correct: "\uC9C0\uB8E8\uD568, \uC7AC\uBBF8\uC5C6\uC74C" }
   };
+  var GEMINI_MODELS = ["gemini-3.6-flash", "gemini-flash-latest", "gemini-3.5-flash"];
+  var chatbotEnabled = false;
+  function setChatbotEnabled(enabled) {
+    chatbotEnabled = enabled;
+    const container = document.querySelector(".chatbot-container");
+    if (container) container.style.display = enabled ? "" : "none";
+  }
+  var escapeHtml = (text) => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  var formatReply = (text) => escapeHtml(text).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
+  async function askGemini(word) {
+    const body = JSON.stringify({
+      systemInstruction: {
+        parts: [{ text: "\uB2F9\uC2E0\uC740 \uC911\uD559\uC0DD\uC5D0\uAC8C \uBC14\uB978 \uC6B0\uB9AC\uB9D0\uC744 \uC54C\uB824\uC8FC\uB294 \uCE5C\uC808\uD558\uACE0 \uB530\uB73B\uD55C \uC120\uC0DD\uB2D8\uC785\uB2C8\uB2E4. \uB2F5\uBCC0\uC740 3\uBB38\uC7A5 \uC774\uB0B4\uB85C \uC9E7\uAC8C \uD569\uB2C8\uB2E4." }]
+      },
+      contents: [{ parts: [{ text: `\uD559\uC0DD\uC774 \uB2E4\uC74C \uB2E8\uC5B4\uC758 \uB73B\uACFC \uC62C\uBC14\uB978 \uC21C\uD654\uC5B4\uB97C \uBB3C\uC5B4\uBD24\uC2B5\uB2C8\uB2E4: "${word}". \uC774 \uB2E8\uC5B4\uAC00 \uBE44\uC18D\uC5B4\uB098 \uC740\uC5B4, \uC2E0\uC870\uC5B4\uB77C\uBA74 \uADF8 \uB73B\uC744 \uAC04\uB2E8\uD788 \uC124\uBA85\uD558\uACE0, \uD559\uC0DD\uC774 \uC77C\uC0C1\uC5D0\uC11C \uC4F8 \uC218 \uC788\uB294 \uAE0D\uC815\uC801\uC774\uACE0 \uBC14\uB978\uB9D0(\uC21C\uD654\uC5B4)\uB85C \uBC14\uAFB8\uC5B4 \uC548\uB0B4\uD574\uC8FC\uC138\uC694.` }] }]
+    });
+    let lastError = null;
+    for (const model of GEMINI_MODELS) {
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body
+        });
+        if (!res.ok) throw new Error(`${model} \uC751\uB2F5 \uC624\uB958 (${res.status})`);
+        const data = await res.json();
+        const parts = data?.candidates?.[0]?.content?.parts || [];
+        const reply = parts.filter((p) => p.text && !p.thought).map((p) => p.text).join("").trim();
+        if (!reply) throw new Error(`${model} \uBE48 \uC751\uB2F5`);
+        return reply;
+      } catch (err) {
+        console.warn("\uCC57\uBD07 API \uC2E4\uD328, \uB2E4\uC74C \uBAA8\uB378 \uC2DC\uB3C4", err);
+        lastError = err;
+      }
+    }
+    throw lastError;
+  }
   function initChatbot() {
     const container = document.createElement("div");
     container.className = "chatbot-container";
+    container.style.display = chatbotEnabled ? "" : "none";
     container.innerHTML = `
     <div class="chatbot-bubble" id="chatbot-bubble">
       <div class="chatbot-header">
@@ -2488,21 +2610,13 @@
       const text = input.value.trim();
       if (!text) return;
       input.value = "";
-      addMessage(text, true);
+      addMessage(escapeHtml(text), true);
       showTyping();
+      sendBtn.disabled = true;
       try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: `\uD559\uC0DD\uC774 \uB2E4\uC74C \uB2E8\uC5B4\uC758 \uB73B\uACFC \uC62C\uBC14\uB978 \uC21C\uD654\uC5B4\uB97C \uBB3C\uC5B4\uBD24\uC2B5\uB2C8\uB2E4: "${text}". \uC774 \uB2E8\uC5B4\uAC00 \uBE44\uC18D\uC5B4\uB098 \uC740\uC5B4, \uC2E0\uC870\uC5B4\uB77C\uBA74 \uADF8 \uB73B\uC744 \uAC04\uB2E8\uD788 \uC124\uBA85\uD558\uACE0, \uD559\uC0DD\uC774 \uC77C\uC0C1\uC5D0\uC11C \uC4F8 \uC218 \uC788\uB294 \uAE0D\uC815\uC801\uC774\uACE0 \uBC14\uB978\uB9D0(\uC21C\uD654\uC5B4)\uB85C \uBC14\uAFB8\uC5B4 \uC548\uB0B4\uD574\uC8FC\uC138\uC694. \uC544\uC8FC \uCE5C\uC808\uD558\uACE0 \uB530\uB73B\uD55C \uC120\uC0DD\uB2D8 \uD1A4\uC73C\uB85C 3\uBB38\uC7A5 \uC774\uB0B4\uB85C \uC9E7\uAC8C \uB2F5\uBCC0\uD574\uC8FC\uC138\uC694.` }] }]
-          })
-        });
-        if (!res.ok) throw new Error("API failed");
-        const data = await res.json();
-        const reply = data.candidates[0].content.parts[0].text;
+        const reply = await askGemini(text);
         removeTyping();
-        addMessage(reply.replace(/\n/g, "<br>"));
+        addMessage(formatReply(reply));
       } catch (err) {
         removeTyping();
         let fallback = null;
@@ -2510,15 +2624,17 @@
           if (text.includes(slang)) fallback = info;
         }
         if (fallback) {
-          addMessage(`'<strong>${text}</strong>'\uB294 ${fallback.meaning}\uB97C \uC758\uBBF8\uD560 \uC218 \uC788\uC5B4\uC694. \uD559\uAD50\uC5D0\uC11C\uB294 '<strong>${fallback.correct}</strong>'(\uC774)\uB77C\uACE0 \uD45C\uD604\uD574\uBCF4\uB294 \uAC74 \uC5B4\uB5A8\uAE4C\uC694? \u{1F60A}`);
+          addMessage(`'<strong>${escapeHtml(text)}</strong>'\uB294 ${fallback.meaning}\uB97C \uC758\uBBF8\uD560 \uC218 \uC788\uC5B4\uC694. \uD559\uAD50\uC5D0\uC11C\uB294 '<strong>${fallback.correct}</strong>'(\uC774)\uB77C\uACE0 \uD45C\uD604\uD574\uBCF4\uB294 \uAC74 \uC5B4\uB5A8\uAE4C\uC694? \u{1F60A}`);
         } else {
           addMessage("\uC785\uB825\uD574\uC8FC\uC2E0 \uB2E8\uC5B4\uC5D0 \uB300\uD574 \uC9C0\uAE08\uC740 \uB2F5\uBCC0\uD558\uAE30 \uC5B4\uB824\uC6CC\uC694. \uB2E4\uB978 \uB2E8\uC5B4\uB97C \uBB3C\uC5B4\uBCF4\uC2DC\uACA0\uC5B4\uC694? \u{1F972}");
         }
+      } finally {
+        sendBtn.disabled = false;
       }
     };
     sendBtn.onclick = handleSend;
-    input.onkeypress = (e) => {
-      if (e.key === "Enter") handleSend();
+    input.onkeydown = (e) => {
+      if (e.key === "Enter" && !e.isComposing && !sendBtn.disabled) handleSend();
     };
   }
 
@@ -2591,7 +2707,7 @@
       if (googleBtn) {
         googleBtn.addEventListener("click", () => {
           sounds.playClick();
-          if (appState.state.auth && appState.state.auth.uid) {
+          if (appState.isLoggedIn()) {
             if (!confirm("\uB85C\uADF8\uC544\uC6C3 \uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?")) return;
             signOutUser(() => {
               this.updateHeaderStats();
@@ -2600,23 +2716,25 @@
             });
             return;
           }
-          showToast("\uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(@kyunghee.sen.ms.kr)\uB85C \uB85C\uADF8\uC778\uD558\uC138\uC694.", "\u{1F3EB}");
-          openGoogleLoginModal(() => {
-            this.updateHeaderStats();
-            this.navigate(this.currentView);
-            const roleText = appState.isVerifiedTeacher() ? "\uAD50\uC0AC" : "\uD559\uC0DD";
-            showToast(`${roleText} \uACC4\uC815\uC73C\uB85C \uB85C\uADF8\uC778\uB418\uC5C8\uC2B5\uB2C8\uB2E4.`, "\u{1F464}");
-          });
+          this.startGoogleLogin();
         });
       }
       const userChip = document.getElementById("user-profile-chip");
       if (userChip) {
         userChip.addEventListener("click", () => {
           sounds.playClick();
+          if (!appState.isLoggedIn()) {
+            this.navigate("home");
+            return;
+          }
           openProfileOnboardingModal(() => {
             this.updateHeaderStats();
             this.navigate(this.currentView);
             showToast("\uD504\uB85C\uD544 \uC815\uBCF4\uAC00 \uC800\uC7A5\uB418\uC5C8\uC2B5\uB2C8\uB2E4.", "\u2728");
+          }, false, () => {
+            this.updateHeaderStats();
+            showToast("\uAD50\uC0AC \uAD8C\uD55C\uC73C\uB85C \uC804\uD658\uB418\uC5C8\uC2B5\uB2C8\uB2E4.", "\u{1F469}\u200D\u{1F3EB}");
+            this.navigate("teacher");
           });
         });
       }
@@ -2641,9 +2759,30 @@
       }
       this.updateHeaderStats();
     }
+    startGoogleLogin() {
+      showToast("\uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(@kyunghee.sen.ms.kr)\uB85C \uB85C\uADF8\uC778\uD558\uC138\uC694.", "\u{1F3EB}");
+      openGoogleLoginModal(() => {
+        this.updateHeaderStats();
+        this.navigate(this.currentView === "teacher" && !appState.isVerifiedTeacher() ? "home" : this.currentView);
+        const roleText = appState.isVerifiedTeacher() ? "\uAD50\uC0AC" : "\uD559\uC0DD";
+        showToast(`${roleText} \uACC4\uC815\uC73C\uB85C \uB85C\uADF8\uC778\uB418\uC5C8\uC2B5\uB2C8\uB2E4.`, "\u{1F464}");
+      });
+    }
+    // 개발용: Firebase 없이 학생/교사 상황 체험
+    startTestLogin(role) {
+      appState.loginAsTestAccount(role);
+      this.updateHeaderStats();
+      if (role === "teacher") {
+        showToast("\uAD50\uC0AC \uD14C\uC2A4\uD2B8 \uACC4\uC815\uC73C\uB85C \uB85C\uADF8\uC778\uD588\uC2B5\uB2C8\uB2E4.", "\u{1F469}\u200D\u{1F3EB}");
+        this.navigate("teacher");
+      } else {
+        showToast("\uD559\uC0DD \uD14C\uC2A4\uD2B8 \uACC4\uC815\uC73C\uB85C \uB85C\uADF8\uC778\uD588\uC2B5\uB2C8\uB2E4.", "\u{1F392}");
+        this.navigate("home");
+      }
+    }
     // 교사 권한이 없을 때: 로그인 전이면 로그인 안내, 로그인 후면 [교사 권한 신청] 모달
     promptTeacherAccess() {
-      if (!appState.state.auth || !appState.state.auth.uid) {
+      if (!appState.isLoggedIn()) {
         showToast("\uAD50\uC0AC \uD654\uBA74\uC740 \uAD50\uC0AC \uACC4\uC815\uC73C\uB85C \uB85C\uADF8\uC778\uD574\uC57C \uC774\uC6A9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.", "\u{1F512}");
         return;
       }
@@ -2664,18 +2803,27 @@
       if (ptsEl) ptsEl.textContent = `\u{1F31F} ${totalPoints.toLocaleString()}P`;
       if (streakEl) streakEl.textContent = `\u{1F525} ${streak}\uC77C \uC5F0\uC18D`;
       if (classEl) classEl.textContent = `\uACBD\uD76C\uC911\uD559\uAD50 \uC62C\uBC14\uB978 \uB8E8\uD2F4`;
+      const loggedIn = appState.isLoggedIn();
       const authLabelEl = document.querySelector("#btn-google-auth span");
-      if (authLabelEl) authLabelEl.textContent = appState.state.auth && appState.state.auth.uid ? "\uB85C\uADF8\uC544\uC6C3" : "\uB85C\uADF8\uC778";
+      if (authLabelEl) authLabelEl.textContent = loggedIn ? appState.isTestAccount() ? "\uD14C\uC2A4\uD2B8 \uC885\uB8CC" : "\uB85C\uADF8\uC544\uC6C3" : "\uB85C\uADF8\uC778";
+      ["header-points", "header-streak", "user-profile-chip", "btn-mode-toggle"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = loggedIn ? "" : "none";
+      });
+      const navMenu = document.querySelector(".nav-menu");
+      if (navMenu) navMenu.style.visibility = loggedIn ? "" : "hidden";
+      setChatbotEnabled(loggedIn);
+      const testMark = appState.isTestAccount() ? "\u{1F9EA} " : "";
       if (userProfile.role === "teacher") {
         if (roleIconEl) roleIconEl.textContent = "\u{1F469}\u200D\u{1F3EB}";
-        if (nameEl) nameEl.textContent = `${userProfile.realName} (\uC120\uC0DD\uB2D8)`;
+        if (nameEl) nameEl.textContent = `${testMark}${userProfile.realName} (\uC120\uC0DD\uB2D8)`;
         if (modeBtn) {
           modeBtn.textContent = "\uD559\uC0DD \uBAA8\uB4DC\uB85C \uC804\uD658";
           modeBtn.classList.add("teacher-active");
         }
       } else {
         if (roleIconEl) roleIconEl.textContent = "\u{1F392}";
-        if (nameEl) nameEl.textContent = userProfile.nickname;
+        if (nameEl) nameEl.textContent = `${testMark}${userProfile.nickname}`;
         if (modeBtn) {
           modeBtn.textContent = "\uAD50\uC0AC \uBAA8\uB4DC";
           modeBtn.classList.remove("teacher-active");
@@ -2690,6 +2838,10 @@
       const mainContainer = document.getElementById("main-content");
       if (!mainContainer) return;
       window.scrollTo({ top: 0, behavior: "smooth" });
+      if (!appState.isLoggedIn()) {
+        this.renderLoginGate(mainContainer);
+        return;
+      }
       switch (view) {
         case "home":
           this.renderHome(mainContainer);
@@ -4195,9 +4347,68 @@
         });
       });
     }
+    // 로그인 전 첫 화면: 구글 로그인 + 개발용 테스트 로그인
+    renderLoginGate(container) {
+      container.innerHTML = `
+      <section class="hero-section">
+        <div class="hero-pill-tag">
+          <span>\u2728</span> \uACBD\uD76C\uC911\uD559\uAD50 \xB7 \uB9E4\uC77C 5\uBD84 \uC62C\uBC14\uB978 \uB8E8\uD2F4
+        </div>
+        <h1 class="hero-title">
+          \uB85C\uADF8\uC778\uD558\uACE0<br>
+          <span class="highlight-gradient">\uBC14\uB9845\uBD84\uC744 \uC2DC\uC791\uD574 \uBCF4\uC138\uC694</span>
+        </h1>
+        <p class="hero-desc">
+          \uC544\uCE68 \uC2DC\uAC04\uBFD0\uB9CC \uC544\uB2C8\uB77C \uC26C\uB294 \uC2DC\uAC04\xB7\uC810\uC2EC\uC2DC\uAC04 \uB4F1 \uC9EC\uB0A0 \uB54C\uB9C8\uB2E4 \uB4E4\uC5B4\uC640\uC11C \uC608\uC808 \uC2E4\uCC9C, \uD55C\uCEF4\uD0C0\uC790, \uB3C5\uC11C\uAE30\uB85D\uC744 \uC774\uC5B4\uAC00\uC694!
+        </p>
+
+        <div class="card" style="max-width: 460px; margin: 2rem auto 0; padding: 2rem; text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">\u{1F3EB}</div>
+          <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.4rem;">\uD559\uAD50 \uACC4\uC815\uC73C\uB85C \uB85C\uADF8\uC778</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
+            \uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(<strong>@kyunghee.sen.ms.kr</strong>)\uB85C \uB85C\uADF8\uC778\uD558\uC138\uC694.<br>
+            \uD559\uC0DD/\uAD50\uC0AC \uAD8C\uD55C\uC740 \uACC4\uC815\uC5D0 \uB530\uB77C \uC790\uB3D9\uC73C\uB85C \uAD6C\uBD84\uB429\uB2C8\uB2E4.
+          </p>
+          <button class="btn btn-primary" id="btn-gate-google" style="width: 100%; background: #4F46E5;">
+            G \uAD6C\uAE00 \uB85C\uADF8\uC778
+          </button>
+
+          ${DEV_TEST_LOGIN_ENABLED ? `
+            <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-light);">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.6rem;">
+                \u{1F9EA} \uAC1C\uBC1C \uB2E8\uACC4 \uD14C\uC2A4\uD2B8 (\uAD6C\uAE00 \uB85C\uADF8\uC778 \uC5C6\uC774 \uCCB4\uD5D8)
+              </div>
+              <div style="display: flex; gap: 0.6rem;">
+                <button class="btn btn-secondary" id="btn-test-student" style="flex: 1;">\u{1F392} \uD559\uC0DD\uC73C\uB85C \uD14C\uC2A4\uD2B8</button>
+                <button class="btn btn-secondary" id="btn-test-teacher" style="flex: 1;">\u{1F469}\u200D\u{1F3EB} \uAD50\uC0AC\uB85C \uD14C\uC2A4\uD2B8</button>
+              </div>
+            </div>
+          ` : ""}
+        </div>
+      </section>
+    `;
+      container.querySelector("#btn-gate-google").addEventListener("click", () => {
+        sounds.playClick();
+        this.startGoogleLogin();
+      });
+      const testStudentBtn = container.querySelector("#btn-test-student");
+      if (testStudentBtn) {
+        testStudentBtn.addEventListener("click", () => {
+          sounds.playClick();
+          this.startTestLogin("student");
+        });
+      }
+      const testTeacherBtn = container.querySelector("#btn-test-teacher");
+      if (testTeacherBtn) {
+        testTeacherBtn.addEventListener("click", () => {
+          sounds.playClick();
+          this.startTestLogin("teacher");
+        });
+      }
+    }
     // 교사 권한이 없는 사용자에게 보여줄 잠금 화면
     renderTeacherLocked(container) {
-      const isLoggedIn = !!(appState.state.auth && appState.state.auth.uid);
+      const isLoggedIn = appState.isLoggedIn();
       container.innerHTML = `
       <div class="app-container" style="padding-top: 3rem;">
         <div class="card" style="max-width: 520px; margin: 0 auto; padding: 2.5rem 2rem; text-align: center;">

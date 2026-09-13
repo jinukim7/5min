@@ -2,7 +2,7 @@
 import { appState } from './state.js';
 import { sounds } from './sound.js';
 import { auth, googleProvider, db } from './firebase-config.js';
-import { resolveAccountRole, verifyTeacherCode } from './roles.js';
+import { resolveAccountRole, verifyTeacherCode, parseStudentEmail } from './roles.js';
 
 const ROLE_LABELS = {
   student: '👨‍🎓 학생',
@@ -12,51 +12,76 @@ const ROLE_LABELS = {
 const ROLE_SOURCE_LABELS = {
   auto: '이메일로 자동 구분',
   code: '교사 인증 코드로 승격',
-  default: '자동 구분 안 됨 (기본 학생)'
+  default: '자동 구분 안 됨 (기본 학생)',
+  test: '개발용 테스트 계정'
+};
+
+const LOGIN_ERROR_MESSAGES = {
+  'auth/configuration-not-found': 'Firebase 콘솔에서 Authentication(Google 로그인)이 아직 설정되지 않았습니다.',
+  'auth/operation-not-allowed': 'Firebase 콘솔에서 Google 로그인 제공업체가 사용 설정되지 않았습니다.',
+  'auth/unauthorized-domain': '현재 사이트 주소가 Firebase 승인된 도메인에 등록되지 않았습니다.',
+  'auth/popup-blocked': '브라우저가 로그인 팝업을 차단했습니다. 팝업을 허용해 주세요.',
+  'auth/network-request-failed': '네트워크 연결을 확인해 주세요.'
 };
 
 // Firestore 프로필을 읽어 권한을 결정하고 role 필드를 저장한 뒤 세션 상태에 반영
+// (Firestore를 사용할 수 없어도 이메일 규칙으로 로그인은 진행)
 async function syncAccount(user) {
   const ref = db.collection('users').doc(user.uid);
-  const doc = await ref.get();
-  const data = doc.exists ? doc.data() : {};
+  const prevAuth = appState.state.auth || {};
+  let data = prevAuth.uid === user.uid ? { role: prevAuth.accountRole, roleSource: prevAuth.roleSource } : {};
+  let hasStoredProfile = false;
+
+  try {
+    const doc = await ref.get();
+    if (doc.exists) {
+      data = doc.data();
+      hasStoredProfile = !!data.nickname;
+    }
+  } catch (err) {
+    console.warn('Firestore 프로필 조회 실패 (로컬 상태로 진행)', err);
+  }
+
   const { role, roleSource } = resolveAccountRole(user.email, data);
 
-  await ref.set({
+  ref.set({
     uid: user.uid,
     email: user.email,
     role,
     roleSource,
     lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
-  }, { merge: true });
+  }, { merge: true }).catch(err => console.warn('Firestore role 저장 실패', err));
 
   appState.applyAccount({ uid: user.uid, email: user.email, accountRole: role, roleSource });
 
-  if (doc.exists) {
+  if (hasStoredProfile) {
     appState.updateProfile({
       grade: data.grade || appState.state.userProfile.grade,
       classNum: data.classNum || appState.state.userProfile.classNum,
       number: data.number || appState.state.userProfile.number,
       realName: data.realName || user.displayName || '',
-      nickname: data.nickname || user.displayName || ''
+      nickname: data.nickname
     });
-  } else {
+  } else if (prevAuth.uid !== user.uid) {
+    // 처음 로그인한 학생은 이메일(입학년도·학년·반·번호)로 학적 정보 자동 입력
+    const studentInfo = role === 'student' ? parseStudentEmail(user.email) : null;
     appState.updateProfile({
+      ...(studentInfo ? { grade: studentInfo.grade, classNum: studentInfo.classNum, number: studentInfo.number } : {}),
       realName: user.displayName || '',
       nickname: user.displayName || ''
     });
   }
 
-  return { isNewUser: !doc.exists || !data.nickname, role };
+  return { isNewUser: !hasStoredProfile && prevAuth.uid !== user.uid, role };
 }
 
-// 새로고침 후에도 Firebase 로그인 세션을 복원
+// 새로고침 후에도 Firebase 로그인 세션을 복원 (테스트 계정 세션은 유지)
 export function initAuthSession(onChange = () => {}) {
   auth.onAuthStateChanged(async (user) => {
     try {
       if (user) {
-        await syncAccount(user);
-      } else if (appState.state.auth && appState.state.auth.uid) {
+        if (!appState.isTestAccount()) await syncAccount(user);
+      } else if (appState.isLoggedIn() && !appState.isTestAccount()) {
         appState.clearAccount();
       }
     } catch (err) {
@@ -79,11 +104,18 @@ export function openGoogleLoginModal(onSuccess = () => {}) {
     })
     .catch((error) => {
       console.error("Google 로그인 에러", error);
-      alert("로그인에 실패했습니다.\n학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.");
+      if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/cancelled-popup-request') return;
+      const reason = LOGIN_ERROR_MESSAGES[error.code] || '잠시 후 다시 시도해 주세요.';
+      alert(`로그인에 실패했습니다.\n${reason}\n(오류 코드: ${error.code || 'unknown'})\n\n학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.`);
     });
 }
 
 export function signOutUser(onDone = () => {}) {
+  if (appState.isTestAccount()) {
+    appState.clearAccount();
+    onDone();
+    return;
+  }
   auth.signOut()
     .then(() => {
       appState.clearAccount();
@@ -97,7 +129,7 @@ export function signOutUser(onDone = () => {}) {
 
 // [교사 권한 신청] 모달: 교사 인증 코드 입력 시 role을 teacher로 승격
 export function openTeacherUpgradeModal(onSuccess = () => {}) {
-  if (!appState.state.auth || !appState.state.auth.uid) {
+  if (!appState.isLoggedIn()) {
     alert('교사 권한 신청은 로그인 후에 할 수 있습니다.\n우측 상단 로그인 버튼을 먼저 눌러 주세요.');
     return;
   }
@@ -150,20 +182,27 @@ export function openTeacherUpgradeModal(onSuccess = () => {}) {
     }
 
     const { uid, email } = appState.state.auth;
+    const promote = () => {
+      appState.applyAccount({ uid, email, accountRole: 'teacher', roleSource: 'code' });
+      sounds.playCelebration();
+      modal.classList.remove('active');
+      onSuccess();
+    };
+
+    if (appState.isTestAccount()) {
+      promote();
+      return;
+    }
+
     submitBtn.disabled = true;
     db.collection('users').doc(uid).set({
       role: 'teacher',
       roleSource: 'code',
       roleUpdatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).then(() => {
-      appState.applyAccount({ uid, email, accountRole: 'teacher', roleSource: 'code' });
-      sounds.playCelebration();
-      modal.classList.remove('active');
-      onSuccess();
-    }).catch(err => {
-      console.error('교사 권한 저장 실패', err);
-      errorEl.textContent = '권한 저장에 실패했습니다. 잠시 후 다시 시도해 주세요.';
-      submitBtn.disabled = false;
+    }, { merge: true }).then(promote).catch(err => {
+      // DB를 쓸 수 없는 환경에서도 이 기기 세션에서는 승격 유지
+      console.warn('교사 권한 DB 저장 실패 (이 기기에만 반영)', err);
+      promote();
     });
   };
 
@@ -171,7 +210,7 @@ export function openTeacherUpgradeModal(onSuccess = () => {}) {
   input.onkeydown = (e) => { if (e.key === 'Enter') submit(); };
 }
 
-export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = false) {
+export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = false, onTeacherUpgrade = onSuccess) {
   let modal = document.getElementById('profile-onboarding-modal');
   if (!modal) {
     modal = document.createElement('div');
@@ -181,7 +220,7 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
 
   const { userProfile } = appState.state;
   const authInfo = appState.state.auth || {};
-  const isLoggedIn = !!authInfo.uid;
+  const isLoggedIn = appState.isLoggedIn();
   const accountRole = isLoggedIn ? (authInfo.accountRole || 'student') : 'student';
   const roleSourceLabel = isLoggedIn ? (ROLE_SOURCE_LABELS[authInfo.roleSource] || ROLE_SOURCE_LABELS.default) : '로그인 전 (체험 모드)';
 
@@ -265,7 +304,7 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
   if (btnRequestTeacher) {
     btnRequestTeacher.onclick = () => {
       modal.classList.remove('active');
-      openTeacherUpgradeModal(onSuccess);
+      openTeacherUpgradeModal(onTeacherUpgrade);
     };
   }
 
@@ -292,7 +331,7 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
       });
 
       const { uid, email } = appState.state.auth;
-      if (uid) {
+      if (uid && !appState.isTestAccount()) {
         // role 필드는 로그인/교사 코드 승격 흐름에서만 저장
         db.collection('users').doc(uid).set({
           uid,
@@ -308,8 +347,11 @@ export function openProfileOnboardingModal(onSuccess = () => {}, isNewUser = fal
           modal.classList.remove('active');
           onSuccess();
         }).catch(err => {
-          console.error("Failed to save profile", err);
-          alert("프로필 저장에 실패했습니다.");
+          // DB 저장 실패 시에도 이 기기에는 저장된 상태로 계속 진행
+          console.warn("Firestore 프로필 저장 실패 (이 기기에만 저장)", err);
+          sounds.playCelebration();
+          modal.classList.remove('active');
+          onSuccess();
         });
       } else {
         sounds.playCelebration();

@@ -6,7 +6,8 @@ import { KeyPracticeSession, HancomSentenceSession, isHangulPrefix } from './typ
 import { sounds } from './sound.js';
 import { triggerConfetti } from './confetti.js';
 import { openGoogleLoginModal, openProfileOnboardingModal, openTeacherUpgradeModal, initAuthSession, signOutUser } from './auth.js';
-import { initChatbot } from './chatbot.js';
+import { initChatbot, setChatbotEnabled } from './chatbot.js';
+import { DEV_TEST_LOGIN_ENABLED } from './roles.js';
 
 export function showToast(message, icon = '✨') {
   const container = document.getElementById('toast-container');
@@ -90,7 +91,7 @@ class App {
     if (googleBtn) {
       googleBtn.addEventListener('click', () => {
         sounds.playClick();
-        if (appState.state.auth && appState.state.auth.uid) {
+        if (appState.isLoggedIn()) {
           if (!confirm('로그아웃 하시겠습니까?')) return;
           signOutUser(() => {
             this.updateHeaderStats();
@@ -99,13 +100,7 @@ class App {
           });
           return;
         }
-        showToast('학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.', '🏫');
-        openGoogleLoginModal(() => {
-          this.updateHeaderStats();
-          this.navigate(this.currentView);
-          const roleText = appState.isVerifiedTeacher() ? '교사' : '학생';
-          showToast(`${roleText} 계정으로 로그인되었습니다.`, '👤');
-        });
+        this.startGoogleLogin();
       });
     }
 
@@ -113,10 +108,18 @@ class App {
     if (userChip) {
       userChip.addEventListener('click', () => {
         sounds.playClick();
+        if (!appState.isLoggedIn()) {
+          this.navigate('home');
+          return;
+        }
         openProfileOnboardingModal(() => {
           this.updateHeaderStats();
           this.navigate(this.currentView);
           showToast('프로필 정보가 저장되었습니다.', '✨');
+        }, false, () => {
+          this.updateHeaderStats();
+          showToast('교사 권한으로 전환되었습니다.', '👩‍🏫');
+          this.navigate('teacher');
         });
       });
     }
@@ -144,9 +147,32 @@ class App {
     this.updateHeaderStats();
   }
 
+  startGoogleLogin() {
+    showToast('학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.', '🏫');
+    openGoogleLoginModal(() => {
+      this.updateHeaderStats();
+      this.navigate(this.currentView === 'teacher' && !appState.isVerifiedTeacher() ? 'home' : this.currentView);
+      const roleText = appState.isVerifiedTeacher() ? '교사' : '학생';
+      showToast(`${roleText} 계정으로 로그인되었습니다.`, '👤');
+    });
+  }
+
+  // 개발용: Firebase 없이 학생/교사 상황 체험
+  startTestLogin(role) {
+    appState.loginAsTestAccount(role);
+    this.updateHeaderStats();
+    if (role === 'teacher') {
+      showToast('교사 테스트 계정으로 로그인했습니다.', '👩‍🏫');
+      this.navigate('teacher');
+    } else {
+      showToast('학생 테스트 계정으로 로그인했습니다.', '🎒');
+      this.navigate('home');
+    }
+  }
+
   // 교사 권한이 없을 때: 로그인 전이면 로그인 안내, 로그인 후면 [교사 권한 신청] 모달
   promptTeacherAccess() {
-    if (!appState.state.auth || !appState.state.auth.uid) {
+    if (!appState.isLoggedIn()) {
       showToast('교사 화면은 교사 계정으로 로그인해야 이용할 수 있습니다.', '🔒');
       return;
     }
@@ -170,19 +196,30 @@ class App {
     if (streakEl) streakEl.textContent = `🔥 ${streak}일 연속`;
     if (classEl) classEl.textContent = `경희중학교 올바른 루틴`;
 
+    const loggedIn = appState.isLoggedIn();
     const authLabelEl = document.querySelector('#btn-google-auth span');
-    if (authLabelEl) authLabelEl.textContent = appState.state.auth && appState.state.auth.uid ? '로그아웃' : '로그인';
+    if (authLabelEl) authLabelEl.textContent = loggedIn ? (appState.isTestAccount() ? '테스트 종료' : '로그아웃') : '로그인';
 
+    // 로그인 전에는 개인 정보·포인트·메뉴·챗봇을 숨김
+    ['header-points', 'header-streak', 'user-profile-chip', 'btn-mode-toggle'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = loggedIn ? '' : 'none';
+    });
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu) navMenu.style.visibility = loggedIn ? '' : 'hidden';
+    setChatbotEnabled(loggedIn);
+
+    const testMark = appState.isTestAccount() ? '🧪 ' : '';
     if (userProfile.role === 'teacher') {
       if (roleIconEl) roleIconEl.textContent = '👩‍🏫';
-      if (nameEl) nameEl.textContent = `${userProfile.realName} (선생님)`;
+      if (nameEl) nameEl.textContent = `${testMark}${userProfile.realName} (선생님)`;
       if (modeBtn) {
         modeBtn.textContent = '학생 모드로 전환';
         modeBtn.classList.add('teacher-active');
       }
     } else {
       if (roleIconEl) roleIconEl.textContent = '🎒';
-      if (nameEl) nameEl.textContent = userProfile.nickname;
+      if (nameEl) nameEl.textContent = `${testMark}${userProfile.nickname}`;
       if (modeBtn) {
         modeBtn.textContent = '교사 모드';
         modeBtn.classList.remove('teacher-active');
@@ -201,6 +238,12 @@ class App {
     if (!mainContainer) return;
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // 모든 기능은 로그인 후에만 이용 가능
+    if (!appState.isLoggedIn()) {
+      this.renderLoginGate(mainContainer);
+      return;
+    }
 
     switch (view) {
       case 'home':
@@ -1802,9 +1845,72 @@ class App {
     });
   }
 
+  // 로그인 전 첫 화면: 구글 로그인 + 개발용 테스트 로그인
+  renderLoginGate(container) {
+    container.innerHTML = `
+      <section class="hero-section">
+        <div class="hero-pill-tag">
+          <span>✨</span> 경희중학교 · 매일 5분 올바른 루틴
+        </div>
+        <h1 class="hero-title">
+          로그인하고<br>
+          <span class="highlight-gradient">바름5분을 시작해 보세요</span>
+        </h1>
+        <p class="hero-desc">
+          아침 시간뿐만 아니라 쉬는 시간·점심시간 등 짬날 때마다 들어와서 예절 실천, 한컴타자, 독서기록을 이어가요!
+        </p>
+
+        <div class="card" style="max-width: 460px; margin: 2rem auto 0; padding: 2rem; text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏫</div>
+          <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 0.4rem;">학교 계정으로 로그인</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.25rem;">
+            학교 워크스페이스(<strong>@kyunghee.sen.ms.kr</strong>)로 로그인하세요.<br>
+            학생/교사 권한은 계정에 따라 자동으로 구분됩니다.
+          </p>
+          <button class="btn btn-primary" id="btn-gate-google" style="width: 100%; background: #4F46E5;">
+            G 구글 로그인
+          </button>
+
+          ${DEV_TEST_LOGIN_ENABLED ? `
+            <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border-light);">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.6rem;">
+                🧪 개발 단계 테스트 (구글 로그인 없이 체험)
+              </div>
+              <div style="display: flex; gap: 0.6rem;">
+                <button class="btn btn-secondary" id="btn-test-student" style="flex: 1;">🎒 학생으로 테스트</button>
+                <button class="btn btn-secondary" id="btn-test-teacher" style="flex: 1;">👩‍🏫 교사로 테스트</button>
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      </section>
+    `;
+
+    container.querySelector('#btn-gate-google').addEventListener('click', () => {
+      sounds.playClick();
+      this.startGoogleLogin();
+    });
+
+    const testStudentBtn = container.querySelector('#btn-test-student');
+    if (testStudentBtn) {
+      testStudentBtn.addEventListener('click', () => {
+        sounds.playClick();
+        this.startTestLogin('student');
+      });
+    }
+
+    const testTeacherBtn = container.querySelector('#btn-test-teacher');
+    if (testTeacherBtn) {
+      testTeacherBtn.addEventListener('click', () => {
+        sounds.playClick();
+        this.startTestLogin('teacher');
+      });
+    }
+  }
+
   // 교사 권한이 없는 사용자에게 보여줄 잠금 화면
   renderTeacherLocked(container) {
-    const isLoggedIn = !!(appState.state.auth && appState.state.auth.uid);
+    const isLoggedIn = appState.isLoggedIn();
     container.innerHTML = `
       <div class="app-container" style="padding-top: 3rem;">
         <div class="card" style="max-width: 520px; margin: 0 auto; padding: 2.5rem 2rem; text-align: center;">

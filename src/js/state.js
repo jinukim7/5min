@@ -605,8 +605,12 @@ export class AppState {
           if (!parsed.selectedClassKey) {
             parsed.selectedClassKey = '2-3';
           }
+          // 로그인 세션(uid)이 없으면 로그아웃 상태로 취급
+          if (!parsed.auth || !parsed.auth.uid) {
+            parsed.auth = { isLoggedIn: false, provider: 'google', uid: null, email: '', accountRole: 'student', roleSource: 'default' };
+          }
           // 인증된 교사 계정이 아니면 교사 화면 모드를 해제
-          if (!parsed.auth || !parsed.auth.uid || parsed.auth.accountRole !== 'teacher') {
+          if (parsed.auth.accountRole !== 'teacher') {
             parsed.userProfile.role = 'student';
           }
           return parsed;
@@ -619,10 +623,12 @@ export class AppState {
     // Default current profile (Student: 2학년 3반 1번 김민준 / 별빛달빛)
     return {
       auth: {
-        isLoggedIn: true,
+        isLoggedIn: false,
         provider: 'google',
-        email: 'minjun.kim@seoul-ms.kr',
-        avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=minjun'
+        uid: null,
+        email: '',
+        accountRole: 'student',
+        roleSource: 'default'
       },
       userProfile: {
         role: 'student', // 'student' | 'teacher'
@@ -681,10 +687,44 @@ export class AppState {
     this.listeners.forEach(fn => fn(this.state));
   }
 
+  // 구글 로그인 또는 테스트 로그인 세션이 있는지
+  isLoggedIn() {
+    const { auth } = this.state;
+    return !!(auth && auth.isLoggedIn && auth.uid);
+  }
+
+  isTestAccount() {
+    return this.isLoggedIn() && !!this.state.auth.isTestAccount;
+  }
+
   // 로그인된 계정이 교사 권한(자동 구분 또는 코드 승격)을 가졌는지
   isVerifiedTeacher() {
-    const { auth } = this.state;
-    return !!(auth && auth.isLoggedIn && auth.uid && auth.accountRole === 'teacher');
+    return this.isLoggedIn() && this.state.auth.accountRole === 'teacher';
+  }
+
+  // 개발용 테스트 로그인 (Firebase 없이 학생/교사 상황 체험)
+  loginAsTestAccount(role) {
+    const isTeacher = role === 'teacher';
+    this.state.auth = {
+      isLoggedIn: true,
+      provider: 'test',
+      isTestAccount: true,
+      uid: isTeacher ? 'test-teacher' : 'test-student',
+      email: isTeacher ? 'test.teacher@kyunghee.sen.ms.kr' : '262301@kyunghee.sen.ms.kr',
+      accountRole: isTeacher ? 'teacher' : 'student',
+      roleSource: 'test'
+    };
+    this.state.userProfile = {
+      ...this.state.userProfile,
+      role: isTeacher ? 'teacher' : 'student',
+      grade: 2,
+      classNum: 3,
+      number: 1,
+      realName: isTeacher ? '테스트 선생님' : '김민준',
+      nickname: isTeacher ? '담임선생님' : '별빛달빛'
+    };
+    if (!isTeacher) this.syncCurrentStudentToClassList();
+    this.save();
   }
 
   // 화면 모드 전환 (교사 화면은 인증된 교사만 가능)
@@ -700,7 +740,7 @@ export class AppState {
     this.state.auth = {
       ...this.state.auth,
       isLoggedIn: true,
-      provider: 'google',
+      provider: this.state.auth && this.state.auth.isTestAccount ? 'test' : 'google',
       uid,
       email,
       accountRole,

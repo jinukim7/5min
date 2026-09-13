@@ -11,10 +11,64 @@ const SLANG_DICTIONARY = {
   "노잼": { meaning: "재미가 없다는 뜻", correct: "지루함, 재미없음" }
 };
 
+// gemini-pro 는 종료된 모델이라 404가 발생 → 현재 사용 가능한 모델을 순서대로 시도
+const GEMINI_MODELS = ['gemini-3.6-flash', 'gemini-flash-latest', 'gemini-3.5-flash'];
+
+let chatbotEnabled = false;
+
+// 로그인 상태에 따라 챗봇 표시 (로그인 전에는 숨김)
+export function setChatbotEnabled(enabled) {
+  chatbotEnabled = enabled;
+  const container = document.querySelector('.chatbot-container');
+  if (container) container.style.display = enabled ? '' : 'none';
+}
+
+const escapeHtml = (text) => String(text)
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;');
+
+// 응답의 **굵게** 표시와 줄바꿈만 HTML로 변환
+const formatReply = (text) => escapeHtml(text)
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/\n/g, '<br>');
+
+async function askGemini(word) {
+  const body = JSON.stringify({
+    systemInstruction: {
+      parts: [{ text: '당신은 중학생에게 바른 우리말을 알려주는 친절하고 따뜻한 선생님입니다. 답변은 3문장 이내로 짧게 합니다.' }]
+    },
+    contents: [{ parts: [{ text: `학생이 다음 단어의 뜻과 올바른 순화어를 물어봤습니다: "${word}". 이 단어가 비속어나 은어, 신조어라면 그 뜻을 간단히 설명하고, 학생이 일상에서 쓸 수 있는 긍정적이고 바른말(순화어)로 바꾸어 안내해주세요.` }] }]
+  });
+
+  let lastError = null;
+  for (const model of GEMINI_MODELS) {
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body
+      });
+      if (!res.ok) throw new Error(`${model} 응답 오류 (${res.status})`);
+      const data = await res.json();
+      const parts = data?.candidates?.[0]?.content?.parts || [];
+      const reply = parts.filter(p => p.text && !p.thought).map(p => p.text).join('').trim();
+      if (!reply) throw new Error(`${model} 빈 응답`);
+      return reply;
+    } catch (err) {
+      console.warn('챗봇 API 실패, 다음 모델 시도', err);
+      lastError = err;
+    }
+  }
+  throw lastError;
+}
+
 export function initChatbot() {
   // Create UI
   const container = document.createElement('div');
   container.className = 'chatbot-container';
+  container.style.display = chatbotEnabled ? '' : 'none';
   container.innerHTML = `
     <div class="chatbot-bubble" id="chatbot-bubble">
       <div class="chatbot-header">
@@ -97,25 +151,14 @@ export function initChatbot() {
     const text = input.value.trim();
     if (!text) return;
     input.value = '';
-    addMessage(text, true);
+    addMessage(escapeHtml(text), true);
     showTyping();
+    sendBtn.disabled = true;
 
     try {
-      // Attempt Gemini API call
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: `학생이 다음 단어의 뜻과 올바른 순화어를 물어봤습니다: "${text}". 이 단어가 비속어나 은어, 신조어라면 그 뜻을 간단히 설명하고, 학생이 일상에서 쓸 수 있는 긍정적이고 바른말(순화어)로 바꾸어 안내해주세요. 아주 친절하고 따뜻한 선생님 톤으로 3문장 이내로 짧게 답변해주세요.` }] }]
-        })
-      });
-
-      if (!res.ok) throw new Error("API failed");
-      const data = await res.json();
-      const reply = data.candidates[0].content.parts[0].text;
+      const reply = await askGemini(text);
       removeTyping();
-      // Format response roughly (replace newlines with br)
-      addMessage(reply.replace(/\n/g, '<br>'));
+      addMessage(formatReply(reply));
     } catch (err) {
       removeTyping();
       // Fallback
@@ -123,15 +166,18 @@ export function initChatbot() {
       for (const [slang, info] of Object.entries(SLANG_DICTIONARY)) {
         if (text.includes(slang)) fallback = info;
       }
-      
+
       if (fallback) {
-        addMessage(`'<strong>${text}</strong>'는 ${fallback.meaning}를 의미할 수 있어요. 학교에서는 '<strong>${fallback.correct}</strong>'(이)라고 표현해보는 건 어떨까요? 😊`);
+        addMessage(`'<strong>${escapeHtml(text)}</strong>'는 ${fallback.meaning}를 의미할 수 있어요. 학교에서는 '<strong>${fallback.correct}</strong>'(이)라고 표현해보는 건 어떨까요? 😊`);
       } else {
         addMessage("입력해주신 단어에 대해 지금은 답변하기 어려워요. 다른 단어를 물어보시겠어요? 🥲");
       }
+    } finally {
+      sendBtn.disabled = false;
     }
   };
 
   sendBtn.onclick = handleSend;
-  input.onkeypress = (e) => { if (e.key === 'Enter') handleSend(); };
+  // 한글 조합 중 Enter 가 두 번 전송되지 않도록 isComposing 확인
+  input.onkeydown = (e) => { if (e.key === 'Enter' && !e.isComposing && !sendBtn.disabled) handleSend(); };
 }

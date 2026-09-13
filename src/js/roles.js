@@ -1,29 +1,49 @@
 // 교사/학생 역할 자동 구분 규칙 (학교 사정에 맞게 아래 값만 수정하세요)
 
-// 이메일 아이디(@ 앞)에 이 문자열이 포함되면 학생
-export const STUDENT_EMAIL_KEYWORDS = ['g.'];
+// 학교 구글 워크스페이스 도메인
+export const SCHOOL_DOMAIN = 'kyunghee.sen.ms.kr';
 
-// 이 도메인이면 학생 (예: 학생 전용 도메인이 따로 있을 때 추가)
-export const STUDENT_DOMAINS = [];
+// 학생 계정 아이디 형식: 입학년도 2자리 + 학년 1자리 + 반 1자리 + 번호 2자리
+// 예) 261501@kyunghee.sen.ms.kr → 26년 입학, 1학년 5반 1번
+export const STUDENT_ID_PATTERN = /^(\d{2})(\d)(\d)(\d{2})$/;
 
-// 위 학생 규칙에 해당하지 않고 이 도메인이면 교사
-export const TEACHER_DOMAINS = ['kyunghee.sen.ms.kr', 'sen.go.kr'];
+// 학교 도메인이지만 학생 형식이 아닌 계정 + 아래 도메인은 교사로 구분
+export const EXTRA_TEACHER_DOMAINS = ['sen.go.kr'];
 
 // 자동 구분이 안 된 사용자가 교사 권한을 신청할 때 입력하는 코드
 export const TEACHER_SECRET_CODE = 'TEACHER2026';
+
+// 개발 단계용 [학생으로 테스트] / [교사로 테스트] 버튼 표시 여부 (운영 시 false)
+export const DEV_TEST_LOGIN_ENABLED = true;
+
+function splitEmail(email = '') {
+  const [localPart = '', domain = ''] = String(email).trim().toLowerCase().split('@');
+  return { localPart, domain };
+}
+
+/**
+ * 학생 계정 이메일에서 입학년도/학년/반/번호를 읽습니다.
+ * @returns {{ entryYear: number, grade: number, classNum: number, number: number } | null}
+ */
+export function parseStudentEmail(email = '') {
+  const { localPart, domain } = splitEmail(email);
+  if (domain !== SCHOOL_DOMAIN) return null;
+  const match = localPart.match(STUDENT_ID_PATTERN);
+  if (!match) return null;
+  const [, year, grade, classNum, number] = match.map(Number);
+  return { entryYear: 2000 + year, grade, classNum, number };
+}
 
 /**
  * 이메일로 역할을 판별합니다.
  * @returns {'student' | 'teacher' | null} 판별 불가 시 null
  */
 export function detectRoleFromEmail(email = '') {
-  const normalized = String(email).trim().toLowerCase();
-  const [localPart, domain] = normalized.split('@');
+  const { localPart, domain } = splitEmail(email);
   if (!localPart || !domain) return null;
 
-  if (STUDENT_EMAIL_KEYWORDS.some(k => localPart.includes(k))) return 'student';
-  if (STUDENT_DOMAINS.includes(domain)) return 'student';
-  if (TEACHER_DOMAINS.includes(domain)) return 'teacher';
+  if (parseStudentEmail(email)) return 'student';
+  if (domain === SCHOOL_DOMAIN || EXTRA_TEACHER_DOMAINS.includes(domain)) return 'teacher';
   return null;
 }
 
