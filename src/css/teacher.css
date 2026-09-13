@@ -1,0 +1,409 @@
+/* Teacher Dashboard & TV Exhibition Mode Styles */
+
+.teacher-dashboard {
+  max-width: 1180px;
+  margin: 1.5rem auto 4rem;
+}
+
+/* Dashboard Top Stats Bar */
+.teacher-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.teacher-title-area h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.teacher-class-select {
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.teacher-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.stat-card.blue::before { background: var(--color-blue); }
+.stat-card.emerald::before { background: var(--color-emerald); }
+.stat-card.amber::before { background: var(--color-amber); }
+.stat-card.purple::before { background: var(--color-purple); }
+
+.stat-card-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.stat-card-number {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  line-height: 1.1;
+}
+
+.stat-card-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ============================================================
+   Teacher Etiquette Proposal & 70% Sympathy Approval Card
+============================================================ */
+.teacher-proposal-panel {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2.5rem;
+}
+
+.proposal-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.proposal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.proposal-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-fast);
+}
+
+.proposal-card:hover {
+  background: #FFFFFF;
+  box-shadow: var(--shadow-xs);
+  border-color: #94A3B8;
+}
+
+.proposal-vote-bar {
+  width: 100%;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.proposal-vote-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+/* Management Table Card */
+.table-container-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.table-filter-pills {
+  display: flex;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  padding: 0.25rem;
+  border-radius: var(--radius-full);
+}
+
+.table-filter-btn {
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+
+.table-filter-btn.active {
+  background: var(--brand-black);
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.table-search-input {
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  width: 220px;
+  background: #FFFFFF;
+}
+
+.table-search-input:focus {
+  outline: none;
+  border-color: var(--brand-black);
+}
+
+.student-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.student-data-table th {
+  background: #F9FAFB;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.student-data-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+.student-data-table tr:hover {
+  background: #F8FAFC;
+}
+
+.student-name-col {
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.student-num-badge {
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid var(--border-light);
+}
+
+/* TV Exhibition Presentation View (Fullscreen Overlay) */
+.exhibition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: radial-gradient(circle at center, #1E1F2B 0%, #0F1015 100%);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 4rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.exhibition-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.exhibition-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exhibition-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.exhibition-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 1.2rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+.exhibition-btn-close {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition-fast);
+}
+
+.exhibition-stage {
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.exhibition-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: 3.5rem 3rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  animation: slideFadeIn 0.5s ease;
+}
+
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.exhibition-student-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.exhibition-quote {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 2.5rem;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.exhibition-metrics {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.ex-metric-val {
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: #60A5FA;
+}
+
+.ex-metric-lbl {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.exhibition-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.exhibition-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ex-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.ex-dot.active {
+  background: #3B82F6;
+  width: 24px;
+  border-radius: 5px;
+}
+
+@media (max-width: 900px) {
+  .teacher-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

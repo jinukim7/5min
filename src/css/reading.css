@@ -1,0 +1,255 @@
+/* PDF-inspired Reading Log & Worksheet Styles (Torn Grid Paper Aesthetic) */
+
+.reading-container {
+  max-width: 1040px;
+  margin: 1.5rem auto 3.5rem;
+}
+
+.reading-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Template Switcher Tabs */
+.reading-template-tabs {
+  display: flex;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  padding: 0.35rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 2rem;
+  gap: 0.35rem;
+  overflow-x: auto;
+}
+
+.template-tab-btn {
+  flex: 1;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.template-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.template-tab-btn.active {
+  background: var(--brand-black);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Book Source Switcher (추천도서 vs 직접입력) */
+.book-source-toggle {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.book-source-btn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.book-source-btn.active {
+  background: #4F46E5;
+  color: #FFFFFF;
+  border-color: #4F46E5;
+}
+
+/* ============================================================
+   Torn Grid Paper Worksheet Styling (PDF Pages 1 ~ 8)
+============================================================ */
+.worksheet-card {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.worksheet-title-area {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #E2E8F0;
+  padding-bottom: 1.25rem;
+}
+
+.worksheet-main-title {
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #1E293B;
+  margin-bottom: 0.35rem;
+}
+
+.worksheet-sub-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #64748B;
+}
+
+/* Torn Grid Memo Note Block */
+.torn-paper-box {
+  background: #FAFBFD;
+  background-image: 
+    linear-gradient(#E2E8F0 1px, transparent 1px),
+    linear-gradient(90deg, #E2E8F0 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 1px solid #CBD5E1;
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.torn-paper-box::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  right: 10px;
+  height: 6px;
+  background: repeating-linear-gradient(45deg, #CBD5E1, #CBD5E1 5px, transparent 5px, transparent 10px);
+  opacity: 0.4;
+}
+
+.torn-page-tag {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.page-num-input {
+  width: 60px;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #64748B;
+  background: transparent;
+  font-weight: 700;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.worksheet-textarea {
+  width: 100%;
+  min-height: 90px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #1E293B;
+  outline: none;
+  resize: vertical;
+}
+
+/* Worksheet Footer Student Meta */
+.worksheet-meta-bar {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #CBD5E1;
+  font-size: 0.9rem;
+}
+
+.worksheet-input-inline {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid #94A3B8;
+  padding: 0.3rem 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  outline: none;
+  background: transparent;
+}
+
+/* Template 2: 독서기록장 Checkboxes */
+.reflection-checkboxes {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0.75rem 0 1.25rem;
+  flex-wrap: wrap;
+}
+
+.rf-check-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+}
+
+.rf-check-label input {
+  width: 18px;
+  height: 18px;
+  accent-color: #4F46E5;
+}
+
+/* Template 3: 퀴즈 만들기 (PDF p.3~4) */
+.quiz-maker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  border-right: 2px dashed #CBD5E1;
+}
+
+.quiz-half-col {
+  padding: 0 1rem;
+}
+
+/* Feed */
+.reading-feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.reading-feed-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition-fast);
+}
+
+.reading-feed-card:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: #CBD5E1;
+}
+
+@media (max-width: 860px) {
+  .worksheet-card {
+    padding: 1.5rem;
+  }
+  .worksheet-meta-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
