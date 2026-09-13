@@ -1250,10 +1250,19 @@
       this.state.totalPoints += points;
       this.syncCurrentStudentToClassList();
       this.save();
+      this.logActivity("manner", points);
+      this.saveToFirebase();
     }
     addTypingScore(points, cpm, acc) {
-      this.state.typingScore += points;
-      this.state.totalPoints += points;
+      const MAX_TYPING_POINTS = 200;
+      const todayEarned = this.state.todayTypingPoints || 0;
+      const actualEarned = Math.min(points, MAX_TYPING_POINTS - todayEarned);
+      if (actualEarned > 0) {
+        this.state.todayTypingPoints = todayEarned + actualEarned;
+        this.state.typingScore += actualEarned;
+        this.state.totalPoints += actualEarned;
+        this.logActivity("typing", actualEarned);
+      }
       if (cpm > this.state.typingBestCPM) {
         this.state.typingBestCPM = cpm;
       }
@@ -1262,6 +1271,7 @@
       }
       this.syncCurrentStudentToClassList();
       this.save();
+      this.saveToFirebase();
     }
     addReadingScore(points, readingEntry) {
       this.state.readingScore += points;
@@ -1276,6 +1286,8 @@
       }
       this.syncCurrentStudentToClassList();
       this.save();
+      this.logActivity("reading", points);
+      this.saveToFirebase();
     }
     completeQuiz(points = 20) {
       if (this.state.todayQuizDone) return false;
@@ -1284,6 +1296,8 @@
       this.state.totalPoints += points;
       this.syncCurrentStudentToClassList();
       this.save();
+      this.logActivity("quiz", points);
+      this.saveToFirebase();
       return true;
     }
     updateComment(newComment) {
@@ -1379,6 +1393,49 @@
     }
     checkBadges() {
       return BADGES.filter((b) => b.req(this.state));
+    }
+    listenToAllUsers() {
+      if (typeof window.firebase === "undefined") return;
+      try {
+        const db2 = window.firebase.firestore();
+        db2.collection("users").onSnapshot((snapshot) => {
+          const realStudents = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.role === "student") {
+              realStudents.push({ ...data, uid: doc.id });
+            }
+          });
+          this.state.students = realStudents.length ? realStudents : this.state.students;
+          this.state.schoolStudents = this.state.students;
+          this.state.gradeStudents = this.state.students.filter((s) => s.grade === this.state.userProfile.grade);
+          this.notify();
+        });
+      } catch (e) {
+        console.warn("Firestore listenToAllUsers error:", e);
+      }
+    }
+    async logActivity(type, points, details = "") {
+      if (!this.isLoggedIn() || this.isTestAccount()) return;
+      const uid = this.state.auth.uid;
+      if (!uid) return;
+      try {
+        const db2 = window.firebase.firestore();
+        await db2.collection("activities").add({
+          uid,
+          userName: this.state.userProfile.realName || this.state.userProfile.nickname || "\uD559\uC0DD",
+          userGrade: this.state.userProfile.grade || 2,
+          userClass: this.state.userProfile.classNum || 3,
+          userNumber: this.state.userProfile.number || 1,
+          type,
+          // 'manner', 'typing', 'reading', 'quiz'
+          points,
+          details,
+          timestamp: window.firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } catch (e) {
+        console.error("Activity Log Error:", e);
+      }
     }
   };
   var appState = new AppState();
