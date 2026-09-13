@@ -1,6 +1,7 @@
 // Application state management with 21 Classes (7 per grade), 28 students capacity, and Teacher Book Addition
 import { INITIAL_TEACHER_PROPOSALS } from './etiquette-data.js';
 import { MIDDLE_SCHOOL_BOOKS } from './reading-data.js';
+import { db } from './firebase-config.js';
 
 const STORAGE_KEY = 'pyeonhakwi_ms_state_v4';
 
@@ -573,13 +574,14 @@ export const BADGES = [
   { id: 'typer_400', name: '타자 마스터', desc: '타자 연습 400타 달성', icon: '⚡', req: (s) => s.typingBestCPM >= 400 },
   { id: 'accuracy_98', name: '명사수', desc: '타자 정확도 98% 이상 달성', icon: '🎯', req: (s) => s.typingAcc >= 98 },
   { id: 'reading_worm', name: '아침 다독왕', desc: '독서기록 300점 이상 달성', icon: '📚', req: (s) => s.readingScore >= 300 },
-  { id: 'manners_master', name: '예절 박사', desc: '예절 실천 400점 이상 달성', icon: '🎓', req: (s) => s.mannersScore >= 400 }
+  { id: 'manners_master', name: '매너 박사', desc: '매너 실천 400점 이상 달성', icon: '🎓', req: (s) => s.mannersScore >= 400 }
 ];
 
 export class AppState {
   constructor() {
     this.listeners = [];
     this.state = this.loadState();
+    this.listenToAllUsers();
   }
 
   getTodayString() {
@@ -676,6 +678,33 @@ export class AppState {
     this.notify();
   }
 
+  async saveToFirebase() {
+    if (!this.isLoggedIn() || this.isTestAccount()) return;
+    const uid = this.state.auth.uid;
+    if (!uid) return;
+    
+    try {
+      const dataToSave = {
+        grade: this.state.userProfile.grade,
+        classNum: this.state.userProfile.classNum,
+        number: this.state.userProfile.number,
+        realName: this.state.userProfile.realName,
+        nickname: this.state.userProfile.nickname,
+        mannersScore: this.state.mannersScore,
+        typingScore: this.state.typingScore,
+        readingScore: this.state.readingScore,
+        totalPoints: this.state.totalPoints,
+        typingBestCPM: this.state.typingBestCPM,
+        typingAcc: this.state.typingAcc,
+        streak: this.state.streak,
+        updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
+      };
+      await db.collection('users').doc(uid).set(dataToSave, { merge: true });
+    } catch (err) {
+      console.error('Firebase DB Save Error:', err);
+    }
+  }
+
   subscribe(listener) {
     this.listeners.push(listener);
     return () => {
@@ -763,6 +792,7 @@ export class AppState {
     };
     this.syncCurrentStudentToClassList();
     this.save();
+    this.saveToFirebase();
   }
 
   // Formatting student name according to role visibility rule
@@ -774,8 +804,8 @@ export class AppState {
     return student.nickname;
   }
 
-  // Toggle individual sub-rule (each awards +5P)
-  toggleSubRule(ruleId, points = 5) {
+  // Toggle individual sub-rule (each awards +10P)
+  toggleSubRule(ruleId, points = 10) {
     const isChecked = !!this.state.todaySubChecked[ruleId];
     if (!isChecked) {
       this.state.todaySubChecked[ruleId] = true;

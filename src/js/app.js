@@ -1,5 +1,6 @@
 import { appState, BADGES } from './state.js';
-import { ETIQUETTE_DOMAINS, MIDDLE_SCHOOL_QUIZZES } from './etiquette-data.js';
+import { ETIQUETTE_DOMAINS } from './etiquette-data.js';
+import { QUIZ_QUESTIONS } from './quiz-data.js';
 import { MIDDLE_SCHOOL_BOOKS, INITIAL_READING_LOGS } from './reading-data.js';
 import { KR_KEY_STAGES, EN_KEY_STAGES, KR_WORDS, EN_WORDS, KR_SHORT_SENTENCES, EN_SHORT_SENTENCES, KR_LONG_PASSAGES, EN_LONG_PASSAGES } from './typing-texts.js';
 import { KeyPracticeSession, HancomSentenceSession, isHangulPrefix } from './typing-engine.js';
@@ -196,7 +197,7 @@ class App {
 
     if (ptsEl) ptsEl.textContent = `🌟 ${totalPoints.toLocaleString()}P`;
     if (streakEl) streakEl.textContent = `🔥 ${streak}일 연속`;
-    if (classEl) classEl.textContent = `경희중학교 올바른 루틴`;
+    if (classEl) classEl.textContent = `올바른 루틴 프로젝트`;
 
     const loggedIn = appState.isLoggedIn();
     const authLabelEl = document.querySelector('#btn-google-auth span');
@@ -211,6 +212,8 @@ class App {
     if (navMenu) navMenu.style.visibility = loggedIn ? '' : 'hidden';
     setChatbotEnabled(loggedIn);
 
+    const teacherNavBtn = document.querySelector('[data-view="teacher"]');
+    if (teacherNavBtn) teacherNavBtn.style.display = (userProfile.role === 'teacher') ? 'flex' : 'none';
     const testMark = appState.isTestAccount() ? '🧪 ' : '';
     if (userProfile.role === 'teacher') {
       if (roleIconEl) roleIconEl.textContent = '👩‍🏫';
@@ -295,11 +298,11 @@ class App {
           <span>✨</span> 경희중학교 · 매일 5분 올바른 루틴
         </div>
         <h1 class="hero-title">
-          바른 예절, 한컴타자, 독서기록으로<br>
+          매너, 스마트 타이핑, 독서기록으로<br>
           <span class="highlight-gradient">편안하고 품격 있는 중학 생활</span>
         </h1>
         <p class="hero-desc">
-          디벗으로 시작하는 매일 5분! 아침 시간뿐만 아니라 쉬는 시간·점심시간 등 <strong>짬날 때마다</strong> 들어와서 활동해 보세요. 5대 학교생활 핵심 예절 개별 실천, 한컴타자 4단계, 중학생 추천도서 독서기록으로 성장 포인트를 모아보세요.
+          디벗으로 시작하는 매일 5분! 아침 시간뿐만 아니라 쉬는 시간·점심시간 등 <strong>짬날 때마다</strong> 들어와서 활동해 보세요. 5대 학교생활 핵심 매너 개별 실천, 스마트 타이핑 4단계, 중학생 추천도서 독서기록으로 성장 포인트를 모아보세요.
         </p>
 
         <!-- Hero Quick Check Card -->
@@ -307,7 +310,7 @@ class App {
           <div class="hero-floating-card">
             <div class="floating-card-header">
               <div class="floating-card-title">
-                <span>📋</span> 오늘 아침 나의 예절 실천 현황
+                <span>📋</span> 오늘 아침 나의 매너 실천 현황
               </div>
               <span class="badge badge-green">지침당 +5P</span>
             </div>
@@ -331,7 +334,7 @@ class App {
 
             <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem;">
               <button class="btn btn-primary" style="flex: 1;" id="btn-quick-typing">
-                ⌨️ 한컴타자 시작
+                ⌨️ 스마트 타이핑 시작
               </button>
               <button class="btn btn-secondary" style="flex: 1;" id="btn-quick-reading">
                 📚 독서기록 작성
@@ -371,7 +374,7 @@ class App {
               🌟 통합 성장 순위
             </button>
             <button class="category-pill-btn ${this.leaderboardCategory === 'manners' ? 'active' : ''}" data-cat="manners">
-              🌸 예절 점수 순위
+              🌸 매너 점수 순위
             </button>
             <button class="category-pill-btn ${this.leaderboardCategory === 'typing' ? 'active' : ''}" data-cat="typing">
               ⌨️ 타자 점수 순위
@@ -521,14 +524,14 @@ class App {
   // ================= ETIQUETTE & QUIZ VIEW (4 INDIVIDUAL CHECKBOXES) =================
   renderEtiquette(container) {
     const activeDomain = ETIQUETTE_DOMAINS[this.currentDomainIndex % ETIQUETTE_DOMAINS.length];
-    const quiz = MIDDLE_SCHOOL_QUIZZES[this.currentQuizIndex % MIDDLE_SCHOOL_QUIZZES.length];
+    const quiz = QUIZ_QUESTIONS[this.currentQuizIndex % QUIZ_QUESTIONS.length];
 
     container.innerHTML = `
       <div class="etiquette-hub-container">
         <div style="text-align: center; max-width: 680px; margin: 0 auto 2.5rem;">
           <span class="hero-pill-tag">Middle School Etiquette Guidelines</span>
           <h2 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.5rem;">
-            중학교 5대 학교생활 예절 교육 & 개별 실천
+            매일매일 실천하는 멋진 나의 모습
           </h2>
           <p style="color: var(--text-secondary); font-size: 0.95rem;">
             지침을 꼼꼼히 읽고 <strong>4개 세부 지침 각각을 직접 체크</strong>하여 실천해 보세요 (+5P씩 총 +20P).
@@ -627,7 +630,7 @@ class App {
             <div style="display: flex; align-items: center; gap: 0.6rem;">
               <span style="font-size: 1.5rem;">💡</span>
               <div>
-                <h3 style="font-size: 1.25rem; font-weight: 800;">중학 예절 상황별 실전 퀴즈</h3>
+                <h3 style="font-size: 1.25rem; font-weight: 800;">중학 매너 상황별 실전 퀴즈</h3>
                 <span class="badge badge-purple">${quiz.category}</span>
               </div>
             </div>
@@ -716,7 +719,7 @@ class App {
           feedbackEl.style.background = '#ECFDF5';
           feedbackEl.style.border = '1px solid #A7F3D0';
           feedbackEl.innerHTML = `
-            <div style="font-weight: 800; color: #065F46; margin-bottom: 0.35rem;">🎉 정답입니다! (+${quiz.points}P 예절 점수 적립)</div>
+            <div style="font-weight: 800; color: #065F46; margin-bottom: 0.35rem;">🎉 정답입니다! (+${quiz.points}P 매너 점수 적립)</div>
             <div style="font-size: 0.875rem; color: #047857; line-height: 1.55;">${quiz.explanation}</div>
           `;
           showToast(`정답! +${quiz.points}P 획득`, '🌟');
@@ -737,7 +740,7 @@ class App {
     if (btnNext) {
       btnNext.addEventListener('click', () => {
         sounds.playClick();
-        this.currentQuizIndex = (this.currentQuizIndex + 1) % MIDDLE_SCHOOL_QUIZZES.length;
+        this.currentQuizIndex = (this.currentQuizIndex + 1) % QUIZ_QUESTIONS.length;
         this.renderEtiquette(container);
       });
     }
@@ -1068,7 +1071,7 @@ class App {
     });
   }
 
-  // --- 3. 짧은 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
+  // --- 3. 짧은 글 연습 (보이는 입력창 스마트 타이핑 공식 스타일) ---
   renderShortPracticeMode(container) {
     const dataSource = this.typingLang === 'ko' ? KR_SHORT_SENTENCES : EN_SHORT_SENTENCES;
     const list = dataSource[this.typingLevel] || dataSource[1];
@@ -1205,7 +1208,7 @@ class App {
     }
   }
 
-  // --- 4. 긴 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
+  // --- 4. 긴 글 연습 (보이는 입력창 스마트 타이핑 공식 스타일) ---
   renderLongPracticeMode(container) {
     const dataSource = this.typingLang === 'ko' ? KR_LONG_PASSAGES : EN_LONG_PASSAGES;
     const list = dataSource[this.typingLevel] || dataSource[1];
@@ -1376,16 +1379,16 @@ class App {
         <!-- 4 Template Switcher Tabs (PDF Formats) -->
         <div class="reading-template-tabs">
           <button class="template-tab-btn ${this.readingTemplate === 'quote_cards' ? 'active' : ''}" data-tpl="quote_cards">
-            📑 1. 기억하고 싶은 구절 (PDF p.1~2)
+            📑 기억하고 싶은 구절 p.1~2)
           </button>
           <button class="template-tab-btn ${this.readingTemplate === 'summary_reflection' ? 'active' : ''}" data-tpl="summary_reflection">
-            📝 2. 독서기록장 (요약&감상) (PDF p.7~8)
+            📝 독서기록장 (요약&감상) 
           </button>
           <button class="template-tab-btn ${this.readingTemplate === 'make_quiz' ? 'active' : ''}" data-tpl="make_quiz">
-            ❓ 3. 퀴즈 만들기 (PDF p.3~4)
+            ❓ 퀴즈 만들기 
           </button>
           <button class="template-tab-btn ${this.readingTemplate === 'mindmap' ? 'active' : ''}" data-tpl="mindmap">
-            🌐 4. 마인드맵 (PDF p.5~6)
+            🌐 마인드맵 
           </button>
         </div>
 
@@ -1558,7 +1561,7 @@ class App {
     const titleVal = isCustom ? '' : book.title;
     const authorVal = isCustom ? '' : book.author;
 
-    // 1. 기억하고 싶은 구절 (PDF p.1~2)
+    // 기억하고 싶은 구절 p.1~2)
     if (this.readingTemplate === 'quote_cards') {
       return `
         <div class="worksheet-title-area">
@@ -1596,7 +1599,7 @@ class App {
       `;
     }
 
-    // 2. 독서기록장 (PDF p.7~8)
+    // 2. 독서기록장 
     if (this.readingTemplate === 'summary_reflection') {
       return `
         <div class="worksheet-title-area">
@@ -1644,7 +1647,7 @@ class App {
       `;
     }
 
-    // 3. 퀴즈 만들기 (PDF p.3~4)
+    // 퀴즈 만들기 
     if (this.readingTemplate === 'make_quiz') {
       return `
         <div class="worksheet-title-area">
@@ -1697,7 +1700,7 @@ class App {
       `;
     }
 
-    // 4. 마인드맵 (PDF p.5~6)
+    // 마인드맵 
     if (this.readingTemplate === 'mindmap') {
       return `
         <div class="worksheet-title-area">
@@ -1821,7 +1824,7 @@ class App {
             </div>
             <div class="category-nav-pills" style="margin: 0;">
               <button class="category-pill-btn ${this.leaderboardCategory === 'total' ? 'active' : ''}" data-subcat="total">통합</button>
-              <button class="category-pill-btn ${this.leaderboardCategory === 'manners' ? 'active' : ''}" data-subcat="manners">예절</button>
+              <button class="category-pill-btn ${this.leaderboardCategory === 'manners' ? 'active' : ''}" data-subcat="manners">매너</button>
               <button class="category-pill-btn ${this.leaderboardCategory === 'typing' ? 'active' : ''}" data-subcat="typing">타자</button>
               <button class="category-pill-btn ${this.leaderboardCategory === 'reading' ? 'active' : ''}" data-subcat="reading">독서</button>
             </div>
@@ -1851,7 +1854,7 @@ class App {
                       🌟 ${s.totalPoints.toLocaleString()}P
                     </span>
                     <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">
-                      예절: ${s.mannersScore}P | 타자: ${s.typingBestCPM}타 | 독서: ${s.readingScore}P
+                      매너: ${s.mannersScore}P | 타자: ${s.typingBestCPM}타 | 독서: ${s.readingScore}P
                     </div>
                   </div>
                 </div>
@@ -1891,7 +1894,7 @@ class App {
           <span class="highlight-gradient">바름5분을 시작해 보세요</span>
         </h1>
         <p class="hero-desc">
-          아침 시간뿐만 아니라 쉬는 시간·점심시간 등 짬날 때마다 들어와서 예절 실천, 한컴타자, 독서기록을 이어가요!
+          아침 시간뿐만 아니라 쉬는 시간·점심시간 등 짬날 때마다 들어와서 매너 실천, 스마트 타이핑, 독서기록을 이어가요!
         </p>
 
         <div class="card" style="max-width: 460px; margin: 2rem auto 0; padding: 2rem; text-align: center;">
@@ -2063,14 +2066,14 @@ class App {
           <div class="proposal-panel-header">
             <div>
               <h3 style="font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
-                <span>🗳️</span> 핵심 예절 지침 교사 제안 & 70% 공감 투표
+                <span>🗳️</span> 핵심 매너 지침 교사 제안 & 70% 공감 투표
               </h3>
               <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
                 선생님 전체 인원(10명) 중 <strong>70% (7명 이상)</strong> 공감을 받으면 학생 공식 실천 지침으로 자동 게시됩니다.
               </p>
             </div>
             <button class="btn btn-primary" id="btn-open-prop-modal" style="font-size: 0.85rem;">
-              ➕ 새 예절 지침 제안하기
+              ➕ 새 매너 지침 제안하기
             </button>
           </div>
 
@@ -2113,7 +2116,7 @@ class App {
                       </button>
                     ` : `
                       <div style="font-size: 0.75rem; color: #059669; font-weight: 700; text-align: center; margin-top: 0.5rem;">
-                        ✓ 학생 예절 실천 항목에 등록되었습니다.
+                        ✓ 학생 매너 실천 항목에 등록되었습니다.
                       </div>
                     `}
                   </div>
@@ -2187,7 +2190,7 @@ class App {
                 <tr>
                   <th style="width: 60px;">번호</th>
                   <th style="width: 180px;">학생 (실명 + 닉네임)</th>
-                  <th style="width: 100px;">예절 점수</th>
+                  <th style="width: 100px;">매너 점수</th>
                   <th style="width: 100px;">타자 점수</th>
                   <th style="width: 100px;">독서 점수</th>
                   <th style="width: 110px;">총합 포인트</th>
@@ -2257,7 +2260,7 @@ class App {
         if (res.isApproved) {
           sounds.playCelebration();
           triggerConfetti();
-          showToast(`공감 70% 달성! 공식 예절 지침으로 채택되었습니다! 🎉`, '🗳️');
+          showToast(`공감 70% 달성! 공식 매너 지침으로 채택되었습니다! 🎉`, '🗳️');
         } else {
           showToast(`공감 투표 완료! (현재 ${res.rate}%)`, '👍');
         }
@@ -2333,7 +2336,7 @@ class App {
     if (btnExport) {
       btnExport.addEventListener('click', () => {
         sounds.playSuccess();
-        const header = '번호,실명,닉네임,예절점수,타자점수,독서점수,총합포인트,최고타수,다짐\n';
+        const header = '번호,실명,닉네임,매너점수,타자점수,독서점수,총합포인트,최고타수,다짐\n';
         const rows = appState.state.students.map(s => 
           `${s.number},${s.realName},${s.nickname},${s.mannersScore},${s.typingScore},${s.readingScore},${s.totalPoints},${s.typingBestCPM},"${s.comment || ''}"`
         ).join('\n');
@@ -2366,7 +2369,7 @@ class App {
       modal.id = 'prop-create-modal';
       modal.innerHTML = `
         <div class="modal-content" style="max-width: 500px; text-align: left;">
-          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">새 핵심 예절 지침 제안</h3>
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">새 핵심 매너 지침 제안</h3>
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
             제안 후 전체 선생님(10명) 중 70% 이상 공감을 받으면 공식 게시됩니다.
           </p>
@@ -2419,7 +2422,7 @@ class App {
 
       sounds.playSuccess();
       modal.classList.remove('active');
-      showToast('새 예절 지침이 제안되었습니다. (동료 교사 투표 시작)', '🗳️');
+      showToast('새 매너 지침이 제안되었습니다. (동료 교사 투표 시작)', '🗳️');
       this.renderTeacher(parentContainer);
     };
   }
@@ -2603,7 +2606,7 @@ class App {
           <div class="exhibition-metrics">
             <div>
               <div class="ex-metric-val">${student.mannersScore}P</div>
-              <div class="ex-metric-lbl">예절 점수</div>
+              <div class="ex-metric-lbl">매너 점수</div>
             </div>
             <div>
               <div class="ex-metric-val">${student.typingBestCPM} <span style="font-size: 1rem; color: rgba(255,255,255,0.7);">CPM</span></div>

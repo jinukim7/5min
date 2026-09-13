@@ -3,7 +3,7 @@
 export const ETIQUETTE_DOMAINS = [
   {
     id: 'arrival',
-    title: '등교 예절',
+    title: '등교 매너',
     icon: '🏫',
     badge: 'Morning Routine',
     color: '#3B82F6',
@@ -36,7 +36,7 @@ export const ETIQUETTE_DOMAINS = [
   },
   {
     id: 'hallway',
-    title: '교실과 복도 예절',
+    title: '교실과 복도 매너',
     icon: '🚶',
     badge: 'Class & Hallway',
     color: '#10B981',
@@ -69,7 +69,7 @@ export const ETIQUETTE_DOMAINS = [
   },
   {
     id: 'cafeteria',
-    title: '급식실 예절',
+    title: '급식실 매너',
     icon: '🍱',
     badge: 'Cafeteria',
     color: '#F59E0B',
@@ -102,7 +102,7 @@ export const ETIQUETTE_DOMAINS = [
   },
   {
     id: 'class_debeot',
-    title: '수업시 & 디벗 예절',
+    title: '수업시 & 디벗 매너',
     icon: '💻',
     badge: 'Class & Digital',
     color: '#8B5CF6',
@@ -135,7 +135,7 @@ export const ETIQUETTE_DOMAINS = [
   },
   {
     id: 'dismissal',
-    title: '하교 예절',
+    title: '하교 매너',
     icon: '🎒',
     badge: 'Dismissal',
     color: '#EF4444',
@@ -209,7 +209,7 @@ export const INITIAL_TEACHER_PROPOSALS = [
 export const MIDDLE_SCHOOL_QUIZZES = [
   {
     id: 'mq1',
-    category: '등교 예절',
+    category: '등교 매너',
     domainId: 'arrival',
     question: '아침 등굣길 횡단보도를 건널 때 가장 올바른 태도는 무엇일까요?',
     options: [
@@ -219,12 +219,12 @@ export const MIDDLE_SCHOOL_QUIZZES = [
       '초록불이 깜빡일 때 전속력으로 뛰어든다.'
     ],
     answer: 2,
-    explanation: '보행 중 스마트폰과 이어폰 사용은 주변의 경적이나 위험을 인지하지 못하게 만듭니다. 스마트폰은 가방에 넣고 주위를 살피는 것이 생명을 지키는 기본 예절입니다.',
+    explanation: '보행 중 스마트폰과 이어폰 사용은 주변의 경적이나 위험을 인지하지 못하게 만듭니다. 스마트폰은 가방에 넣고 주위를 살피는 것이 생명을 지키는 기본 매너입니다.',
     points: 30
   },
   {
     id: 'mq2',
-    category: '교실·복도 예절',
+    category: '교실·복도 매너',
     domainId: 'hallway',
     question: '쉬는 시간에 복도 모퉁이를 돌다가 다른 반 친구와 강하게 부딪쳤을 때 나의 행동은?',
     options: [
@@ -239,7 +239,7 @@ export const MIDDLE_SCHOOL_QUIZZES = [
   },
   {
     id: 'mq3',
-    category: '급식실 예절',
+    category: '급식실 매너',
     domainId: 'cafeteria',
     question: '급식실에서 긴 줄을 서 있을 때 친한 친구가 "나 여기 좀 끼워줘"라고 부탁한다면?',
     options: [
@@ -254,7 +254,7 @@ export const MIDDLE_SCHOOL_QUIZZES = [
   },
   {
     id: 'mq4',
-    category: '수업 & 디벗 예절',
+    category: '수업 & 디벗 매너',
     domainId: 'class_debeot',
     question: '선생님께서 칠판에 개념을 판서하며 설명하고 계실 때, 디벗(태블릿)은 어떻게 다루어야 할까요?',
     options: [
@@ -264,12 +264,12 @@ export const MIDDLE_SCHOOL_QUIZZES = [
       '선생님의 모습을 카메라로 몰래 촬영하여 단톡방에 올린다.'
     ],
     answer: 1,
-    explanation: '수업 중 선생님의 강의와 설명 시간에는 화면을 덮거나 엎어두어 주의를 집중하는 것이 선생님과 학급 구성원에 대한 기본적인 수업 예절입니다.',
+    explanation: '수업 중 선생님의 강의와 설명 시간에는 화면을 덮거나 엎어두어 주의를 집중하는 것이 선생님과 학급 구성원에 대한 기본적인 수업 매너입니다.',
     points: 30
   },
   {
     id: 'mq5',
-    category: '하교 예절',
+    category: '하교 매너',
     domainId: 'dismissal',
     question: '방과 후 하교할 때 교실에 남겨두는 디벗(태블릿)을 관리하는 올바른 방법은?',
     options: [
@@ -284,7 +284,7 @@ export const MIDDLE_SCHOOL_QUIZZES = [
   },
   {
     id: 'mq6',
-    category: '급식실 예절',
+    category: '급식실 매너',
     domainId: 'cafeteria',
     question: '음식을 다 먹고 식판을 퇴식구에 반납할 때 가장 올바른 순서는?',
     options: [

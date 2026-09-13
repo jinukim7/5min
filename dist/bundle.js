@@ -3,7 +3,7 @@
   var ETIQUETTE_DOMAINS = [
     {
       id: "arrival",
-      title: "\uB4F1\uAD50 \uC608\uC808",
+      title: "\uB4F1\uAD50 \uB9E4\uB108",
       icon: "\u{1F3EB}",
       badge: "Morning Routine",
       color: "#3B82F6",
@@ -36,7 +36,7 @@
     },
     {
       id: "hallway",
-      title: "\uAD50\uC2E4\uACFC \uBCF5\uB3C4 \uC608\uC808",
+      title: "\uAD50\uC2E4\uACFC \uBCF5\uB3C4 \uB9E4\uB108",
       icon: "\u{1F6B6}",
       badge: "Class & Hallway",
       color: "#10B981",
@@ -69,7 +69,7 @@
     },
     {
       id: "cafeteria",
-      title: "\uAE09\uC2DD\uC2E4 \uC608\uC808",
+      title: "\uAE09\uC2DD\uC2E4 \uB9E4\uB108",
       icon: "\u{1F371}",
       badge: "Cafeteria",
       color: "#F59E0B",
@@ -102,7 +102,7 @@
     },
     {
       id: "class_debeot",
-      title: "\uC218\uC5C5\uC2DC & \uB514\uBC97 \uC608\uC808",
+      title: "\uC218\uC5C5\uC2DC & \uB514\uBC97 \uB9E4\uB108",
       icon: "\u{1F4BB}",
       badge: "Class & Digital",
       color: "#8B5CF6",
@@ -135,7 +135,7 @@
     },
     {
       id: "dismissal",
-      title: "\uD558\uAD50 \uC608\uC808",
+      title: "\uD558\uAD50 \uB9E4\uB108",
       icon: "\u{1F392}",
       badge: "Dismissal",
       color: "#EF4444",
@@ -206,98 +206,6 @@
       // 4 votes = 40%
       totalTeachers: 10,
       status: "pending"
-    }
-  ];
-  var MIDDLE_SCHOOL_QUIZZES = [
-    {
-      id: "mq1",
-      category: "\uB4F1\uAD50 \uC608\uC808",
-      domainId: "arrival",
-      question: "\uC544\uCE68 \uB4F1\uAD63\uAE38 \uD6A1\uB2E8\uBCF4\uB3C4\uB97C \uAC74\uB110 \uB54C \uAC00\uC7A5 \uC62C\uBC14\uB978 \uD0DC\uB3C4\uB294 \uBB34\uC5C7\uC77C\uAE4C\uC694?",
-      options: [
-        "\uC2A4\uB9C8\uD2B8\uD3F0\uC73C\uB85C \uC778\uAE30 \uC720\uD29C\uBE0C \uC1FC\uCE20\uB97C \uBCF4\uBA70 \uCC9C\uCC9C\uD788 \uAC77\uB294\uB2E4.",
-        "\uC74C\uC545 \uBCFC\uB968\uC744 \uCD5C\uB300\uB85C \uD0A4\uC6B4 \uC774\uC5B4\uD3F0\uC744 \uB07C\uACE0 \uCC28\uAC00 \uC624\uB294\uC9C0 \uC0B4\uD53C\uC9C0 \uC54A\uB294\uB2E4.",
-        "\uC2A4\uB9C8\uD2B8\uD3F0\uC740 \uAC00\uBC29\uC5D0 \uB123\uACE0 \uC774\uC5B4\uD3F0\uC744 \uBE80 \uB4A4, \uC88C\uC6B0\uB97C \uD655\uC778\uD558\uACE0 \uC548\uC804\uD558\uAC8C \uAC74\uB10C\uB2E4.",
-        "\uCD08\uB85D\uBD88\uC774 \uAE5C\uBE61\uC77C \uB54C \uC804\uC18D\uB825\uC73C\uB85C \uB6F0\uC5B4\uB4E0\uB2E4."
-      ],
-      answer: 2,
-      explanation: "\uBCF4\uD589 \uC911 \uC2A4\uB9C8\uD2B8\uD3F0\uACFC \uC774\uC5B4\uD3F0 \uC0AC\uC6A9\uC740 \uC8FC\uBCC0\uC758 \uACBD\uC801\uC774\uB098 \uC704\uD5D8\uC744 \uC778\uC9C0\uD558\uC9C0 \uBABB\uD558\uAC8C \uB9CC\uB4ED\uB2C8\uB2E4. \uC2A4\uB9C8\uD2B8\uD3F0\uC740 \uAC00\uBC29\uC5D0 \uB123\uACE0 \uC8FC\uC704\uB97C \uC0B4\uD53C\uB294 \uAC83\uC774 \uC0DD\uBA85\uC744 \uC9C0\uD0A4\uB294 \uAE30\uBCF8 \uC608\uC808\uC785\uB2C8\uB2E4.",
-      points: 30
-    },
-    {
-      id: "mq2",
-      category: "\uAD50\uC2E4\xB7\uBCF5\uB3C4 \uC608\uC808",
-      domainId: "hallway",
-      question: "\uC26C\uB294 \uC2DC\uAC04\uC5D0 \uBCF5\uB3C4 \uBAA8\uD241\uC774\uB97C \uB3CC\uB2E4\uAC00 \uB2E4\uB978 \uBC18 \uCE5C\uAD6C\uC640 \uAC15\uD558\uAC8C \uBD80\uB52A\uCCE4\uC744 \uB54C \uB098\uC758 \uD589\uB3D9\uC740?",
-      options: [
-        '"\uC55E \uC880 \uB611\uBC14\uB85C \uBCF4\uACE0 \uB2E4\uB140!"\uB77C\uACE0 \uD654\uB97C \uB0B4\uACE0 \uC9C0\uB098\uAC04\uB2E4.',
-        '\uCE5C\uAD6C\uC758 \uC0C1\uD0DC\uB97C \uBA3C\uC800 \uC0B4\uD53C\uBA70 "\uBBF8\uC548\uD574! \uC5B4\uB514 \uB2E4\uCE5C \uACF3\uC740 \uC5C6\uC5B4?" \uD558\uACE0 \uC9C4\uC2EC\uC73C\uB85C \uC0AC\uACFC\uD55C\uB2E4.',
-        "\uBD80\uB044\uB7EC\uC6B0\uB2C8 \uBABB \uBCF8 \uCC99\uD558\uACE0 \uB3C4\uB9DD\uCE58\uB4EF \uC6B0\uB9AC \uBC18\uC73C\uB85C \uB4E4\uC5B4\uAC04\uB2E4.",
-        "\uCE5C\uAD6C\uC758 \uBA71\uC0B4\uC744 \uC7A1\uACE0 \uB204\uAD6C \uC798\uBABB\uC778\uC9C0 \uB530\uC9C4\uB2E4."
-      ],
-      answer: 1,
-      explanation: "\uC758\uB3C4\uCE58 \uC54A\uC740 \uC2E0\uCCB4 \uC811\uCD09\uC774\uB098 \uC0AC\uACE0\uC5D0\uC11C\uB294 \uAC10\uC815\uC744 \uC55E\uC138\uC6B0\uAE30\uBCF4\uB2E4 \uC989\uC2DC \uCE5C\uAD6C\uC758 \uBD80\uC0C1 \uC5EC\uBD80\uB97C \uC0B4\uD53C\uACE0 \uC815\uC911\uD558\uAC8C \uC0AC\uACFC\uD558\uB294 \uAC83\uC774 \uC131\uC219\uD55C \uC911\uD559\uC0DD\uC758 \uD0DC\uB3C4\uC785\uB2C8\uB2E4.",
-      points: 30
-    },
-    {
-      id: "mq3",
-      category: "\uAE09\uC2DD\uC2E4 \uC608\uC808",
-      domainId: "cafeteria",
-      question: '\uAE09\uC2DD\uC2E4\uC5D0\uC11C \uAE34 \uC904\uC744 \uC11C \uC788\uC744 \uB54C \uCE5C\uD55C \uCE5C\uAD6C\uAC00 "\uB098 \uC5EC\uAE30 \uC880 \uB07C\uC6CC\uC918"\uB77C\uACE0 \uBD80\uD0C1\uD55C\uB2E4\uBA74?',
-      options: [
-        "\uCE5C\uD55C \uCE5C\uAD6C\uB2C8\uAE4C \uC544\uBB34 \uB9D0 \uC5C6\uC774 \uB0B4 \uC55E\uC5D0 \uC138\uC6CC\uC900\uB2E4.",
-        '"\uB4A4\uC5D0 \uC904 \uC120 \uB2E4\uB978 \uCE5C\uAD6C\uB4E4\uC5D0\uAC8C \uD53C\uD574\uAC00 \uAC00\uB2C8\uAE4C, \uBBF8\uC548\uD558\uC9C0\uB9CC \uB9E8 \uB4A4\uB85C \uAC00\uC11C \uC11C\uC790"\uB77C\uACE0 \uC815\uC911\uD788 \uAC70\uC808\uD55C\uB2E4.',
-        "\uCE5C\uAD6C\uB97C \uB07C\uC6CC\uC8FC\uACE0 \uB2E4\uB978 \uD559\uC0DD\uC774 \uCCD0\uB2E4\uBCF4\uBA74 \uC9F8\uB824\uBCF8\uB2E4.",
-        "\uC120\uC0DD\uB2D8\uC774 \uC548 \uACC4\uC2DC\uB294\uC9C0 \uD655\uC778\uD558\uACE0 \uC0B4\uC9DD \uB07C\uC6CC\uC900\uB2E4."
-      ],
-      answer: 1,
-      explanation: "\uAE09\uC2DD\uC2E4 \uC904\uC11C\uAE30\uB294 \uACF5\uACF5 \uADDC\uCE59\uC785\uB2C8\uB2E4. \uCE5C\uBD84\uC744 \uC774\uC720\uB85C \uC0C8\uCE58\uAE30\uB97C \uD5C8\uC6A9\uD558\uB294 \uAC83\uC740 \uB4A4\uC5D0 \uC120 \uBAA8\uB4E0 \uCE5C\uAD6C\uC758 \uC2DC\uAC04\uC744 \uBE7C\uC557\uB294 \uBC30\uB824 \uC5C6\uB294 \uD589\uB3D9\uC785\uB2C8\uB2E4.",
-      points: 30
-    },
-    {
-      id: "mq4",
-      category: "\uC218\uC5C5 & \uB514\uBC97 \uC608\uC808",
-      domainId: "class_debeot",
-      question: "\uC120\uC0DD\uB2D8\uAED8\uC11C \uCE60\uD310\uC5D0 \uAC1C\uB150\uC744 \uD310\uC11C\uD558\uBA70 \uC124\uBA85\uD558\uACE0 \uACC4\uC2E4 \uB54C, \uB514\uBC97(\uD0DC\uBE14\uB9BF)\uC740 \uC5B4\uB5BB\uAC8C \uB2E4\uB8E8\uC5B4\uC57C \uD560\uAE4C\uC694?",
-      options: [
-        "\uC120\uC0DD\uB2D8 \uBAB0\uB798 \uCE5C\uAD6C\uC640 \uD654\uBA74 \uBD84\uD560\uB85C \uC6F9\uD230\uC744 \uBCF8\uB2E4.",
-        "\uD654\uBA74 \uB36E\uAC1C\uB97C \uB2EB\uAC70\uB098 \uD654\uBA74\uC744 \uC5CE\uC5B4\uB450\uACE0 \uC2DC\uC120\uC744 \uC120\uC0DD\uB2D8\uACFC \uCE60\uD310\uC73C\uB85C \uD5A5\uD55C\uB2E4.",
-        "\uC18C\uB9AC\uB97C \uB044\uACE0 \uAC8C\uC784 \uC790\uB3D9\uC0AC\uB0E5\uC744 \uB3CC\uB824\uB454\uB2E4.",
-        "\uC120\uC0DD\uB2D8\uC758 \uBAA8\uC2B5\uC744 \uCE74\uBA54\uB77C\uB85C \uBAB0\uB798 \uCD2C\uC601\uD558\uC5EC \uB2E8\uD1A1\uBC29\uC5D0 \uC62C\uB9B0\uB2E4."
-      ],
-      answer: 1,
-      explanation: "\uC218\uC5C5 \uC911 \uC120\uC0DD\uB2D8\uC758 \uAC15\uC758\uC640 \uC124\uBA85 \uC2DC\uAC04\uC5D0\uB294 \uD654\uBA74\uC744 \uB36E\uAC70\uB098 \uC5CE\uC5B4\uB450\uC5B4 \uC8FC\uC758\uB97C \uC9D1\uC911\uD558\uB294 \uAC83\uC774 \uC120\uC0DD\uB2D8\uACFC \uD559\uAE09 \uAD6C\uC131\uC6D0\uC5D0 \uB300\uD55C \uAE30\uBCF8\uC801\uC778 \uC218\uC5C5 \uC608\uC808\uC785\uB2C8\uB2E4.",
-      points: 30
-    },
-    {
-      id: "mq5",
-      category: "\uD558\uAD50 \uC608\uC808",
-      domainId: "dismissal",
-      question: "\uBC29\uACFC \uD6C4 \uD558\uAD50\uD560 \uB54C \uAD50\uC2E4\uC5D0 \uB0A8\uACA8\uB450\uB294 \uB514\uBC97(\uD0DC\uBE14\uB9BF)\uC744 \uAD00\uB9AC\uD558\uB294 \uC62C\uBC14\uB978 \uBC29\uBC95\uC740?",
-      options: [
-        "\uB0B4\uC77C \uB610 \uC4F8 \uAC70\uB2C8\uAE4C \uB0B4 \uCC45\uC0C1 \uC704\uC5D0 \uADF8\uB0E5 \uB450\uACE0 \uAC04\uB2E4.",
-        "\uBC14\uB2E5\uC5D0 \uB5A8\uC5B4\uC9C4 \uCC44\uB85C \uB450\uACE0 \uBD88\uB9CC \uB044\uACE0 \uB098\uAC04\uB2E4.",
-        "\uD559\uAE09 \uCDA9\uC804\uD568\uC758 \uB0B4 \uBC88\uD638 \uC2AC\uB86F\uC5D0 \uBC14\uB974\uAC8C \uAF42\uACE0 \uCDA9\uC804 \uCF00\uC774\uBE14\uC774 \uC798 \uC5F0\uACB0\uB418\uC5C8\uB294\uC9C0 \uD655\uC778\uD55C\uB2E4.",
-        "\uC606 \uBC18 \uCE5C\uAD6C\uC5D0\uAC8C \uC7A5\uB09C\uC73C\uB85C \uC228\uACA8\uB450\uACE0 \uAC04\uB2E4."
-      ],
-      answer: 2,
-      explanation: "\uB514\uBC97\uC740 \uC11C\uC6B8\uC2DC\uAD50\uC721\uCCAD\uC5D0\uC11C \uC9C0\uC6D0\uD558\uB294 \uC18C\uC911\uD55C \uACF5\uACF5 \uD559\uC2B5 \uAE30\uAE30\uC785\uB2C8\uB2E4. \uB2E4\uC74C \uB0A0 \uC218\uC5C5\uC5D0 \uCC28\uC9C8\uC774 \uC5C6\uB3C4\uB85D \uBC18\uB4DC\uC2DC \uD559\uAE09 \uCDA9\uC804\uD568 \uBCF8\uC778 \uBC88\uD638 \uC790\uB9AC\uC5D0 \uAF42\uC544\uB450\uC5B4\uC57C \uD569\uB2C8\uB2E4.",
-      points: 30
-    },
-    {
-      id: "mq6",
-      category: "\uAE09\uC2DD\uC2E4 \uC608\uC808",
-      domainId: "cafeteria",
-      question: "\uC74C\uC2DD\uC744 \uB2E4 \uBA39\uACE0 \uC2DD\uD310\uC744 \uD1F4\uC2DD\uAD6C\uC5D0 \uBC18\uB0A9\uD560 \uB54C \uAC00\uC7A5 \uC62C\uBC14\uB978 \uC21C\uC11C\uB294?",
-      options: [
-        "\uAD6D\uADF8\uB987\uC5D0 \uC4F0\uB808\uAE30\uC640 \uC218\uC800\uB97C \uBAA8\uB450 \uC4F8\uC5B4 \uB123\uACE0 \uB300\uCDA9 \uB358\uC838\uB454\uB2E4.",
-        "\uC794\uBC18\uC744 \uC794\uBC18\uD1B5\uC5D0 \uD138\uC5B4 \uB123\uACE0, \uC218\uC800\uC640 \uC813\uAC00\uB77D\uC744 \uBD84\uB9AC\uD558\uC5EC \uD1B5\uC5D0 \uB123\uC740 \uB4A4 \uC2DD\uD310\uC744 \uAC00\uC9C0\uB7F0\uD788 \uC313\uB294\uB2E4.",
-        "\uBC30\uBD80\uB974\uB2C8 \uC2DD\uD310\uC744 \uC2DD\uD0C1 \uC704\uC5D0 \uADF8\uB300\uB85C \uB450\uACE0 \uB098\uAC04\uB2E4.",
-        "\uC794\uBC18\uD1B5 \uC606 \uBC14\uB2E5\uC5D0 \uD758\uB824\uB3C4 \uBAA8\uB978 \uCC99\uD55C\uB2E4."
-      ],
-      answer: 1,
-      explanation: "\uC2DD\uD310\uACFC \uC218\uC800\uB97C \uBD84\uB9AC\uD558\uACE0 \uC794\uBC18\uC744 \uBC14\uB974\uAC8C \uBE44\uC6B0\uB294 \uAC83\uC740 \uB4A4\uCC98\uB9AC\uD574\uC8FC\uC2DC\uB294 \uAE09\uC2DD\uC2E4 \uC2E4\uBB34\uC0AC\uB2D8\uB4E4\uC744 \uC704\uD55C \uCD5C\uC18C\uD55C\uC758 \uC874\uC911\uC774\uC790 \uC704\uC0DD \uC218\uCE59\uC785\uB2C8\uB2E4.",
-      points: 30
     }
   ];
 
@@ -459,6 +367,24 @@
       likes: 16
     }
   ];
+
+  // src/js/firebase-config.js
+  var firebase2 = window.firebase;
+  var firebaseConfig = {
+    projectId: "better-school-life-260913",
+    appId: "1:333970857991:web:8b3165032a7fd38c158aa2",
+    storageBucket: "better-school-life-260913.firebasestorage.app",
+    apiKey: "AIzaSyDxCDJ-agfDGiFN6sBTdlk6TB-TodfeUDw",
+    authDomain: "better-school-life-260913.firebaseapp.com",
+    messagingSenderId: "333970857991"
+  };
+  if (!firebase2.apps.length) {
+    firebase2.initializeApp(firebaseConfig);
+  }
+  var auth = firebase2.auth();
+  var db = firebase2.firestore();
+  var googleProvider = new firebase2.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ prompt: "select_account" });
 
   // src/js/state.js
   var STORAGE_KEY = "pyeonhakwi_ms_state_v4";
@@ -1019,12 +945,13 @@
     { id: "typer_400", name: "\uD0C0\uC790 \uB9C8\uC2A4\uD130", desc: "\uD0C0\uC790 \uC5F0\uC2B5 400\uD0C0 \uB2EC\uC131", icon: "\u26A1", req: (s) => s.typingBestCPM >= 400 },
     { id: "accuracy_98", name: "\uBA85\uC0AC\uC218", desc: "\uD0C0\uC790 \uC815\uD655\uB3C4 98% \uC774\uC0C1 \uB2EC\uC131", icon: "\u{1F3AF}", req: (s) => s.typingAcc >= 98 },
     { id: "reading_worm", name: "\uC544\uCE68 \uB2E4\uB3C5\uC655", desc: "\uB3C5\uC11C\uAE30\uB85D 300\uC810 \uC774\uC0C1 \uB2EC\uC131", icon: "\u{1F4DA}", req: (s) => s.readingScore >= 300 },
-    { id: "manners_master", name: "\uC608\uC808 \uBC15\uC0AC", desc: "\uC608\uC808 \uC2E4\uCC9C 400\uC810 \uC774\uC0C1 \uB2EC\uC131", icon: "\u{1F393}", req: (s) => s.mannersScore >= 400 }
+    { id: "manners_master", name: "\uB9E4\uB108 \uBC15\uC0AC", desc: "\uB9E4\uB108 \uC2E4\uCC9C 400\uC810 \uC774\uC0C1 \uB2EC\uC131", icon: "\u{1F393}", req: (s) => s.mannersScore >= 400 }
   ];
   var AppState = class {
     constructor() {
       this.listeners = [];
       this.state = this.loadState();
+      this.listenToAllUsers();
     }
     getTodayString() {
       const d = /* @__PURE__ */ new Date();
@@ -1114,6 +1041,31 @@
       }
       this.notify();
     }
+    async saveToFirebase() {
+      if (!this.isLoggedIn() || this.isTestAccount()) return;
+      const uid = this.state.auth.uid;
+      if (!uid) return;
+      try {
+        const dataToSave = {
+          grade: this.state.userProfile.grade,
+          classNum: this.state.userProfile.classNum,
+          number: this.state.userProfile.number,
+          realName: this.state.userProfile.realName,
+          nickname: this.state.userProfile.nickname,
+          mannersScore: this.state.mannersScore,
+          typingScore: this.state.typingScore,
+          readingScore: this.state.readingScore,
+          totalPoints: this.state.totalPoints,
+          typingBestCPM: this.state.typingBestCPM,
+          typingAcc: this.state.typingAcc,
+          streak: this.state.streak,
+          updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
+        };
+        await db.collection("users").doc(uid).set(dataToSave, { merge: true });
+      } catch (err) {
+        console.error("Firebase DB Save Error:", err);
+      }
+    }
     subscribe(listener) {
       this.listeners.push(listener);
       return () => {
@@ -1192,6 +1144,7 @@
       };
       this.syncCurrentStudentToClassList();
       this.save();
+      this.saveToFirebase();
     }
     // Formatting student name according to role visibility rule
     formatStudentName(student) {
@@ -1201,8 +1154,8 @@
       }
       return student.nickname;
     }
-    // Toggle individual sub-rule (each awards +5P)
-    toggleSubRule(ruleId, points = 5) {
+    // Toggle individual sub-rule (each awards +10P)
+    toggleSubRule(ruleId, points = 10) {
       const isChecked = !!this.state.todaySubChecked[ruleId];
       if (!isChecked) {
         this.state.todaySubChecked[ruleId] = true;
@@ -1430,6 +1383,150 @@
   };
   var appState = new AppState();
 
+  // src/js/quiz-data.js
+  var QUIZ_QUESTIONS = [
+    {
+      id: "q1",
+      category: "\uC218\uC5C5 \uB9E4\uB108",
+      question: '\uC218\uC5C5 \uC2DC\uAC04 \uC911 \uC120\uC0DD\uB2D8\uAED8\uC11C "\uC55E\uC744 \uBCF4\uC138\uC694"\uB77C\uACE0 \uD558\uC168\uC744 \uB54C \uC62C\uBC14\uB978 \uB514\uBC97(\uD0DC\uBE14\uB9BF) \uD589\uB3D9\uC740?',
+      options: [
+        "\uD558\uB358 \uAC8C\uC784\uC744 \uB9C8\uC800 \uB05D\uB0B4\uACE0 \uD654\uBA74\uC744 \uB048\uB2E4.",
+        "\uD654\uBA74\uC744 \uC5CE\uC5B4\uB450\uAC70\uB098 \uD654\uBA74 \uB36E\uAC1C\uB97C \uB2EB\uACE0 \uC120\uC0DD\uB2D8\uC744 \uBC14\uB77C\uBCF8\uB2E4.",
+        "\uC18C\uB9AC\uB9CC \uC74C\uC18C\uAC70\uD574\uB450\uACE0 \uBAB0\uB798 \uC778\uD130\uB137\uC744 \uAC80\uC0C9\uD55C\uB2E4.",
+        "\uCE5C\uAD6C\uAC00 \uBB34\uC5C7\uC744 \uD558\uB294\uC9C0 \uD654\uBA74\uC744 \uCCD0\uB2E4\uBCF8\uB2E4."
+      ],
+      answer: 1,
+      explanation: "\uC218\uC5C5\uC5D0 \uC9D1\uC911\uD558\uAE30 \uC704\uD574 \uC9C0\uC2DC\uAC00 \uC788\uC73C\uBA74 \uB514\uBC97 \uD654\uBA74\uC744 \uB36E\uAC70\uB098 \uC5CE\uC5B4\uB450\uACE0 \uC2DC\uC120\uC744 \uC120\uC0DD\uB2D8\uAED8 \uD5A5\uD558\uB294 \uAC83\uC774 \uBC30\uB824\uC640 \uB9E4\uB108\uC785\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q2",
+      category: "\uC0AC\uC774\uBC84 \uC5B8\uC5B4 \uB9E4\uB108",
+      question: "\uD559\uAE09 \uC628\uB77C\uC778 \uC18C\uD1B5\uBC29\uC5D0\uC11C \uAE00\uC744 \uB0A8\uAE38 \uB54C \uAC00\uC7A5 \uBC14\uB78C\uC9C1\uD55C \uD0DC\uB3C4\uB294?",
+      options: [
+        "\uC7AC\uBBF8\uB97C \uC704\uD574 \uCE5C\uAD6C\uC758 \uD751\uC5ED\uC0AC \uC0AC\uC9C4\uC744 \uD5C8\uB77D \uC5C6\uC774 \uC62C\uB9B0\uB2E4.",
+        "\uB2A6\uC740 \uBC24 12\uC2DC\uC5D0 \uCE5C\uAD6C \uBAA8\uB450\uC5D0\uAC8C \uBA58\uC158\uC744 \uBCF4\uB0B8\uB2E4.",
+        "\uCE5C\uAD6C\uC758 \uAE30\uBD84\uC744 \uC874\uC911\uD558\uBA70 \uB2E4\uC815\uD558\uACE0 \uBC14\uB978 \uB9D0\uC744 \uC0AC\uC6A9\uD55C\uB2E4.",
+        "\uB0B4 \uB9C8\uC74C\uC5D0 \uC548 \uB4DC\uB294 \uC758\uACAC\uC5D0\uB294 \uBE44\uC6C3\uB294 \uC774\uBAA8\uD2F0\uCF58\uC744 \uB2E8\uB2E4."
+      ],
+      answer: 2,
+      explanation: "\uC628\uB77C\uC778 \uACF5\uAC04\uB3C4 \uC2E4\uC81C \uAD50\uC2E4\uACFC \uAC19\uC2B5\uB2C8\uB2E4. \uC0C1\uB300\uBC29\uC758 \uC785\uC7A5\uC744 \uBA3C\uC800 \uC0DD\uAC01\uD558\uACE0 \uC874\uC911\uD558\uB294 \uC5B8\uC5B4\uB97C \uC0AC\uC6A9\uD574\uC57C \uD569\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q3",
+      category: "\uAD50\uC2E4 \uC0DD\uD65C \uB9E4\uB108",
+      question: "\uC544\uCE68 \uC790\uC2B5 \uC2DC\uAC04\uC5D0 \uB2E4\uB978 \uCE5C\uAD6C\uAC00 \uCC45\uC744 \uC77D\uACE0 \uC788\uC744 \uB54C \uB098\uC758 \uD589\uB3D9\uC73C\uB85C \uC54C\uB9DE\uC740 \uAC83\uC740?",
+      options: [
+        "\uD070 \uC18C\uB9AC\uB85C \uC5B4\uC81C \uBCF8 \uC720\uD29C\uBE0C \uC774\uC57C\uAE30\uB97C \uC2DC\uC791\uD55C\uB2E4.",
+        "\uD544\uC694\uD55C \uB300\uD654\uB294 \uC791\uC740 \uBAA9\uC18C\uB9AC(\uADD3\uC18D\uB9D0 \uD06C\uAE30)\uB85C \uC870\uC6A9\uD788 \uB098\uB208\uB2E4.",
+        "\uAD50\uC2E4 \uC548\uC5D0\uC11C \uC228\uBC14\uAF2D\uC9C8\uC744 \uD558\uBA70 \uB6F0\uC5B4\uB2E4\uB2CC\uB2E4.",
+        "\uC758\uC790\uB97C \uB35C\uCEF9\uAC70\uB9AC\uBA70 \uC7A5\uB09C\uC744 \uCE5C\uB2E4."
+      ],
+      answer: 1,
+      explanation: "\uC544\uCE68 \uC2DC\uAC04\uC740 \uBAA8\uB450\uAC00 \uC9D1\uC911\uD558\uB294 \uC18C\uC911\uD55C \uC2DC\uAC04\uC785\uB2C8\uB2E4. \uC11C\uB85C\uC758 \uBAB0\uC785\uC744 \uC704\uD574 \uC815\uC219\uC744 \uC9C0\uCF1C\uC8FC\uC138\uC694.",
+      points: 30
+    },
+    {
+      id: "q4",
+      category: "\uB514\uC9C0\uD138 \uC800\uC791\uAD8C",
+      question: "\uBC1C\uD45C \uACFC\uC81C\uB97C \uC704\uD574 \uC778\uD130\uB137\uC5D0\uC11C \uC0AC\uC9C4\uC774\uB098 \uAE00\uC744 \uAC00\uC838\uC62C \uB54C \uC62C\uBC14\uB978 \uBC29\uBC95\uC740?",
+      options: [
+        "\uB0B4\uAC00 \uC9C1\uC811 \uCC0D\uC740 \uAC83\uCC98\uB7FC \uAE00\uB9CC \uC0B4\uC9DD \uBC14\uAFD4 \uC81C\uCD9C\uD55C\uB2E4.",
+        "\uCD9C\uCC98\uC640 \uC6D0\uC791\uC790\uB97C \uBA85\uD655\uD788 \uD45C\uC2DC\uD558\uACE0 \uC774\uC6A9\uD55C\uB2E4.",
+        "\uC6CC\uD130\uB9C8\uD06C\uAC00 \uC788\uB294 \uC774\uBBF8\uC9C0\uB294 \uD3EC\uD1A0\uC0F5\uC73C\uB85C \uC9C0\uC6B0\uACE0 \uC4F4\uB2E4.",
+        "\uC800\uC791\uAD8C \uD45C\uC2DC\uB294 \uADC0\uCC2E\uC73C\uB2C8 \uC0DD\uB7B5\uD574\uB3C4 \uAD1C\uCC2E\uB2E4."
+      ],
+      answer: 1,
+      explanation: "\uD0C0\uC778\uC758 \uCC3D\uC791\uBB3C\uC744 \uD65C\uC6A9\uD560 \uB54C\uB294 \uBC18\uB4DC\uC2DC \uCD9C\uCC98\uB97C \uD45C\uAE30\uD558\uC5EC \uC9C0\uC801 \uC7AC\uC0B0\uAD8C\uC744 \uC874\uC911\uD558\uB294 \uBA4B\uC9C4 \uB514\uC9C0\uD138 \uC2DC\uBBFC\uC774 \uB418\uC5B4\uC57C \uD569\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q5",
+      category: "\uAE09\uC2DD\uC2E4 \uB9E4\uB108",
+      question: "\uAE09\uC2DD\uC2E4\uC5D0\uC11C \uBC25\uC744 \uBA39\uC744 \uB54C \uC9C0\uCF1C\uC57C \uD560 \uC62C\uBC14\uB978 \uB9E4\uB108\uB294?",
+      options: [
+        "\uC74C\uC2DD\uC744 \uC785\uC5D0 \uB123\uACE0 \uD070 \uC18C\uB9AC\uB85C \uB5A0\uB4E0\uB2E4.",
+        "\uB0B4\uAC00 \uC88B\uC544\uD558\uB294 \uBC18\uCC2C\uB9CC \uC0B0\uB354\uBBF8\uCC98\uB7FC \uB2F4\uACE0 \uB0A8\uAE34\uB2E4.",
+        "\uB9DB\uC788\uAC8C \uBA39\uACE0 \uC790\uB9AC\uB97C \uAE68\uB057\uC774 \uC815\uB9AC\uD55C \uD6C4 \uC758\uC790\uB97C \uB123\uB294\uB2E4.",
+        "\uBC30\uC2DD\uC744 \uAE30\uB2E4\uB9B4 \uB54C \uCE5C\uAD6C\uC640 \uC0C8\uCE58\uAE30\uB97C \uD558\uBA70 \uC7A5\uB09C\uCE5C\uB2E4."
+      ],
+      answer: 2,
+      explanation: "\uC790\uC2E0\uC774 \uBA39\uC740 \uC790\uB9AC\uB97C \uAE68\uB057\uD558\uAC8C \uC815\uB9AC\uD558\uB294 \uAC83\uC740 \uB2E4\uC74C \uC0AC\uB78C\uACFC \uAE09\uC2DD\uC2E4 \uC2DD\uAD6C\uB4E4\uC744 \uC704\uD55C \uAE30\uBCF8 \uBC30\uB824\uC785\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q6",
+      category: "\uBCF5\uB3C4 \uB9E4\uB108",
+      question: "\uC26C\uB294 \uC2DC\uAC04\uC5D0 \uBCF5\uB3C4\uC640 \uACC4\uB2E8\uC744 \uC774\uC6A9\uD560 \uB54C \uC62C\uBC14\uB978 \uD589\uB3D9\uC740?",
+      options: [
+        "\uCE5C\uAD6C\uC640 \uD314\uC9F1\uC744 \uB07C\uACE0 \uD1B5\uB85C\uB97C \uB9C9\uACE0 \uAC77\uB294\uB2E4.",
+        "\uC2A4\uB9C8\uD2B8\uD3F0\uC744 \uBCF4\uBA74\uC11C \uACE0\uAC1C\uB97C \uC219\uC774\uACE0 \uAC77\uB294\uB2E4.",
+        "\uC6B0\uCE21\uD1B5\uD589\uC744 \uC9C0\uD0A4\uBA70 \uB2E4\uB978 \uC0AC\uB78C\uACFC \uBD80\uB52A\uD788\uC9C0 \uC54A\uAC8C \uC870\uC2EC\uD574\uC11C \uAC77\uB294\uB2E4.",
+        "\uACC4\uB2E8\uC744 \uB450\uC138 \uCE78\uC529 \uB6F0\uC5B4\uB0B4\uB824\uAC04\uB2E4."
+      ],
+      answer: 2,
+      explanation: "\uD559\uAD50 \uBCF5\uB3C4\uC640 \uACC4\uB2E8\uC5D0\uC11C\uB294 \uBAA8\uB450\uC758 \uC548\uC804\uC744 \uC704\uD574 \uC6B0\uCE21\uBCF4\uD589\uC744 \uC2E4\uCC9C\uD558\uACE0 \uC8FC\uBCC0\uC744 \uC0B4\uD53C\uBA70 \uCC9C\uCC9C\uD788 \uAC78\uC5B4\uC57C \uD569\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q7",
+      category: "\uAD50\uC6B0 \uAD00\uACC4 \uB9E4\uB108",
+      question: "\uCE5C\uAD6C\uAC00 \uB9D0\uC2E4\uC218\uB97C \uD588\uC744 \uB54C \uAC00\uC7A5 \uBC14\uB78C\uC9C1\uD55C \uB300\uC751\uC740?",
+      options: [
+        "\uBC18 \uCE5C\uAD6C\uB4E4 \uBAA8\uB450\uAC00 \uB4E4\uB9AC\uAC8C \uD070 \uC18C\uB9AC\uB85C \uC9C0\uC801\uD55C\uB2E4.",
+        "\uC628\uB77C\uC778 \uB2E8\uD1A1\uBC29\uC5D0 \uC62C\uB824 \uC870\uB9AC\uB3CC\uB9BC\uD55C\uB2E4.",
+        "\uCE5C\uAD6C\uC758 \uBB34\uC548\uD568\uC744 \uC774\uD574\uD574\uC8FC\uACE0, \uB2E8\uB458\uC774 \uC788\uC744 \uB54C \uBD80\uB4DC\uB7FD\uAC8C \uC54C\uB824\uC900\uB2E4.",
+        "\uCE5C\uAD6C\uAC00 \uC0C1\uCC98\uBC1B\uB3C4\uB85D \uB611\uAC19\uC740 \uB9D0\uC2E4\uC218\uB85C \uAC1A\uC544\uC900\uB2E4."
+      ],
+      answer: 2,
+      explanation: "\uB204\uAD6C\uB098 \uC2E4\uC218\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uC0C1\uB300\uB97C \uBC30\uB824\uD558\uC5EC \uC870\uC6A9\uD788 \uBC14\uB85C\uC7A1\uC544\uC8FC\uB294 \uAC83\uC774 \uC9C4\uC815\uD55C \uCE5C\uAD6C\uC758 \uB9E4\uB108\uC785\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q8",
+      category: "\uB3C4\uC11C\uAD00 \uB9E4\uB108",
+      question: "\uB3C4\uC11C\uAD00\uC744 \uC774\uC6A9\uD560 \uB54C \uC9C0\uCF1C\uC57C \uD560 \uBC14\uB978 \uD0DC\uB3C4\uB294?",
+      options: [
+        "\uC77D\uACE0 \uB09C \uCC45\uC740 \uC544\uBB34 \uACF3\uC5D0\uB098 \uB300\uCDA9 \uAF42\uC544\uB454\uB2E4.",
+        "\uCC45\uC5D0 \uD615\uAD11\uD39C\uC73C\uB85C \uB0B4 \uC0DD\uAC01\uC744 \uBC11\uC904 \uCE5C\uB2E4.",
+        "\uC74C\uB8CC\uC218\uB098 \uACFC\uC790\uB97C \uBA39\uC73C\uBA70 \uCC45\uC744 \uC77D\uB294\uB2E4.",
+        "\uC815\uC219\uC744 \uC720\uC9C0\uD558\uBA70, \uB2E4 \uC77D\uC740 \uCC45\uC740 \uC9C0\uC815\uB41C \uBC18\uB0A9\uD568\uC5D0 \uB454\uB2E4."
+      ],
+      answer: 3,
+      explanation: "\uB3C4\uC11C\uAD00\uC740 \uBAA8\uB450\uAC00 \uD568\uAED8 \uC774\uC6A9\uD558\uB294 \uACF5\uAC04\uC774\uBA70, \uCC45\uC740 \uC18C\uC911\uD55C \uACF5\uC6A9 \uC790\uC0B0\uC774\uBBC0\uB85C \uD6FC\uC190\uD558\uC9C0 \uC54A\uACE0 \uC870\uC6A9\uD788 \uC774\uC6A9\uD574\uC57C \uD569\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q9",
+      category: "\uC778\uC0AC \uB9E4\uB108",
+      question: "\uC544\uCE68\uC5D0 \uAD50\uBB38\uC774\uB098 \uBCF5\uB3C4\uC5D0\uC11C \uC120\uC0DD\uB2D8\uC744 \uBD48\uC5C8\uC744 \uB54C \uC62C\uBC14\uB978 \uC778\uC0AC\uBC95\uC740?",
+      options: [
+        "\uC120\uC0DD\uB2D8\uC774 \uB098\uB97C \uBABB \uBCF8 \uCC99\uD560 \uB54C\uAE4C\uC9C0 \uAE30\uB2E4\uB9B0\uB2E4.",
+        "\uACE0\uAC1C\uB9CC \uAE4C\uB531\uD558\uACE0 \uC9C0\uB098\uAC04\uB2E4.",
+        "\uB208\uC744 \uB9C8\uC8FC\uCE58\uBA70 \uBC1D\uACE0 \uB610\uB837\uD55C \uBAA9\uC18C\uB9AC\uB85C \uC778\uC0AC\uD55C\uB2E4.",
+        "\uC774\uC5B4\uD3F0\uC744 \uB080 \uCC44 \uC190\uB9CC \uD754\uB4E4\uACE0 \uAC04\uB2E4."
+      ],
+      answer: 2,
+      explanation: "\uBC1D\uACE0 \uAE0D\uC815\uC801\uC778 \uC778\uC0AC\uB294 \uD558\uB8E8\uB97C \uC2DC\uC791\uD558\uB294 \uC5D0\uB108\uC9C0\uB97C \uC8FC\uACE0, \uC11C\uB85C\uB97C \uC874\uC911\uD558\uB294 \uAE30\uBCF8 \uC911\uC758 \uAE30\uBCF8\uC785\uB2C8\uB2E4.",
+      points: 30
+    },
+    {
+      id: "q10",
+      category: "\uAD50\uC2E4 \uCCAD\uACB0 \uB9E4\uB108",
+      question: "\uB0B4 \uC790\uB9AC\uC5D0 \uC791\uC740 \uACFC\uC790 \uBD80\uC2A4\uB7EC\uAE30\uB098 \uC4F0\uB808\uAE30\uAC00 \uB5A8\uC5B4\uC838 \uC788\uB2E4\uBA74?",
+      options: [
+        "\uCCAD\uC18C \uB2F9\uBC88\uC774 \uCE58\uC6CC\uC904 \uB54C\uAE4C\uC9C0 \uB0B4\uBC84\uB824 \uB454\uB2E4.",
+        "\uBC1C\uB85C \uC2AC\uCA4D \uC606 \uCE5C\uAD6C \uC790\uB9AC\uB85C \uBC00\uC5B4 \uB123\uB294\uB2E4.",
+        "\uC989\uC2DC \uC8FC\uC6CC\uC11C \uC4F0\uB808\uAE30\uD1B5\uC5D0 \uBC84\uB9B0\uB2E4.",
+        "\uC11C\uB78D \uC18D\uC5D0 \uC464\uC154 \uB123\uACE0 \uBAA8\uB978 \uCC99\uD55C\uB2E4."
+      ],
+      answer: 2,
+      explanation: "\uC790\uC2E0\uC774 \uBA38\uBB38 \uC790\uB9AC\uB97C \uC2A4\uC2A4\uB85C \uAE68\uB057\uD558\uAC8C \uC720\uC9C0\uD558\uB294 \uAC83\uC774 \uCF8C\uC801\uD55C \uAD50\uC2E4\uC744 \uB9CC\uB4DC\uB294 \uAC13\uC0DD(God\uC0DD) \uB8E8\uD2F4\uC758 \uCCAB\uAC78\uC74C\uC785\uB2C8\uB2E4.",
+      points: 30
+    }
+  ];
+
   // src/js/typing-texts.js
   var KR_KEY_STAGES = [
     {
@@ -1550,23 +1647,23 @@
   ];
   var KR_SHORT_SENTENCES = {
     1: [
-      { text: "\uC778\uC0AC\uB294 \uC6B0\uB9AC\uC758 \uB9C8\uC74C\uC744 \uC5FD\uB2C8\uB2E4.", source: "\uD559\uAD50 \uC608\uC808" },
-      { text: "\uC624\uB298 \uD558\uB8E8\uB3C4 \uD65C\uAE30\uCC28\uAC8C \uC2DC\uC791\uD574\uC694.", source: "\uD559\uAD50 \uC608\uC808" },
+      { text: "\uC778\uC0AC\uB294 \uC6B0\uB9AC\uC758 \uB9C8\uC74C\uC744 \uC5FD\uB2C8\uB2E4.", source: "\uD559\uAD50 \uB9E4\uB108" },
+      { text: "\uC624\uB298 \uD558\uB8E8\uB3C4 \uD65C\uAE30\uCC28\uAC8C \uC2DC\uC791\uD574\uC694.", source: "\uD559\uAD50 \uB9E4\uB108" },
       { text: "\uC791\uC740 \uCE5C\uC808\uC774 \uC138\uC0C1\uC744 \uBC14\uAFC9\uB2C8\uB2E4.", source: "\uB3C4\uB355" },
-      { text: "\uCE5C\uAD6C\uC758 \uB9D0\uC744 \uB05D\uAE4C\uC9C0 \uB4E4\uC5B4\uC8FC\uC138\uC694.", source: "\uB300\uD654 \uC608\uC808" },
+      { text: "\uCE5C\uAD6C\uC758 \uB9D0\uC744 \uB05D\uAE4C\uC9C0 \uB4E4\uC5B4\uC8FC\uC138\uC694.", source: "\uB300\uD654 \uB9E4\uB108" },
       { text: "\uC6B0\uB9AC\uB294 \uB9E4\uC77C \uC870\uAE08\uC529 \uC131\uC7A5\uD569\uB2C8\uB2E4.", source: "\uC131\uC7A5" },
       { text: "\uCC45 \uC18D\uC5D0 \uC218\uB9CE\uC740 \uAE38\uC774 \uC788\uC2B5\uB2C8\uB2E4.", source: "\uB3C5\uC11C" },
       { text: "\uC6A9\uAE30 \uB0B4\uC5B4 \uBA3C\uC800 \uB2E4\uAC00\uAC00 \uBCF4\uC138\uC694.", source: "\uC6B0\uC815" },
       { text: "\uC2E4\uC218\uB294 \uBC30\uC6C0\uC758 \uB610 \uB2E4\uB978 \uC774\uB984\uC785\uB2C8\uB2E4.", source: "\uC131\uC7A5" },
       { text: "\uACE0\uB9C8\uC6B4 \uB9C8\uC74C\uC740 \uD45C\uD604\uD560\uC218\uB85D \uCEE4\uC838\uC694.", source: "\uAC10\uC0AC" },
       { text: "\uB098\uB97C \uC0AC\uB791\uD574\uC57C \uB0A8\uB3C4 \uC0AC\uB791\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.", source: "\uC790\uC874\uAC10" },
-      { text: "\uBC1D\uC740 \uBBF8\uC18C\uB294 \uAC00\uC7A5 \uC88B\uC740 \uC778\uC0AC\uC785\uB2C8\uB2E4.", source: "\uD559\uAD50 \uC608\uC808" },
+      { text: "\uBC1D\uC740 \uBBF8\uC18C\uB294 \uAC00\uC7A5 \uC88B\uC740 \uC778\uC0AC\uC785\uB2C8\uB2E4.", source: "\uD559\uAD50 \uB9E4\uB108" },
       { text: "\uAC70\uC9D3\uB9D0\uC740 \uC5B8\uC820\uAC00 \uB4DC\uB7EC\uB098\uAC8C \uB9C8\uB828\uC785\uB2C8\uB2E4.", source: "\uC815\uC9C1" },
-      { text: "\uBC30\uB824\uD558\uB294 \uB9C8\uC74C\uC774 \uC544\uB984\uB2E4\uC6B4 \uAD50\uC2E4\uC744 \uB9CC\uB4ED\uB2C8\uB2E4.", source: "\uD559\uAD50 \uC608\uC808" },
+      { text: "\uBC30\uB824\uD558\uB294 \uB9C8\uC74C\uC774 \uC544\uB984\uB2E4\uC6B4 \uAD50\uC2E4\uC744 \uB9CC\uB4ED\uB2C8\uB2E4.", source: "\uD559\uAD50 \uB9E4\uB108" },
       { text: "\uD568\uAED8 \uB540 \uD758\uB9AC\uB294 \uC2DC\uAC04\uC740 \uADC0\uC911\uD569\uB2C8\uB2E4.", source: "\uD611\uB3D9" },
       { text: "\uB178\uB825\uC740 \uACB0\uCF54 \uC6B0\uB9AC\uB97C \uBC30\uC2E0\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.", source: "\uB178\uB825" },
       { text: "\uAFC8\uC744 \uD5A5\uD574 \uD55C \uAC78\uC74C\uC529 \uB098\uC544\uAC00\uC138\uC694.", source: "\uD76C\uB9DD" },
-      { text: "\uBC14\uB978 \uB9D0 \uACE0\uC6B4 \uB9D0\uC744 \uC0DD\uD65C\uD654\uD569\uC2DC\uB2E4.", source: "\uC5B8\uC5B4 \uC608\uC808" },
+      { text: "\uBC14\uB978 \uB9D0 \uACE0\uC6B4 \uB9D0\uC744 \uC0DD\uD65C\uD654\uD569\uC2DC\uB2E4.", source: "\uC5B8\uC5B4 \uB9E4\uB108" },
       { text: "\uC591\uBCF4\uD558\uB294 \uB2F9\uC2E0\uC774 \uC9C4\uC815\uD55C \uCC54\uD53C\uC5B8\uC785\uB2C8\uB2E4.", source: "\uBC30\uB824" },
       { text: "\uC2DC\uAC04\uC740 \uB3CC\uC544\uC624\uC9C0 \uC54A\uC73C\uB2C8 \uC18C\uC911\uD788 \uC4F0\uC138\uC694.", source: "\uC2DC\uAC04 \uAD00\uB9AC" },
       { text: "\uB9C8\uC74C\uC744 \uC5F4\uBA74 \uC0C8\uB85C\uC6B4 \uC138\uC0C1\uC774 \uBCF4\uC785\uB2C8\uB2E4.", source: "\uACF5\uAC10" }
@@ -1600,7 +1697,7 @@
       { text: "\uC9C4\uC815\uD55C \uC6A9\uAE30\uB780 \uB450\uB824\uC6C0\uC774 \uC5C6\uB294 \uAC83\uC774 \uC544\uB2C8\uB77C, \uB450\uB824\uC6C0\uC5D0\uB3C4 \uBD88\uAD6C\uD558\uACE0 \uD589\uB3D9\uD558\uB294 \uAC83\uC774\uB2E4.", source: "\uB12C\uC2A8 \uB9CC\uB378\uB77C" },
       { text: "\uB2E4\uB978 \uC0AC\uB78C\uC744 \uAE4E\uC544\uB0B4\uB9B0\uB2E4\uACE0 \uD574\uC11C \uB2F9\uC2E0\uC758 \uAC00\uCE58\uAC00 \uC62C\uB77C\uAC00\uB294 \uAC83\uC740 \uACB0\uCF54 \uC544\uB2C8\uB2E4.", source: "\uC778\uC131 \uBA85\uC5B8" },
       { text: "\uC778\uC0DD\uC740 \uD758\uB7EC\uAC00\uB294 \uAC83\uC774 \uC544\uB2C8\uB77C, \uB0B4\uAC00 \uC9C1\uC811 \uB178\uB97C \uC800\uC5B4 \uB098\uC544\uAC00\uB294 \uD56D\uD574\uC640 \uAC19\uB2E4.", source: "\uBA85\uC5B8" },
-      { text: "\uB9D0\uC740 \uC785\uC744 \uB5A0\uB098\uBA74 \uC8FC\uC6CC \uB2F4\uC744 \uC218 \uC5C6\uC73C\uB2C8, \uC138 \uBC88 \uC0DD\uAC01\uD558\uACE0 \uD55C \uBC88 \uB9D0\uD558\uB294 \uC2B5\uAD00\uC744 \uB4E4\uC774\uC790.", source: "\uC5B8\uC5B4 \uC608\uC808" },
+      { text: "\uB9D0\uC740 \uC785\uC744 \uB5A0\uB098\uBA74 \uC8FC\uC6CC \uB2F4\uC744 \uC218 \uC5C6\uC73C\uB2C8, \uC138 \uBC88 \uC0DD\uAC01\uD558\uACE0 \uD55C \uBC88 \uB9D0\uD558\uB294 \uC2B5\uAD00\uC744 \uB4E4\uC774\uC790.", source: "\uC5B8\uC5B4 \uB9E4\uB108" },
       { text: "\uC2A4\uC2A4\uB85C\uB97C \uC874\uC911\uD558\uB294 \uB9C8\uC74C\uC774 \uC788\uC5B4\uC57C \uBE44\uB85C\uC18C \uD0C0\uC778\uB3C4 \uC9C4\uC2EC\uC73C\uB85C \uC874\uC911\uD560 \uC218 \uC788\uB294 \uBC95\uC774\uB2E4.", source: "\uC790\uC874\uAC10" },
       { text: "\uC544\uB984\uB2E4\uC6B4 \uACB0\uACFC\uB294 \uD6CC\uB96D\uD55C \uACFC\uC815\uC744 \uD1B5\uD574\uC11C\uB9CC \uC5BB\uC5B4\uC9C4\uB2E4. \uC694\uD589\uC744 \uBC14\uB77C\uC9C0 \uB9C8\uB77C.", source: "\uBA85\uC5B8" },
       { text: "\uC6B0\uB9AC\uAC00 \uC77D\uB294 \uCC45\uC774 \uC6B0\uB9AC \uBA38\uB9AC\uB97C \uC8FC\uBA39\uC73C\uB85C \uD55C \uB300 \uCCD0\uC11C \uC7A0\uC5D0\uC11C \uAE68\uC6B0\uC9C0 \uC54A\uB294\uB2E4\uBA74, \uB3C4\uB300\uCCB4 \uC65C \uCC45\uC744 \uC77D\uB294\uAC00?", source: "\uCE74\uD504\uCE74" },
@@ -2317,24 +2414,6 @@
     }
     render();
   }
-
-  // src/js/firebase-config.js
-  var firebase2 = window.firebase;
-  var firebaseConfig = {
-    projectId: "better-school-life-260913",
-    appId: "1:333970857991:web:8b3165032a7fd38c158aa2",
-    storageBucket: "better-school-life-260913.firebasestorage.app",
-    apiKey: "AIzaSyDxCDJ-agfDGiFN6sBTdlk6TB-TodfeUDw",
-    authDomain: "better-school-life-260913.firebaseapp.com",
-    messagingSenderId: "333970857991"
-  };
-  if (!firebase2.apps.length) {
-    firebase2.initializeApp(firebaseConfig);
-  }
-  var auth = firebase2.auth();
-  var db = firebase2.firestore();
-  var googleProvider = new firebase2.auth.GoogleAuthProvider();
-  googleProvider.setCustomParameters({ prompt: "select_account" });
 
   // src/js/roles.js
   var SCHOOL_DOMAIN = "kyunghee.sen.ms.kr";
@@ -3273,7 +3352,7 @@ ${reason}
       const modeBtn = document.getElementById("btn-mode-toggle");
       if (ptsEl) ptsEl.textContent = `\u{1F31F} ${totalPoints.toLocaleString()}P`;
       if (streakEl) streakEl.textContent = `\u{1F525} ${streak}\uC77C \uC5F0\uC18D`;
-      if (classEl) classEl.textContent = `\uACBD\uD76C\uC911\uD559\uAD50 \uC62C\uBC14\uB978 \uB8E8\uD2F4`;
+      if (classEl) classEl.textContent = `\uC62C\uBC14\uB978 \uB8E8\uD2F4 \uD504\uB85C\uC81D\uD2B8`;
       const loggedIn = appState.isLoggedIn();
       const authLabelEl = document.querySelector("#btn-google-auth span");
       if (authLabelEl) authLabelEl.textContent = loggedIn ? appState.isTestAccount() ? "\uD14C\uC2A4\uD2B8 \uC885\uB8CC" : "\uB85C\uADF8\uC544\uC6C3" : "\uB85C\uADF8\uC778";
@@ -3284,6 +3363,8 @@ ${reason}
       const navMenu = document.querySelector(".nav-menu");
       if (navMenu) navMenu.style.visibility = loggedIn ? "" : "hidden";
       setChatbotEnabled(loggedIn);
+      const teacherNavBtn = document.querySelector('[data-view="teacher"]');
+      if (teacherNavBtn) teacherNavBtn.style.display = userProfile.role === "teacher" ? "flex" : "none";
       const testMark = appState.isTestAccount() ? "\u{1F9EA} " : "";
       if (userProfile.role === "teacher") {
         if (roleIconEl) roleIconEl.textContent = "\u{1F469}\u200D\u{1F3EB}";
@@ -3357,11 +3438,11 @@ ${reason}
           <span>\u2728</span> \uACBD\uD76C\uC911\uD559\uAD50 \xB7 \uB9E4\uC77C 5\uBD84 \uC62C\uBC14\uB978 \uB8E8\uD2F4
         </div>
         <h1 class="hero-title">
-          \uBC14\uB978 \uC608\uC808, \uD55C\uCEF4\uD0C0\uC790, \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C<br>
+          \uB9E4\uB108, \uC2A4\uB9C8\uD2B8 \uD0C0\uC774\uD551, \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C<br>
           <span class="highlight-gradient">\uD3B8\uC548\uD558\uACE0 \uD488\uACA9 \uC788\uB294 \uC911\uD559 \uC0DD\uD65C</span>
         </h1>
         <p class="hero-desc">
-          \uB514\uBC97\uC73C\uB85C \uC2DC\uC791\uD558\uB294 \uB9E4\uC77C 5\uBD84! \uC544\uCE68 \uC2DC\uAC04\uBFD0\uB9CC \uC544\uB2C8\uB77C \uC26C\uB294 \uC2DC\uAC04\xB7\uC810\uC2EC\uC2DC\uAC04 \uB4F1 <strong>\uC9EC\uB0A0 \uB54C\uB9C8\uB2E4</strong> \uB4E4\uC5B4\uC640\uC11C \uD65C\uB3D9\uD574 \uBCF4\uC138\uC694. 5\uB300 \uD559\uAD50\uC0DD\uD65C \uD575\uC2EC \uC608\uC808 \uAC1C\uBCC4 \uC2E4\uCC9C, \uD55C\uCEF4\uD0C0\uC790 4\uB2E8\uACC4, \uC911\uD559\uC0DD \uCD94\uCC9C\uB3C4\uC11C \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C \uC131\uC7A5 \uD3EC\uC778\uD2B8\uB97C \uBAA8\uC544\uBCF4\uC138\uC694.
+          \uB514\uBC97\uC73C\uB85C \uC2DC\uC791\uD558\uB294 \uB9E4\uC77C 5\uBD84! \uC544\uCE68 \uC2DC\uAC04\uBFD0\uB9CC \uC544\uB2C8\uB77C \uC26C\uB294 \uC2DC\uAC04\xB7\uC810\uC2EC\uC2DC\uAC04 \uB4F1 <strong>\uC9EC\uB0A0 \uB54C\uB9C8\uB2E4</strong> \uB4E4\uC5B4\uC640\uC11C \uD65C\uB3D9\uD574 \uBCF4\uC138\uC694. 5\uB300 \uD559\uAD50\uC0DD\uD65C \uD575\uC2EC \uB9E4\uB108 \uAC1C\uBCC4 \uC2E4\uCC9C, \uC2A4\uB9C8\uD2B8 \uD0C0\uC774\uD551 4\uB2E8\uACC4, \uC911\uD559\uC0DD \uCD94\uCC9C\uB3C4\uC11C \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C \uC131\uC7A5 \uD3EC\uC778\uD2B8\uB97C \uBAA8\uC544\uBCF4\uC138\uC694.
         </p>
 
         <!-- Hero Quick Check Card -->
@@ -3369,7 +3450,7 @@ ${reason}
           <div class="hero-floating-card">
             <div class="floating-card-header">
               <div class="floating-card-title">
-                <span>\u{1F4CB}</span> \uC624\uB298 \uC544\uCE68 \uB098\uC758 \uC608\uC808 \uC2E4\uCC9C \uD604\uD669
+                <span>\u{1F4CB}</span> \uC624\uB298 \uC544\uCE68 \uB098\uC758 \uB9E4\uB108 \uC2E4\uCC9C \uD604\uD669
               </div>
               <span class="badge badge-green">\uC9C0\uCE68\uB2F9 +5P</span>
             </div>
@@ -3393,7 +3474,7 @@ ${reason}
 
             <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem;">
               <button class="btn btn-primary" style="flex: 1;" id="btn-quick-typing">
-                \u2328\uFE0F \uD55C\uCEF4\uD0C0\uC790 \uC2DC\uC791
+                \u2328\uFE0F \uC2A4\uB9C8\uD2B8 \uD0C0\uC774\uD551 \uC2DC\uC791
               </button>
               <button class="btn btn-secondary" style="flex: 1;" id="btn-quick-reading">
                 \u{1F4DA} \uB3C5\uC11C\uAE30\uB85D \uC791\uC131
@@ -3433,7 +3514,7 @@ ${reason}
               \u{1F31F} \uD1B5\uD569 \uC131\uC7A5 \uC21C\uC704
             </button>
             <button class="category-pill-btn ${this.leaderboardCategory === "manners" ? "active" : ""}" data-cat="manners">
-              \u{1F338} \uC608\uC808 \uC810\uC218 \uC21C\uC704
+              \u{1F338} \uB9E4\uB108 \uC810\uC218 \uC21C\uC704
             </button>
             <button class="category-pill-btn ${this.leaderboardCategory === "typing" ? "active" : ""}" data-cat="typing">
               \u2328\uFE0F \uD0C0\uC790 \uC810\uC218 \uC21C\uC704
@@ -3574,13 +3655,13 @@ ${reason}
     // ================= ETIQUETTE & QUIZ VIEW (4 INDIVIDUAL CHECKBOXES) =================
     renderEtiquette(container) {
       const activeDomain = ETIQUETTE_DOMAINS[this.currentDomainIndex % ETIQUETTE_DOMAINS.length];
-      const quiz = MIDDLE_SCHOOL_QUIZZES[this.currentQuizIndex % MIDDLE_SCHOOL_QUIZZES.length];
+      const quiz = QUIZ_QUESTIONS[this.currentQuizIndex % QUIZ_QUESTIONS.length];
       container.innerHTML = `
       <div class="etiquette-hub-container">
         <div style="text-align: center; max-width: 680px; margin: 0 auto 2.5rem;">
           <span class="hero-pill-tag">Middle School Etiquette Guidelines</span>
           <h2 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.5rem;">
-            \uC911\uD559\uAD50 5\uB300 \uD559\uAD50\uC0DD\uD65C \uC608\uC808 \uAD50\uC721 & \uAC1C\uBCC4 \uC2E4\uCC9C
+            \uB9E4\uC77C\uB9E4\uC77C \uC2E4\uCC9C\uD558\uB294 \uBA4B\uC9C4 \uB098\uC758 \uBAA8\uC2B5
           </h2>
           <p style="color: var(--text-secondary); font-size: 0.95rem;">
             \uC9C0\uCE68\uC744 \uAF3C\uAF3C\uD788 \uC77D\uACE0 <strong>4\uAC1C \uC138\uBD80 \uC9C0\uCE68 \uAC01\uAC01\uC744 \uC9C1\uC811 \uCCB4\uD06C</strong>\uD558\uC5EC \uC2E4\uCC9C\uD574 \uBCF4\uC138\uC694 (+5P\uC529 \uCD1D +20P).
@@ -3679,7 +3760,7 @@ ${reason}
             <div style="display: flex; align-items: center; gap: 0.6rem;">
               <span style="font-size: 1.5rem;">\u{1F4A1}</span>
               <div>
-                <h3 style="font-size: 1.25rem; font-weight: 800;">\uC911\uD559 \uC608\uC808 \uC0C1\uD669\uBCC4 \uC2E4\uC804 \uD034\uC988</h3>
+                <h3 style="font-size: 1.25rem; font-weight: 800;">\uC911\uD559 \uB9E4\uB108 \uC0C1\uD669\uBCC4 \uC2E4\uC804 \uD034\uC988</h3>
                 <span class="badge badge-purple">${quiz.category}</span>
               </div>
             </div>
@@ -3760,7 +3841,7 @@ ${reason}
             feedbackEl.style.background = "#ECFDF5";
             feedbackEl.style.border = "1px solid #A7F3D0";
             feedbackEl.innerHTML = `
-            <div style="font-weight: 800; color: #065F46; margin-bottom: 0.35rem;">\u{1F389} \uC815\uB2F5\uC785\uB2C8\uB2E4! (+${quiz.points}P \uC608\uC808 \uC810\uC218 \uC801\uB9BD)</div>
+            <div style="font-weight: 800; color: #065F46; margin-bottom: 0.35rem;">\u{1F389} \uC815\uB2F5\uC785\uB2C8\uB2E4! (+${quiz.points}P \uB9E4\uB108 \uC810\uC218 \uC801\uB9BD)</div>
             <div style="font-size: 0.875rem; color: #047857; line-height: 1.55;">${quiz.explanation}</div>
           `;
             showToast(`\uC815\uB2F5! +${quiz.points}P \uD68D\uB4DD`, "\u{1F31F}");
@@ -3780,7 +3861,7 @@ ${reason}
       if (btnNext) {
         btnNext.addEventListener("click", () => {
           sounds.playClick();
-          this.currentQuizIndex = (this.currentQuizIndex + 1) % MIDDLE_SCHOOL_QUIZZES.length;
+          this.currentQuizIndex = (this.currentQuizIndex + 1) % QUIZ_QUESTIONS.length;
           this.renderEtiquette(container);
         });
       }
@@ -4089,7 +4170,7 @@ ${reason}
         }
       });
     }
-    // --- 3. 짧은 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
+    // --- 3. 짧은 글 연습 (보이는 입력창 스마트 타이핑 공식 스타일) ---
     renderShortPracticeMode(container) {
       const dataSource = this.typingLang === "ko" ? KR_SHORT_SENTENCES : EN_SHORT_SENTENCES;
       const list = dataSource[this.typingLevel] || dataSource[1];
@@ -4216,7 +4297,7 @@ ${reason}
         });
       }
     }
-    // --- 4. 긴 글 연습 (보이는 입력창 한컴타자 공식 스타일) ---
+    // --- 4. 긴 글 연습 (보이는 입력창 스마트 타이핑 공식 스타일) ---
     renderLongPracticeMode(container) {
       const dataSource = this.typingLang === "ko" ? KR_LONG_PASSAGES : EN_LONG_PASSAGES;
       const list = dataSource[this.typingLevel] || dataSource[1];
@@ -4373,16 +4454,16 @@ ${reason}
         <!-- 4 Template Switcher Tabs (PDF Formats) -->
         <div class="reading-template-tabs">
           <button class="template-tab-btn ${this.readingTemplate === "quote_cards" ? "active" : ""}" data-tpl="quote_cards">
-            \u{1F4D1} 1. \uAE30\uC5B5\uD558\uACE0 \uC2F6\uC740 \uAD6C\uC808 (PDF p.1~2)
+            \u{1F4D1} \uAE30\uC5B5\uD558\uACE0 \uC2F6\uC740 \uAD6C\uC808 p.1~2)
           </button>
           <button class="template-tab-btn ${this.readingTemplate === "summary_reflection" ? "active" : ""}" data-tpl="summary_reflection">
-            \u{1F4DD} 2. \uB3C5\uC11C\uAE30\uB85D\uC7A5 (\uC694\uC57D&\uAC10\uC0C1) (PDF p.7~8)
+            \u{1F4DD} \uB3C5\uC11C\uAE30\uB85D\uC7A5 (\uC694\uC57D&\uAC10\uC0C1) 
           </button>
           <button class="template-tab-btn ${this.readingTemplate === "make_quiz" ? "active" : ""}" data-tpl="make_quiz">
-            \u2753 3. \uD034\uC988 \uB9CC\uB4E4\uAE30 (PDF p.3~4)
+            \u2753 \uD034\uC988 \uB9CC\uB4E4\uAE30 
           </button>
           <button class="template-tab-btn ${this.readingTemplate === "mindmap" ? "active" : ""}" data-tpl="mindmap">
-            \u{1F310} 4. \uB9C8\uC778\uB4DC\uB9F5 (PDF p.5~6)
+            \u{1F310} \uB9C8\uC778\uB4DC\uB9F5 
           </button>
         </div>
 
@@ -4794,7 +4875,7 @@ ${reason}
             </div>
             <div class="category-nav-pills" style="margin: 0;">
               <button class="category-pill-btn ${this.leaderboardCategory === "total" ? "active" : ""}" data-subcat="total">\uD1B5\uD569</button>
-              <button class="category-pill-btn ${this.leaderboardCategory === "manners" ? "active" : ""}" data-subcat="manners">\uC608\uC808</button>
+              <button class="category-pill-btn ${this.leaderboardCategory === "manners" ? "active" : ""}" data-subcat="manners">\uB9E4\uB108</button>
               <button class="category-pill-btn ${this.leaderboardCategory === "typing" ? "active" : ""}" data-subcat="typing">\uD0C0\uC790</button>
               <button class="category-pill-btn ${this.leaderboardCategory === "reading" ? "active" : ""}" data-subcat="reading">\uB3C5\uC11C</button>
             </div>
@@ -4824,7 +4905,7 @@ ${reason}
                       \u{1F31F} ${s.totalPoints.toLocaleString()}P
                     </span>
                     <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">
-                      \uC608\uC808: ${s.mannersScore}P | \uD0C0\uC790: ${s.typingBestCPM}\uD0C0 | \uB3C5\uC11C: ${s.readingScore}P
+                      \uB9E4\uB108: ${s.mannersScore}P | \uD0C0\uC790: ${s.typingBestCPM}\uD0C0 | \uB3C5\uC11C: ${s.readingScore}P
                     </div>
                   </div>
                 </div>
@@ -4861,7 +4942,7 @@ ${reason}
           <span class="highlight-gradient">\uBC14\uB9845\uBD84\uC744 \uC2DC\uC791\uD574 \uBCF4\uC138\uC694</span>
         </h1>
         <p class="hero-desc">
-          \uC544\uCE68 \uC2DC\uAC04\uBFD0\uB9CC \uC544\uB2C8\uB77C \uC26C\uB294 \uC2DC\uAC04\xB7\uC810\uC2EC\uC2DC\uAC04 \uB4F1 \uC9EC\uB0A0 \uB54C\uB9C8\uB2E4 \uB4E4\uC5B4\uC640\uC11C \uC608\uC808 \uC2E4\uCC9C, \uD55C\uCEF4\uD0C0\uC790, \uB3C5\uC11C\uAE30\uB85D\uC744 \uC774\uC5B4\uAC00\uC694!
+          \uC544\uCE68 \uC2DC\uAC04\uBFD0\uB9CC \uC544\uB2C8\uB77C \uC26C\uB294 \uC2DC\uAC04\xB7\uC810\uC2EC\uC2DC\uAC04 \uB4F1 \uC9EC\uB0A0 \uB54C\uB9C8\uB2E4 \uB4E4\uC5B4\uC640\uC11C \uB9E4\uB108 \uC2E4\uCC9C, \uC2A4\uB9C8\uD2B8 \uD0C0\uC774\uD551, \uB3C5\uC11C\uAE30\uB85D\uC744 \uC774\uC5B4\uAC00\uC694!
         </p>
 
         <div class="card" style="max-width: 460px; margin: 2rem auto 0; padding: 2rem; text-align: center;">
@@ -5019,14 +5100,14 @@ ${reason}
           <div class="proposal-panel-header">
             <div>
               <h3 style="font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
-                <span>\u{1F5F3}\uFE0F</span> \uD575\uC2EC \uC608\uC808 \uC9C0\uCE68 \uAD50\uC0AC \uC81C\uC548 & 70% \uACF5\uAC10 \uD22C\uD45C
+                <span>\u{1F5F3}\uFE0F</span> \uD575\uC2EC \uB9E4\uB108 \uC9C0\uCE68 \uAD50\uC0AC \uC81C\uC548 & 70% \uACF5\uAC10 \uD22C\uD45C
               </h3>
               <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
                 \uC120\uC0DD\uB2D8 \uC804\uCCB4 \uC778\uC6D0(10\uBA85) \uC911 <strong>70% (7\uBA85 \uC774\uC0C1)</strong> \uACF5\uAC10\uC744 \uBC1B\uC73C\uBA74 \uD559\uC0DD \uACF5\uC2DD \uC2E4\uCC9C \uC9C0\uCE68\uC73C\uB85C \uC790\uB3D9 \uAC8C\uC2DC\uB429\uB2C8\uB2E4.
               </p>
             </div>
             <button class="btn btn-primary" id="btn-open-prop-modal" style="font-size: 0.85rem;">
-              \u2795 \uC0C8 \uC608\uC808 \uC9C0\uCE68 \uC81C\uC548\uD558\uAE30
+              \u2795 \uC0C8 \uB9E4\uB108 \uC9C0\uCE68 \uC81C\uC548\uD558\uAE30
             </button>
           </div>
 
@@ -5069,7 +5150,7 @@ ${reason}
                       </button>
                     ` : `
                       <div style="font-size: 0.75rem; color: #059669; font-weight: 700; text-align: center; margin-top: 0.5rem;">
-                        \u2713 \uD559\uC0DD \uC608\uC808 \uC2E4\uCC9C \uD56D\uBAA9\uC5D0 \uB4F1\uB85D\uB418\uC5C8\uC2B5\uB2C8\uB2E4.
+                        \u2713 \uD559\uC0DD \uB9E4\uB108 \uC2E4\uCC9C \uD56D\uBAA9\uC5D0 \uB4F1\uB85D\uB418\uC5C8\uC2B5\uB2C8\uB2E4.
                       </div>
                     `}
                   </div>
@@ -5143,7 +5224,7 @@ ${reason}
                 <tr>
                   <th style="width: 60px;">\uBC88\uD638</th>
                   <th style="width: 180px;">\uD559\uC0DD (\uC2E4\uBA85 + \uB2C9\uB124\uC784)</th>
-                  <th style="width: 100px;">\uC608\uC808 \uC810\uC218</th>
+                  <th style="width: 100px;">\uB9E4\uB108 \uC810\uC218</th>
                   <th style="width: 100px;">\uD0C0\uC790 \uC810\uC218</th>
                   <th style="width: 100px;">\uB3C5\uC11C \uC810\uC218</th>
                   <th style="width: 110px;">\uCD1D\uD569 \uD3EC\uC778\uD2B8</th>
@@ -5211,7 +5292,7 @@ ${reason}
           if (res.isApproved) {
             sounds.playCelebration();
             triggerConfetti();
-            showToast(`\uACF5\uAC10 70% \uB2EC\uC131! \uACF5\uC2DD \uC608\uC808 \uC9C0\uCE68\uC73C\uB85C \uCC44\uD0DD\uB418\uC5C8\uC2B5\uB2C8\uB2E4! \u{1F389}`, "\u{1F5F3}\uFE0F");
+            showToast(`\uACF5\uAC10 70% \uB2EC\uC131! \uACF5\uC2DD \uB9E4\uB108 \uC9C0\uCE68\uC73C\uB85C \uCC44\uD0DD\uB418\uC5C8\uC2B5\uB2C8\uB2E4! \u{1F389}`, "\u{1F5F3}\uFE0F");
           } else {
             showToast(`\uACF5\uAC10 \uD22C\uD45C \uC644\uB8CC! (\uD604\uC7AC ${res.rate}%)`, "\u{1F44D}");
           }
@@ -5273,7 +5354,7 @@ ${reason}
       if (btnExport) {
         btnExport.addEventListener("click", () => {
           sounds.playSuccess();
-          const header = "\uBC88\uD638,\uC2E4\uBA85,\uB2C9\uB124\uC784,\uC608\uC808\uC810\uC218,\uD0C0\uC790\uC810\uC218,\uB3C5\uC11C\uC810\uC218,\uCD1D\uD569\uD3EC\uC778\uD2B8,\uCD5C\uACE0\uD0C0\uC218,\uB2E4\uC9D0\n";
+          const header = "\uBC88\uD638,\uC2E4\uBA85,\uB2C9\uB124\uC784,\uB9E4\uB108\uC810\uC218,\uD0C0\uC790\uC810\uC218,\uB3C5\uC11C\uC810\uC218,\uCD1D\uD569\uD3EC\uC778\uD2B8,\uCD5C\uACE0\uD0C0\uC218,\uB2E4\uC9D0\n";
           const rows = appState.state.students.map(
             (s) => `${s.number},${s.realName},${s.nickname},${s.mannersScore},${s.typingScore},${s.readingScore},${s.totalPoints},${s.typingBestCPM},"${s.comment || ""}"`
           ).join("\n");
@@ -5304,7 +5385,7 @@ ${reason}
         modal.id = "prop-create-modal";
         modal.innerHTML = `
         <div class="modal-content" style="max-width: 500px; text-align: left;">
-          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">\uC0C8 \uD575\uC2EC \uC608\uC808 \uC9C0\uCE68 \uC81C\uC548</h3>
+          <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem;">\uC0C8 \uD575\uC2EC \uB9E4\uB108 \uC9C0\uCE68 \uC81C\uC548</h3>
           <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
             \uC81C\uC548 \uD6C4 \uC804\uCCB4 \uC120\uC0DD\uB2D8(10\uBA85) \uC911 70% \uC774\uC0C1 \uACF5\uAC10\uC744 \uBC1B\uC73C\uBA74 \uACF5\uC2DD \uAC8C\uC2DC\uB429\uB2C8\uB2E4.
           </p>
@@ -5352,7 +5433,7 @@ ${reason}
         });
         sounds.playSuccess();
         modal.classList.remove("active");
-        showToast("\uC0C8 \uC608\uC808 \uC9C0\uCE68\uC774 \uC81C\uC548\uB418\uC5C8\uC2B5\uB2C8\uB2E4. (\uB3D9\uB8CC \uAD50\uC0AC \uD22C\uD45C \uC2DC\uC791)", "\u{1F5F3}\uFE0F");
+        showToast("\uC0C8 \uB9E4\uB108 \uC9C0\uCE68\uC774 \uC81C\uC548\uB418\uC5C8\uC2B5\uB2C8\uB2E4. (\uB3D9\uB8CC \uAD50\uC0AC \uD22C\uD45C \uC2DC\uC791)", "\u{1F5F3}\uFE0F");
         this.renderTeacher(parentContainer);
       };
     }
@@ -5518,7 +5599,7 @@ ${reason}
           <div class="exhibition-metrics">
             <div>
               <div class="ex-metric-val">${student.mannersScore}P</div>
-              <div class="ex-metric-lbl">\uC608\uC808 \uC810\uC218</div>
+              <div class="ex-metric-lbl">\uB9E4\uB108 \uC810\uC218</div>
             </div>
             <div>
               <div class="ex-metric-val">${student.typingBestCPM} <span style="font-size: 1rem; color: rgba(255,255,255,0.7);">CPM</span></div>
