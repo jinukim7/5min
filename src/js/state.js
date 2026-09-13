@@ -39,7 +39,7 @@ export const INITIAL_STUDENTS_28 = [
     streak: 11,
     checked: true,
     quizDone: true,
-    comment: '《시간을 파는 상점》을 읽고 아침 20분의 소중함을 실감했어요.',
+    comment: '《시간을 파는 상점》을 읽고 매일 5분의 소중함을 실감했어요.',
     hasSticker: true
   },
   {
@@ -566,7 +566,7 @@ function generateExpandedStudents() {
 const { gradeStudents: GRADE_STUDENTS_ALL, schoolStudents: SCHOOL_STUDENTS_ALL } = generateExpandedStudents();
 
 export const BADGES = [
-  { id: 'first_step', name: '첫 발자국', desc: '편학위 첫 활동 완료', icon: '🌱', req: (s) => s.totalPoints >= 20 },
+  { id: 'first_step', name: '첫 발자국', desc: '바름5분 첫 활동 완료', icon: '🌱', req: (s) => s.totalPoints >= 20 },
   { id: 'streak_3', name: '3일의 결심', desc: '3일 연속 아침 루틴 달성', icon: '🔥', req: (s) => s.streak >= 3 },
   { id: 'streak_7', name: '아침의 지배자', desc: '7일 연속 아침 루틴 달성', icon: '👑', req: (s) => s.streak >= 7 },
   { id: 'typer_250', name: '타자 루키', desc: '타자 연습 250타 달성', icon: '⌨️', req: (s) => s.typingBestCPM >= 250 },
@@ -622,7 +622,7 @@ export class AppState {
       },
       userProfile: {
         role: 'student', // 'student' | 'teacher'
-        school: '배움중학교',
+        school: '경희중학교',
         grade: 2,
         classNum: 3,
         number: 1,

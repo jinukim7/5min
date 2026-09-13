@@ -42,7 +42,7 @@ export function openGoogleLoginModal(onSuccess = () => {}) {
     })
     .catch((error) => {
       console.error("Google 로그인 에러", error);
-      alert("구글 로그인에 실패했습니다. 다시 시도해 주세요.");
+      alert("로그인에 실패했습니다.\n학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.");
     });
 }
 

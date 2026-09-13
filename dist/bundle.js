@@ -437,7 +437,7 @@
       author: "\uAE40\uC120\uC601",
       summary: "\uC8FC\uC778\uACF5 \uC628\uC870\uAC00 \uC778\uD130\uB137 \uCE74\uD398\uC5D0\uC11C \uC2DC\uAC04\uC744 \uC758\uB8B0\uBC1B\uC544 \uC218\uD589\uD558\uBA74\uC11C \uB2E4\uC591\uD55C \uC0AC\uB78C\uB4E4\uC758 \uC0AC\uC5F0\uACFC \uC2DC\uAC04\uC758 \uAC00\uCE58\uB97C \uAE68\uB2EC\uC544\uAC00\uB294 \uC774\uC57C\uAE30\uC785\uB2C8\uB2E4.",
       reflectionTags: ["\uB290\uB080\uC810", "\uB2E4\uC9D0"],
-      reflection: "\uC544\uCE68 \uB3C5\uC11C \uC2DC\uAC04 20\uBD84\uC744 \uB2E8\uC21C\uD788 \uD758\uB824\uBCF4\uB0B4\uC9C0 \uC54A\uACE0 \uB098\uB97C \uCC44\uC6B0\uB294 \uC2DC\uAC04\uC73C\uB85C \uCC44\uC6CC\uC57C\uACA0\uB2E4\uACE0 \uAD73\uAC8C \uB2E4\uC9D0\uD588\uC2B5\uB2C8\uB2E4.",
+      reflection: "\uC9EC\uB098\uB294 5\uBD84 \uB3C5\uC11C \uC2DC\uAC04\uC744 \uB2E8\uC21C\uD788 \uD758\uB824\uBCF4\uB0B4\uC9C0 \uC54A\uACE0 \uB098\uB97C \uCC44\uC6B0\uB294 \uC2DC\uAC04\uC73C\uB85C \uCC44\uC6CC\uC57C\uACA0\uB2E4\uACE0 \uAD73\uAC8C \uB2E4\uC9D0\uD588\uC2B5\uB2C8\uB2E4.",
       memorablePart: "\uC2DC\uAC04\uC740 \uBD99\uC7A1\uC544 \uB458 \uC218\uB3C4 \uC5C6\uACE0 \uAC00\uBD88\uD560 \uC218\uB3C4 \uC5C6\uB2E4. \uC624\uC9C1 \uC9C0\uAE08\uBFD0\uC774\uB2E4.",
       date: "2026-09-13",
       likes: 19
@@ -496,7 +496,7 @@
       streak: 11,
       checked: true,
       quizDone: true,
-      comment: "\u300A\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810\u300B\uC744 \uC77D\uACE0 \uC544\uCE68 20\uBD84\uC758 \uC18C\uC911\uD568\uC744 \uC2E4\uAC10\uD588\uC5B4\uC694.",
+      comment: "\u300A\uC2DC\uAC04\uC744 \uD30C\uB294 \uC0C1\uC810\u300B\uC744 \uC77D\uACE0 \uB9E4\uC77C 5\uBD84\uC758 \uC18C\uC911\uD568\uC744 \uC2E4\uAC10\uD588\uC5B4\uC694.",
       hasSticker: true
     },
     {
@@ -1012,7 +1012,7 @@
   }
   var { gradeStudents: GRADE_STUDENTS_ALL, schoolStudents: SCHOOL_STUDENTS_ALL } = generateExpandedStudents();
   var BADGES = [
-    { id: "first_step", name: "\uCCAB \uBC1C\uC790\uAD6D", desc: "\uD3B8\uD559\uC704 \uCCAB \uD65C\uB3D9 \uC644\uB8CC", icon: "\u{1F331}", req: (s) => s.totalPoints >= 20 },
+    { id: "first_step", name: "\uCCAB \uBC1C\uC790\uAD6D", desc: "\uBC14\uB9845\uBD84 \uCCAB \uD65C\uB3D9 \uC644\uB8CC", icon: "\u{1F331}", req: (s) => s.totalPoints >= 20 },
     { id: "streak_3", name: "3\uC77C\uC758 \uACB0\uC2EC", desc: "3\uC77C \uC5F0\uC18D \uC544\uCE68 \uB8E8\uD2F4 \uB2EC\uC131", icon: "\u{1F525}", req: (s) => s.streak >= 3 },
     { id: "streak_7", name: "\uC544\uCE68\uC758 \uC9C0\uBC30\uC790", desc: "7\uC77C \uC5F0\uC18D \uC544\uCE68 \uB8E8\uD2F4 \uB2EC\uC131", icon: "\u{1F451}", req: (s) => s.streak >= 7 },
     { id: "typer_250", name: "\uD0C0\uC790 \uB8E8\uD0A4", desc: "\uD0C0\uC790 \uC5F0\uC2B5 250\uD0C0 \uB2EC\uC131", icon: "\u2328\uFE0F", req: (s) => s.typingBestCPM >= 250 },
@@ -1064,7 +1064,7 @@
         userProfile: {
           role: "student",
           // 'student' | 'teacher'
-          school: "\uBC30\uC6C0\uC911\uD559\uAD50",
+          school: "\uACBD\uD76C\uC911\uD559\uAD50",
           grade: 2,
           classNum: 3,
           number: 1,
@@ -1470,12 +1470,12 @@
     },
     {
       book: "\uC911\uD559 \uB4F1\uAD50 \uC608\uC808",
-      author: "\uD3B8\uD559\uC704 \uC9C0\uCE68",
+      author: "\uBC14\uB9845\uBD84 \uC9C0\uCE68",
       text: "\uAD50\uBB38 \uC55E \uC120\uC0DD\uB2D8\uACFC \uBC30\uC6C0\uD130 \uC9C0\uD0B4\uC774 \uC120\uC0DD\uB2D8\uAED8 \uBA48\uCD94\uC5B4 \uC11C\uC11C \uACF5\uC190\uD788 \uD5C8\uB9AC \uC219\uC5EC \uC778\uC0AC\uD569\uB2C8\uB2E4."
     },
     {
       book: "\uAE09\uC2DD\uC2E4 \uC608\uC808",
-      author: "\uD3B8\uD559\uC704 \uC9C0\uCE68",
+      author: "\uBC14\uB9845\uBD84 \uC9C0\uCE68",
       text: "\uC0C8\uCE58\uAE30 \uC5C6\uC774 \uD55C \uC904\uB85C \uC11C\uC11C \uBC30\uC2DD\uBC1B\uACE0 \uC870\uB9AC\uC2E4\uBB34\uC0AC\uB2D8\uAED8 \uC9C4\uC2EC\uC73C\uB85C \uAC10\uC0AC \uC778\uC0AC\uB97C \uC804\uD569\uB2C8\uB2E4."
     }
   ];
@@ -2048,6 +2048,7 @@
   var auth = firebase2.auth();
   var db = firebase2.firestore();
   var googleProvider = new firebase2.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ prompt: "select_account" });
 
   // src/js/auth.js
   function openGoogleLoginModal(onSuccess = () => {
@@ -2082,7 +2083,7 @@
       });
     }).catch((error) => {
       console.error("Google \uB85C\uADF8\uC778 \uC5D0\uB7EC", error);
-      alert("\uAD6C\uAE00 \uB85C\uADF8\uC778\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4. \uB2E4\uC2DC \uC2DC\uB3C4\uD574 \uC8FC\uC138\uC694.");
+      alert("\uB85C\uADF8\uC778\uC5D0 \uC2E4\uD328\uD588\uC2B5\uB2C8\uB2E4.\n\uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(@kyunghee.sen.ms.kr)\uB85C \uB85C\uADF8\uC778\uD558\uC138\uC694.");
     });
   }
   function openProfileOnboardingModal(onSuccess = () => {
@@ -2420,10 +2421,11 @@
       if (googleBtn) {
         googleBtn.addEventListener("click", () => {
           sounds.playClick();
+          showToast("\uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4(@kyunghee.sen.ms.kr)\uB85C \uB85C\uADF8\uC778\uD558\uC138\uC694.", "\u{1F3EB}");
           openGoogleLoginModal(() => {
             this.updateHeaderStats();
             this.navigate(this.currentView);
-            showToast("\uAD6C\uAE00 \uACC4\uC815\uC774 \uC5F0\uACB0\uB418\uC5C8\uC2B5\uB2C8\uB2E4.", "\u{1F464}");
+            showToast("\uD559\uAD50 \uC6CC\uD06C\uC2A4\uD398\uC774\uC2A4 \uACC4\uC815\uC774 \uC5F0\uACB0\uB418\uC5C8\uC2B5\uB2C8\uB2E4.", "\u{1F464}");
           });
         });
       }
@@ -2466,7 +2468,7 @@
       const modeBtn = document.getElementById("btn-mode-toggle");
       if (ptsEl) ptsEl.textContent = `\u{1F31F} ${totalPoints.toLocaleString()}P`;
       if (streakEl) streakEl.textContent = `\u{1F525} ${streak}\uC77C \uC5F0\uC18D`;
-      if (classEl) classEl.textContent = `\uBC30\uC6C0\uC911 ${userProfile.grade}-${userProfile.classNum} \uB8E8\uD2F4`;
+      if (classEl) classEl.textContent = `\uACBD\uD76C\uC911\uD559\uAD50 \uC62C\uBC14\uB978 \uB8E8\uD2F4`;
       if (userProfile.role === "teacher") {
         if (roleIconEl) roleIconEl.textContent = "\u{1F469}\u200D\u{1F3EB}";
         if (nameEl) nameEl.textContent = `${userProfile.realName} (\uC120\uC0DD\uB2D8)`;
@@ -2524,18 +2526,18 @@
         if (this.leaderboardCategory === "reading") return `${student.readingScore}P`;
         return `${student.totalPoints.toLocaleString()}P`;
       };
-      const scopeLabel = this.leaderboardScope === "class" ? "2\uD559\uB144 3\uBC18 (\uD559\uAE09 28\uBA85)" : this.leaderboardScope === "grade" ? "2\uD559\uB144 \uC804\uCCB4 (7\uAC1C\uBC18 196\uBA85)" : "\uC804\uAD50\uC0DD (1~3\uD559\uB144 21\uAC1C\uBC18 588\uBA85)";
+      const scopeLabel = this.leaderboardScope === "class" ? "2\uD559\uB144 3\uBC18" : this.leaderboardScope === "grade" ? "2\uD559\uB144 \uC804\uCCB4" : "\uC804\uAD50\uC0DD";
       container.innerHTML = `
       <section class="hero-section">
         <div class="hero-pill-tag">
-          <span>\u2728</span> \uBC30\uC6C0\uC911\uD559\uAD50 \xB7 \uC544\uCE68 20\uBD84 \uC790\uC728 \uC131\uC7A5 \uB8E8\uD2F4
+          <span>\u2728</span> \uACBD\uD76C\uC911\uD559\uAD50 \xB7 \uB9E4\uC77C 5\uBD84 \uC62C\uBC14\uB978 \uB8E8\uD2F4
         </div>
         <h1 class="hero-title">
           \uBC14\uB978 \uC608\uC808, \uD55C\uCEF4\uD0C0\uC790, \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C<br>
           <span class="highlight-gradient">\uD3B8\uC548\uD558\uACE0 \uD488\uACA9 \uC788\uB294 \uC911\uD559 \uC0DD\uD65C</span>
         </h1>
         <p class="hero-desc">
-          \uB514\uBC97\uC73C\uB85C \uC2DC\uC791\uD558\uB294 \uC544\uCE68 20\uBD84! 5\uB300 \uD559\uAD50\uC0DD\uD65C \uD575\uC2EC \uC608\uC808 \uAC1C\uBCC4 \uC2E4\uCC9C, \uD55C\uCEF4\uD0C0\uC790 4\uB2E8\uACC4, \uC911\uD559\uC0DD \uCD94\uCC9C\uB3C4\uC11C \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C \uC131\uC7A5 \uD3EC\uC778\uD2B8\uB97C \uBAA8\uC544\uBCF4\uC138\uC694.
+          \uB514\uBC97\uC73C\uB85C \uC2DC\uC791\uD558\uB294 \uB9E4\uC77C 5\uBD84! \uC544\uCE68 \uC2DC\uAC04\uBFD0\uB9CC \uC544\uB2C8\uB77C \uC26C\uB294 \uC2DC\uAC04\xB7\uC810\uC2EC\uC2DC\uAC04 \uB4F1 <strong>\uC9EC\uB0A0 \uB54C\uB9C8\uB2E4</strong> \uB4E4\uC5B4\uC640\uC11C \uD65C\uB3D9\uD574 \uBCF4\uC138\uC694. 5\uB300 \uD559\uAD50\uC0DD\uD65C \uD575\uC2EC \uC608\uC808 \uAC1C\uBCC4 \uC2E4\uCC9C, \uD55C\uCEF4\uD0C0\uC790 4\uB2E8\uACC4, \uC911\uD559\uC0DD \uCD94\uCC9C\uB3C4\uC11C \uB3C5\uC11C\uAE30\uB85D\uC73C\uB85C \uC131\uC7A5 \uD3EC\uC778\uD2B8\uB97C \uBAA8\uC544\uBCF4\uC138\uC694.
         </p>
 
         <!-- Hero Quick Check Card -->
@@ -2591,13 +2593,13 @@
           <!-- Scope Selector (\uD559\uAE09 / \uD559\uB144 / \uC804\uAD50\uC0DD) -->
           <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.25rem;">
             <button class="btn ${this.leaderboardScope === "class" ? "btn-primary" : "btn-secondary"} btn-scope" data-scope="class" style="font-size: 0.85rem; padding: 0.4rem 1.1rem;">
-              \u{1F3EB} \uD559\uAE09\uBCC4 (28\uBA85)
+              \u{1F3EB} \uD559\uAE09\uBCC4
             </button>
             <button class="btn ${this.leaderboardScope === "grade" ? "btn-primary" : "btn-secondary"} btn-scope" data-scope="grade" style="font-size: 0.85rem; padding: 0.4rem 1.1rem;">
-              \u{1F393} \uD559\uB144\uBCC4 (7\uAC1C\uBC18 196\uBA85)
+              \u{1F393} \uD559\uB144\uBCC4
             </button>
             <button class="btn ${this.leaderboardScope === "school" ? "btn-primary" : "btn-secondary"} btn-scope" data-scope="school" style="font-size: 0.85rem; padding: 0.4rem 1.1rem;">
-              \u{1F310} \uC804\uAD50\uC0DD (21\uAC1C\uBC18 588\uBA85)
+              \u{1F310} \uC804\uAD50\uC0DD
             </button>
           </div>
 
@@ -3506,7 +3508,7 @@
         <div class="reading-header">
           <span class="hero-pill-tag">Middle School Reading Worksheet</span>
           <h2 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.5rem;">
-            \uC544\uCE68 20\uBD84 \uB3C5\uC11C\uAE30\uB85D\uC7A5 <\uB098\uC758 \uCC45 \uB098\uC758 \uAE30\uB85D>
+            \uB9E4\uC77C 5\uBD84 \uB3C5\uC11C\uAE30\uB85D\uC7A5 <\uB098\uC758 \uCC45 \uB098\uC758 \uAE30\uB85D>
           </h2>
           <p style="color: var(--text-secondary); font-size: 0.95rem;">
             \uCCA8\uBD80 \uD559\uC2B5\uC9C0 \uC591\uC2DD\uC5D0 \uB9DE\uCD94\uC5B4 \uB9C8\uC74C\uC5D0 \uB0A8\uB294 \uAD6C\uC808, \uB0B4\uC6A9 \uC694\uC57D \uBC0F \uAC10\uC0C1, \uCC45 \uD034\uC988\uB97C \uC9C1\uC811 \uAE30\uB85D\uD574 \uBCF4\uC138\uC694.
@@ -3890,13 +3892,13 @@
 
           <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.25rem;">
             <button class="btn ${this.leaderboardScope === "class" ? "btn-primary" : "btn-secondary"} sub-scope" data-sub-scope="class">
-              \u{1F3EB} \uD559\uAE09\uBCC4 (28\uBA85)
+              \u{1F3EB} \uD559\uAE09\uBCC4
             </button>
             <button class="btn ${this.leaderboardScope === "grade" ? "btn-primary" : "btn-secondary"} sub-scope" data-sub-scope="grade">
-              \u{1F393} \uD559\uB144\uBCC4 (7\uAC1C\uBC18 196\uBA85)
+              \u{1F393} \uD559\uB144\uBCC4
             </button>
             <button class="btn ${this.leaderboardScope === "school" ? "btn-primary" : "btn-secondary"} sub-scope" data-sub-scope="school">
-              \u{1F310} \uC804\uAD50\uC0DD (21\uAC1C\uBC18 588\uBA85)
+              \u{1F310} \uC804\uAD50\uC0DD
             </button>
           </div>
         </div>
@@ -4027,13 +4029,13 @@
                     ${[1, 2, 3, 4, 5, 6, 7].map((c) => {
         const key = `${g}-${c}`;
         const isSel = key === activeClassKey;
-        return `<option value="${key}" ${isSel ? "selected" : ""}>\uBC30\uC6C0\uC911 ${g}\uD559\uB144 ${c}\uBC18 (${g === 2 && c === 3 ? "\uB0B4 \uD559\uAE09 \u2B50" : "\uD559\uAE09 \uC870\uD68C"})</option>`;
+        return `<option value="${key}" ${isSel ? "selected" : ""}>\uACBD\uD76C\uC911\uD559\uAD50 ${g}\uD559\uB144 ${c}\uBC18 (${g === 2 && c === 3 ? "\uB0B4 \uD559\uAE09 \u2B50" : "\uD559\uAE09 \uC870\uD68C"})</option>`;
       }).join("")}
                   </optgroup>
                 `).join("")}
               </select>
               <span style="font-size: 0.85rem; color: var(--text-muted);">
-                \uC624\uB298 \uC77C\uC790: ${appState.getTodayString()} | \uD559\uAE09 \uC815\uC6D0: ${classStudents.length}\uBA85
+                \uC624\uB298 \uC77C\uC790: ${appState.getTodayString()}
               </span>
             </div>
           </div>
@@ -4053,7 +4055,7 @@
           <div class="stat-card blue">
             <div class="stat-card-title">\uC624\uB298 \uCC38\uC5EC\uC728</div>
             <div class="stat-card-number">${stats.participationRate}%</div>
-            <div class="stat-card-sub">\uCD1D ${stats.total}\uBA85 \uC911 ${stats.activeCount}\uBA85 \uCC38\uC5EC</div>
+            <div class="stat-card-sub">\uC624\uB298 ${stats.activeCount}\uBA85 \uCC38\uC5EC</div>
           </div>
           <div class="stat-card emerald">
             <div class="stat-card-title">\uB8E8\uD2F4 \uC644\uB8CC\uC790</div>
@@ -4245,7 +4247,7 @@
         <div class="exhibition-top-bar">
           <div class="exhibition-brand">
             <div class="logo-badge" style="background: #3B82F6;">Q</div>
-            <div style="font-size: 1.3rem; font-weight: 800;">\uD3B8\uD559\uC704 \uC911\uD559 \uC804\uC2DC \uBAA8\uB4DC \u2014 2\uD559\uB144 3\uBC18</div>
+            <div style="font-size: 1.3rem; font-weight: 800;">\uBC14\uB9845\uBD84 \uC804\uC2DC \uBAA8\uB4DC \u2014 2\uD559\uB144 3\uBC18</div>
             <span class="exhibition-badge">LIVE MORNING SHOWCASE</span>
           </div>
           <button class="exhibition-btn-close" id="btn-close-exhibition">\u2715 \uB2EB\uAE30 (ESC)</button>
@@ -4339,7 +4341,7 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = `\uD3B8\uD559\uC704_2\uD559\uB1443\uBC18_\uAE30\uB85D_${appState.getTodayString()}.csv`;
+          a.download = `\uBC14\uB9845\uBD84_2\uD559\uB1443\uBC18_\uAE30\uB85D_${appState.getTodayString()}.csv`;
           a.click();
           URL.revokeObjectURL(url);
           showToast("\uD559\uAE09 \uD65C\uB3D9 \uAE30\uB85D CSV \uD30C\uC77C \uB2E4\uC6B4\uB85C\uB4DC \uC644\uB8CC", "\u{1F4E5}");

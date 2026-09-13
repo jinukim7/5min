@@ -86,10 +86,11 @@ class App {
     if (googleBtn) {
       googleBtn.addEventListener('click', () => {
         sounds.playClick();
+        showToast('학교 워크스페이스(@kyunghee.sen.ms.kr)로 로그인하세요.', '🏫');
         openGoogleLoginModal(() => {
           this.updateHeaderStats();
           this.navigate(this.currentView);
-          showToast('구글 계정이 연결되었습니다.', '👤');
+          showToast('학교 워크스페이스 계정이 연결되었습니다.', '👤');
         });
       });
     }
@@ -137,7 +138,7 @@ class App {
 
     if (ptsEl) ptsEl.textContent = `🌟 ${totalPoints.toLocaleString()}P`;
     if (streakEl) streakEl.textContent = `🔥 ${streak}일 연속`;
-    if (classEl) classEl.textContent = `배움중 ${userProfile.grade}-${userProfile.classNum} 루틴`;
+    if (classEl) classEl.textContent = `경희중학교 올바른 루틴`;
 
     if (userProfile.role === 'teacher') {
       if (roleIconEl) roleIconEl.textContent = '👩‍🏫';
@@ -204,19 +205,19 @@ class App {
       return `${student.totalPoints.toLocaleString()}P`;
     };
 
-    const scopeLabel = this.leaderboardScope === 'class' ? '2학년 3반 (학급 28명)' : (this.leaderboardScope === 'grade' ? '2학년 전체 (7개반 196명)' : '전교생 (1~3학년 21개반 588명)');
+    const scopeLabel = this.leaderboardScope === 'class' ? '2학년 3반' : (this.leaderboardScope === 'grade' ? '2학년 전체' : '전교생');
 
     container.innerHTML = `
       <section class="hero-section">
         <div class="hero-pill-tag">
-          <span>✨</span> 배움중학교 · 아침 20분 자율 성장 루틴
+          <span>✨</span> 경희중학교 · 매일 5분 올바른 루틴
         </div>
         <h1 class="hero-title">
           바른 예절, 한컴타자, 독서기록으로<br>
           <span class="highlight-gradient">편안하고 품격 있는 중학 생활</span>
         </h1>
         <p class="hero-desc">
-          디벗으로 시작하는 아침 20분! 5대 학교생활 핵심 예절 개별 실천, 한컴타자 4단계, 중학생 추천도서 독서기록으로 성장 포인트를 모아보세요.
+          디벗으로 시작하는 매일 5분! 아침 시간뿐만 아니라 쉬는 시간·점심시간 등 <strong>짬날 때마다</strong> 들어와서 활동해 보세요. 5대 학교생활 핵심 예절 개별 실천, 한컴타자 4단계, 중학생 추천도서 독서기록으로 성장 포인트를 모아보세요.
         </p>
 
         <!-- Hero Quick Check Card -->
@@ -272,13 +273,13 @@ class App {
           <!-- Scope Selector (학급 / 학년 / 전교생) -->
           <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.25rem;">
             <button class="btn ${this.leaderboardScope === 'class' ? 'btn-primary' : 'btn-secondary'} btn-scope" data-scope="class" style="font-size: 0.85rem; padding: 0.4rem 1.1rem;">
-              🏫 학급별 (28명)
+              🏫 학급별
             </button>
             <button class="btn ${this.leaderboardScope === 'grade' ? 'btn-primary' : 'btn-secondary'} btn-scope" data-scope="grade" style="font-size: 0.85rem; padding: 0.4rem 1.1rem;">
-              🎓 학년별 (7개반 196명)
+              🎓 학년별
             </button>
             <button class="btn ${this.leaderboardScope === 'school' ? 'btn-primary' : 'btn-secondary'} btn-scope" data-scope="school" style="font-size: 0.85rem; padding: 0.4rem 1.1rem;">
-              🌐 전교생 (21개반 588명)
+              🌐 전교생
             </button>
           </div>
 
@@ -1251,7 +1252,7 @@ class App {
         <div class="reading-header">
           <span class="hero-pill-tag">Middle School Reading Worksheet</span>
           <h2 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.5rem;">
-            아침 20분 독서기록장 <나의 책 나의 기록>
+            매일 5분 독서기록장 <나의 책 나의 기록>
           </h2>
           <p style="color: var(--text-secondary); font-size: 0.95rem;">
             첨부 학습지 양식에 맞추어 마음에 남는 구절, 내용 요약 및 감상, 책 퀴즈를 직접 기록해 보세요.
@@ -1659,13 +1660,13 @@ class App {
 
           <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.25rem;">
             <button class="btn ${this.leaderboardScope === 'class' ? 'btn-primary' : 'btn-secondary'} sub-scope" data-sub-scope="class">
-              🏫 학급별 (28명)
+              🏫 학급별
             </button>
             <button class="btn ${this.leaderboardScope === 'grade' ? 'btn-primary' : 'btn-secondary'} sub-scope" data-sub-scope="grade">
-              🎓 학년별 (7개반 196명)
+              🎓 학년별
             </button>
             <button class="btn ${this.leaderboardScope === 'school' ? 'btn-primary' : 'btn-secondary'} sub-scope" data-sub-scope="school">
-              🌐 전교생 (21개반 588명)
+              🌐 전교생
             </button>
           </div>
         </div>
@@ -1805,13 +1806,13 @@ class App {
                     ${[1, 2, 3, 4, 5, 6, 7].map(c => {
                       const key = `${g}-${c}`;
                       const isSel = key === activeClassKey;
-                      return `<option value="${key}" ${isSel ? 'selected' : ''}>배움중 ${g}학년 ${c}반 (${g === 2 && c === 3 ? '내 학급 ⭐' : '학급 조회'})</option>`;
+                      return `<option value="${key}" ${isSel ? 'selected' : ''}>경희중학교 ${g}학년 ${c}반 (${g === 2 && c === 3 ? '내 학급 ⭐' : '학급 조회'})</option>`;
                     }).join('')}
                   </optgroup>
                 `).join('')}
               </select>
               <span style="font-size: 0.85rem; color: var(--text-muted);">
-                오늘 일자: ${appState.getTodayString()} | 학급 정원: ${classStudents.length}명
+                오늘 일자: ${appState.getTodayString()}
               </span>
             </div>
           </div>
@@ -1831,7 +1832,7 @@ class App {
           <div class="stat-card blue">
             <div class="stat-card-title">오늘 참여율</div>
             <div class="stat-card-number">${stats.participationRate}%</div>
-            <div class="stat-card-sub">총 ${stats.total}명 중 ${stats.activeCount}명 참여</div>
+            <div class="stat-card-sub">오늘 ${stats.activeCount}명 참여</div>
           </div>
           <div class="stat-card emerald">
             <div class="stat-card-title">루틴 완료자</div>
@@ -2023,7 +2024,7 @@ class App {
         <div class="exhibition-top-bar">
           <div class="exhibition-brand">
             <div class="logo-badge" style="background: #3B82F6;">Q</div>
-            <div style="font-size: 1.3rem; font-weight: 800;">편학위 중학 전시 모드 — 2학년 3반</div>
+            <div style="font-size: 1.3rem; font-weight: 800;">바름5분 전시 모드 — 2학년 3반</div>
             <span class="exhibition-badge">LIVE MORNING SHOWCASE</span>
           </div>
           <button class="exhibition-btn-close" id="btn-close-exhibition">✕ 닫기 (ESC)</button>
@@ -2133,7 +2134,7 @@ class App {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `편학위_2학년3반_기록_${appState.getTodayString()}.csv`;
+        a.download = `바름5분_2학년3반_기록_${appState.getTodayString()}.csv`;
         a.click();
         URL.revokeObjectURL(url);
         showToast('학급 활동 기록 CSV 파일 다운로드 완료', '📥');
